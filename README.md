@@ -1,2 +1,1 @@
-# SeSG
-SeSG (Search String Generator)
+# SeSG  (Search String Generator)
