@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: pydot2
+Version: 1.0.33
+Summary: Python interface to Graphviz's Dot
+Home-page: http://code.google.com/p/pydot/
+Author: Ero Carrera
+Author-email: ero@dkbza.org
+License: MIT
+Download-URL: http://pydot.googlecode.com/files/pydot-1.0.33.tar.gz
+Keywords: graphviz dot graphs visualization
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.1
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: pyparsing
+Requires-Dist: setuptools
+
+UNKNOWN
+
+

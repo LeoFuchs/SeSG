@@ -1,0 +1,5 @@
+[console_scripts]
+bert-serving-benchmark = bert_serving.server.cli:benchmark
+bert-serving-start = bert_serving.server.cli:main
+bert-serving-terminate = bert_serving.server.cli:terminate
+
