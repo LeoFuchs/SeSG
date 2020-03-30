@@ -99,6 +99,6 @@ gs_size = 30
 ### :page_facing_up: References
 <a id="1">[1]</a> Azeem, M. I., Palomba, F., Shi, L., & Wang, Q. (2019). [Machine learning techniques for code smell detection: A systematic literature review and meta-analysis.](https://www.sciencedirect.com/science/article/abs/pii/S0950584918302623) Information and Software Technology, 108, 115-138.
 
-<a id="2">[2]</a> Hosseini, S., Turhan, B., & Gunarathna, D. (2017). [A systematic literature review and meta-analysis on cross project defect prediction.] (https://ieeexplore.ieee.org/abstract/document/8097045/) IEEE Transactions on Software Engineering, 45(2), 111-147.
+<a id="2">[2]</a> Hosseini, S., Turhan, B., & Gunarathna, D. (2017). [A systematic literature review and meta-analysis on cross project defect prediction.](https://ieeexplore.ieee.org/abstract/document/8097045/) IEEE Transactions on Software Engineering, 45(2), 111-147.
 
-<a id="3">[3]</a> Vasconcellos, F. J., Landre, G. B., Cunha, J. A. O., Oliveira, J. L., Ferreira, R. A., & Vincenzi, A. M. (2017). [Approaches to strategic alignment of software process improvement: A systematic literature review.] (https://www.sciencedirect.com/science/article/pii/S0164121216301893) Journal of systems and software, 123, 45-63.
+<a id="3">[3]</a> Vasconcellos, F. J., Landre, G. B., Cunha, J. A. O., Oliveira, J. L., Ferreira, R. A., & Vincenzi, A. M. (2017). [Approaches to strategic alignment of software process improvement: A systematic literature review.](https://www.sciencedirect.com/science/article/pii/S0164121216301893) Journal of systems and software, 123, 45-63.
