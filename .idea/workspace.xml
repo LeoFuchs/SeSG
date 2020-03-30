@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2011d89f-f9ad-49c2-87cd-b5d0428a8ceb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SeSG-azeem-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-azeem-random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SeSG-hosseini-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-hosseini-random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SeSG-vasconcellos-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-vasconcellos-random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/complete-results/vasconcellos-review/random-qgs(10)/2/vasconcellos-results-2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exits/manual-exit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/manual-exit.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exits/result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exits/sentences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/exits/sentences.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" beforeDir="false" afterPath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-    </list>
+    <list default="true" id="2011d89f-f9ad-49c2-87cd-b5d0428a8ceb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585587992645</updated>
-      <workItem from="1585588003310" duration="3158000" />
+      <workItem from="1585588003310" duration="3822000" />
     </task>
     <servers />
   </component>
