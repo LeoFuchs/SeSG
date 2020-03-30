@@ -52,7 +52,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ###  :bar_chart: Results
 
-###  :red_circle: Requirements
+###   :bangbang: Requirements
 * Python 2.7
 * Torch 1.2.0+
 * Numpy 1.15.4+
