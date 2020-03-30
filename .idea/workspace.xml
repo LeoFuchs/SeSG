@@ -2,8 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2011d89f-f9ad-49c2-87cd-b5d0428a8ceb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SeSG-azeem-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-azeem-random.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SeSG-hosseini-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-hosseini-random.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SeSG-vasconcellos-random.py" beforeDir="false" afterPath="$PROJECT_DIR$/SeSG-vasconcellos-random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete-results/vasconcellos-review/random-qgs(10)/2/vasconcellos-results-2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/manual-exit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/manual-exit.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/sentences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/exits/sentences.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" beforeDir="false" afterPath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/15.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/15.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +75,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585587992645</updated>
-      <workItem from="1585588003310" duration="1897000" />
+      <workItem from="1585588003310" duration="3158000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
   </component>
   <component name="WindowStateProjectService">
     <state x="418" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585588416014">
@@ -75,12 +94,28 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="310" width="424" height="484" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1585588414389" />
-    <state x="898" y="93" key="SettingsEditor" timestamp="1585590759273">
+    <state width="1920" height="286" key="GridCell.Tab.0.bottom" timestamp="1585591227424">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="898" y="93" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1585590759273" />
+    <state width="1920" height="286" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1585591227424" />
+    <state width="1920" height="286" key="GridCell.Tab.0.center" timestamp="1585591227424">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1920" height="286" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1585591227424" />
+    <state width="1920" height="286" key="GridCell.Tab.0.left" timestamp="1585591227424">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1920" height="286" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1585591227424" />
+    <state width="1920" height="286" key="GridCell.Tab.0.right" timestamp="1585591227424">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1920" height="286" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1585591227424" />
+    <state x="898" y="93" key="SettingsEditor" timestamp="1585590979663">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="898" y="93" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1585590979663" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SeSG$azeem.coverage" NAME="azeem Coverage Results" MODIFIED="1585588418864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SeSG$azeem.coverage" NAME="azeem Coverage Results" MODIFIED="1585591227410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,5 +1,0 @@
-IDS: An Immune-inspired Approach for the Detection of Software Design Smells
-
-We propose a parallel between object-oriented system designs and living creatures. We suggest that, like any living creature, system designs are subject to diseases, which are design smells (code smells and antipatterns). Design smells are conjectured in the literature to impact the quality and life of systems and, therefore, their detection has drawn the attention of both researchers and practitioners with various approaches. With our parallel, we propose a novel approach built on models of the immune system responses to pathogenic material. We show that our approach can detect more than one smell at a time. We build and test our approach on GanttProject v1.10.2 and Xerces v2.7.0, for which manually-validated and publicly-available smells exist. The results show a significant improvement in detection time, precision, and recall, in comparison to the state–of–the–art approaches.
-
-System design, Reverse engineering, Code smells, Antipatterns, Artificial Immune Systems

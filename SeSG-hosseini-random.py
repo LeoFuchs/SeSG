@@ -662,7 +662,7 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
     g.attr(fontsize='12')
 
     r = graphviz.Source(g, filename="graph-with-%0.1f-%d-%d-%d" % (min_df, number_topics, number_words, enrichment),
-                        directory=os.path.join(sys.path[0], 'exits/Snowballing/'), format="ps")
+                        directory=os.path.join(sys.path[0], 'exits/snowballing-images/'), format="ps")
     r.render()
     # r.view()
 
@@ -786,7 +786,7 @@ def main():
     bert_model = BertForMaskedLM.from_pretrained('bert-base-uncased')
     bert_model.eval()
 
-    with open(os.path.join(sys.path[0], 'Code/Exits/%s-result.csv' % author), mode='w') as file_output:
+    with open(os.path.join(sys.path[0], 'exits/%s-result.csv' % author), mode='w') as file_output:
 
         file_writer = csv.writer(file_output, delimiter=',')
 

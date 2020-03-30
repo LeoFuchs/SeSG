@@ -4,33 +4,39 @@ Implementation and experimentation of SeSG, a search string generator that uses 
 
 ## Note
 
-This is a search algorithm, susceptible to several errors and imperfections.
+This is a research algorithm, susceptible to errors and imperfections.
 
 ## Structure
+This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
 ├── SeSG
 │   ├── complete-results
-│   │   ├── review-azeem
-│   │   ├── review-hosseini
-│   │   └── review-vasconcellos
-│   │       ├── doc_lengths.npy
+│   │   ├── azeem-review
+│   │       └── ...
+│   │   ├── hosseini-review
+│   │       └── ...
+│   │   └── vasconcellos-review
+│   │       └── ...
 │   ├── exits
 │   │   ├── snowballing-images
 │   │   ├── manual-exit.csv
 │   │   ├── result.csv
 │   │   └── sentences.txt
-│   ├── qgs-files
+│   ├── files-qgs
 │   │   ├── review-azeem
 │   │       ├── gs-pdf
 │   │       ├── gs-txt
 │   │       ├── qgs-txt
-│   │       ├── gs.csv
-│   │       ├── qgs.csv
+│   │       ├── GS.csv
+│   │       └── QGS.csv
 │   │   ├── review-hosseini
+│   │       └── ...
 │   │   └── review-vasconcellos
-│   ├── venv
+│   │       └── ...
+│   ├── README.md
 │   ├── SeSG-azeem-random.py
+│   ├── requirements.txt
 │   ├── SeSG-hosseini-random.py
 │   └── SeSG-vasconcellos-random.py
 

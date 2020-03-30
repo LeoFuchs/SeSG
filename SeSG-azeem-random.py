@@ -662,7 +662,7 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
     g.attr(fontsize='12')
 
     r = graphviz.Source(g, filename="graph-with-%0.1f-%d-%d-%d" % (min_df, number_topics, number_words, enrichment),
-                        directory=os.path.join(sys.path[0], 'exits/Snowballing/'), format="ps")
+                        directory=os.path.join(sys.path[0], 'exits/snowballing-images/'), format="ps")
     r.render()
     # r.view()
 
@@ -775,8 +775,8 @@ def main():
     print("Randomize QGS...\n")
     randomize_qgs(qgs_size, gs_size)
 
-    #print("Doing Snowballing...\n")
-    #title_list, adjacency_matrix, final_edges = snowballing()
+    print("Doing Snowballing...\n")
+    title_list, adjacency_matrix, final_edges = snowballing()
 
     print("Loading BERT...\n")
     # Load pre-trained model tokenizer (vocabulary).
@@ -814,9 +814,9 @@ def main():
                         counter_one = similarity_score_qgs(qgs, result_name_list, manual_comparation)
                         counter_two, list_graph = similarity_score_gs(gs, result_name_list, manual_comparation)
 
-                        #counter_total = graph(list_graph, title_list, adjacency_matrix, final_edges,
-                        #                      min_df, number_topics, number_words, enrichment)
-                        counter_total = 0
+                        counter_total = graph(list_graph, title_list, adjacency_matrix, final_edges,
+                                              min_df, number_topics, number_words, enrichment)
+
                         file_writer.writerow(
                             [min_df, number_topics, number_words, enrichment, scopus_number_results, counter_one,
                              counter_two, counter_total])

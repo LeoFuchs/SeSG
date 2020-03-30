@@ -1,6 +1,6 @@
 title
-IDS: An Immune-Inspired Approach for the Detection of Software Design Smells
-Bad-smell prediction from software design model using machine learning techniques
-SMURF: A SVM-based Incremental Anti-pattern Detection Approach
+Tracking Design Smells: Lessons from a Study of God Classes
+Can I clone this piece of code here?
+Support vector machines for anti-pattern detection
 Code smell severity classification using machine learning techniques
-Classification model for code clones based on machine learning
+Deep learning code fragments for code clone detection

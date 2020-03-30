@@ -1,60 +1,60 @@
-QGS1:			ids: an immune-inspired approach for the detection of software design smells	
-				causality, information, and biological computation: an algorithmic software approach to life, disease, and the immune system	
+QGS1:			tracking design smells: lessons from a study of god classes	
+				tracking design smells: lessons from a study of god classes	
 
-QGS2:			bad-smell prediction from software design model using machine learning techniques	
-				code smell severity classification using machine learning techniques	
+QGS2:			can i clone this piece of code here?	
+				deep learning code fragments for code clone detection	
 
-QGS3:			smurf: a svm-based incremental anti-pattern detection approach	
-				statistical discriminability estimation for pattern classification based on neural incremental attribute learning	
+QGS3:			support vector machines for anti-pattern detection	
+				esvm: evolutionary support vector machine for automatic feature selection and classification of microarray data	
 
 QGS4:			code smell severity classification using machine learning techniques	
-				code smell severity classification using machine learning techniques	
+				clonewise – detecting package-level clones using machine learning	
 
-QGS5:			classification model for code clones based on machine learning	
-				code clones detection using machine learning technique: support vector machine	
+QGS5:			deep learning code fragments for code clone detection	
+				deep learning code fragments for code clone detection	
 
 GS1:			code smell detection: towards a machine learning-based approach	
-				code smell severity classification using machine learning techniques	
+				deep learning code fragments for code clone detection	
 
 GS2:			tracking design smells: lessons from a study of god classes	
-				evaluation of machine learning approaches for change-proneness prediction using code smells	
+				tracking design smells: lessons from a study of god classes	
 
 GS3:			a bayesian approach for the detection of code and design smells	
-				bayesian network structure optimization for improved design space mapping for design exploration with materials design applications	
+				the relationship between design patterns and code smells: an exploratory study	
 
 GS4:			ids: an immune-inspired approach for the detection of software design smells	
-				causality, information, and biological computation: an algorithmic software approach to life, disease, and the immune system	
+				the relationship between design patterns and code smells: an exploratory study	
 
 GS5:			bad-smell prediction from software design model using machine learning techniques	
-				software design pattern recognition using machine learning techniques	
+				learnable evolution model: evolutionary processes guided by machine learning	
 
 GS6:			smurf: a svm-based incremental anti-pattern detection approach	
-				statistical discriminability estimation for pattern classification based on neural incremental attribute learning	
+				pattern-based design evolution using graph transformation	
 
 GS7:			can i clone this piece of code here?	
-				code randomization: haven't we solved this problem yet?	
+				deep learning code fragments for code clone detection	
 
 GS8:			support vector machines for anti-pattern detection	
-				evolutionary support vector machines: a dual approach	
+				esvm: evolutionary support vector machine for automatic feature selection and classification of microarray data	
 
 GS9:			experience report: evaluating the effectiveness of decision trees for detecting code smells	
-				evaluating the accuracy of machine learning algorithms on detecting code smells for different developers	
+				the evolution and impact of code smells: a case study of two open source systems	
 
 GS10:			code smell severity classification using machine learning techniques	
-				code smell severity classification using machine learning techniques	
+				clonewise – detecting package-level clones using machine learning	
 
 GS11:			adaptive detection of design flaws	
-				an adaptive approach for automatic design defects detection in object-oriented systems	
+				using history information to improve design flaws detection	
 
 GS12:			bdtex: a gqm-based bayesian approach for the detection of antipatterns	
-				practical bayesian optimization for model fitting with bayesian adaptive direct search	
+				empirically based evolution of a variability management approach at uml class level	
 
 GS13:			comparing and experimenting machine learning techniques for code smell detection	
-				code smell severity classification using machine learning techniques	
+				deep learning code fragments for code clone detection	
 
 GS14:			deep learning code fragments for code clone detection	
-				supervised deep features for software functional clone detection by exploiting lexical and syntactical information in source code	
+				deep learning code fragments for code clone detection	
 
 GS15:			classification model for code clones based on machine learning	
-				code clones detection using machine learning technique: support vector machine	
+				clonewise – detecting package-level clones using machine learning	
 
