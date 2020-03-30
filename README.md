@@ -1,4 +1,4 @@
-# :bar_chart: SeSG (Search String Generator)
+# :pushpin: SeSG (Search String Generator)
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
