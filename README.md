@@ -44,7 +44,11 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ###  :runner: Running
 
+To run SeSG, simply run some of the .py files present at the root of the directory.
+
 ####  :one: Azeem et al.
+
+The file `teste`
 
 ####  :two: Hosseini et al.
 
