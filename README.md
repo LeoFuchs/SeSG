@@ -42,7 +42,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
-### :chart_with_upwards_trend: Usage
+### :chart_with_upwards_trend: Running
 
 ####  :one: Azeem et al.
 
