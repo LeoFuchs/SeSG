@@ -1,0 +1,976 @@
+奈良先端科学技術⼤学院⼤学 学術リポジトリ
+Nara Institute of Science and Technology Academic Repository: naistar
+Title
+Author(s)
+Citation
+Issue Date
+Resource Version
+Rights
+DOI
+URL
+An Ensemble Approach of Simple Regression Models to Cross-Project
+Fault Prediction
+Uchigaki, Satoshi; Uchida, Shinji; Toda, Koji; Monden, Akito
+2012 13th ACIS International Conference on Software Engineering,
+Artificial Intelligence, Networking and Parallel/Distributed
+Computing, 8-10 Aug. 2012, Kyoto, Japan
+2012
+author
+© 2012 IEEE. Personal use of this material is permitted. Permission from
+IEEE must be obtained for all other uses, in any current or future media,
+including reprinting/republishing this material for advertising or
+promotional purposes, creating new collective works, for resale or
+redistribution to servers or lists, or reuse of any copyrighted component
+of this work in other works.
+10.1109/SNPD.2012.34
+http://hdl.handle.net/10061/12750
+An Ensemble Approach of Simple Regression
+Models to Cross-Project Fault Prediction
+Satoshi Uchigaki
+Graduate School of Information Science
+Nara Institute of Science and Technology
+Nara, Japan
+satoshi-u@is.naist.jp
+Koji Toda
+Department of Computer Science and Engineering
+Fukuoka Institute of Technology
+Fukuoka, Japan
+toda@fit.ac.jp
+Abstract- In software development, prediction of fault-prone
+modules is an important challenge for effective software testing.
+However, high prediction accuracy may not be achieved in
+cross-project prediction, since there is a large difference in
+distribution of predictor variables between the base project (for
+building prediction model) and the target project (for applying
+prediction model.) In this paper we propose an prediction technique
+called “an ensemble of simple regression models” to improve the
+prediction accuracy of cross-project prediction. The proposed
+method uses weighted sum of outputs of simple (e.g. 1-predictor
+variable) logistic regression models to improve the generalization
+ability of logistic models. To evaluate the performance of the
+proposed method, we conducted 132 combinations of cross-project
+prediction using datasets of 12 projects from NASA IV&V Facility
+Metrics Data Program. As a result, the proposed method
+outperformed conventional logistic regression models in terms of
+AUC of the Alberg diagram.
+Keywords: fault-prone
+empirical study
+module
+prediction, product
+metrics,
+I. INTRODUCTION
+Prediction of fault-prone modules is an important challenge
+for effective testing and/or software inspection [1]. Various
+multivariate modeling techniques, which are applicable to
+fault-prone module prediction, have been proposed, including
+multivariate logistic-regression (MLR) model [4], linear
+discriminant analysis [5], neural network model [6], etc.
+These models are constructed from a fit dataset, which
+contains product metrics and fault data of modules of a past
+Shinji Uchida
+Department of Information Engineering
+Nara National College of Technology
+Nara, Japan
+uchida@info.nara-k.ac.jp
+Akito Monden
+Graduate School of Information Science
+Nara Institute of Science and Technology
+Nara, Japan
+akito-m@is.naist.jp
+software project [2] [3].
+However, for a new development project and/or an
+enhancement project that had not recorded data of past
+releases, high prediction accuracy cannot be expected. It is
+because defect prediction works well if models are trained
+with a sufficiently large amount of data and applied to a single
+software project [7]. Indeed, Zimmermann et. al. conducted
+622 combinations of cross-project prediction, but only 3.4%
+of them showed enough prediction performance [7]. They
+suggested that difference in distribution of metrics between fit
+dataset and test dataset influences the predictive accuracy.
+To improve the prediction performance of cross-project
+prediction, we need to improve the generalization ability of a
+predictor model. One of the methods to solve this problem is
+normalization of dataset. Kuramoto showed that the
+prediction performance was improved using normalization of
+metrics in MLR models [8].
+This paper proposes a prediction method called “an
+ensemble of simple regression models” to improve the
+generalization ability of MLR models. While “strong”
+multivariate models can cause overfitting problem, our
+technique uses an ensemble of “very weak” (1-variable)
+models to avoid overfitting. In our technique, we use
+weighted average of outputs of simple models based on the
+goodness of fit of the models. We also use normalized values
+of predictor variables.
+This paper evaluates the proposed method using datasets
+of 12 projects from NASA IV&V Facility Metrics Data
+Program [10]. We compared predictive accuracy with
+normalized MLR models [8].
+Dependent
+variable
+Output
+Weighted Average
+Sub-Model
+A
+Sub-Model
+B
+Sub-Model
+C
+Sub-Model
+D
+Simple Regression Analysis
+Independent
+variable
+A
+Independent
+variable
+B
+Independent
+variable
+C
+Independent
+variable
+D
+Figure 1. Overview of the proposed method
+In what follows, Section 2 describes the proposed
+fault-prone module prediction method. Section 3 explains an
+experiment to evaluate the proposed method. Section 4 gives
+the discussion of the result. Finally Section 5 summarizes this
+paper.
+II. FAULT-PRONE MODULE PREDICTION MODEL
+A. An Ensemble of Simple Regression Models
+Figure 1 shows the overview of the proposed method. The
+proposed method predicts a probability of having a fault in a
+module. Given a fit dataset for model construction, the
+proposed method constructs sub-models (simple logistic
+regression model) each using one of the software metrics. The
+weighted average of outputs of sub-models is used as a final
+output of the proposed method. The weights are computed
+based on the goodness of fit of each sub-model. While “strong”
+multivariate models can cause overfitting problem, our
+technique uses an ensemble of “very weak” sub-models to
+avoid overfitting in cross-project prediction.
+The simple regression model is a technique to predict a
+dependent variable using single independent variable. While
+multivariate models like MLR model need to make sure that
+independent variables are certainly independent each other,
+our method can use a set of predictor variables that are
+dependent each other since each sub-model contain just one
+predictor variable.
+The output y of our method is defined as the following
+formula (1).
+y =
+∑
+∑
+( )
+(1)
+where y is a probability of having a fault in a module, n is
+the number of sub-models, fi(xi) is i-th sub-model whose
+predictor variable is xi, and wi is a weight for i-th sub-model.
+In this paper we use as w the contribution ratio of the
+sub-model. The contribution ratio is one of the criteria of
+goodness of fit of a model. Its value range is [0,1].
+In this paper, we use a simple logistic regression model as a
+sub-model fi(xi), which outputs the probability of having a
+fault in a module. The model is defined by the following
+formula (2).
+( ) = P(y|x ) =
+(α
+β)
+(2)
+where, y is a dependent variable. is an independent
+variable. α and β are regression coefficients. P(y|xi) is
+probability that y takes 1 with respect to the independent
+variable xi.
+B. Normalization of Metrics
+Enough predictive accuracy is not achieved if the
+distribution of the metrics of test dataset is different from fit
+dataset's one. [5]. Kuramoto reported that by normalizing
+software metrics in fit dataset and test dataset can improve
+prediction accuracy of logistic regression models [8].
+In this paper, we apply metrics normalization to our
+prediction method. The normalization is performed by two
+steps. The first step is logarithmic transformation and the
+second step is Z-score transformation. The purpose of these
+steps is to make the distribution of metric values closer to the
+standard normal distribution.
+The logarithmic transformation changes a metric value into
+its logarithm by formula (3), where X is a metric value and Y
+is a transformed value. Note that 1 is added before
+log-transformation since some metrics contain zero (such as
+cyclomatic number.)
+Table 1
+Summary of NASA project data
+project
+language
+# of metrics
+Total SLOC
+# of modules
+# of bugs
+% faulty
+CM1
+JM1
+KC1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+PC5
+C++
+Java
+C&C++
+C
+C
+C
+C
+C
+C
+C
+C
+C++
+40
+21
+21
+40
+39
+40
+40
+40
+40
+40
+40
+39
+17K
+457K
+43K
+8K
+67K
+6K
+8K
+26K
+27K
+36K
+30K
+162K
+505
+10878
+2107
+429
+4625
+161
+403
+1059
+4505
+1511
+1347
+15414
+48
+2107
+325
+43
+68
+52
+31
+76
+23
+160
+178
+503
+9.50%
+19.40%
+15.40%
+10.00%
+1.50%
+32.30%
+7.70%
+7.20%
+0.50%
+10.60%
+13.20%
+3.30%
+Y = log (X " 1)
+(3)
+The Z-score transformation is performed by formula (4),
+where $Y is the average of Y and ν is the standard deviation of
+Y. After this transformation, the average of Z becomes 0 and
+the standard deviation of Z becomes 1.
+Z =
+&'&(
+)
+(4)
+III. EXPERIMENTAL EVALUATION
+A. Outline
+The goal of the experiment is to evaluate the prediction
+performance of the proposed method . In this experiment,
+cross-project fault-prone module prediction was performed
+using three approaches; the proposed method, the proposed
+method with normalization, and the MLR (multivariate
+logistic regression) with normalization, which we refer to as
+“conventional method.”
+B. Datasets
+The target dataset is the NASA IV&V Facility Metrics Data
+Program(MDP) datasets [10]. We used datasets of 12 projects.
+Details of each project are shown in Table 1. JM1 and KC1
+consist of 21 software metrics while MC1 and PC5 consist of
+39 software metrics. The remaining 8 projects had 40
+software metrics. Therefore, we used 21 software metrics
+common to the 12 projects. In this paper, a “module” is a
+“source file.”
+Figure 2. An example of the Alberg diagram
+C. Evaluation Criteria
+In this experiment, we used the area under the curve (AUC)
+of the Alberg diagram to evaluate the prediction performance.
+The Alberg diagram shows the percentage of accumulated
+number of faults when modules are ordered with respect to
+the probability of having a fault [9]. Figure 2 shows an
+example of AUC of the Alberg diagram. The larger AUC
+indicates better prediction performance. Also, AUC=0.5
+means that the prediction performance is as worst as the
+random prediction.
+D. Experiment Procedure
+The fault-prone module prediction was performed to 132
+combinations of project pairs. The procedure of the
+experiment is shown below.
+Step1: Normalizing all software metrics of 12 project
+datasets.
+Table 3
+0.698
+0.717
+0.631
+0.703
+0.598
+0.86
+0.624
+0.577
+0.925
+KC1
+0.747
+0.645
+0.775
+0.792
+0.632
+0.758
+0.675
+0.854
+0.725
+0.645
+0.925
+0.844
+0.616
+0.735
+0.758
+0.86
+0.792
+0.777
+0.939
+KC3
+0.727
+0.661
+0.733
+0.833
+0.616
+0.742
+0.684
+0.837
+0.736
+0.715
+0.898
+0.703
+0.624
+0.831
+0.655
+0.597
+0.938
+0.722
+0.849
+0.754
+0.665
+0.935
+0.552
+0.635
+0.742
+0.735
+0.731
+0.706
+0.851
+0.628
+0.777
+0.703
+0.859
+0.752
+0.672
+0.921
+AUC of the proposed method
+Fit Data
+MC1 MC2 MW1
+0.752 0.746 0.757
+0.658 0.654 0.665
+0.75 0.734 0.748
+0.78 0.773 0.776
+0.768 0.798
+0.631
+0.726
+0.658
+0.847
+0.706
+0.631
+0.913
+0.684
+0.851
+0.743
+0.645
+0.922
+Table 2
+CM1
+JM1
+KC1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+PC5
+CM1
+JM1
+KC1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+PC5
+CM1
+0.426
+0.619
+0.72
+0.669
+0.651
+0.728
+0.664
+0.451
+0.668
+0.474
+0.893
+CM1
+0.655
+0.726
+0.77
+0.774
+0.634
+0.749
+0.658
+0.845
+0.706
+0.63
+0.853
+0.733
+0.79
+0.812
+0.603
+0.745
+0.75
+0.803
+0.754
+0.714
+0.918
+JM1
+0.745
+0.746
+0.778
+0.798
+0.631
+0.76
+0.679
+0.856
+0.733
+0.66
+0.921
+PC1
+0.716
+0.603
+0.653
+0.761
+0.813
+0.529
+0.723
+0.612
+0.751
+0.638
+0.791
+PC1
+0.751
+0.658
+0.754
+0.781
+0.813
+0.626
+0.777
+0.853
+0.75
+0.687
+0.936
+PC2
+0.725
+0.631
+0.647
+0.725
+0.774
+0.638
+0.738
+0.626
+0.703
+0.638
+0.858
+PC2
+0.748
+0.648
+0.728
+0.77
+0.752
+0.638
+0.717
+0.657
+0.686
+0.626
+0.871
+PC3
+0.691
+0.618
+0.708
+0.786
+0.833
+0.601
+0.752
+0.763
+0.86
+0.731
+0.897
+PC3
+0.75
+0.649
+0.73
+0.782
+0.803
+0.634
+0.757
+0.715
+0.856
+0.706
+0.898
+PC4
+0.53
+0.562
+0.417
+0.61
+0.78
+0.405
+0.388
+0.66
+0.659
+0.688
+0.61
+PC4
+0.708
+0.664
+0.74
+0.781
+0.822
+0.609
+0.754
+0.696
+0.848
+0.745
+0.916
+Test Data
+Test Data
+AUC of the conventional method (multivariate regression with metrics normalization)
+Fit Data
+JM1 KC1 KC3 MC1 MC2 MW1
+0.749 0.726 0.695 0.717 0.726 0.769
+0.576 0.661 0.532 0.615 0.604
+0.768 0.63 0.743 0.733
+0.739 0.765 0.786
+0.707 0.802
+0.625
+PC5
+0.749
+0.599
+0.741
+0.784
+0.792
+0.626
+0.742
+0.686
+0.791
+0.702
+0.65
+PC5
+0.746
+0.643
+0.741
+0.768
+0.743
+0.648
+0.696
+0.659
+0.849
+0.678
+0.635
+Step2: Constructing fault-prone detection models. In each
+model, one of 12 projects is used as a fit (training)
+dataset.
+Step3: Prediction of the probability of having a fault. For each
+model, all the other projects are used as test datasets.
+Step4: Evaluation of prediction performance using AUC of
+the Alberg Diagram.
+E. Results and its Analysis
+The prediction performance of each model is shown in Table
+2, 3 and 4. The average of the AUC, the percentage of
+improvement of the average AUC (compared with the
+conventional method), and standard deviation of the AUC are
+shown in table 5. Below describes our findings in Table 2, 3, 4
+and 5.
+The prediction performance of the proposed method
+was improved in 83 cases out of 132 compared with the
+conventional method.
+The prediction performance of the proposed method
+“with normalization” was improved in 98 cases out of
+132 compared with conventional method.
+The improvements of the average AUCs were 0.037
+(5.3%) in the proposed method and 0.043 (6.1%) in the
+proposed method with normalization, compared with
+the conventional method.
+The standard deviation of the AUC of the proposed
+method became smaller than the conventional method,
+which indicates that the proposed method did stable
+prediction.
+Fig.3 shows the histograms of AUC of the conventional
+Test Data
+Conventional
+Proposed
+Proposed with
+normalization
+to 0.3
+0.3 to 0.4
+0.4 to 0.5
+0.5 to 0.6
+0.6 to 0.7
+0.7 to 0.8
+0.8 to 0.9
+0.9 to 1.0
+AUC
+value
+CM1
+JM1
+KC1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+PC5
+Average
+0.703
+0.740
+0.746
+0
+1
+5
+10
+40
+56
+15
+5
+CM1
+0.632
+0.752
+0.779
+0.793
+0.633
+0.759
+0.678
+0.861
+0.729
+0.652
+0.937
+JM1
+0.734
+0.749
+0.777
+0.78
+0.633
+0.742
+0.672
+0.841
+0.72
+0.653
+0.937
+5.26%
+6.12%
+0
+0
+0
+0
+44
+63
+19
+6
+KC1
+0.741
+0.631
+0.776
+0.788
+0.631
+0.752
+0.673
+0.858
+0.72
+0.649
+0.936
+0.109
+0.082
+0.089
+Proposed with
+normalization
+0
+0
+0
+0
+41
+62
+18
+11
+Table 5 The average and the standard deviation of AUC
+% of
+improvement
+Standard
+Deviation
+Table 6
+The number of cases for each AUC value range
+Conventional
+Proposed
+method, the proposed method, and the proposed method
+with normalization. Table 6 shows the case distribution of
+AUC in each model. In the conventional method, there exist
+cases of AUC < 0.5, which means the prediction
+performance is worse than the random prediction. Since the
+prediction performance cannot be known beforehand, this
+Table 4
+AUC of the proposed method with metrics normalization
+Fit Data
+KC3
+0.739
+0.641
+0.752
+0.794
+0.629
+0.752
+0.676
+0.857
+0.725
+0.658
+0.936
+MC1
+0.744
+0.632
+0.75
+0.79
+0.625
+0.764
+0.691
+0.86
+0.742
+0.676
+0.937
+MC2
+0.74
+0.627
+0.748
+0.776
+0.777
+0.743
+0.667
+0.858
+0.715
+0.641
+0.936
+MW1
+0.747
+0.639
+0.753
+0.781
+0.798
+0.631
+0.683
+0.86
+0.736
+0.652
+0.937
+70
+60
+s50
+e
+s
+ca40
+f
+ro30
+e
+b20
+m
+u
+n10
+0
+PC1
+0.748
+0.626
+0.749
+0.791
+0.814
+0.624
+0.77
+0.856
+0.752
+0.681
+0.938
+PC2
+0.738
+0.641
+0.745
+0.789
+0.795
+0.629
+0.744
+0.675
+0.724
+0.667
+0.934
+PC3
+0.744
+0.625
+0.748
+0.792
+0.817
+0.626
+0.77
+0.704
+0.861
+0.683
+0.937
+Conventional
+Proposed
+Proposed with
+normalization
+PC4
+0.724
+0.621
+0.736
+0.802
+0.833
+0.608
+0.733
+0.708
+0.858
+0.757
+0.931
+PC5
+0.74
+0.649
+0.753
+0.781
+0.8
+0.629
+0.754
+0.674
+0.853
+0.727
+0.658
+0~ 0.1~ 0.2~ 0.3~ 0.4~ 0.5~ 0.6~ 0.7~ 0.8~ 0.9~
+AUC
+Figure 3. Histogram of AUC
+indicates that the conventional method cannot be used for
+cross-project prediction since it often produces worse
+prediction than the random.
+On the other hand, in the proposed method and the
+proposed method with normalization, all the cases are larger
+than 0.6, which means that the proposed method is much
+more practically useful than the conventional method.
+IV. CONCLUSION
+To improve the prediction accuracy of cross-project
+fault-prone module prediction, this paper proposed a
+modeling technique called “an ensemble of simple
+regression models.” Our main idea is to use an ensemble of
+“very weak” (1-variable) models to avoid overfitting to the
+fit (training) dataset. In addition, we also employed metric
+normalization method to improve the prediction
+performance.
+To evaluate the prediction performance of the proposed
+method, we conducted 132 combinations of cross-project
+prediction using datasets of 12 projects from NASA IV&V
+Facility Metrics Data Program. As a result, the proposed
+method outperformed conventional multivariate logistic
+regression models in terms of AUC of the Alberg diagram.
+Moreover, while the prediction by the conventional method
+contained cases of AUC < 0.5, which means worse than the
+random prediction, the proposed method achieved AUC >
+0.6 for all 132 predictions.
+The major limitation of this paper is that we used only
+NASA MDP datasets. Our future work is to confirm our
+result using other datasets
+REFERENCES
+[1] Li, P.L., Herbsleb, J., Shaw, M. and Robinson,
+B., ”Experiences and Results from Initiating Field Defect
+Prediction and Product Test Prioritization Efforts at ABB
+Inc.” , Proc. 28th Int'l Conf. on Software Engineering
+(ICSE'06), pp.413-422 ,2006.
+[2] Nagappan, N., Ball, T., and Zeller, A., ”Mining metrics to
+predict component failures”, Proc. Int'l Conf. on Software
+Engineering (ICSE'06), pp.452-461 ,2006.
+[3] Kamei, Y., Sato, H., Monden, A., Kawaguchi, S., Uwano,
+H., Nagura, M., Matsumoto, K., Ubayashi, N., ”An
+Empirical Study of Fault Prediction with Code Clone
+Metrics”, In Proc. Joint Conference of International
+Workshop on Software Measurement and International
+Conference on Software Process and Product
+Measurement (IWSM/Mensura2011), pp.55-61,
+November 2011.
+[4] John, C.Munson., and Taghi M.Khoshgoftaar., ”The
+detection of fault-prone programs. “, IEEE Trans. Softw.
+Eng., Vol. 18, No. 5, pp. 423-433, 1992.
+[5] Fisher, R.A., “The Use of Multiple Measurements in
+Taxonomic Problems”, Annals Eugenics, Vol.7, Part II,
+pp.179-188, 1936.
+[6] Rumelhart, D.E., Hinton, G.E. and Williams, R.J.,
+“Learning Representations by Back-propagating
+Errors”, Nature, Vol.323, pp.533-536, 1986.
+[7] Zimmermann, T., Nagappan, N., Gall, H., Giger, E. and
+Murphy, B., ”Cross-project Defect Prediction.”, The 7th
+joint meeting of the European Software Engineering
+Conference and the ACM SIGSOFT Symposium on the
+Foundations of Software Engineering (ESEC/FSE'09),
+pp.91-100 ,2009.
+[8] Kuramoto, T., Matsumoto, S., Kamei, Y., Monden, A.,
+Matsumoto, K., ”Performance Improvement of
+Fault-prone Module Detection by Normalization of
+Software Metrics”, The Special Interest Group Technical
+Reports, IPSJ Special Interest Group on Software
+Engineering, Vol.2009-SE-166, No.11, 2009
+[9] Ohlsson, N. and Alberg, H., ”Predicting Fault-Prone
+Software Modules in Telephone Switches.”, IEEE
+Trans. on Software Engineering, Vol.22, No.12, pp.
+886-894 ,1996.
+[10] NASA IV&V Facility Metrics Data Program, available
+from http://mdp.ivv.nasa.gov/

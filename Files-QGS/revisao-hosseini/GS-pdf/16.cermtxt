@@ -1,0 +1,4249 @@
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+com topn
+.
+c y
+i
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+.20 OD
+.lnnogEw SSRGOO
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+International Journal of Software Engineering
+and Knowledge Engineering
+Vol. 24, No. 1 (2014) 61-90
+. World Scienti¯c Publishing Company
+c
+#
+DOI: 10.1142/S021819401450003X
+Investigating Associative Classi¯cation for Software Fault
+Prediction: An Experimental Perspective
+Baojun Ma
+School of Economics and Management
+Beijing University of Posts and Telecommunications
+Beijing 100876, P. R. China
+mabaojun@bupt.edu.cn
+Huaping Zhang
+School of Computer Science & Technology
+Beijing Institute of Technology
+Beijing 100081, P. R. China
+kevinzhang@bit.edu.cn
+Guoqing Chen*
+School of Economics and Management
+Tsinghua University, Beijing 100084, P. R. China
+chengq@sem.tsinghua.edu.cn
+Yanping Zhao
+School of Management and Economics
+Beijing Institute of Technology
+Beijing 100081, P. R. China
+zhaoyp@bit.edu.cn
+Bart Baesens
+Faculty of Business and Economics
+Katholieke Universiteit Leuven
+Leuven B-3000, Belgium
+Bart.Baesens@econ.kuleuven.be
+Received 30 April 2013
+Revised 19 June 2013
+Accepted 24 September 2013
+It is a recurrent ¯nding that software development is often troubled by considerable delays as
+well as budget overruns and several solutions have been proposed in answer to this observation,
+software fault prediction being a prime example. Drawing upon machine learning techniques,
+*Corresponding author.
+61
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+62 B. Ma et al.
+software fault prediction tries to identify upfront software modules that are most likely to
+contain faults, thereby streamlining testing e®orts and improving overall software quality.
+When deploying fault prediction models in a production environment, both prediction performance
+and model comprehensibility are typically taken into consideration, although the latter is
+commonly overlooked in the academic literature. Many classi¯cation methods have been suggested
+to conduct fault prediction; yet associative classi¯cation methods remain uninvestigated
+in this context. This paper proposes an associative classi¯cation (AC)-based fault prediction
+method, building upon the CBA2 algorithm. In an empirical comparison on 12 real-world
+datasets, the AC-based classi¯er is shown to achieve a predictive performance competitive to
+those of models induced by ¯ve other tree/rule-based classi¯cation techniques. In addition, our
+¯ndings also highlight the comprehensibility of the AC-based models, while achieving similar
+prediction performance. Furthermore, the possibilities of cross project prediction are investigated,
+strengthening earlier ¯ndings on the feasibility of such approach when insu±cient data
+on the target project is available.
+Keywords: Software fault prediction; associative classi¯cation; prediction performance; comprehensibility;
+cross project validation.
+1. Introduction
+Computers have become omnipresent in everyday life, and also software development
+has become a key economical activity, which aims to deliver high-quality and
+reliable software with as few errors or defects as possible [1]. A defect can be de¯ned
+as any situation in the code, which prevents the software system from operating
+according to its speci¯cations. Defects are also commonly referred to as bugs or
+faults, and we will use the terms interchangeably [2]. Since defective software
+modules could cause software failures, increase development and maintenance costs,
+and decrease customer satisfaction, e®ective defect prediction models can help
+developers focus quality assurance activities on defect-prone modules, thereby improving
+software quality by using resources more e±ciently [3].
+Software defect prediction is typically regarded as a binary classi¯cation task,
+which involves categorizing modules, represented by a set of software metrics or code
+attributes, into two classes, i.e. fault-prone (fp) and non-fault-prone (nfp), by means
+of a classi¯cation model derived from data of previous development projects [4].
+There has been ample work discussing the di®erent classi¯ers used in the domain of
+software fault prediction, which can be broadly divided into two groups, i.e. statistical
+approaches including discriminant analysis [5, 6], logistic regression [7, 8] and
+Bayesian networks [9, 10], as well as machine learning methods such as rule/treebased
+methods [3, 11], SVM [12], neural networks [13, 14], fuzzy clustering methods
+[15], analogy-based approaches [16] and ensemble methods [17]. Using statistical
+models validated with a speci¯c organization's data, is not convenient to be used in
+another company because statistical models are seriously dependent on data and
+di®erent organizations may have di®erent data features [18]. According to the literature
+review of Catal and Diri [19], machine learning algorithms have become the
+most popular approach to fault prediction. Furthermore, it was pointed out that
+certain complex classi¯ers, such as SVM and neural networks, result in the unclear
+relationship between input and prediction, which are also referred to as black box
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 63
+solutions [20]. Lessmann et al. [21] showed that simple classi¯ers, such as NaiveBayes
+or decision trees, are often competitive with more sophisticated approaches,
+i.e. not signi¯cantly inferior, suggesting that most methods do not di®er signi¯cantly
+in terms of predictive performance. Consequently, the assessment and selection of a
+classi¯cation model should not solely be based on predictive performance but also on
+alternative criteria like computational e±ciency, ease of use, and especially comprehensibility.
+Models providing insight into factors in°uencing the presence of
+software faults and helping improve our overall understanding of software failures
+and their sources, which in return, may enable the development of novel predictors of
+fault-proneness [5, 21].
+From this perspective, tree/rule-based classi¯ers seem to be the preferred choice
+over, e.g. SVM and neural networks, given their white box nature and similar classi¯cation
+performance. However, traditional tree rule-based classi¯ers, such as C4.5
+[22], RIPPER [23], CART [24] and DT [25], derive local sets of rules in a greedy
+manner, which means these rules are discovered from partitions of the training data
+set instead of from the whole training set [26] and this could result in many interesting
+and useful rules not being discovered [27, 28]. In contrast, associative classi¯cation
+(AC) methods, ¯rst proposed by Liu et al. [27], combine classi¯cation and
+association rule mining, exploring the complete training data set in an attempt to
+construct a global classi¯er [26]. Several studies have provided evidence that AC
+algorithms are able to build classi¯ers competitive with those produced by tree/rulebased
+methods or probabilistic approaches such as Bayesian networks, SVM and
+neural networks [27-29]. Obviously, AC classi¯ers are typically extremely comprehensible
+as they result in a collection of classi¯cation rules in the form of \X ) C",
+where X is a set of data items, and C is the class label.
+Both proprietary and public datasets have been investigated in the domain of
+software fault prediction. Recently however, there has been a shift towards using
+public data sets in software engineering studies, as it has been argued that studies
+relating to proprietary data are more di±cult to verify [18, 19]. Public datasets
+mostly originate from PROMISE [30] and NASA MDP (Metrics Data Program) [31]
+repositories which are freely accessible by researchers, and as such attracted considerable
+attention [18, 19, 32, 33]. Nevertheless, recent work often involve only a
+small selection of these public datasets, such as three datasets in [34], two in [35], ¯ve
+in [17] and [36].
+Software fault prediction models are assessed on the basis of confusion matrix
+based criteria, including accuracy, recall, precision, sensitivity, speci¯city, F-measure,
+G-mean, or the more recently introduced AUC measure. In addition, other aspects
+are also important when deploying fault prediction models in a development environment,
+including ease of use, computational e±ciency and especially model comprehensibility.
+Despites its importance, the latter remains an often-overlooked aspect
+of classi¯cation models [37, 38].
+In this paper, we investigate an associative classi¯cation approach based on
+CBA2, proposed by Liu et al. [28], and adjust it to the speci¯cs of the domain of
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom topny
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+64 B. Ma et al.
+software fault prediction. The proposed AC-based approach is contrasted with ¯ve
+other tree/rule-based classi¯cation methods, i.e. C4.5, Decision Table, CART, ADT
+and RIPPER, across twelve public-domain benchmark data sets obtained from the
+NASA MDP repository and the PROMISE repository. Comparisons are mainly
+based on the Area under the ROC curve (AUC) and three comprehensibility metrics.
+As argued later in this paper, the AUC represents the most informative indicator of
+predictive accuracy within the ¯eld of software defect prediction. Furthermore, we
+also investigated a cross project validation approach to assess whether rule sets
+learned on one data set are applicable to other data sets.
+In summary, the main contributions of this paper are as follows:
+. The investigation of associative classi¯cation based software fault prediction,
+which allows to account for speci¯c characteristics encountered in this domain
+such as the skewed class distribution. Note that an associative classi¯cation based
+approach has not been adopted in this ¯eld to date, despite the promising results
+obtained in other settings [39]. This associative classi¯cation approach is contrasted
+against ¯ve other tree/rule-based methods in an extensive benchmarking
+experiment involving 12 public data sets, answering the call made by, e.g. [40]
+concerning repeatable results.
+. The aspect of model comprehensibility, which is an important but often overlooked
+criterion when deploying classi¯cation models, is de¯ned from the point of view of
+tree/rule-based classi¯ers and is subsequently considered during the benchmarking
+experiments.
+. A silent assumption made in software fault prediction research is that su±cient
+data is available to learn a classi¯cation model. However, when developing new
+software, only historic data from previous, completed projects will be available.
+This observation constitutes the rationale for considering a cross project validation
+approach in which data from di®erent projects are used to learn and validate the
+classi¯cation models. This also allows to investigate the generalization capabilities
+of the proposed AC classi¯er.
+This paper is organized as follows. In Sec. 2, we introduce the research background,
+including software fault prediction and associative classi¯cation. Section 3
+speci¯es our proposed associative classi¯cation based fault prediction method from
+four stages. Section 4 discusses software defect data and performance evaluation
+measures. In Sec. 5, we provide the experimental setup and discussion of the results.
+Finally, a conclusion is presented.
+2. Related Work
+2.1. Software fault prediction
+A key ¯nding to software testing is that faults tend to cluster; i.e. to be contained in a
+limited subset of software modules. Examples hereof can be found in the work of, e.g.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom topny
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 65
+Gyimothy et al. [41] who investigated the open source software web and email suite
+Mozilla and found that bugs were present in 42.04% of all modules and Ostrand et al.
+[42] who reported even more skewed class distributions. This observation, paired
+with the fact that correcting errors later in the software development life cycle
+becomes increasingly more expensive [43], lead to the investigation of early warning
+mechanisms which try to identify upfront fault prone regions in the code. Several
+approaches have hereto been proposed, including, e.g. software reliability modeling
+which try to predict which components will fail ¯rst [44]. Such approach however
+considers a di®erent timing, assuming software already to be released. Software fault
+prediction on the other hand takes a di®erent perspective by situating itself right
+after coding, before software testing and deployment.
+Several so-called static code features can be obtained from the code base of a
+software project using automated methods and, together with historic data on which
+modules were faulty in, e.g. a previous release, form the basis on which software fault
+prediction models can learned. Such models typically discriminate between modules,
+which are likely to contain errors or are fault prone (fp) and those that are not fault
+prone (nfp). Given the extensive code bases software project managers are often
+faced with, an automatable approach to identify software modules that are likely to
+contain faults seems especially feasible to allow to streamline the testing process, an
+activity which can otherwise take up to 50% of the total development budget [45].
+During the software development process, accurately identifying the software
+quality of software systems plays a critical role in targeting quality improvement
+e®orts to the high-risk modules. However, only predicting the exact amount of faults
+is too risky, especially in the beginning of a software project when too little information
+is available [46]. Generally, software managers and researchers commonly
+adopt approaches that classifying software modules into two groups, fp or nfp, in
+order to identify the fp category easily [47]. Hence, providing an accurate and reliable
+software fault prediction model has become more and more important for e®ectively
+assuring quality in software systems.
+There has been ample work applying various types of classi¯ers to construct fault
+prediction models, and software project managers often have di±culties in choosing
+an appropriate approach from the many alternatives discussed in the literature as
+results regarding the superiority of one method over another are not always consistent
+across studies [48]. Moreover, the aspect of comprehensibility is often
+neglected, which is, however, often of critical importance for model acceptance [5,
+21]. Almeida and Matwin [20] state that some statistical models are to be considered
+black-box solutions because the relationship between inputs and responses is unclear,
+and also signpost their data dependency [20]. When considering machine learning
+methods, tree/rule-based algorithms seem the most attractive to software project
+managers due to their comprehensibility and satisfactory predictive e®ectiveness [5,
+21, 49]. However, traditional tree-based or rule-based classi¯ers, such as C4.5 [22],
+RIPPER [23], CART [24] and ADT [25] derive local sets of rules in a greedy manner,
+which implies that many interesting and useful rules would not be discovered. The
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom topny
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+66 B. Ma et al.
+derived rules are local because when a rule is discovered, all training data objects
+associated with it are discarded and the process continues until the next rule found
+has an unacceptable error rate. This means rules are discovered from partitions of the
+training data set and not from the whole training data set. The search process for the
+rules is greedy as most rule induction algorithms look for the rule that maximizes
+some statistical measure [26].
+2.2. Associative classi¯cation
+Associative classi¯cation (AC), which was ¯rstly proposed by Liu et al. [27] with the
+CBA algorithm, aims to integrate classi¯cation rule mining and association rule
+mining to build a classi¯er based on a special discovered subset of association rules
+(i.e. class association rules, CARs). Association rule mining can be de¯ned as follows
+[50]: Let I ¼ fi1; i2; . . . ; img be a set of items and D be a set of transactions (the
+dataset), where each transaction t (a data record) is a set of items such that t I. An
+association rule is an implication of the form, X ) Y , where X I, Y I are called
+itemsets, and X \ Y ¼ . A transaction t is called to contain X, if X t. The rule
+X ) Y holds in the transaction set D with con¯dence conf if conf % of transactions
+in D that supports X also supports Y . The rule has support supp in D if supp % of the
+transactions in D contains X [ Y . Given a set of transactions D (the dataset), the
+problem of mining association rules is to discover all the rules that have support and
+con¯dence greater than the user-speci¯ed minimum support (denoted as minsup)
+and minimum con¯dence (denoted as minconf ). An e±cient algorithm for mining
+association rules is the Apriori algorithm, which was proposed by Agrawal and
+Srikant [50].
+A class association rule or CAR takes the form X ) C, where X is a set of data
+items, and C is the class (label) and a predetermined target. With such a rule, a
+transaction or data record t in a given database could be classi¯ed into class C if t
+contains X. Apparently, a class association rule could be regarded as an association
+rule of a special kind. To build a classi¯er using an AC algorithm, the complete set of
+class association rules (CARs) is ¯rst discovered from the training data set and a
+subset is selected to form the classi¯er.
+Since the introduction of the CBA algorithm in 1998, many studies have investigated
+alternative associative classi¯cation approaches, such as CBA2 [28], CMAR
+[51], CPAR [52], MMAC [53], CAAR [54] and GARC [29]. The CBA algorithm
+directly employs the Apriori-type approach for mining classi¯cation rules in form of
+X ) C and uses them to predict new data records based on user-de¯ned threshold
+values of minsup and minconf [27]. This study investigates the CBA2 algorithm,
+which modi¯es the way the minsup threshold is set during rule generation [28]. More
+speci¯cally, CBA2 allows to de¯ne di®erent minsup values depending on the class
+(i.e. each class is assigned a di®erent minsup), rather than using only a single minsup
+value as is the case in CBA, which can potentially improve classi¯cation performance
+in case of an unbalanced class distribution. This is also the main reason of its
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 67
+application to software defect prediction. Associative classi¯ers have been applied to
+many other domains, including document classi¯cation [55] and recommendation
+systems [39, 56].
+There are several points about associative classi¯cation needing attention. Small
+value of minsup may cause too many CARs to be generated, resulting over¯tting,
+which requires the pruning of redundant rules [28, 29]. Furthermore, the two userspeci¯ed
+prede¯ned thresholds (i.e. minsup and minconf ), especially for minsup,
+have a considerable impact on the generation of CARs. Although sensitive analysis
+can be utilized to quantify the impact of both parameters [29], it is often impractical
+to apply this strategy in real software fault prediction applications. Some researchers
+suggested to adopt cross-validation or bootstrapping to address this problem [21, 48].
+Finally, classi¯cation datasets often contain continuous attributes. Association rule
+mining techniques on the other hand usually involve transactional data and as such,
+a discretization of these continuous attributes is required [57].
+3. Associative Classi¯cation Based Fault Prediction
+This section introduces our associative classi¯cation approach which is based on the
+CBA2 algorithm previously proposed by Liu et al. [28]. Software fault prediction is
+often characterized by a skewed class distribution, motivating the choice of CBA2 as
+basis in this study. In contrast to e.g. the CBA algorithm, CBA2 allows to determine
+a speci¯c minsup threshold for each class, potentially improving classi¯cation performance
+in case of an unbalanced class distribution.
+There are four main stages in the processing of our proposed associative classi¯cation
+based fault prediction method, i.e. data preprocessing, rule generation, classi¯er
+building and prediction, as well as prediction results evaluation, which are
+illustrated in Fig. 1. Since data preprocessing is conducted on the experimental
+datasets and prediction results evaluation mainly discusses prediction performance
+and classi¯er comprehensibility, to avoid duplicate statements, these two parts
+would be introduced and discussed in Secs. 4.2 and 4.3 in detail respectively. Thus in
+this section, we focus on the stages of rule generation (see Sec. 3.2) as well as classi¯er
+building and prediction (see Sec. 3.2).
+Training
+Data
+Test
+Data
+Data Preprocessing
+Removing Useless
+Attributes
+Dealing with
+Missing Data
+Continuous Data
+Discretization
+Rule Generation
+Thresholds Selection
+using cross-validation
+CARs Generation
+Rules Pruning
+Classifier Building
+& Prediction
+Rules Ordering
+Rules Selection
+Defect Prediction &
+Probability Estimation
+Prediction Results
+Evaluation
+Performance
+Comprehensibility
+Fig. 1. The processing of the associative classi¯cation based fault prediction method.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+68 B. Ma et al.
+3.1. Rule generation
+The rule generation process, resulting in the CAR set, constitutes the main part of
+the associative classi¯cation inference. The typical approach adopted in, e.g. CBA
+[27], CBA2 [28], GARC [29], is to use a prede¯ned minsup and minconf threshold.
+These parameters can however seriously impact classi¯er performance as e.g. valid
+rules are being rejected if the ¯rst parameter is set too high and as such, the CARs
+may fail to cover all the training cases. As a result, the generated rule set will be
+unable to properly discriminate the minority class [27]. By contrast, if the minsup
+value is set too low, over¯tting might occur [28]. Although the CBA2 algorithm
+already includes a multiple minsup values strategy [28] and a sensitive analysis by
+Chen et al. [29] investigated the impact of both parameters, an approach in which
+these thresholds are determined in advance seems most feasible, especially given the
+skewed class distribution in the domain of software fault prediction.
+In this study, a 10-fold cross-validation approach [58] was adopted to address the
+above concern, see Algorithm 1. More speci¯cally, a grid-search procedure was
+implemented, based on a set of candidate values for both parameters. This model
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 69
+selection step is guided by the AUC as criterion of choice, see also Sec. 4.3.1. That is,
+the training data set is randomly divided into 10 parts of approximately equal
+size (line 1). Iteratively, 9 of the 10 parts are used for training by employing the
+current minsup and minconf, resulting in a CAR set and classi¯er (line 5-6). The last
+part is then used to evaluate the candidate solution (line 7) and the combination of
+hyper parameters resulting in the best performance on this independent test
+set is selected as optimal threshold during the remainder of the model building
+(lines 10-16).
+After determining the optimal thresholds, the CARs are generated on all training
+data by application of the CBA2 algorithm. In fact, the generation of the CARs in
+CBA2 is based on the CBA-RG algorithm of CBA. The basic idea lies in generating
+all possible frequent rule-items by making multiple passes over the training data
+based on minsupopt and producing CARs from this set of frequent rule-items based on
+minconfopt, see also [27]. However, to extract useful CARs related to the minority
+class, the global minsupopt value was multiplied by the fraction of each class,
+resulting in minsup copt. Any rule related to class c satisfying the minsup copt would be
+regarded as a frequent CAR.
+During the CARs generation process, several rule pruning strategies can be applied
+to substantially reduce the size of the generated rule set. In this study, the
+pessimistic error rate pruning proposed in the context of C4.5 [22] is adopted. This
+procedure goes as follows: if rule r's pessimistic error rate is higher than the pessimistic
+error rate of rule r', obtained by deleting one condition from rule antecedent
+of rule r, then rule r is replaced by the shorter rule r'. Note it is also possible to
+remove redundant and/or con°icting rules and during the process of rule generation,
+see e.g. [29].
+3.2. Classi¯er building and prediction
+The CARs generated in Sec. 3.1 allow to construct the ¯nal classi¯er and subsequently
+allow for inference on the test data.
+Hereto, an ordering on all CARs is imposed based on the following de¯nition of
+rule precedence:
+De¯nition 1: Given two rules, ri and rj, ri precedes rjðri
+rjÞ if
+(a) Con¯denceðriÞ > ConfidenceðrjÞ, or
+(b) Con¯denceðriÞ ¼ ConfidenceðrjÞ, but SupportðriÞ > SupportðrjÞ, or
+(c) Con¯denceðriÞ ¼ ConfidenceðrjÞ and SupportðriÞ ¼ SupportðrjÞ, but ri is generated
+earlier than rj.
+Then, the ¯nal classi¯er is constructed by selecting a set of high precedence CARs
+(denoted as R) to cover the training data set. As such, the classi¯er generated has the
+following format: < r1; r2; . . . ; rm, default class>, where ri 2 R; ra rb if b > a,
+which is similar to that of C4.5. Note that the con¯dence of each rule can be used to
+estimate the prediction probability. Each rule is marked with its rule con¯dence,
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+70 B. Ma et al.
+which could be used to estimate prediction probability needed when calculating
+the AUC.
+With the above classi¯er, any unseen module could be classi¯ed as either fp or nfp
+by traversing the ordered rule set until a rule with matching rule antecedent is found;
+if no rule ¯res, the default class is assigned.
+4. Software Defect Data and Performance Evaluation Measurements
+4.1. Software defect datasets
+The data sets used in this study stem from the NASA MDP repository [31]. A total
+of twelve public software fault prediction data sets are analyzed, including those
+investigated by [21] as well as two additional data sets (i.e. MC1 and MC2).
+Each data set contains details on several software modules (e.g. java source ¯les),
+together with their number of faults and static code characteristics. Besides LOC
+counts, the NASA MDP data sets contain several Halstead attributes as well as
+McCabe complexity measures. The former estimates complexity by counting the
+number of operators and operands in a module, whereas the latter is derived from a
+module's °ow graph, quantifying the number of independent paths through a program.
+The reader is referred to [38] for a more detailed description on the MDP
+data sets.
+4.2. Data pre-processing
+A ¯rst important step in each data mining exercise is preprocessing the data. In order
+to contrast the proposed associative classi¯cation technique discussed in Sec. 3
+against the other rule based learners presented in Sec. 5.1.2, the same preprocessing
+steps are applied to each of the twelve data sets. Each observation (software module
+or ¯le) in the data sets consists of a unique ID, several static code features and an
+error count. First, the data used to learn and validate the models are selected and
+thus, the ID as well as attributes exhibiting zero variance is discarded. The error
+count indicates the number of faults associated with each module and is discretized
+into a Boolean value where 0 indicates that no errors were recorded for this software
+module or ¯le and 1 otherwise, in line with, e.g. [21] and [37]. The error density is also
+removed, as this attribute indicates the number of faults per line of code and thus
+perfectly correlates with the target attribute.
+While static code features can be mined in an automated way, some data sets
+exhibit missing values for the decision density attribute. To retain as much data as
+possible, an average value imputation schema is used where appropriate.
+As the proposed associative classi¯cation approach is unable to cope with continuous
+features, a discretized version of each data set was constructed using the
+algorithm of Fayyad and Irani [59]. This supervised discretization algorithm uses
+entropy to select subintervals that are as pure as possible with respect to the target
+attribute.
+Investigating Associative Classi¯cation for Software Fault Prediction 71
+Finally, it should be noted that machine learning techniques typically perform
+better if more data to learn from are available. On the other hand, part of the data
+needs to be put aside as an independent test set in order to provide a realistic
+assessment of the performance. As can be seen from Table 2, the smallest data set
+contains 125 observations, while the largest contains up to 9,537 observations. Each
+of the data sets is randomly partitioned into two disjoint sets, i.e. a training and a
+test set consisting of respectively 2/3 and 1/3 of the observations, using strati¯ed
+sampling in order to preserve the class distribution [11, 21, 37, 47]. To account for a
+potential sampling bias, this partitioning procedure is repeated ten times in total.
+After performing these steps, the data sets are passed to the learners described in
+Sec. 3 and the reference learners discussed in Sec. 5.1.2.
+4.3. Evaluation measurements
+4.3.1. Prediction performance
+Binary classi¯ers (i.e. classi¯ers with dichotomous outcomes) are routinely assessed
+using a confusion matrix (also called a contingency table). A confusion matrix
+summarizing the number of modules correctly or incorrectly classi¯ed as fault prone
+(fp) or not fault prone (nfp) by the classi¯er is shown in Fig. 2. In our study, we call
+the software modules with defects \positive" cases, whereas the modules without
+faults are termed \negative" cases. If TP, TN, FP, and FN represent respectively the
+number of true positive, true negative, false positive and false negative, than several
+common evaluation metrics can be de¯ned as follows.
+The accuracy is the proportion of total modules that were predicted correctly:
+accuracy ¼ TP þ FTPP þþ FTNN þ TN :
+The recall (also called hit rate or sensitivity) is the percentage of fault-prone
+modules that are correctly predicted:
+The precision is the proportion of correctly predicted fault-prone modules in all
+the predicted fault-prone modules:
+.
+s
+e
+l
+c
+itr
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom topny
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+ð1Þ
+ð2Þ
+ð3Þ
+TP
+recall ¼ TP þ FN :
+TP
+precision ¼ TP þ FP :
+Predicted Class
+Actual Class
+fp
+nfp
+fp
+True Positive (TP)
+False Negative (FN)
+Fig. 2. Confusion matrix.
+nfp
+False Positive (FP)
+True Negative (TN)
+72 B. Ma et al.
+The speci¯city is the proportion of correctly identi¯ed defect-free modules:
+TN
+specificity ¼ FP þ TN :
+The F-measure is the harmonic mean of recall and precision, de¯ned as follows:
+F
+measure ¼
+ð 2 þ 1Þ recall precision :
+2 recall þ precision
+In Eq. (5), takes any non-negative value and is used to control the weight
+assigned to recall and precision. If is set to one, than recall and precision are
+weighted equally, giving the F1-measure.
+In the domain of software fault prediction, the number of fault-prone modules is
+typically much smaller than the number of non-defective modules; for example, PC2
+and MC1 only contain 0.51% and 1.47% fp modules respectively, as can be seen in
+Table 2. Furthermore, it is often stated that the misclassi¯cation cost of fp modules is
+di®erent from that of nfp modules [38]. Therefore, recent work advices against the
+usage of accuracy, especially in contexts characterized by skewed data distribution
+and unequal classi¯cation costs [60-62]. Moreover, Menzies et al. [63] stated that also
+precision is not a useful parameter for software engineering problems.
+Besides the F1-measure, there are several others that take the class imbalance into
+account, such as geometric mean (G-mean) [64] and Area under ROC curve (AUC )
+[65]. G-mean1 and G-mean 2 are de¯ned as follows:
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+ð4Þ
+ð5Þ
+ð6Þ
+ð7Þ
+G
+G
+mean1 ¼ pffirffiffieffifficffiffiaffiffilffiffilffiffiffiffiffipffiffirffiffieffifficffiffiiffiffisffiffiiffiffioffiffinffiffiffi:
+mean2 ¼ pffirffiffieffifficffiffiaffiffilffiffilffiffiffiffiffisffiffipffiffieffifficffiffiiffifffiffiffiifficffiffiiffiffitffiffiyffiffi:
+Although Ma et al. [66] suggested using the G-mean and F-measure to evaluate
+the performance of imbalanced datasets, the above confusion matrix metrics still
+su®er from the limitation that they require a prede¯ned cut-o® value for predicted
+probabilities, which may leave considerable room for bias and cause inconsistencies
+across studies [11, 21].
+As such, there is a growing trend in fault prediction research to quantify classi¯cation
+performance in terms of the AUC measure [67].
+The ROC graph is a two-dimensional plot, in which sensitivity is plotted on the Y
+axis against 1-speci¯city, see Fig. 3. A ROC curve depicts the relative tradeo® between
+bene¯ts (true positives) and costs (false positives) and allows one to assess
+performance of a prediction model in general, regardless of any particular cut-o®
+value [11]. In addition, the Area under ROC curve (AUC ) has the potential to
+signi¯cantly improve convergence across empirical experiments in software defect
+prediction because it separates predictive performance from operating conditions,
+i.e. class and cost distributions, and thus represents a general measure of predictability
+[21]. Furthermore, the AUC has a clear statistical interpretation: it measures
+the probability that a classi¯er ranks a randomly chosen fp module higher than a
+randomly chosen nfp module, which is equivalent to the Wilcoxon test of ranks [61].
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 73
+Fig. 3. ROC curve (model trained on the KC1 data set, evaluated on the JM1 data set).
+In this study, our experimental comparisons mainly focus on the AUC. In order to
+illustrate the ine®ectiveness and inconsistency between other metrics and the AUC,
+the values of accuracy, recall, precision, speci¯city, F1-measure, G-mean1 and
+G-mean 2 are also calculated.
+4.3.2. Comprehensibility
+Comprehensibility can be a key requirement for a classi¯cation model, demanding
+that the end user can understand the rationale behind the model's prediction. Although
+de¯ning comprehensibility for a classi¯cation model is close to being a
+philosophical discussion, literature indicates that the type of output and the size of
+output play an important role [68]. Although the comprehensibility of a speci¯c
+output type is largely domain dependent, rule-based or tree-based classi¯ers can be
+considered as the most comprehensible while nonlinear classi¯ers are typically
+regarded as less comprehensible. Smaller models are also to be preferred over more
+elaborate ones [68].
+As this study only compares di®erent kinds of tree-based and rule-based classi¯ers,
+only the size of the classi¯er output needs to be considered. For rule-based
+classi¯ers, the outputs are classi¯cation rule sets. While referring to tree-based
+classi¯ers, we could also regard each leave with all its related previous decision nodes
+in the tree as a classi¯cation rule. First, for a given rule output, the comprehensibility
+decreases with the size, i.e. the number of rules, implying that simple models are
+preferred over more complex ones [69]. Second, speaking in a rule-based context, the
+more the conditions (i.e. rule antecedents), the harder it is to understand [70]. In
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+74 B. Ma et al.
+addition, for a given number of conditions, it is better to have many rules with a low
+average number of conditions per rule than few rules with many conditions [68].
+Based on the above discussion, the number of rules, total number of conditions in
+the rule set as well as average number of conditions per rule is adopted as assessment
+criteria for classi¯er comprehensibility.
+5. Experiments and Results
+In this section, the experimental setup is described and subsequently, the empirical
+results are presented in detail, together with a discussion of possible limitations and
+threats to validity of this study.
+5.1. Experimental setup
+5.1.1. The details of our proposed AC-based method
+In the experimental study, we ¯rst aim to investigate the performance of the proposed
+AC-based software fault prediction method on 12 NASA MDP data sets.
+Although the open source CBA package is perhaps the most popular AC toolkit, it
+lacks speci¯c functionalities key to our research. CBAa does not allow for evaluation
+criteria others than accuracy during the cross-validation stage, which is infeasible
+given the skewed class distribution of software fault prediction data sets. Instead, we
+opted for the LUCS-KDD implementation of the CBA algorithm [71] and made
+several modi¯cations and improvements to achieve our goals. Firstly, LUCS-KDD
+only implements the basic CBA algorithm with a single minsup value [71]; the
+ability of de¯ning multiple minsup values was added to account for the class
+imbalances problem. Hereto, we considered the principles outlined by the CBA2
+algorithm. Secondly, as the original implementation of LUCS-KDD still utilized
+accuracy as its evaluation metric, seven evaluation metrics were added: precision,
+recall, speci¯city, F1-measure, G-mean1, G-mean 2 and AUC. Furthermore, a crossvalidation
+procedure was added to LUCS-KDD, which is based on the AUC to
+obtain optimal minsup and minconf thresholds before building the ¯nal prediction
+model.
+Note that this cross validation procedure is only adopted during parameter selection;
+the ¯nal performance is estimated using a random hold-out testing procedure
+considering 2/3 of all available data for model building while the remaining 1/3 of the
+data is set aside for testing. Besides providing an unbiased estimate of the classi¯er's
+generalization performance, the split-sample setup o®ers the advantage of enabling
+easy replication, which constitutes an important part of empirical research [48, 72].
+Furthermore, its choice is motivated by the fact that the split-sample setup is the
+prevailing approach to assess performance in the domain of software defect prediction
+[16, 21, 73, 74].
+a http://www.comp.nus.edu.sg/ dm2/
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 75
+All the modi¯cations and improvements described above were implemented by
+using Java language, and the experimental environment is a PC with a quad-core
+CPU 2.50 GHz, 3.96 GB RAM, running Microsoft Windows Server 2003 Standard
+Edition.
+5.1.2. Benchmarking learners
+As the comprehensibility of classi¯cation models when deploying decision models in a
+business environment is often of critical importance, di®erent rule and decision tree
+learners were also considered. These are C4.5 [22], Classi¯cation and regression tree
+(CART) [24], Alternating Decision Trees (ADT) [25] and Repeated Incremental
+Pruning to Produce Error Reduction (RIPPER) [23]. Also the paradigm of decision
+tables (DT) [75] was investigated as it was previously found that such approach also
+can result in compact and comprehensible models. These benchmark learners are all
+implemented in WEKA, an open source package available under the GNU public
+license [76]. Speci¯cs on these learners are given in Table 1; further details can be
+found in academic literature on this topic.
+Note that the above classi¯ers exhibit adjustable parameters, also termed
+hyperparameters, which enable the algorithm to be adjusted to a speci¯c problem
+setting, see Table 1. Similar to our approach to tuning the hyperparameters for the
+AC learner, a grid-search approach is adopted during this selection phase, again
+adopting the AUC as criterion of choice. Besides AUC, also calculated the accuracy,
+recall, precision, speci¯city, F1-measure, G-mean1 and G-mean 2 are calculated.
+Comprehensibility on the other hand is assessed by the number of rules, total number
+of conditions in rule set and average number of conditions per rule.
+5.1.3. Cross project validation
+Finally, a cross project validation setup was also considered, training a model on data
+stemming from one speci¯c NASA project while validating using data from other
+(NASA) projects. In principle, the scope of such cross project validation is not limited
+to data stemming from the NASA MDP repository, but as such validation approach
+requires an identical input space to learn from, many alternative data sources are
+infeasible. Moreover, as there exist also di®erences in the input space of NASA MDP
+data sets, the cross project validation is investigated on the only 9 of the 12 data sets
+Table 1. Summary of ¯ve selected rule/tree-based classi¯ers.
+Classi¯er
+C4.5
+DT
+CART
+ADT
+RIPPER
+WEKA path
+weka.classi¯ers.trees.J48
+weka.classi¯ers.rules.DecisionTable
+weka.classi¯ers.trees.SimpleCart
+weka.classi¯ers.trees.ADTree
+weka.classi¯ers.rules.Jrip
+Hyperparameters
+con¯denceFactor, minNumObj
+evaluationMeasure, search
+minNumObj, numFoldsPruning,
+numOfBoostingIterations
+folds, optimizations
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+76 B. Ma et al.
+(i.e. CM1, KC3, MC1, MC2, MW1, PC1, PC2, PC3, PC4). More speci¯cally, for
+these 9 data sets, the classi¯cation model is trained on one data set (e.g. CM1), while
+the other 8 data sets are used to validate the learned model (e.g. KC3, MC1, MC2,
+MW1, PC1, PC2, PC3, PC4). Note that for reasons of brevity, only the result of the
+cross project validation when applying the novel AC approach is discussed.
+5.2. Experimental results
+5.2.1. Results of classi¯er performance
+As outlined in Fig. 1, the ¯rst step of the proposed AC approach involves the empirical
+derivation of optimal minsup and minconf thresholds, the results of which
+are shown in Table 2. It can be observed that the fp percentage of some data sets is
+relatively close to the minsup value, as is the case for the CM1, KC3, MW1 and PC1
+data sets. Other data sets however exhibit larger di®erences between the two values,
+especially for data sets with a small amount of fp modules, e.g. MC1 and PC2.
+The predictive performance of the di®erent classi¯ers is summarized in Table 3;
+the best value is indicated in bold font. The last column of Table 3 displays the
+Average Rank (i.e. AR) for each algorithm. The AR is calculated by ranking all
+techniques according to their performance on each dataset, rank 1 indicating the best
+performance and rank 6 the worst. The ARs are then obtained by averaging the
+ranks across all twelve data sets.
+First of all, although all classi¯cation methods perform dissimilar, it can be observed
+that some data sets are \easier" to learn from than others, as is, e.g. the case
+for the KC4 data set versus the CM1 data set. When considering the di®erent
+classi¯cation performance measures discussed in Sec. 4.3, it can be noted that alternative
+conclusions can be drawn depending on the metric of choice. More speci¯cally,
+DT and CART classi¯ers outperform the other classi¯ers on accuracy and
+speci¯city measures while AC and RIPPER perform better than other methods when
+considering F1-measure and G-mean1. AC and DT show clear advantage over the
+other methods on AUC ; the AC approach itself yields decent performance on recall
+and G-mean 2. In addition, it seems that there are no obvious di®erences amongst the
+six classi¯ers on precision. The above results also imply that comparing classi¯ers
+performance by means of multiple evaluation metrics results in an inconclusive
+outcome. Some of these measures, such as classi¯cation accuracy, are known to be
+inappropriate to the domain of software fault prediction [11, 21, 63]. Referring
+Table 2. The optimal thresholds (i.e. minsup, minconf ) of AC-based method on each NASA MDP
+data set.
+minsupopt
+minconfopt
+CM1 JM1
+9%
+95%
+30%
+85%
+KC1
+14%
+85%
+KC3
+7%
+95%
+KC4
+35%
+70%
+MC1
+45%
+95%
+MC2
+50%
+80%
+MW1
+10%
+70%
+PC1
+5%
+50%
+PC2
+10%
+95%
+PC3
+20%
+95%
+PC4
+40%
+95%
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+comtopn
+.
+c
+i y
+f l
+i t
+t c
+n i
+ie tr
+c s
+sd is
+l
+r n
+o io
+.w tu
+w ib
+w tr
+w is
+d
+fromand
+laedod -seeuR
+n .
+ow /19
+D 6
+.-09 /211
+1 n
+:6 o
+24 L
+. U
+14 S
+20 O
+. D
+g
+n O
+E S
+. S
+l O
+ow R
+n G
+.gK TO
+n A
+.E M
+t
+f E
+oS D
+.J L
+.tn RA
+I E
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+.le3b irssea¯ CA .54C TD TRA AD IPPR
+a l C
+T C
+)
+%
+(
+s y
+e c
+r a
+u r
+s u
+a c
+e c
+)
+y
+t
+i
+v
+i
+t
+i
+s
+n
+e
+S
+(
+l
+l
+a
+c
+e
+n
+o
+i
+s
+i
+c
+e
+r
+Investigating Associative Classi¯cation for Software Fault Prediction 77
+)
+RA .34 .64 .32 .91 .33 .23 .51 .33 .14 .14 .73 .22 .73 .34 .72 .92 .63 .92 .15 .14 .02 .81 .13 .53 .32 .83 .83 .14 .83 .22 edun
+i
+t
+4PC .693 .468 .577 .808 .795 .468 .4608 .2406 .4108 .9208 .9503 .0500 .9308 .5305 .4701 .6049 .4038 .5029 .8066 .9049 .9077 .9074 .8096 .9039 .5008 .4077 .2064 .4040 .5010 .5014 (onC
+8 8 8 8 8 8
+3PC .846 .629 .708 .869 .869 .079 .2505 .2305 .0708 .0000 .0000 .3303 .3002 .4404 .2305 .0000 .0000 .4407 .9034 .9067 .9071 .0100 .0100 .9054 .2078 .0323 .0135 .0000 .0000 .0386
+8 8 8 8 8 8
+.
+s
+c
+ittrem 2PC .209 .009 .279 .679 .279 .139 .4550 .0000 .0000 .0000 .0000 .0910 .4550 .0000 .0000 .0000 .0000 .2500 .9940 .9980 .0001 .0001 .0001 .9980 .0455 .0000 .0000 .0000 .0000 .1051
+n 9 9 9 9 9 9
+e
+iredn® 1PC .871 .938 .023 .023 .023 .702 .4040 .6010 .0020 .6010 .8020 .4020 .2340 .6710 .5650 .7150 .3580 .0400 .5904 .3909 .8908 .9901 .9802 .9703 .4301 .1603 .3303 .3002 .3808 .3100
+o 9 8 9 9 9 9
+s
+irtohm 1W .04 .30 .283 .041 .041 .791 .5000 .2500 .1250 .2500 .3750 .2500 .3330 .2220 .3330 .2500 .3000 .2860 .0919 .0944 .0984 .0952 .0944 .0960 .0480 .0263 .0240 .0205 .0353 .0276
+g M 91 90 9 9 9 9
+l
+a
+EPPR 2CM .189 .830 .189 .406 .297 .406 .3330 .0050 .2220 .7610 .3330 .7610 .0060 .9240 .7660 .0050 .5450 .0050 .8806 .2500 .4903 .1904 .5807 .1904 .4407 .6403 .8305 .8209 .2406 .8209
+I 6 6 6 6 6 6
+R
+adnT 1CM .005 .078 .158 .098 .388 .388 .0050 .0030 .0520 .0520 .0520 .0530 .0310 .0050 .5830 .1470 .2560 .8350 .5690 .9690 .9590 .9990 .9890 .9790 .5520 .8730 .1030 .2240 .9530 .5240
+D 9 9 9 9 9 9
+,TRAA 4CK .735 .508 .807 .807 .490 .807 .7202 .5506 .7708 .7708 .7202 .7708 .9029 .9009 .9033 .9033 .8013 .9033 .9057 .9057 .9057 .9057 .8070 .9057 .8019 .7011 .8052 .8052 .0766 .0852
+C 8 7 8 8 8 8
+,
+,.5TD 3CK .910 .315 .611 .611 .821 .519 .3033 .1067 .0083 .0000 .1067 .3033 .4044 .1054 .5000 .0000 .1011 .3064 .9062 .9016 .9092 .0100 .8078 .9047 .0385 .0160 .0204 .0000 .0136 .0348
+4 9 8 9 9 8 8
+C
+,foCA 1CK .1738 .4318 .6738 .5038 .8438 .1928 .4540 .0710 .5710 .9100 .8300 .8210 .8040 .6130 .1360 .5050 .7660 .2150 .1900 .6900 .7909 .9805 .9901 .9604 .4603 .1907 .3100 .2204 .2305 .3005
+s
+t
+llrseu 1JM .253 .130 .111 .521 .051 .890 .4610 .1230 .9110 .6080 .1020 .2430 .3570 .9470 .0550 .7660 .8820 .5030 .1800 .0940 .9770 .0990 .9990 .3940 .6400 .3303 .6205 .0204 .6103 .3050
+ta 7 8 8 8 8 8
+n
+e
+irepm 1CM .630 .215 .393 .254 .333 .254 .2000 .2000 .0050 .2000 .0050 .3000 .1090 .3008 .1011 .2086 .1000 .3033 .8085 .9039 .9046 .9032 .9039 .9019 .1095 .2048 .0074 .2039 .0071 .0316
+x 8 8 8 8 8 8
+E
+R
+R
+R
+R
+T
+T E 5
+C .4 T R D P
+T
+T E 5
+C .4 T R D P
+T
+T E 5
+C .4 T R D P
+T E 5 T T E
+C .4 T R D P
+A C D A A IP
+C
+A C D A A IP
+C
+A C D A A IP
+C
+A C D A A IP
+C
+R
+R
+R
+R
+R
+R
+M A
+P
+G
+y
+t
+i
+c
+¯
+i
+c
+e
+p
+S
+1
+n
+a
+e
+m
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+comtopn
+.
+c
+i y
+f l
+i t
+t c
+n i
+ie tr
+c s
+sd is
+l
+r n
+o io
+.w tu
+w ib
+w tr
+w is
+d
+fromand
+laedod -seeuR
+n .
+ow /19
+D 6
+.-09 /211
+1 n
+:6 o
+24 L
+. U
+14 S
+20 O
+. D
+g
+n O
+E S
+. S
+l O
+ow R
+n G
+.gK TO
+n A
+.E M
+t
+f E
+oS D
+.J L
+.tn RA
+I E
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+78 B. Ma et al.
+RA .61 .83 .24 .34 .93 .32 .32 .43 .14 .24 .14 .02 .32 .04 .91 .94 .82 .84
+4PC .7409 .6306 .3800 .5309 .7209 .6805 .4903 .4704 .2205 .4009 .5004 .5104 .8085 .8017 .8067 .8017 .8042 .7023
+3PC .8840 .7740 .7520 .0000 .0000 .6350 .7720 .0830 .1810 .0000 .0000 .8230 .2180 .2670 .7930 .50 .7430 .6420
+2PC .7602 .0000 .0000 .0000 .0000 .3001 .4055 .0000 .0000 .0000 .0000 .1033 .8009 .7083 .7095 .5000 .7094 .5044
+1PC .6048 .3088 .4045 .3098 .5024 .4083 .4031 .1063 .2094 .2050 .3068 .3000 .8027 .6001 .7058 .5075 .8005 .6004
+1 78 86 51 88 95 90 0 3 2 5 3 6 6 9 3 0 6 0
+0 5 8 0 3 7 0 7 7 4 5 5
+MW .06 .04 .30 .40 .50 .40 .40 .20 .10 .20 .30 .20 .80 .50 .70 .60 .70 .60
+2CM .4503 .1500 .5408 .9301 .5304 .3901 .4029 .4062 .3033 .2050 .4014 .2050 .6071 .5073 .6060 .5040 .5080 .5040
+)ed 1CM .9106 .4705 .9904 .0500 .9490 .9510 .2006 .3705 .3003 .3700 .3507 .4308 .8602 .8107 .8906 .7804 .8109 .6703
+u
+n
+i
+t
+.(onC 4CK .3180 .2970 .6380 .6380 .9370 .6380 .1380 .9060 .4880 .4880 .6570 .4880 .3850 .7840 .0960 .0910 .5820 .0910
+3
+e
+l
+abT 3CK .5660 .3910 .2870 .0000 .3830 .5610 .3810 .1600 .1430 .0000 .1330 .3480 .6096 .0597 .0749 .0500 .0700 .0644
+1CK .6370 .3200 .3920 .2990 .2870 .4190 .4620 .1660 .2500 .1560 .1470 .2680 .8036 .7011 .7078 .6094 .7045 .5072
+1JM .8600 .6460 .1340 .2290 .5140 .4709 .2400 .2310 .5190 .2150 .2040 .3208 .8608 .0701 .7018 .3607 .7005 .3509
+1 21 33 17 32 17 52 95 42 69 35 67 16 98 45 42 14 53 13
+CM .40 .40 .20 .40 .20 .50 .10 .20 .00 .20 .00 .30 .50 .06 .06 .06 .06 .06
+r R
+e
+¯ 5
+is C .4 T R D P
+lsa A C D CA A IP
+C R
+R
+T T E 5
+C .4 T R D P
+R
+T T E 5 T T E
+C .4 T R D P
+A C D A
+C A IP
+R
+A C D A
+C A IP
+R
+se n2
+r
+su ea
+ea -m
+M G
+F
+A
+e
+r
+u
+s
+a
+e
+M
+1
+C
+U
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+tf
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom topny
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 79
+0.9CM1
+PC4
+JM1
+G-mean1
+PC4
+JM1
+MC1
+JM1
+KC1
+KC4
+KC1
+KC4
+KC3
+PC2
+F1-measure
+KC3
+PC2
+AC
+C4.5
+DT
+CART
+ADT
+RIPPER
+AC
+C4.5
+DT
+CART
+ADT
+RIPPER
+PC3
+PC1
+PC3
+PC1
+0.9CM1
+0.6
+0.3
+0.0
+MC2
+0.9CM1
+0.8
+0.7
+0.6
+0.5
+MW1
+PC4
+MC1
+JM1
+KC1
+KC4
+KC3
+KC1
+KC3
+KC4
+G-mean2
+AC
+C4.5
+DT
+CART
+ADT
+RIPPER
+AUC
+AC
+C4.5
+DT
+CART
+ADT
+RIPPER
+PC2
+PC2
+PC3
+PC1
+PC3
+PC1
+MW1
+PC4
+0.6
+0.3
+0.0
+0.6
+0.3
+0.0
+MC2
+0.9CM1
+MW1
+MC1
+MC2
+MW1
+MC1
+MC2
+Fig. 4. Radar diagrams comparing AC, C4.5, DT, CART, ADT and RIPPER on G-mean, F1 and AUC.
+to results on measures considering imbalance of data (i.e. F1-measure, G-mean 2,
+G-mean1 and AUC ), radar diagrams are derived for easier comparison of the results,
+see Fig. 4. It is found that the proposed AC-based method outperforms almost all the
+other ¯ve classi¯ers on F1-measure, G-mean 2, G-mean1 and AUC measures, as the
+circle representing AC method almost lies outside all the other circles in each radar
+diagram.
+The above presented empirical results are submitted to statistical analysis to
+verify whether speci¯c results are due to luck, or in fact re°ect underlying trends.
+Hereto, the 95% con¯dence interval (denoted as 95%-CI) on the results are calculated
+for each method. When comparing the results of two classi¯ers on a speci¯c
+metric, it su±ces to consider the 95%-CI of both techniques; a di®erence between two
+methods on a speci¯c measure is statistically signi¯cant at the 95% level when both
+con¯dence intervals do not overlap one another. The results of this statistical
+analysis are provided in Fig. 5, comparing the proposed AC learner with the
+benchmark learners. Note that an analogous analysis was also performed considering
+a signi¯cance level of 90%, which resulted in similar ¯ndings; due to space constraints,
+these are however not further detailed.
+Based on this statistical analysis, it can be seen that, for G-mean1 and F1-measure,
+the proposed AC method obtains superior results over other methods except
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+80 B. Ma et al.
+RIPPER, which can be attributed to the fact that G-mean1 and F1-measure are both
+combinations of recall and precision. Note that AC outperforms all the other
+methods in terms of G-mean 2. Most importantly, our AC method beats all other
+approaches except DT when considering the AUC, which should be the preferred
+evaluation metric when dealing with imbalanced class distributions. As such, we can
+conclude that AC and DT signi¯cantly outperform tree and rule based learners in the
+domain of software fault prediction.
+5.2.2. Results of classi¯er comprehensibility
+Section 4.2.2 de¯ned three metrics which, in the case of tree or rule based classi¯ers,
+can serve as a proxy to the somewhat intangible concept of classi¯er comprehensibility,
+i.e. number of rules, number of conditions in the rule set and average number of
+conditions per rule. Based on these metrics, the di®erent classi¯ers can be ordered
+according to this concept, based on the following de¯nition of comprehensibility
+(a)
+Fig. 5. 95% Con¯dence intervals of di®erences between AC and benchmark classi¯ers.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 81
+(b)
+Fig. 5. (Continued )
+precedence of rule set for tree-based or rule-based classi¯ers:
+De¯nition 2: Given two rule sets of tree/rule-based classi¯ers, Ri and Rj, Ri has a
+higher comprehensibility precedence than Rj if
+(a) Ri has fewer number of rules than Rj, or
+(b) Ri has equal number of rules with Rj, but Ri has fewer number of conditions
+than Rj, or
+(c) Ri has equal number of rules with Rj, and Ri has equal number of conditions
+with Rj, but Ri has fewer average number of conditions per rule than Rj.
+Table 4 reports on the results of classi¯er comprehensibility while Fig. 6 presents
+again the 95%-CIs of di®erences between AC and the benchmark classi¯ers on model
+comprehensibility. It is clear from Table 4 and Fig. 6 that the comprehensibility of
+CART and RIPPER is notably better than that of the other four classi¯ers and that
+the AC classi¯er results in signi¯cantly better comprehensible models than DT and
+C4.5 classi¯ers. Finally, the di®erence of model comprehensibility between AC and
+ADT classi¯ers is not signi¯cant. When examining the rules of CART and RIPPER
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+comtopn
+.
+c
+i y
+f l
+i t
+t c
+n i
+ie tr
+c s
+s s
+d i
+l
+r n
+o io
+.w tu
+w ib
+w tr
+s
+w i
+d
+md
+fro an
+ed se
+ad -eu
+o
+l R
+n .
+w 9
+o /1
+D 6
+. /2
+0 1
+-9 1
+1 n
+:6 o
+4 L
+2
+. U
+14 S
+0 O
+2
+. D
+g
+n O
+E S
+. S
+l
+O
+ow R
+n G
+.K O
+g T
+n A
+E
+. M
+t
+f E
+o
+S D
+.J L
+. A
+t
+n R
+I E
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+82 B. Ma et al.
+8 0 0 7 1 0
+.1 .0 .0 .6 .8 .5
+3 6 0 0 0 0
+.3 .8 .0 .0 .1 .5
+3 1 0 5 0 0
+.2 .2 .0 .2 .0 .0
+6 6 0 5 0 7
+.5 .5 .0 .2 .1 .6
+f
+o s
+. n
+o io e
+N it l
+u
+e d r
+ag on re
+r
+e C p
+v
+R .0 .6 .4 .5 .4 .3 .8 .5 .5 .5 .0 .6 .0 .3 .0 .3 .8 .6
+A 4 3 5 1 4 1 3 4 5 1 4 1 3 5 5 2 2 2
+4
+C 8 4 2 4 3 4 4 3 8 6 6 2 1 5 4 1 1 3
+P 1 3 1 1 7 2 1 1
+1
+5 1 0 0 3 0
+2 0
+.7 .2 .0 .5 . .
+3
+3 4 0 0 4 0
+0 5 .5
+.2 .7 .0 . .
+C 8 3 9 1 3 4 5 2 6 0 0 0 3 5 4 0 1 2
+P 4 2 2 1 5 3 1 2 1
+1 1 1
+4 0 0 0 9 0
+2
+0 6 .5
+.8 .0 .0 . .
+C 9 1 0 3 3 2 5 4 0 0 2 3 1 4 5 0 1 1
+P 1 1 2 1 3 4 0 2
+1
+.
+s
+r
+3 1 0 0 9 5
+e 1
+¯ .0 .3 .0 .0 .6 .2
+i
+s C 4 6 1 2 3 4 3 1 5 2 2 9 3 6 5 1 1 2
+s P 3 1 4 1 0 0 0 2
+1 1 2
+r
+e W 1 2 4 3 1 2 4 2 4 5 8 3 2 1 6 1 1 1
+i® M 1 4 2 2 0 3 1
+7
+d
+9 7 6 2 1 2 1 7 6 2 4 1 2 3 6 1 2 0
+1 2 2 2 9 4
+s
+n
+o
+i
+t
+i
+d
+n
+o
+C
+f
+o
+.
+o
+s
+e
+l
+u
+r
+f
+o
+.
+o
+N
+N
+A
+t
+en 1
+2
+ty C
+i
+li M
+n
+e 1
+h C
+e
+r
+p
+m
+o
+m
+f
+o 3
+a
+l
+c
+r
+o
+f
+b
+i
+s
+u
+s
+e
+r
+m
+i
+r
+e
+e
+l
+ab 1
+T M 9 9 2 4 1 3 4 2 2 9 4 5 1 3 6 2 2 1
+C 2 2 1 3 3 4
+1
+r
+e
+C
+i¯ 5 T
+s C .4 T R
+s
+a A C D A
+l C
+R
+R
+R
+T
+T E 5
+C .4 T R
+D P
+T
+T E 5
+C .4 T R
+D P
+A IP
+A C D A
+C
+A IP
+A C D A
+C
+T E
+D P
+A IP
+R
+R
+R
+1 4 1 4 1 3 9 9 3 9 2 9 2 4 3 2 2 3
+M 3 1 3 2 6 5 9 4
+c 4 5 5 0 7 9 7
+le C .2 .2 .0 .6 .1 .6
+d K 4 4 4 3 1 3 5 9 8 5 6 2 1 2 2 1 2 0
+o 2 4
+8 1 0 0 9 5
+s C .3 .2 .0 .0 .2 .7
+t
+l K 13 14 18 1 21 4 8 3 2 0 8 1 1 5 4 0 2 2
+1 7 7 4 1
+l
+a 1
+t
+4 9 0 7 9 0
+6 6 .0
+.2 .0 .0 . .
+n C 7 3 5 3 3 4 8 3 0 5 2 6 2 7 6 1 1 4
+e K 1 2 6 1 3 6 9 2 1
+1 3
+p
+x 1
+2 8 0 6 5 0
+.6 .4 .0 .8 .0 .5
+E M 3 1 4 7 1 4 4 2 2 7 4 0 2 8 3 3 3 2
+J 1 7 0 2 3 0 1 2 6 1
+. 1 6 3
+4
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 83
+Fig. 6. 95% con¯dence intervals of di®erences between AC and benchmark classi¯ers on comprehensibility.
+classi¯ers, it was found that their rules are usually overly simple and direct. For
+instance, there is only one rule, i.e., all modules being nfp or default class, for CART
+classi¯er on KC3 and PC3 data sets, which results in poor performance (AUC ¼ 0:5).
+Based on the above discussion, any satisfactory classi¯er requires the making of a
+tradeo® between prediction performance and model comprehensibility. We post that
+the proposed AC method performed adequately in both perspectives. Table 5 summaries
+the prediction performance and model comprehensibility for the benchmark
+classi¯ers compared to the AC-based method. The proposed approach notably
+outperforms four alternative methods, with DT being the notable exception, while
+resulting in highly comprehensible models.
+Furthermore, we argue that, when comparing tree-based or tree-based classi¯ers,
+prediction performance should be the dominant factor to be taken into account, since
+their comprehensibility is already often satisfactory. As such, comprehensibility
+could be an additional metric to be considered. From this perspective, the AC
+method still surpasses other methods. When examining prediction performance, AC
+and DT show clear advantage over other classi¯ers while DT results in signi¯cantly
+less comprehensible models.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+84
+B. Ma et al.
+Classi¯ers
+DT
+CART, RIPPER
+C4.5
+ADT
+Table 5. Summary of prediction performance and comprehensibility for
+¯ve selected classi¯ers compared to AC-based method.
+Prediction performance (AUC)
+Comprehensibility
+0
+þþ
+0
+Notes: þþ, signi¯cantly better than AC; 0, without signi¯cant di®erence;
+, signi¯cantly worse than AC.
+5.2.3. Results of cross project validation
+Table 6 presents the performance of the proposed AC-based classi¯er in terms of the
+AUC; Table 7 compares these results with those presented above. As indicated in
+Sec. 5.1.3, only 9 of the 12 data sets are considered here, since other three data sets,
+i.e. JM1, KC1 and KC4, exhibit a di®erent input space. For both tables, the horizontal
+dataset names represent the training data while the vertical are the validation
+sets utilized to obtain the classi¯cation performance.
+In the context of Tables 6 and 7, we observe that classi¯ers trained from four data
+sets, i.e. MC2, MW1, PC3 and PC4, achieve acceptable prediction performance on
+other data sets with relative AUC values above 90%. In the meanwhile, the stability
+of prediction e®ectiveness, which expressed by the standard deviation (denoted as
+StDev in Table 7), needs also to be taken into consideration. Hence, as can be seen,
+from a combination point of view of performance and stability, AC classi¯er trained
+by PC4 data set possesses a relative high capability of generalization, due to its high
+mean value and low standard deviation (see Table 7).
+5.3. Threats to validity
+When conducting an empirical study, it is important to be aware of potential
+threats to the validity of the obtained results and derived conclusions. A ¯rst
+Table 6. Experimental results of cross project validation on absolute AUC value.
+Training
+Test
+CM1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+CM1
+0.627
+0.736
+0.631
+0.651
+0.662
+0.534
+0.620
+0.591
+KC3
+0.709
+0.745
+0.547
+0.664
+0.654
+0.702
+0.696
+0.701
+MC1
+0.667
+0.644
+0.604
+0.605
+0.660
+0.761
+0.720
+0.822
+MC2
+0.775
+0.730
+0.718
+0.727
+0.699
+0.796
+0.695
+0.588
+MW1
+0.735
+0.803
+0.703
+0.654
+0.644
+0.787
+0.677
+0.589
+PC1
+0.720
+0.646
+0.751
+0.575
+0.590
+0.561
+0.711
+0.610
+PC2
+0.630
+0.596
+0.560
+0.598
+0.659
+0.607
+0.587
+0.557
+PC3
+0.759
+0.758
+0.776
+0.665
+0.744
+0.762
+0.522
+0.720
+PC4
+0.727
+0.658
+0.835
+0.571
+0.650
+0.703
+0.766
+0.746
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 85
+Table 7. Experimental results of cross project validation on relative AUC value (%).
+Training
+Test
+CM1
+KC3
+MC1
+MC2
+MW1
+PC1
+PC2
+PC3
+PC4
+Mean
+StDev
+CM1
+89.99
+85.38
+94.02
+75.73
+80.00
+65.96
+75.52
+66.81
+79.18
+9.55
+KC3
+118.56
+86.48
+81.43
+77.26
+79.11
+86.81
+84.71
+79.18
+86.69
+12.50
+MC1
+111.52
+92.51
+90.00
+70.29
+79.84
+94.09
+87.69
+92.86
+89.85
+11.13
+MC2
+129.55
+104.82
+83.33
+84.56
+84.51
+98.35
+84.67
+66.45
+92.03
+17.70
+MW1
+122.76
+115.33
+81.61
+97.47
+77.84
+97.30
+82.47
+66.58
+92.67
+17.99
+PC1
+120.41
+92.83
+87.13
+85.58
+68.59
+69.38
+86.57
+68.95
+84.93
+16.18
+PC2
+105.38
+85.63
+64.96
+89.13
+76.65
+73.35
+71.52
+62.94
+78.69
+13.18
+PC3
+126.79
+108.84
+90.04
+99.04
+86.52
+92.14
+64.49
+81.31
+93.65
+17.42
+PC4
+121.51
+94.48
+96.90
+85.04
+75.54
+85.04
+94.73
+90.87
+93.02
+12.59
+possible source of bias relates to the data used, e.g. whether the data is representative
+to the domain in question and whether results can be generalized. As the data
+used in this study stems from the public domain, our results can be compared to
+others, and can be subjected to replication if necessary. In addition, several authors
+have argued in favor of the appropriateness of the NASA MDP repository and/or
+used some of its data sets for their experiments [21, 33, 37, 49]. Therefore, we
+consider the obtained results to be relevant to the software defect prediction community.
+Despite the general suitability of the data, the sampling procedure might bias
+results and prevent generalization. We consider a generic split-sample setup with
+randomly selected test records (1/3 of the available data set). This is a wellestablished
+approach for comparative classi¯cation experiments and the size of the
+MDP data sets seems large enough to justify this setting. Compared to cross validation
+or bootstrapping, the split sample setup saves a considerable amount of
+computation time, which, in turn, can be invested into model selection to ensure
+that the classi¯ers are well tuned to each data set. It would be interesting to
+quantify possible di®erences between a split-sample setup and cross-validation/
+bootstrapping setups by means of empirical experimentation. However, this step is
+left for future research.
+The selection of classi¯ers is another possible source of bias. Given the variety of
+available tree-based and rule-based learning algorithms, many others could have
+been considered. Our selection is guided by the aim of ¯nding the most frequently
+used approaches. Regarding to the proposed AC-based method, we adopted the core
+idea of CBA and CBA2 algorithms, which contributed the basic point of view for
+associative classi¯cation. However, other AC-based approaches, e.g. CMAR [51],
+CPAR [52], MMAC [53], CAAR [54], GARC [29], etc. are left as a topic for future
+investigation. Furthermore, since our experiments are conducted among tree/rulebased
+classi¯cation methods, generalization of our conclusions towards other types of
+classi¯ers needs to done cautiously.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+.iccom tyopn
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+86 B. Ma et al.
+6. Conclusions and Future Work
+This paper o®ered several insights into the discipline of software fault prediction.
+Firstly, we pointed out that software fault prediction models needed to be evaluated
+from multiple perspectives, not only prediction performance but also comprehensibility.
+Accuracy may be a misleading performance metric as faulty modules are likely
+to form the minority of all modules. In addition, other metrics depending on setting a
+speci¯c threshold on the scores outputted by a classi¯er can result in arbitrary results
+being reported, and as such, we advocate to use a di®erent set of evaluation metrics,
+e.g. AUC and comprehensibility metrics, when comparing classi¯cation algorithms.
+We also proposed a novel software defect prediction approach. This approach is
+based on two variants of the associative classi¯cation algorithms, i.e. CBA and
+CBA2 and this is the ¯rst attempt to make a connection between associative classi¯cation
+and software fault prediction. It is valuable for real-world applications in
+software fault prediction as our proposed AC-based method runs e±ciently on large
+data sets and provides high level of predictive power without over¯tting. Moreover,
+it provides classi¯cation models with acceptable comprehensibility, which is essential
+and vital for software managers and users. Implementing e®ective early warning
+mechanisms when developing software is believed to decrease costs and enable faster
+time to market for software developers.
+Another important characteristic of this study is that it has compared results
+from several classi¯cation algorithms on 12 public software engineering data sets.
+The results of our experiments provide a \proving grounds" for new methods that
+will be developed in the future. All our experiments can be repeated, as the tools and
+data sets of this study are situated in the public domain. Therefore, new methods for
+software fault prediction can and should be compared with our results in a clear and
+consistent way.
+Finally, in order to evaluate the software fault prediction results in a combined
+perspective of classi¯cation performance and comprehensibility, we have compared
+the AC-based method with ¯ve other rule/tree-based classi¯cation algorithms.
+Nevertheless, considering other complicated classi¯cation methods, such as support
+vector machines, neural networks, Bayesian classi¯cations, etc. in the comparative
+experiments would gain important insights for the domain of software fault prediction,
+which is left as the future research for us.
+Acknowledgements
+This work was partly supported by the National Natural Science Foundation of
+China (61272362/71372044/71110107027), the Fundamental Research Funds for
+the Central Universities (No. 2014RC0601) and the Doctoral Fund of Ministry of
+Education of China (No. 20120005120001). We also give thanks to the anonymous
+reviewers for their thoughtful comments and suggestions.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+com topn
+.c y
+i
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 87
+References
+1. C. Nan-Hsing, Combining techniques for software quality classi¯cation: An integrated
+decision network approach, Expert Systems with Applications 38 (2011) 4618-4625.
+2. R. Bell, T. Ostrand and E. Weyuker, The limited impact of individual developer data on
+software defect prediction, Empirical Software Engineering 18 (2013) 478-505.
+3. A. G. Koru and H. Liu, Building e®ective defect-prediction models in practice, IEEE
+Software 22 (2005) 23-29.
+4. N. F. Schneidewind, Methodology for validating software metrics, IEEE Transactions on
+Software Engineering 18 (1992) 410-422.
+5. L. C. Briand, V. R. Brasili and C. J. Hetmanski, Developing interpretable models with
+optimized set reduction for identifying high-risk software components, IEEE Transactions
+on Software Engineering 19 (1993) 1028-1044.
+6. N. F. Schneidewind, Investigation of logistic regression as a discriminant of software
+quality, in Seventh International Symposium on Software Metrics, Washington, DC,
+2001, pp. 328-337.
+7. G. Denaro, M. Pezze and S. Morasca, Towards industrially relevant fault-proneness
+models, Int. J. Software Engineering & Knowledge Engineering 13 (2003) 395-414.
+8. T. Khoshgoftaar, N. Seliya and K. Gao, Assessment of a new three-group software quality
+classi¯cation technique: An empirical case study, Empirical Software Engineering 10
+(2005) 183-218.
+9. T. Menzies, J. DiStefano, A. Orrego and R. Chapman, Assessing predictors of software
+defects, in Predictive Software Models Workshop, 2004, pp. 1-4.
+10. B. Turhan and A. Bener, Analysis of naive Bayes' assumptions on software fault data: An
+empirical study, Data & Knowledge Engineering 68 (2009) 278-290.
+11. E. Arisholm, L. C. Briand and E. B. Johannessen, A systematic and comprehensive
+investigation of methods to build and evaluate fault prediction models, Journal of Systems
+and Software 83 (2010) 2-17.
+12. F. Xing, P. Guo and M. R. Lyu, A novel method for early software quality prediction
+based on support vector machine, in Sixteenth IEEE International Symposium on Software
+Reliability Engineering, Chicago, IL, USA, 2005, pp. 213-222.
+13. S. Kanmani, V. R. Uthariaraj, V. Sankaranarayanan and P. Thambidurai, Object oriented
+software quality prediction using general regression neural networks, SIGSOFT
+Softw. Eng. Notes 29 (2004) 1-6.
+14. Z. Jun, Cost-sensitive boosting neural networks for software defect prediction, Expert
+Systems with Applications 37 (2010) 4537-4543.
+15. S. Zhong, T. M. Khoshgoftaar and N. Seliya, Unsupervised learning for expert-based
+software quality estimation, in Eighth IEEE International Symposium on High Assurance
+Systems Engineering, 2004, pp. 149-155.
+16. K. Ganesan, T. M. Khoshgoftaar and E. B. Allen, Case-based software quality prediction,
+International Journal of Software Engineering & Knowledge Engineering 10 (2000) 139152.
+17. C. Catal and B. Diri, Investigating the e®ect of dataset size, metrics sets, and feature
+selection techniques on software fault prediction problem, Information Sciences 179
+(2009) 1040-1058.
+18. C. Cagatay, Software fault prediction: A literature review and current trends, Expert
+Systems with Applications 38 (2011) 4626-4636.
+19. C. Catal and B. Diri, A systematic review of software fault prediction studies, Expert
+Systems with Applications 36 (2009) 7346-7354.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+com topn
+.c y
+i
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+88 B. Ma et al.
+20. M. A. Almeida and S. Matwin, Machine learning method for software quality model
+building, in Eleventh International Symposium on Methodologies for Intelligent Systems,
+1999, pp. 565-573.
+21. S. Lessmann, B. Baesens, C. Mues and S. Pietsch, Benchmarking classi¯cation models for
+software defect prediction: A proposed framework and novel ¯ndings, IEEE Transactions
+on Software Engineering 34 (2008) 485-496.
+22. J. R. Quinlan, C4.5: Programs for Machine Learning (Morgan Kaufmann, 1993).
+23. W. W. Cohen, Fast e®ective rule induction, in Proceedings of the 12th International
+Conference on Machine Learning (Lake Tahoe, CA, 1995), pp. 115-123.
+24. L. Breiman, J. H. Friedman, R. A. Olshen and C. J. Stone, Classi¯cation and Regression
+Trees (Wadsworth International Group, Belmont, 1984).
+25. Y. Freund and L. Mason, The alternating decision tree learning algorithm, in Proceedings
+of the 16th International Conference on Machine Learning (Bled, Slovenia, 1999), pp.
+124-133.
+26. F. Thabtah, A review of associative classi¯cation mining, Knowledge Engineering Review
+22 (2007) 37-65.
+27. B. Liu, W. Hsu and Y. Ma, Integrating classi¯cation and association rule mining, in
+Proceedings of the 4th International Conference on Knowledge Discovery and Data
+Mining (New York, 1998), pp. 80-86.
+28. B. Liu, Y. Ma and C. Wong, Improving an association rule based classi¯er, in Proceedings
+of the 4th European Conference on Principles and Practice of Knowledge Discovery in
+Databases, 2000, pp. 504-509.
+29. G. Chen, H. Liu, L. Yu, Q. Wei and X. Zhang, A new approach to classi¯cation based on
+association rule mining, Decision Support Systems 42 (2006) 674-689.
+30. J. S. Shirabad and T. J. Menzies, The PROMISE Repository of Software Engineering
+Databases, 2005, from http://promise.site.uottawa.ca/SERepository.
+31. M. Chapman, P. Callis and W. Jackson, Metrics Data Program, 2004, from http://mdp.
+ivv.nasa.gov/.
+32. B. Cukic and Y. Ma, Predicting fault-proneness: Do we ¯nally know how? in Reliability
+Analysis of System Failure Data, Cambridge, UK, 2007.
+33. T. Menzies, J. Greenwald and A. Frank, Data mining static code attributes to learn defect
+predictors, IEEE Transactions on Software Engineering 33 (2007) 2-13.
+34. Y. Jiang, B. Cukic and T. Menzies, Fault prediction using early lifecycle data, in
+18th IEEE International Symposium on Software Reliability, 2007, pp. 237-246.
+35. S. Sha¯, S. M. Hassan, A. Arshaq, M. J. Khan and S. Shamail, Software quality prediction
+techniques: A comparative analysis, in 4th International Conference on Emerging
+Technologies, 2008, pp. 242-246.
+36. J. Riquelme, R. Ruiz, D. Rodríguez and J. Moreno, Finding defective modules from highly
+unbalanced datasets, in Actas del 8 taller sobre el apoyo a la decision en ingenier {a del
+software, 2008, pp. 67-74.
+37. O. Vandecruys, D. Martens, B. Baesens, C. Mues, M. De Backer and R. Haesen, Mining
+software repositories for comprehensible software fault prediction models, Journal of
+Systems and Software 81 (2008) 823-839.
+38. K. Dejaeger, T. Verbraken and B. Baesens, Towards comprehensible software fault
+prediction models using Bayesian network classi¯ers, IEEE Transactions on Software
+Engineering 39 (2013) 237-257.
+39. Y. Jiang, J. Shang and Y. Liu, Maximizing customer satisfaction through an online
+recommendation system: A novel associative classi¯cation model, Decision Support
+Systems 48 (2010) 470-479.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+com topn
+.c y
+i
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+Investigating Associative Classi¯cation for Software Fault Prediction 89
+40. T. Menzies and M. Shepperd, Special issue on repeatable results in software engineering
+prediction, Empirical Software Engineering 17 (2012) 1-17.
+41. T. Gyimothy, R. Ferenc and I. Siket, Empirical validation of object-oriented metrics on
+open source software for fault prediction, IEEE Transactions on Software Engineering 31
+(2005) 897-910.
+42. T. J. Ostrand, E. J. Weyuker and R. M. Bell, Predicting the location and number of faults
+in large software systems, IEEE Transactions on Software Engineering 31 (2005) 340355.
+43. B. W. Boehm and P. N. Papaccio, Understanding and controlling software costs, IEEE
+Transactions on Software Engineering 14 (1988) 1462-1477.
+44. S. G. Swapna, Architecture-based software reliability analysis: Overview and limitations,
+IEEE Transactions on Dependable and Secure Computing 4 (2007) 32-40.
+45. M. J. Harrold, Testing: A roadmap, in Proceedings of the Conference on the Future of
+Software Engineering (Limerick, Ireland, 2000), pp. 61-72.
+46. A. Bhattacharya, A. Konar, S. Das, C. Grosan and A. Abraham, Hardware software
+partitioning problem in embedded system design using particle swarm optimization algorithm,
+in International Conference on Complex, Intelligent and Software Intensive
+Systems, 2008, pp. 171-176.
+47. L. Chen and S. Huang, Accuracy and e±ciency comparisons of single- and multi-cycled
+software classi¯cation models, Information and Software Technology 51 (2009) 173-181.
+48. I. Myrtveit, E. Stensrud and M. Shepperd, Reliability and validity in comparative studies
+of software prediction models, IEEE Transactions on Software Engineering 31 (2005)
+380-391.
+49. A. G. Koru and H. Liu, An investigation of the e®ect of module size on defect prediction
+using static measures, ACM SIGSOFT Software Engineering Notes 30 (2005) 1-5.
+50. R. Agrawal and R. Srikant, Fast algorithms for mining association rules, in Proceeding of the
+20th International Conference on Very Large Data Bases (VLDB'94), 1994, pp. 487-499.
+51. W. Li, J. Han and J. Pei, CMAR: Accurate and e±cient classi¯cation based on multiple
+class-association rules, in Proceedings of the International Conference on Data Mining
+(San Jose, CA, 2001), pp. 369-376.
+52. X. Yin and J. Han, CPAR: Classi¯cation based on predictive association rules, in
+Proceedings of the SIAM International Conference on Data Mining (San Francisco, CA,
+2003), pp. 369-376.
+53. F. A. Thabtah, P. Cowling and P. Yonghong, MMAC: A new multi-class, multi-label
+associative classi¯cation approach, in 4th IEEE International Conference on Data Mining
+(Brighton, UK, 2004), pp. 217-224.
+54. X. Xiaoyuan, H. Guoqiang and M. Huaqing, A novel algorithm for associative classi¯cation
+of image blocks, in 4th International Conference on Computer and Information
+Technology (Shiguo, China, 2004), pp. 46-51.
+55. Y. Yoon and G. G. Lee, E±cient implementation of associative classi¯ers for document
+classi¯cation, Information Processing & Management 43 (2007) 393-405.
+56. J. Pinho Lucas, S. Segrera and M. N. Moreno, Making use of associative classi¯ers in order
+to alleviate typical drawbacks in recommender systems, Expert Systems with Applications
+39 (2012) 1273-1283.
+57. J. Dougherty, R. Kohavi and M. Sahami, Supervised and unsupervised discretization of
+continuous features, in Proceedings of the 12th International Conference on Machine
+Learning (San Francisco, CA, 1995), pp. 194-202.
+58. R. Kohavi, A study of cross-validation and bootstrap for accuracy estimation and model
+selection, in International Joint Conference on Arti¯cial Intelligence, 1995, pp. 11371145.
+.
+s
+e
+l
+c
+i
+t
+r
+a
+s
+s
+e
+c
+c
+A
+n
+e
+p
+O
+r
+o
+f
+t
+p
+e
+c
+x
+e
+,
+d
+e
+t
+t
+i
+m
+r
+e
+com topn
+.c y
+i
+f l
+i t
+tn ic
+ie tr
+c s
+lsd is
+r n
+o io
+.w tu
+www itirsdb
+from and
+laedodnow ./-seeu91R
+.:-6190D /on1261
+.1424 SLU
+..lnnog20Ew SSRGOOOD
+..tfgnoSEK TEAODM
+..tIJn ELRA
+D
+E
+F
+E
+D
+A
+D
+I
+S
+R
+E
+V
+I
+N
+U
+O
+A
+C
+A
+D
+N
+U
+F
+y
+b
+90 B. Ma et al.
+59. U. M. Fayyad and K. B. Irani, Multi-interval discretization of continuous-valued attributes
+for classi¯cation learning, in Proceedings of the 13th International Joint Conference
+on Arti¯cial Intelligence, 1993, pp. 1022-1027.
+60. F. Provost, T. Fawcett, Robust classi¯cation for imprecise environments, Machine
+Learning 42 (2001) 203-231.
+61. F. Tom, An introduction to ROC analysis, Pattern Recognition Letters 27 (2006)
+861-874.
+62. A. Mahaweerawat, P. Sophatsathit and C. Lursinsap, Adaptive self-organizing map
+clustering for software fault prediction, in 4th International Joint Conference on Computer
+Science and Software Engineering (Khon Kaen, Thailand, 2007), pp. 35-41.
+63. T. Menzies, A. Dekhtyar, J. Distefano and J. Greenwald, Problems with precision: A
+response to \Comments on `Data Mining Static Code Attributes to Learn Defect Predictors'
+", IEEE Transactions on Software Engineering 33 (2007) 637-640.
+64. M. Kubat, R. C. Holte and S. Matwin, Machine learning for the detection of oil spills in
+satellite radar images, Machine Learning 30 (1998) 195-215.
+65. B. Andrew, The use of area under the ROC curve in the evaluation of machine learning
+algorithms, Pattern Recognition 30 (1997) 1145-1159.
+66. Y. Ma, L. Guo and B. Cukic, A statistical framework for the prediction of fault-proneness,
+in Advances in Machine Learning Application in Software Engineering (Idea Group,
+2006), pp. 237-265.
+67. T. Hall, S. Beecham, D. Bowes, D. Gray and S. Counsell, A systematic literature review
+on fault prediction performance in software engineering, IEEE Transactions on Software
+Engineering 38 (2012) 1276-1304.
+68. D. Martens and B. Baesens, Building acceptable classi¯cation models, in R. Stahlbock,
+S. F. Crone and S. Lessmann (Eds.) Data Mining: Special Issue in Annals of Information
+Systems (Springer, 2010), pp. 53-74.
+69. I. Askira-Gelman, Knowledge discovery: Comprehensibility of the results, in Proceedings
+of the 31st Hawaii International Conference on System Sciences, Washington, DC, USA,
+1998, pp. 247-255.
+70. J. Huysmans, K. Dejaeger, C. Mues, J. Vanthienen and B. Baesens, An empirical evaluation
+of the comprehensibility of decision table, tree and rule based predictive models,
+Decision Support Systems 51 (2011) 141-154.
+71. F. Coenen, LUCS KDD implementation of CBA (Classi¯cation Based on Associations),
+2004, from http://www.csc.liv.ac.uk/ frans/KDD/Software/CMAR/cba.html.
+72. C. Andersson, A replicated empirical study of a selection method for software reliability
+growth models, Empirical Software Engineering 12 (2007) 161-182.
+73. K. El Emam, S. Benlarbi, N. Goel and S. N. Rai, Comparing case-based reasoning classi¯ers
+for predicting high risk software components, Journal of Systems and Software 55
+(2001) 301-320.
+74. K. El Emam, W. Melo and J. C. Machado, The prediction of faulty classes using objectoriented
+design metrics, Journal of Systems and Software 56 (2001) 63-75.
+75. R. Kohavi, The power of decision tables, in 8th European Conference on Machine
+Learning, 1995, pp. 174-189.
+76. I. H. Witten, E. Frank and M. A. Hall, Data Mining: Practical Machine Learning Tools
+and Techniques, 3rd Ed. (Morgan Kaufmann, 2011).

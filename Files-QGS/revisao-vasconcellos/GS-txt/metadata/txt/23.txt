@@ -1,0 +1,6 @@
+Software Process Improvement: Supporting the Linking of the Software and the Business Strategies
+
+The market is becoming more and more competitive, a lot of products and services depend of the software product and the software is one of the most important assets, which influence the organizations businesses. Considering this context, we can observe that the companies must to deal with the software, developing or acquiring, carefully. One of the perspectives that can help to take advantage of the software, supporting effectively the business, is to invest on the organizations software processes. This paper presents an approach to evaluate and improve the processes assets of the software organizations, based on internationally well-known standards and process models. This approach is supported by automated tools from the TABA Workstation and is part of a wider improvement strategy constituted of three layers (organizational layer, process execution layer and external entity layer). Moreover, this paper presents the experience of use and their results.
+
+Software Quality, Software Process Improvement, Business Strategy. 
+

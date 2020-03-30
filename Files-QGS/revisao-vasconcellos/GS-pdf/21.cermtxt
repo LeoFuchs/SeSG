@@ -1,0 +1,812 @@
+Software Qual J (2010) 18:341-359
+DOI 10.1007/s11219-010-9094-7
+Integration of strategic management, process
+improvement and quantitative measurement
+for managing the competitiveness of software
+engineering organizations
+Javier Garc´ıa Guzm a´n • Hugo A. Mitre •
+Antonio Amescua • Manuel Velasco
+Published online: 7 March 2010
+Springer Science+Business Media, LLC 2010
+Abstract Strategic management is a key discipline that permits companies to achieve
+their competitive goals. An effective and explicit alignment and integration of business
+strategy with SPI initiatives based on measurement is essential to prevent loss of income,
+customers and competitiveness. By integrating SPI models and measurement techniques in
+the strategy management process, an organization's investments will be better aligned with
+strategy, optimizing the benefits obtained as a result of an SPI program. In this paper, the
+authors propose BOQM (Balanced Objective-Quantifiers Methodology) that integrates
+properly strategic management, process improvement and quantitative measurement to
+manage the competitiveness of software engineering organizations. Finally, this paper
+presents and discusses the results from implementing BOQM in a software development
+organization.
+Keywords Strategic management Software process improvement
+Quantitative measurement Software engineering organizations IT governance
+1 Introduction
+At present, competitiveness is a key factor to assure the survival of companies in the
+market (Mehra and Inman 2004). Information and communication technologies (ICT) are
+J. G. Guzma´n (&) H. A. Mitre A. Amescua M. Velasco
+Department of Computer Science, Carlos III University of Madrid,
+Av. De la Universidad 30, 28911 Leganes, Madrid, Spain
+e-mail: jgarciag@inf.uc3m.es
+H. A. Mitre
+e-mail: hmitre@inf.uc3m.es
+A. Amescua
+e-mail: amescua@inf.uc3m.es
+M. Velasco
+e-mail: velasco@ia.uc3m.es
+123
+342
+Software Qual J (2010) 18:341-359
+essential elements that contribute to improving a company's competitiveness (Kamel et al.
+2009; Kuppusamy et al. 2008).
+Nowadays, it is widely known that strategic management is a key discipline that permits
+companies to achieve their competitive goals (Fahey 2007). However, in 63% of organizations,
+the role of ICT is essential to achieve their business goals, but often, it is limited to
+the operational level, having little consideration and influence in the definition of an
+organization's strategy (Asgarkhani 2006).
+Nevertheless, effective management and improvement of internal processes in software
+development, operation and maintenance organizations [hereafter software engineering
+organization (SEO)] have contributed to improving the competitiveness of this type of
+organization in the ICT market (Asgarkhani 2006). Many case studies (Mcloone and
+Rohde 2007; Qi 2007; El-Emam 2007) demonstrate that software development companies
+have achieved success by adopting SPI models such as capability maturity model integration
+(CMMI). Moreover, professionals and managers are agreed on their effectiveness
+(Oliveira et al. 2009).
+So, aligning SPI initiatives and efforts with strategic management principles and
+techniques is essential to manage and control costs and quality of an SEO (Kojima et al.
+2007; Issac et al. 2006).
+However, it is important to highlight that, in the software industry, there are few
+relevant case studies with enough detail (Goethert and Siviy 2004) where SPI initiatives
+are directed or well aligned with the company's strategy, quantitatively controlled by a
+measurement program and the information needs of senior management are integrated
+appropriately.
+The problem addressed in this paper is the effective and explicit integration of strategic
+management, process improvement and quantitative measurement to manage efficiently
+the competitiveness of SEOs.
+The hypothesis of this research work is: ''If there is a methodology available, especially
+focused on SEOs, that integrates strategic management activities, process improvement
+principles and measurement techniques, it will be possible to manage an SEO strategy,
+potentially increasing the synergies among all stakeholders and distributing the knowledge
+at all levels for effective decision-making.''
+Consequently, the authors decided on the following research activities:
+1.
+2.
+3.
+Analyze different approaches that enable the integration of strategy management,
+process improvement and measurement techniques in SEOs (Sect. 2).
+Define a methodology that allows SPI models to integrate and manage SEO strategy,
+based on measurement (Sect. 3).
+Apply in a real organization the methodology defined in order to determine whether it
+contributes to increasing the synergies among stakeholders and provides key
+information for decision-making at all levels in the company (Sect. 4).
+2 Literature review
+As Lamb et al. state, strategic management is ''an ongoing process that evaluates and
+controls the business and the industries in which the company is involved; and then
+reassesses each strategy regularly to determine how it has been implemented and whether
+it has succeeded'' (Lamb 2008).
+123
+Software Qual J (2010) 18:341-359
+343
+Fig. 1 Current proposals in the strategy management process for software engineering organizations
+Strategic management is a combination of three main processes: strategy formulation,
+strategy implementation and strategy evaluation, which then cycles back to strategy formulation
+(Kaplan and Norton 2005).
+Before formulating the strategy in SEOs, it is necessary to add another sub-process in
+strategic management, called environmental scanning. SEOs need to be proactive compared
+to other competitive organizations and to identify all external and internal
+vulnerabilities.
+Next, the current proposals to implement strategy management in SEOs are presented
+using the four-phase scheme as an analysis framework (see Fig. 1).
+2.1 Environmental scanning
+The purpose of this strategy management sub-process is to analyze the current situation of
+an SEO in the environment in which it operates. Trienekens (Trienekens et al. 2009)
+stresses that a software organization should not only be aware of its own internal conditions,
+but also its external conditions. A SWOT (strengths, weaknesses, opportunities and
+threats; Kahraman et al. 2007) analysis is the most common tool to evaluate the current
+state of an SEO in relation to its strategy. A SWOT analysis can be complemented with
+other specific techniques to analyze the organization's internal and external context.
+The analysis of the external context is centerd on a competitor's evaluation using
+several techniques. The most representative are: (a) Market research (Belk 2007); (b)
+business intelligence (Watson and Wixom 2007); (c) five forces (Porter 1979; Chastek
+et al. 2009); and (d) PEST analysis (Peng and Nunes 2007).
+The analysis of the internal context consists of assessing the elements of an organization
+that influence the strategy such as processes, human resources and the current state of its
+information systems. In SEOs, there are many approaches to identify the strengths and
+weaknesses of processes. The most relevant are SCAMPI (standard CMMI appraisal
+method for process improvement; SEI 2006) and the ISO/IEC 15504 standard (ISO 2004).
+There are also other quality models that have been successfully applied in SEOs, such as
+ISO 9000 (ISO 2008), COBIT (Watson and Wixom 2007) and ITIL (Long 2008).
+2.2 Strategy formulation
+The purpose of this sub-process is to define the strategy in terms of quantitative objectives,
+without forgetting the organization's vision and constraints. The strategic objectives
+123
+344
+Software Qual J (2010) 18:341-359
+formulation requires effective techniques to manage the strategy as a whole. Executives
+use strategic maps (Kaplan and Norton 2008) to address business strategies effectively.
+The balanced scorecard (BSC; Kaplan and Norton 2006) clearly specifies how to formulate
+the strategy map using four quadrants: customers, internal processes, innovation and
+growth, and financial perspectives.
+One of the difficulties in formulating the strategy quantitatively is to link the strategic or
+business objectives with the product and process measurements and the expected values for
+improvement based on an appropriate analysis of the current situation. There are two kinds
+of proposals to solve this problem:
+•
+•
+Proposals based on a predefined procedure to define indicators. McGarry's procedure
+helps to define indicators based on organizational information needs (Card 2003;
+McGarry 2002). The BSC&GQM proposal (Goethert and Fisher 2003) applies the goal
+question (Indicator) measurement (GQ(I)M) methodology (Shull et al. 2006) to derive
+quantitative sub-objectives from strategy objectives allocated in the quadrants of the
+BSC. The GQM model was extended in a new approach known as GQM ? strategies
+(Basili et al. 2009). It provides a mechanism to align the measurement goals with highlevel
+goals such as business goals, software goals and project goals. Ebert and Dumke
+(2007) also present a process-based proposal for linking the business goals definitions
+and operational goals in software companies.
+Proposals based on predefined indicators or models. Tuan (Tuan et al. 2006) used the
+activity-based costing (ABC) method (Kaplan and Cooper 1997) to determine the cost
+structure of tactical programs. Kanji's business scorecard (KBS; Kanji and e Sa´ 2007)
+provides predefined indicators, increasing understanding of the application of the BSC
+perspectives in an SEO.
+2.3 Strategy implementation
+This process defines the operational models that implement the actions required to achieve
+the business and process improvement objectives. The activities in this phase are related to
+the definition, pilot implementation and improvement of the organization's internal
+processes.
+2.4 Analysis and control of the strategy implementation
+In this process, an SEO has to obtain objective data and analyze them to determine the
+extent to which the strategic objectives have been accomplished. There are two key
+activities in this process: (a) data collection, whose main goal is to ensure that data
+gathered is defined and accurate. An ISO standard (ISO 2007) is used, but other proposals
+(PSM, ABCM and BSC&GQM) provide their own approach; (b) data information is an
+activity for providing decision makers with useful periodic reports on the state of the
+software processes and products. ABCM, PSM & BSC, KBS and BSC&GQM use the
+balanced scorecard as an information system to get the big picture of the current state of
+the strategy.
+As a result of this state-of-the-art analysis, it can be said that the strategy of SEOs is
+often related to short- and medium-term plans and limited to their domain. Consequently,
+an SEO attempts to do its part in meeting the overall business strategy, but it is difficult to
+know how the SEO's performance contributes to implementing the business strategy
+(Mishra and Mishra 2008; Capell 2004). In order to align efficiently SPI goals and
+123
+Software Qual J (2010) 18:341-359
+345
+activities with business objectives, it is necessary to integrate properly and explicitly the
+SPI management activities with strategic management activities.
+By analyzing the measurement proposals previously presented, it can be stated that
+there are non-integrated proposals that partially solve some specific problems of aligning
+the definition and control of SPI objectives with business strategy management. Nevertheless,
+the alignment and integration of business strategy with SPI initiatives in an SEO
+often fail for several reasons (Harjumaa et al. 2008; Gopal et al. 2005; Dyba˚ 2005):
+•
+•
+•
+•
+Lack of coordination and alignment among all the roles and responsibilities involved in
+both business and SEO strategies.
+Lack of senior management commitment to implementing the SEO strategy due to
+insufficient information on how SEO strategic objectives contribute to their business
+strategy.
+Lack of employee commitment through failure of management to communicate the
+business and SEO strategies to their employees and lack of incentives given to workers
+to embrace the new strategy.
+Poor communication resulting from insufficient information sharing among stakeholders
+or exclusion of stakeholders in the knowledge-sharing processes (El-Emam et al.
+2001).
+To solve the problems of achieving the synergies required to align business objectives
+and SEO goals, it is necessary to refine already existing proposals, defining an approach
+that:
+•
+•
+•
+•
+Seamlessly integrates strategic management, process improvement and measurement to
+control efficiently the current status of SPI initiatives.
+Specifies the roles, responsibilities and competencies of stakeholders involved, creating
+the required synergies for effective competitive management.
+Contributes to capturing and disseminating useful knowledge of SPI initiatives and
+results to control the business strategy at all levels of the organization.
+Governs software process improvement efforts through indicators that link process
+improvement objectives with business strategy objectives.
+3 A balanced objective-quantifiers methodology
+The balanced objective-quantifiers method (BOQM) is a process guided by the SEO's key
+roles to design, implement and control a quantitative strategy through indicators aligned
+with strategic and improvement objectives in a BSC.
+Balanced objective-quantifiers method includes the four perspectives of the BSC
+(financial, internal, customer and innovation and growth) and presents a clear state of the
+organization and its strategic advance. BOQM also applies the GQM principles to provide
+well-informed measures and justify indicators through goals-questions-measures. Finally,
+BOQM is also based on the main PSM principles to derive indicators and identify causeeffect
+relations between them.
+BOQM is based on the process orientation philosophy. Figure 2 summarizes the BOQM
+process. The numbers in fig. 2 correspond to the activities described in this section. The
+complete process will be available after defense of Mitre's dissertation (in mid-2010) at
+http://sel.inf.uc3m.es/hmitre/BOQM.html.
+123
+346
+Software Qual J (2010) 18:341-359
+Fig. 2 The process of the balanced objective-quantifiers method (BOQM)
+3.1 Diagnosis sub-process
+This sub-process identifies and analyzes all the external and internal contexts of the
+organization. This process has only one activity.
+1. Analysis of the internal and external context.
+a.
+b.
+The internal context is defined by (1) the technological infrastructure, (2) the SPI model
+or SPI initiatives introduced and (3) the stakeholders. The technological infrastructure,
+relates to technological resources such as PCs, laptops, servers and networks. The
+previous SPI initiatives specify the scope and intensity of previous activities in this area
+and the software model used as a basis for these (CMMI, TSP, PSP, ISO 12207, etc.).
+The external context, obtained from surveys, is defined by (1) social behavior, (2) the
+local industry and market, including industry competitors, potential entrants, buyers,
+substitutes and suppliers. Social behavior is the social levels present in the sector and
+the ease of access to information technologies. The local industry represents other
+organizations in the same sector or company-related activity; and the local market is
+the type of suppliers, purchasers and final clients. A PEST or SWOT analysis can be
+considered support techniques.
+3.2 Definition sub-process
+The purpose of this sub-process is to define the strategy in terms of quantitative objectives
+bearing in mind the organization's vision.
+2. Identify and clarify vision and mission. The vision statement describes the organization's
+aims and what specific motivation binds the stakeholders, including members,
+123
+Software Qual J (2010) 18:341-359
+347
+Fig. 3 BOQM analysis model
+leaders and anyone else involved. The vision reflects the realization of the organization's
+values.
+3. Formulate strategic objectives that are based on the internal and external context,
+bearing in mind the vision and mission definitions.
+4. Define an operational model for each strategic objective. The operational model
+represents the set of actions needed to operate a strategic objective. It is composed of
+specific actions to implement the strategic and/or improvement objectives. From this
+activity, the first version of the BOQM analysis model is obtained. Figure 3 presents the
+structure and a snapshot of a part of the analysis model defined for BOQM; the complete
+model can be seen at http://sel.inf.uc3m.es/hmitre/AnalysisModel.html. When applying
+BOQM, this analysis model has to be customized for a specific organization through the
+following activities.
+5. Derive one or more quantitative improvement objectives (IOs) from the strategic
+objectives and their operational model.
+a.
+To derive IOs, the strategic objective is divided into measurable pieces, taking into
+account that these IOs can support decision-making during the operational model
+implementation. The following information categories can be covered in BOQM: (1)
+Software products quality: to improve the product quality, or product functionality and
+stability; (2) software process performance: to analyze and tailor the plan to improve
+an SEO's process capabilities; (3) organization capacity: to direct the performance and
+structure of the organization's staff toward the desired goals; (4) technology
+performance: to evaluate the effectiveness of the technology; (5) resources and costs:
+to estimate and control the cost of resources and activities; (6) customer satisfaction: to
+123
+348
+Software Qual J (2010) 18:341-359
+improve customer satisfaction, or to control customer support; and (7) project
+schedule: to improve project management capabilities to meet the organizational
+commitments in terms of delivery agenda.
+b. Identify, if necessary, process area or life cycle phase that affects IOs. This step is
+addressed by the SPI model selected or the SPI initiative. The process area or life cycle
+phase can facilitate the source of data required for measurements and data collection
+for the indicators.
+c. Assign priorities to IOs.
+6. Develop indicators and measurement procedures. The inputs for this activity are the
+BOQM analysis model (see Fig. 3) and the resulting catalog of IOs. The output products
+are the set of measurement constructors. Tasks included in this activity are:
+a. As the IOs are measurable pieces obtained from the strategic objectives, this task
+consists of cataloging the IOs in the information categories (IC) considered in the
+BOQM analysis model.
+b. Identify the measurement concepts (MC) from the information categories. We suggest
+reading the questions for each measurable concept that can satisfy the IO (see Fig. 3)
+and selecting the appropriate question and measurement concept. Each question
+belongs to a BSC quadrant. Therefore, the measurement analyst does not worry about
+categorizing the questions and improvement objectives into the BSC perspectives.
+c. Establish possible base or derived measures for each measurable concept (see Fig. 3).
+The template to define measurement constructs can be seen at http://sel.inf.uc3m.es/
+hmitre/MeasurementConstructTemplate.html.
+7. Identify cause-effect relationship between indicators and prioritize improvement
+objectives. Here, the BOQM analysis model and a catalog of IO aligned with constructors
+are needed. Each IO is aligned with an MC, and the MCs have cause-effect relationships.
+The measurement analyst identifies the relationships from the BOQM analysis model, and
+the SEO manager takes the decision to prioritize the IOs.
+3.3 Implementation sub-process
+The purpose of this sub-process is to perform the strategy and the measurement procedures
+to collect and store measurable information.
+8. Perform the operational models. The strategy manager gets the staff commitment to
+apply the operational models, and assigns checklists per stakeholder.
+9. Perform measurement-related collection and storage procedures. This activity is closely
+linked to the periods defined in each measurable construct. The measurement librarian collects
+data from the documents generated by personnel at the operational level (software
+designers, developers, testers, etc.) and updates the measurement database. In addition, the
+measurement librarian reports measurement constructs to the measurement users.
+3.4 Analysis and control sub-process
+In this sub-process, the measurement analyst has to obtain objective data and analyze them
+to determine the current state of the strategic objectives accomplishment.
+10. Analyze the state of the indicators related to the improvement objectives. The
+measurement analyst updates the analysis models of all the measurement constructs and
+makes a report on the strategy in the BSC.
+123
+Software Qual J (2010) 18:341-359
+349
+11. Communicate the results to measurement users. The measurement analyst sends all
+the measurement constructs to the corresponding user according to the reporting periods.
+The BSC generated by the measurement analyst is also sent to senior managers.
+12. Evaluate the measurement users' satisfaction and the BOQM process performance
+in order to make improvements.
+4 BOQM application and results obtained
+Having defined BOQM, the authors applied it to determine whether it contributes to: (a)
+managing effectively SEO competitiveness, enabling the alignment of SEO strategic
+objectives, SPI initiatives and measurement constructs used to monitor the organization's
+performance; (b) increasing the synergies among all the stakeholders involved in the
+business strategy management, the SEO performance control and the management of SPI
+initiatives; and (c) capturing and disseminating useful knowledge of SPI initiatives and
+results to control business strategy at all levels of the organization.
+Results obtained using BOQM were compared with previous initiatives of the same type
+in the same organization. Information sources for this discussion are:
+•
+•
+•
+•
+Previous SPI initiatives at AGROSEGURO.
+Results of BOQM application.
+Observation of BOQM execution.
+Final group interviews.
+The following sections present the activities done and results obtained through the
+BOQM application in a real software development setting and discuss the lessons learned
+during the practical validation of BOQM.
+Section 4.1 briefly presents the activities carried out and the results obtained from
+implementing BOQM in a real software development setting. Section 4.2 discusses the
+lessons learned during the practical validation of BOQM.
+4.1 BOQM application
+4.1.1 Background
+BOQM was implemented in a medium-sized SEO of a company called AGROSEGURO.
+The information presented in this section was obtained during the execution of BOQM
+Activity 1. The company is one of the main insurance corporations in Spain whose clients
+are farmers, livestock breeders and other insurance companies. It has about 200 employees;
+around 35 were in the development department (Sept 2008). Staff turnover is very low and
+the composition of working groups is very stable, with few changes each year. The type of
+software developed by the SEO is information management systems in host environments
+(AS/400) with web interfaces developed using Java technologies. There is also a small
+team for the development and maintenance of windows-based applications to support
+mobile users without a stable internet connection. There were previous initiatives in this
+SEO to improve performance and efficiency:
+•
+The first software process improvement initiative was to introduce several process areas
+included in CMMI level 2 (staged version).
+123
+350
+•
+Software Qual J (2010) 18:341-359
+The second software process improvement initiative was to obtain an ISO 9000-3:2000
+certification for development processes.
+4.1.2 Process improvement goals and activities
+In order to align AGROSEGURO's SEO performance with the business objectives, a new
+software process improvement initiative was launched. BOQM was used to control the
+alignment of these three elements: business goals, SEO goals and the SPI initiatives.
+4.1.3 Mission and vision
+As result of BOQM activity 2, AGROSEGURO SEO's mission was stated. It is to provide
+good quality and optimize the delivery term for each assignment to the rest of organization
+areas at AGROSEGURO. The vision of the SEO is to be capable of planning new product
+portfolios at the beginning of the year, and to achieve the objectives by the end of the year.
+This means that the development teams would not be burdened with continuous corrective
+maintenance tasks and support that prevent the annual objectives from being met.
+4.1.4 Strategic and SPI objectives
+According to the SEO's mission and vision, the strategic objectives (SOs) to be managed
+using BOQM were defined during the execution of BOQM Activity 3. Moreover, an
+operational model (OM) was defined for each strategic objective considered as a result of
+BOQM Activity 4. Finally, the definition of the improvement objectives (IO) was the result
+of BOQM Activity 5.
+4.1.4.1 Strategic objective 1 (S.O.1) Align the organization of the development department
+with the demands of other units in the enterprise. This strategic objective had to be
+achieved in 1 year. In order to do so, a set of activities for the organizational reconstruction
+in the development department was initiated. The specific improvement objective identified
+for this strategic objective was to reorganize the structure of the teams in the development
+department (IO1.1).
+4.1.4.2 Strategic objective 2 (S.O.2) Optimize the work that can be done by the development
+department, increasing the capability to manage efficiently the available resources.
+This strategic objective (SO) had to be achieved in 1 year. The activities to achieve this
+objective were those required to define and deploy a new process for project control and
+tracking and the specific improvement objectives identified for this strategic objective were:
+IO2.1: separate development and support, optimizing the workflow; IO2.2: center and reallocate
+roles and performance; and IO2.3: strengthen the management control system.
+4.1.4.3 Strategic objective 3 (S.O.3) Increase the quality of the work delivered to other
+units at AGROSEGURO. This strategic objective had to be achieved in 1 year. The
+activities were those required to optimize the development processes and improve the
+training of the personnel who use them. The specific improvement objectives identified for
+this strategic objective were: IO3.1: improve the development software processes displayed
+and IO3.2: improve personnel capabilities and performance in the development
+department.
+123
+Software Qual J (2010) 18:341-359
+351
+Once the improvement objectives were identified, the SPI initiatives were initiated.
+4.1.5 Measurement constructs identified and results obtained
+BOQM activity 6 was carried out to identify measurement constructs (indicators) to control
+strategic and improvement objectives.
+Fig. 4 BOQM analysis model obtained for AGROSEGURO
+123
+352
+Software Qual J (2010) 18:341-359
+First, the questions to control the achievement of these objectives were selected and
+correctly linked to the corresponding strategic objectives (Fig. 4).
+Having defined these questions, the activities for defining the measurement constructs
+were then carried out. The measurement constructs selected and the target values are
+presented in Fig. 4.
+Once measurement constructs were defined, several cause-effect relations among them
+were identified (BOQM Activity 7). ''i1.2.1, Number of days to do the work by type of
+work'' affects ''i3.2.1 Average added value of the services provided to users'' is an
+example of the types of relationships identified. Any problem with schedule overruns has a
+negative impact on the benefits that the customer obtains from using the solution provided.
+Once the BOQM analysis model was adapted to AGROSEGURO, the software process
+improvement activities were done in parallel with the activities for gathering the required
+data to compile the measurement constructs considered (BOQM Activities 8 and 9). The
+evolution of measurement construct values was periodically analyzed (BOQM Activity
+10). The conclusions of these analyses were also communicated to AGROSEGURO's SEO
+staff within the same periods (BOQM Activity 11).
+The values achieved at the end of the SPI activities for each measurement construct are
+presented in Fig. 4 (marked as actual values). In several cases, the organization did not
+achieve the expected values, but the SEO managers considered that the expected values
+would be achieved shortly.
+Finally, several lessons learned were identified during the evaluation of the participants'
+satisfaction and the BOQM process performance (BOQM Activity 12). Several of these
+lessons are discussed in Sect. 4.2.
+4.2 Lessons learned from the BOQM application
+This section presents the observations gathered during the BOQM application at AGROSEGURO.
+The discussion is divided in three areas: (a) alignment of an SEO's strategic
+objectives, SPI initiatives and measurement constructs; (b) synergies among stakeholders
+involved in the BOQM initiative; and (c) effective knowledge sharing on strategy
+implementation across all organizational levels.
+Table 1 Analysis of added value provided by BOQM (Part I)
+Alignment during strategic objectives definition
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+123
+It is important to note that previous SPI initiatives had a lack of alignment among
+business goals, SEO goals and the SPI initiatives, although the support of senior
+management was obtained. This support was implemented by providing the
+resources required for SPI initiatives and a few senior managers participated in
+monitoring the process of defining the SPI and measurement initiatives
+It is important to state that the active participation of AGROSEGURO's SEO
+manager in BOQM and the use of the information provided by senior managers
+helped to achieve a full alignment between the formulation of business and the
+SEO's objectives
+In consequence, the BOQM practitioners indicated in final interviews that
+leadership involvement is not synonymous with success in aligning business
+and SEO strategies. The BOQM practitioners concluded that senior
+management participation should not only consist of providing resources and
+political support, but also it is essential that senior managers provide relevant
+information on their insights and points of view. The BOQM process
+orientation facilitated effective senior management participation
+Software Qual J (2010) 18:341-359
+353
+Table 2 Analysis of added value provided by BOQM (Part II)
+Alignment of the elements to define business strategy, SPI and measurement initiatives
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+In previous initiatives, an important lack of alignment was detected because the
+business view was centerd on having a greater amount of products delivered,
+and the SEO's view on managing more rationally the projects portfolio and
+delivering products of higher quality. In addition, although senior and SEO
+managers agreed on the set of measures in the past, the reports submitted to
+management were very complex, without providing meaningful information on
+the number and the quality of products delivered
+At the end of the BOQM application, the participants indicated that the definition
+of strategic and improvement objectives were more related to the actual
+situation at AGROSEGURO's SEO and they were more feasible. This better
+alignment was obtained because the BOQM process and analysis model
+enhanced common understanding of business goals among stakeholders, how
+the SEO could contribute to achieving them and how the organizational
+problems of the SEO could be solved
+As the information model obtained for managing the strategy was more aligned,
+indicators and the cause-effect relationships among them helped to identify the
+impact of the changes in the values of several measurement constructs on the
+values of other measurement constructs. So, it was simpler to evaluate the
+impact of internal changes on the degree of accomplishment of the business and
+the SEO's objectives
+Finally, the indicators' aggregation levels provided by the BOQM analysis model
+contributed to providing the appropriate information to the different
+stakeholders (senior manager, SEO managers and software engineers).
+Nevertheless, it is important to mention that measurement is meaningless
+without interpretation and judgment by those who make decisions and take
+actions based on indicators
+4.2.1 Alignment of an SEO's strategic objectives, SPI initiatives and measurement
+constructs
+The improved alignment of an SEO's strategy with business objectives due to BOQM can
+be analyzed in two ways: alignment during strategic objectives definition and alignment of
+the elements configuring the strategic plan (Tables 1, 2).
+4.2.2 Synergies among stakeholders involved in the BOQM initiative
+Integration of strategic management, process improvement and quantitative measurement
+requires combining properly the knowledge, experience and competencies of stakeholders
+involved in this process. The main BOQM contribution is in the enhancement of synergies
+among stakeholders (Table 3).
+4.2.3 BOQM's contribution to capturing and spreading useful knowledge
+The practical application of BOQM indicated that the capture and spread of relevant
+knowledge on the current state of actions and implementing the business strategy, are
+essential to maintaining the alignment between business goals and SPI initiatives. BOQM's
+contribution to capturing and spreading useful knowledge can be discussed from three
+123
+354
+Software Qual J (2010) 18:341-359
+Table 3 Analysis of added value provided by BOQM (Part III)
+Enhancement of synergies between stakeholders involved in the definition of the business strategy, SPI and
+measurement initiatives
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+During previous SPI initiatives, it was mentioned that the lack of alignment
+among the business and the SEO goals, SPI initiatives and the related
+measurement programs was partially due to a lack of a clear process indicating
+the specific information to be defined and the roles and responsibilities of those
+involved. This lack of predefined process created several problems related to
+the type of relevant information to be obtained. Moreover, there were frequent
+and serious discrepancies during teamwork sessions because of conflicting
+points of view. Finally, the lower level employees were reluctant to participate
+freely and actively in teamwork sessions due to the participation of senior and
+SEO managers
+The application of BOQM provided several benefits:
+First, the BOQM training was more focused, providing specific training for all
+participants and more detailed insight into the concepts and activities assigned
+to each role participating in the process. Moreover, the examples taken from
+already existing case studies and adapted to BOQM were evaluated positively
+because they clarified how to complete the BOQM process
+Second, the use of a formalized process enhanced the visibility of the current state
+of the process. The stakeholders involved were able to identify what activities
+remained and what internal products were needed before the process was
+completed
+Third, roles and responsibilities were identified and clearly defined at the
+beginning, so each worker involved knew what was expected of him to define
+the SEO's objectives and indicators. Participants also considered that the
+responsibilities assigned to each of them matched their skills and experience
+Fourth, the way the activities were organized among stakeholders enhanced the
+combination of expertise in an organized way, preventing bottlenecks in long
+non-productive discussions and enabling active participation of workers at the
+lower levels. Finally, participants remarked that the BOQM process orientation
+reduced back-office work, and promoted more structured interaction among
+stakeholders
+Table 4 Analysis of added value provided by BOQM (Part IV)
+Effective use of pre-existing knowledge
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+During the first two initiatives where there was no use of pre-existing knowledge
+because the objectives were selected and indicators identified from scratch. In
+consequence, participants spent more effort than expected in re-work because
+senior management's orientation and guidelines were not considered
+appropriately
+The observations gathered during the application of BOQM and the interviews
+conducted at the end of the project indicate that using this predefined
+knowledge organized in BSC perspectives has had several positive effects.
+Specifically, the use of predefined schemes of business objectives, SPI goals
+and measurement constructs reduced the number of arguments on the
+appropriateness of the improvement objectives and indicators. Moreover, the
+application of the BSC perspectives helped to organize the information in the
+same way senior management organize knowledge on business objectives,
+enhancing meaningful interchange of knowledge between organizational levels
+points of view: (a) Effective use of pre-existing knowledge; (b) effective gathering of
+required data; and (c) knowledge sharing on the current state of the organization (Tables 4,
+5, 6).
+123
+Software Qual J (2010) 18:341-359
+Table 5 Analysis of added value provided by BOQM (Part V)
+Effective gathering of required data
+355
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+The information provided by the SEO staff was low quality because they did not
+really know why the data were necessary and what the actual use of the
+information was for. Due to this lack of information, the SEO staff were
+concerned about the use of the data
+After the application of BOQM, the quality of the information improved. The
+participation of workers at all professional levels in defining the SEO's
+objectives and indicators for their control contributed to increasing confidence
+in using information
+Table 6 Analysis of added value provided by BOQM (Part V)
+Knowledge sharing on the current state of the organization
+Problems in previous
+initiatives
+Analysis of BOQM
+added value
+Indicators and the related reports were used to provide senior management with
+data for decision-making and to assess the effects of the improvement actions in
+the SEO organization
+During the BOQM application, several types of reports were prepared. Senior
+managers and software engineers evaluated very positively the overall picture
+provided by the four BSC perspectives
+Although it was positively evaluated at AGROSEGURO, the BOQM philosophy
+includes not only these traditional uses, but also availability and data feedback,
+and the use of data to guide SPI actions. This feedback on actual performance
+not only motivated a change in the behavior of individuals, groups and the
+organization as a whole, but also guided change in a specific direction
+The BOQM information model contributed to enabling learning across all
+organizational levels, instead of enabling exclusively decision-making activities
+for senior and SEO management purposes
+5 Conclusions
+In this paper, BOQM was defined to link strategic objectives and IOs with measures in a
+BSC, using the GQM approach and the integrated analysis model of Practical Software
+Measurement (PSM). The BSC, GQM and PSM are integrated in such a way that strategy
+formulation and control are simpler and more traceable.
+BOQM was applied in an SEO and compared with previous measurement initiatives in
+the same organization. This pilot application provides a relevant example, indicating that
+BOQM can contribute to satisfying the research hypothesis stated in the introduction. The
+specific findings identified as conclusions of the BOQM pilot application are:
+•
+•
+•
+BOQM offers traceability among strategic objectives, operative models, improvement
+objectives, questions and indicators.
+BOQM provides a process defining the roles, responsibilities and competencies of the
+stakeholders involved and creating the required synergies for effective competitive
+management.
+BOQM provides an effective framework to capture and spread useful knowledge of SPI
+initiatives and their results to control business strategy at all levels of the organization.
+123
+356
+•
+The BOQM analysis model allows one to see the big picture of the knowledge
+generated in the formulation activities, analysis and control of the strategy process
+defined.
+Finally, the BOQM measurement context is not only limited to product and process
+measurement, but also measures staff performance, effectiveness of the technology, costs
+and customer satisfaction.
+The next steps of this research work are focused on an empirical evaluation of BOQM
+compared to other software measurement approaches such as BSC, GQM and PSM.
+Moreover, BOQM is being implemented in other organizations, so the BOQM analysis
+model will be enriched. In addition, a software assistant is being developed to guide
+BOQM practitioners to follow the process in the most effective way.
+Acknowledgments This work has been partially funded by the Spanish Ministry of Science and Technology
+through the TIC2004-7083 and TIN2009-10700 projects and the Spanish Ministry of Industry
+through project PPT-430000-2008-54. This work was also supported by PROGRESION SMP (UC3M 2006/
+03617/001). Moreover, we thank Dr. Victor R. Basili from Fraunhofer Center for Experimental Software
+Engineering, who reviewed this article.
+Software Qual J (2010) 18:341-359
+References
+Asgarkhani, M. (2006). Current trends in strategic management of ICTs. IEEE international conference on
+management of innovation and technology, doi:10.1109/ICMIT.2006.262205.
+Basili, V., Heidrich, J., Lindvall, M., Mu¨nch, J., Regardie, M., Rombach, D., et al. (2009). Linking software
+development and business strategy through measurement. IEEE computer (Accepted article).
+Belk, R. W. (Ed.). (2007). Handbook of qualitative research methods in marketing. Cheltenham, UK,
+Northampton, MA, USA: Edward Elgar.
+Capell, P. (2004) Benefits of improvement efforts, SEI SPECIAL REPORT CMU/SEI-2004-SR-010,
+Sep 2004.
+Card, D. (2003). Practical software measurement. Proceedings of the 25th international conference on
+software engineering (ICSE'03), IEEE computer society, (pp. 738).
+Chastek, J. G., Donohoe, P., & McGregor, D. J. (2009). Formulation of a production strategy for a software
+product line.
+Dyba˚, T. (2005). An empirical investigation of the key factors for success in software process improvement.
+IEEE Transactions on Software Engineering, 31(5), 410-424.
+Ebert, C., & Dumke, R. (2007). Software measurement: Establish-extract-evaluate-execute. Springer, XII,
+561 p. 157 illus, ISBN: 978-3-540-71648-8.
+El-Emam, K. (2007). TrialStat corporation: On schedule with high quality and cost savings for the customer.
+Performance results from process improvement, DACS Journal, Vol. 10, no. 1.
+El-Emam, K., Goldenson, D., McCurley, J., & Herbsleb, J. (2001). Modelling the likelihood of software
+process improvement: An exploratory study. Empirical Software Engineering, 6(3), 207-229.
+Fahey, L. (2007). Connecting strategy and competitive intelligence: Refocusing intelligence to produce
+critical strategy inputs. Strategy & Leadership, Emerald, 35(1), 4-12.
+Goethert, W., & Fisher, M. (2003). Deriving enterprise-based measures using the balanced scorecard and
+goal-driven measurement techniques. Carnegie Mellon University, Software Eng. Inst. http://www.
+sei.cmu.edu/pub/documents/03.reports/pdf/03tn024.pdf. Accessed 15 May 2009.
+Goethert, W. & Siviy, J. (2004). Applications of the indicator template for measurement and analysis.
+Carnegie Mellon University, Software Eng. Inst. http://www.sei.cmu.edu/pub/documents/04.reports/
+pdf/04tn024.pdf. Accessed 15 May 2009.
+Gopal, A., Mukhopadhyay, T., & Krishnan, M. S. (2005). The impact of institutional forces on software
+metrics programs. IEEE Transactions on Software Engineering, 31(8), 679-694.
+Harjumaa, L., Markkula, J., & Oivo, M. (2008). How does a measurement programme evolve in software
+organizations? PROFES 2008, LNCS 5089 (pp. 230-243).
+ISO/IEC 15504-4:2004 (2004). Information technology-process assessment-Part 4: Guidance on use for
+process improvement and process capability determination.
+ISO/IEC 15939:2007 (2007). Software engineering-software measurement process.
+123
+Software Qual J (2010) 18:341-359
+357
+ISO/IEC 9001:2008 (2008). Quality management systems-requirements, international standards
+organization.
+Issac, G., Rajendran, C., & Anantharaman, R. N. (2006). An instrument for the measurement of customer
+perceptions of quality management in the software industry: An empirical study in India. Software
+Quality Journal, Springer, 14(4), 291-308.
+Kahraman, C., Demirel, N. C., & Demirel, T. (2007). Prioritization of e-Government strategies using a
+SWOT-AHP analysis: The case of Turkey. European Journal of Information Systems, 16, 284-298.
+Kamel, S. H., Rateb, D., & El-Tawil, M. (2009). The impact of ICT investments on economic development
+in Egypt. The Electronic Journal of Information Systems in Developing Countries, 36(1), 1-21.
+Kanji, G. K., & e Sa´, P. M. (2007). Performance measurement and business excellence: The reinforcing link
+for the public sector. Total Quality Management & Business Excellence, 18(1 & 2), 49-56.
+Kaplan, R. S., & Cooper, R. (1997). Cost and effect: Using integrated cost systems to drive profitability and
+performance, activity-based costing: Introduction (79-110). Boston: Harvard Business School Press.
+Kaplan, R. S. & Norton, D. P. (2005) The office of strategy management, Harvard Business Review Article,
+doi:10.1225/R0510D.
+Kaplan, R. S., & Norton, D. P. (2006). Alignment: Using the balanced scorecard to create corporate
+synergies. Boston, MA, USA: Harvard Business Press Books.
+Kaplan, R. S., & Norton, D. P. (2008). Plan the strategy: Aligning the organization for effective strategy
+execution. Harvard Business Press, Book Chapter, Prod. #: 7686BC-PDF-ENG.
+Kojima, T., Hasegawa, T., Misumi, M., & Nakamura, T. (2007). Risk analysis of software process measurements.
+Software Quality Journal, Springer, 16(3), 361-376.
+Kuppusamy, M., Pahlavani, M., & Salman, A. S. (2008). Fostering ICT development for growth: Measuring
+the payoffs for Australia and the Asean-5 Countries. American Journal of Applied Sciences, 5(12),
+1676-1685.
+Lamb, R. B. (2008). Competitive strategic management. Englewood Cliffs: Prentice-Hall.
+Long, J. O. (2008). ITIL version 3 at a glance, Springer US.
+McGarry, J. (2002). Practical software measurement: Objective information for decision makers, AddisonWesley.
+Mcloone, P. J., & Rohde S. L. (2007). Performances outcomes of CMMI-based process improvements.
+Performance results from process improvement, DACS Journal, Vol. 10, no. 1.
+Mehra, S., & Inman, R. A. (2004). Purchasing management and business competitiveness in the coming
+decade. Production Planning & Control, 15(7), 710-718.
+Mishra, D., & Mishra, A. (2008). Software process improvement methodologies for small and medium
+enterprises. Product-focused software process improvement, Springer Berlin, Heidelberg, LNCS, 5089,
+(pp. 273-288).
+Oliveira, S. B., Valle, R., & Mahler, C. F. (2009). A comparative analysis of CMMI software project
+management by Brazilian, Indian and Chinese companies. Software Quality Journal, Springer, doi:
+10.1007/s11219-009-9087-6.
+Peng, G. C. A., & Nunes, M. B. (2007). Using PEST analysis as a tool for refining and focusing contexts for
+information systems research. Proceedings of the 6th European conference on research methods for
+business and management studies (pp. 229-236).
+Porter, M. E. (1979). How competitive forces shape strategy. Harvard Business Review, 57, Mar-Apr, 86-93.
+Qi, L. A. (2007). Motorola software group's china center: Value added by CMMI. Performance results from
+process improvement, DACS Journal, Vol. 10, no. 1.
+Shull, F., Seaman, C., & Zelkowltz, M. (2006). Victor R. Basili's contributions to software quality. Software
+IEEE, 23(1), 16-18.
+Software Engineering Institute (2006). Standard CMMI Appraisal method for process improvement
+(SCAMPI) A, version 1.2: Method definition document. CMU/SEI-2006-HB-002. http://www.sei.cmu.
+edu/pub/documents/06.reports/pdf/06hb002.pdf. Accessed 15 May 2009.
+Trienekens, J. J. M., Kusters, R., Kriek, D., & Siemons, P. (2009). Entropy based software processes
+improvement. Software Quality Journal, Springer, 17(3), 231-243.
+Tuan, H. W., Liu, C. Y., & Chen, C. M. (2006). Using ABC model for software process improvement: A
+balanced perspective. HICSS '06: Proceedings of the 39th annual Hawaii international conference on
+system sciences, IEEE Computer Society, 9, 229.3.
+Watson, H. J., & Wixom, B. H. (2007). The current state of business intelligence. IEEE Computer, 40(9),
+96-99.
+123
+358
+Author Biographies
+123
+Software Qual J (2010) 18:341-359
+Javier Garc´ıa Guzma´n holds a BSc in Engineering and a PhD in
+Computer Science (Carlos III University of Madrid). He is a software
+process improvement consultant at PROGRESION SMP. He has
+9 years of experience as a software engineer and consultant in public
+and private companies. He has participated in numerous research
+projects relating to software process improvement and its integration
+with organizational business processes, financed by public (European
+and national) and private funds. He has published several books and
+international scientific papers related to software engineering and
+collaborative working environments. His current research interest is
+formal measurement of processes improvement, ISO 15504 assessments,
+software capacity evaluations and audits and knowledge management
+related to software engineering.
+Hugo A. Mitre is a PhD candidate at the SEL-UC3M (Software
+Engineering Lab, sel.inf.uc3m.es) group at Carlos III University of
+Madrid. Currently, he has a research grant (GPS: Plataforma de
+Gestio´n de Procesos Software; Software Process Management Platform)
+from the Spanish Ministry of Science and Innovation. He holds a
+BSc in Computer Science (Technological Institute of Culiaca´n, Me´xico)
+and an MSc in Computer Science and Technology (Carlos III
+University of Madrid, Spain (2007). His current interests are Software
+Process Improvement, Strategic Management in SIOs, Measurement
+tools and procedures, Software Economics and Software Metrics.
+Antonio de Amescua holds a BSc in Engineering and a PhD in
+Computer Science (Polytechnic University of Madrid). He is a lecturer
+in Software Engineering at Carlos III University of Madrid and
+founding partner of PROGRESION SMP whose main research areas
+are software development methodologies and software process
+improvement. He has been responsible for the Spanish Standard
+Software Development Methodology, called METRICA V3, for Public
+Administration. He has published several books and over 100 technical
+publications on software engineering and management. He is a
+member of the Spanish Association of Software Metrics (AEMES) and
+SPIN-Spain (Software Process Improvement Network).
+Software Qual J (2010) 18:341-359
+359
+Manuel Velasco de Diego He received an Engineering Degree (1993)
+and PhD (1998) in Computer Science at Polytechnical University of
+Madrid. He is a University Lecturer of Software Testing at Carlos III
+University of Madrid since 2001. His main research areas are software
+testing and reusability. He has published several papers in international
+journals and congresses about these subjects. He has participated in
+numerous research projects, financed by European and Spanish Government.
+Currently his main research tries to relate software testing
+and reusability topics with the design of spatio-temporal databases.
+123

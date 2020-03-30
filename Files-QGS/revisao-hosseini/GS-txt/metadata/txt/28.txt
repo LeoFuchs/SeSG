@@ -1,0 +1,5 @@
+Cross–Project Defect Prediction With Respect To Code Ownership Model: An Empirical Study
+
+The paper presents an analysis of 83 versions of industrial, open-source and academic projects. We have empirically evaluated whether those project types constitute separate classes of projects with regard to defect prediction. Statistical tests proved that there exist significant differences between the models trained on the aforementioned project classes. This work makes the next step towards cross-project reusability of defect prediction models and facilitates their adoption, which has been very limited so far.
+
+software engineering, defect prediction, empirical study

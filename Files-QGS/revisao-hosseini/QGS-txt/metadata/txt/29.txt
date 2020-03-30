@@ -1,0 +1,5 @@
+Towards Cross-Project Defect Prediction with Imbalanced Feature Sets
+
+Cross-project defect prediction (CPDP) has been deemed as an emerging technology of software quality assurance, especially in new or inactive projects, and a few improved methods have been proposed to support better defect prediction. However, the regular CPDP always assumes that the features of training and test data are all identical. Hence, very little is known about whether the method for CPDP with imbalanced feature sets (CPDP-IFS) works well. Considering the diversity of defect data sets available on the Internet as well as the high cost of labeling data, to address the issue, in this paper we proposed a simple approach according to a distribution characteristic-based instance (object class) mapping, and demonstrated the validity of our method based on three public defect data sets (i.e., PROMISE, ReLink and AEEEM). Besides, the empirical results indicate that the hybrid model composed of CPDP and CPDP-IFS does improve the prediction performance of the regular CPDP to some extent. 
+
+cross-project defect prediction, learning technique, software metric, software quality

@@ -1,0 +1,6 @@
+Application of GQM+Strategies(R) in the Japanese space industry
+
+Aligning organizational goals and activities is of great importance for large organizations in order to improve their performance and achieve top-level business goals. Through alignment, organizational sub-units can optimize and explicitly highlight their contributions towards the achievement of top-level business goals. GQM + Strategies 1 provides a systematic, measurement-based approach for explicitly linking goals and contributions on different organizational levels. This paper presents results and experiences from applying the GQM + Strategies approach at the Japan Aerospace Exploration Agency.
+
+Measurement-based business IT alignment, Goal-oriented measurement, GQM+Strategies, Software process improvement, Aerospace
+

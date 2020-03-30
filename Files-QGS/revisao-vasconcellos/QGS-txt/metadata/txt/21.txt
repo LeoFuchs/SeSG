@@ -1,0 +1,5 @@
+Integration of strategic management, process improvement and quantitative measurement for managing the competitiveness of software engineering organizations
+
+Strategic management is a key discipline that permits companies to achieve their competitive goals. An effective and explicit alignment and integration of business strategy with SPI initiatives based on measurement is essential to prevent loss of income, customers and competitiveness. By integrating SPI models and measurement techniques in the strategy management process, an organization’s investments will be better aligned with strategy, optimizing the benefits obtained as a result of an SPI program. In this paper, the authors propose BOQM (Balanced Objective-Quantifiers Methodology) that integrates properly strategic management, process improvement and quantitative measurement to manage the competitiveness of software engineering organizations. Finally, this paper presents and discusses the results from implementing BOQM in a software development organization.
+
+Strategic management, Software process improvement, Quantitative measurement, Software engineering organizations, IT governance

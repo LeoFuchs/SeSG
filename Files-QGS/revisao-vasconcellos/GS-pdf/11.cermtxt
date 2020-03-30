@@ -1,0 +1,484 @@
+The Rosetta Stone Methodology - A Benefits-driven
+Approach to SPI
+Fionbarr McLoughlin & Ita Richardson
+Lero - the Irish Software Engineering Research Centre
+University of Limerick, Ireland
+Abstract. The Rosetta Stone Methodology (RSM) has been developed which
+allows organizations to undertake Software Process Improvement (SPI) based
+on business- and organizational-driven goals and objectives. The methodology
+itself is fully customizable and allows organizations to make adjustments to the
+model where they feel it appropriate. To demonstrate the usefulness,
+appropriateness and practicality of this new approach, the Rosetta Stone IGSIISM
+to CMMI Instance mapping (RS-ICMMI) is developed. To aid in
+understanding, the Measurement and Analysis (MA) process area is used as an
+example of how to apply the methodology. The Rosetta Stone Methodology and
+the RS-ICMMI instance have been validated by experts.
+1
+Introduction
+•
+According to the Organization for Economic Co-Operation and Development [1],
+total worldwide spending on ICT was expected to reach $2.964 trillion in 2005, the
+last year for which the OECD has published estimates. Given the massive amount of
+spending involved, anything which can shave even a few percentage points off costs
+could potentially free up a large amount of capital that could be re-invested in the
+organization. From a Software Process Improvement perspective, there are several
+competing and, in some cases, complementary standards such as the Software
+Engineering Institute's CMMI for Development version 1.2 [2], the International
+Standards Organization's (ISO) 15504 [3], and the International Standards
+Organisation's ISO 9000-3 [4] and ISO 9001:2000 [5] standards, a process-driven
+approach to define, establish and maintain software quality within an organization
+that will allow organizations to meet their business objectives [6].
+Following our literature review, we can summarise software process improvement
+benefits into the following categories:
+• Return on Investment (ROI): We have noted evidence of a correlation between
+increased ROI and implementation of various SPI initiatives. Examples of studies
+which illustrate increased ROI are Hughes Aircraft (Humphrey et al. [7]),
+Boeing STS, a division of Boeing Inc. [8], Oklahoma City Air Logistics Center
+(OC-ALC) [9].
+Productivity: There are many studies which demonstrate that productivity
+increases as a result of software process improvement. These include Brodman
+and Johnson [10], Dion [11], and Herbsleb et al. [12].
+2
+•
+•
+Fionbarr McLoughlin & Ita Richardson
+Quality: Studies analysed demonstrate that as organizations implement more
+quality-oriented processes, the quality of code improves. Additionally, quality
+increases as process capability maturity levels increase. Studies in this area
+include Krasner, Pyles et al. [13] and Putnam and Myers [14]. We also note that
+it becomes more difficult, and therefore more costly, to increase quality between
+higher maturity levels.
+Financial Benefit: Evidence of the financial benefit resulting from the
+implementation of SPI may be expressed as a ratio of cost to benefit (or vice
+versa) or as a discussion of costs and benefits separately, and published research
+tends to centre on ratios rather than on costs and benefits. Example studies
+include the SEI [15] and Sapp, Stoddard et al. [16].
+All these initiatives have demonstrated improvement in an organization's systems
+capabilities but these improvements were approached from an IT perspective. There is
+no ability within the established methodologies to define what benefits/objectives an
+organization would like to achieve and use business-centric objectives to drive what
+particular SPI initiatives should be undertaken. We also note that IT organizations
+have tended to drive the SPI agenda in order to achieve IT benefits as a primary
+objective, and organizational benefits as a secondary objective. However, this is
+typically not the way the commercial world works - in the commercial world it is the
+business which drives IT, not the other way around. The Rosetta Stone Methodology
+(RSM), which we developed and validated during this research, allows businesses to
+undertake business- and organizational-driven goals and objectives using SPI. In
+addition, we present a specific instance of the RSM, the RS-ICMMI (Rosetta Stone Implementation
+for CMMI) mapping, presenting details on the Measurement and
+Analysis (MA) process area.
+Section 2 of this paper describes the Research Methods used in developing both the
+meta-model and the operationalisation of the methodology. Section 3 describes the
+Rosetta Stone meta-model. This meta-model provides an abstract representation of the
+relationships between business objectives, software process improvement process
+areas, and the indicators/metrics which may be used to demonstrate progress or
+regression of the implementation of SPI within an organization. Section 4 describes
+the methodology used to arrive at a concrete implementation of the meta-model. In
+section 5 we create an instance of a mapping. The implementation presented here is a
+mapping from the IGSI-ISM benefits model, a generic benefits model developed by
+IBM India [17], to the CMMI (Staged) SPI model and will hereafter be referred to as
+the Rosetta Stone IGSI-ISM to CMMI implementation or RS-ICMMI for short. We
+discuss the validation of this model through interviews with experts. Section 6
+concludes the paper.
+2
+Research Methods
+Once we had established through literature review and expert interviews that there
+was no readily usable approach which supported businesses in deciding which
+software processes to improve to gain specific business benefits, we commenced the
+The Rosetta Stone Methodology - A Benefits-driven Approach to SPI
+3
+development of an objectives-driven approach whose use should allow this. The first
+step was to create a generic methodology, the Rosetta Stone Methodology (RSM).
+This was done by creating a meta-model of all the elements involved in an SPI
+implementation. After this, a step-by-step approach was developed which guides
+practitioners in using an SPI methodology combined with a benefits model. We
+defined a mapping between business-focused benefits and individual SPI process
+areas. In essence, this process allows practitioners to substitute the meta-model with a
+concrete implementation instance of the model. This mapping is then used as the basis
+to decide upon and prioritise which process areas should be implemented to achieve
+specific business benefits.
+To demonstrate the implementation of the RSM in a specific instance, we investigated
+available return on investment (ROI) models which did not deal exclusively with
+software process improvement, but with which existing SPI models could be
+combined. We chose to work with the IGSI-ISM Benefits Model [17] and CMMI
+Version 1.2 [7] This is done as follows:
+1.
+2.
+Define the mapping (relationships) between Objectives/Benefits and Software
+Processes
+Answer the questions that are relevant to the individual organization.
+The initial methodology, meta-model and implementation instance were developed as
+described and were then reviewed by a small group of peers for validity. For
+triangulation purposes, they were validated through an expert panel review of 17
+people with an average work experience in the software industry of 19 years along
+with an average of 11 years of SPI experience. Additionally, to validate the
+implementation instance, a group of experts was interviewed about each relationship
+within the RS-ICMMI model. Out of a pool of ten experts, two experts were
+randomly selected to review a set of IGSI-ISM Benefit/CMMI Level 2 combinations.
+They discussed whether they agreed with the relationship presented, and where they
+had seen these relationships work in practice. This process was repeated until all
+combinations had been reviewed. In some cases, the RS-ICMMI was modified as a
+result of these interviews.
+3
+Rosetta Stone Meta-Model
+Many valuable studies of the benefits resulting from implementation of CMM/CMMI
+and Software Process Improvement (SPI) in general have been undertaken over the
+last several years. These studies have focused on SPI along one or two of three
+aspects - organizational, improvement methodology, or metric-based. In contrast, our
+research has developed a consolidated model which would allow practitioners to view
+organization, improvement programs and metrics concurrently using one, unified
+framework - a “Rosetta Stone”, if you will, of SPI.
+The Rosetta Stone meta-model is composed of 5 basic elements, as well as the
+relationships between them (Figure 1), with further detail in [18].
+4
+•
+•
+•
+Fionbarr McLoughlin & Ita Richardson
+Elements: The most important element is the set of Business Objectives or
+Benefits which an organization wishes to achieve. Ideally, these should be
+hierarchical so that the achievement of one leads to the achievement of others.
+Relationships are defined between Business Objectives and Process Areas (PAs).
+Return, Costs and ROI: it is now possible to tie SPI to specific benefits due to the
+fact that the benefits may be defined at a very granular level.
+Figure 1: Rosetta Stone Meta-Model and Implementation Mapping
+4
+The Rosetta Stone Methodology
+The Rosetta Stone methodology is the translation process whereby an abstract metamodel
+is transformed into a concrete implementation which may be readily used by
+practitioners. At a high level, each abstract entity as described in Figure 1 must be
+replaced with a concrete entity. Frequently the choice of both the SPI methodology
+(Step 1) and benefits model (Step 2) is performed at a strategic level within an
+organization. The mapping between benefits and process areas (step 3), the
+determination of the implementation order (step 4) and the determination of which
+metrics to use (step 5) are performed by SPI practitioners; and the monitoring of costs
+and benefits (step 6) is performed by the “front-line” staff involved in the running of
+projects and support organizations.
+The Rosetta Stone Methodology - A Benefits-driven Approach to SPI
+5
+Step 1 - Choose the SPI Methodology: There are several SPI models and
+methodologies currently in use within ICT and several factors influence an
+organization's decision on which SPI methodology to use. Reasons for SPI
+implementation include improving the software process, external requirements such
+as supplying a contract, and enabling the business in a particular market segment.
+Step 2 - Choose the Benefits Model: Different organizations have different
+organizational goals and missions. Some, like IBM and Microsoft, are for-profit
+companies while others such as universities, charities, and local government bodies
+have different goals and missions. What both the for-profit and not-for-profit
+organizations have in common, however, is that both types of organization try to use
+their use their resources most efficiently to achieve their organizational objectives.
+Step 3 - Mapping between the SPI Methodology and the Benefits Model: One of the
+core questions we asked is how do we determine the benefits associated with the
+implementation of a Process Area? This is based on the Goal Question Metric (GQM)
+approach [19-22] and is performed by creating a mapping between Goals (Business
+Objectives) and Questions (Process Areas) using a reverse mapping between Process
+Areas (Questions) and Business Objectives (Goals).
+Step 4 - Determine Implementation Order: This step allows us to determine which
+Process Areas should be implemented, and in what order, to achieve those specific
+business benefits. A prerequisite for this step is an understanding of what business
+objectives an organization wishes to achieve. This understanding may come from
+many sources - for example, a Six Sigma review of existing business processes.
+Given that an organization knows what business objectives it wishes to achieve, it
+must then use the map which was built up in Step 3 to determine which Process Areas
+contribute to the desired business objective.
+Step 5 - Identification of Metrics/Indicators for Benefits: The organization has now
+decided which business objectives it wishes to achieve. Each potential benefit must be
+capable of being monitored in order to determine if the benefit is being received by
+the organization or not. GQM [19-22] is a well-established methodology for defining
+measurable goals and has been used to establish successful measurement programs in
+industry. Specifically with regard to the Rosetta Stone Methodology, each Goal is the
+analysis of a particular Benefit from the Benefits model. The Question is “what are
+the objective measures which can be used to determine if a benefit is being
+achieved?” and the Metrics are “what is going to be measured?”.
+Step 6 - Tracking of Costs and Returns: The final step involves tracking both the
+Costs and the Returns and is operational in nature. This step will typically be
+performed by the front-line staff involved in developing software such as the Project
+Management Office, the development staff, and the QA staff. Note that, as this step
+has not been implemented as part of this work, this step will not be discussed in
+Section 5.
+6
+5
+Fionbarr McLoughlin & Ita Richardson
+Operationalization of the Rosetta Stone Methodology
+Having discussed the methodology at a high level in section 4, we now present a
+specific instance of operationalizing the methodology.
+Step 1 - Choose SPI Methodology - CMMI (Staged): In this paper, we present SEI's
+CMMI (Staged) methodology [23] as the demonstration SPI. It was chosen primarily
+as it is one of the most popular SPI methodologies in use today and is therefore
+widely understood and used by many practitioners.
+Figure 2: IGSI-ISM ROI Model
+Step 2 - Choose Benefits Model - IGSI-ISM Benefits Model: Goyal at al. [17]
+developed a generic for-profit benefits model, with the ultimate goal being an increase
+in revenues/profits and which will appeal to a broad spectrum of for-profit
+organizations - the IGSI-ISM model. This model, shown in Figure 2, determines 21
+separate identifiable benefit areas1, and the relationships between them. This model is
+1 We recognize that there are some benefits which are not described as we might like within
+this model. An example is 'Image' which should read 'Improved Image'. We have not
+clarified such changes in this paper.
+The Rosetta Stone Methodology - A Benefits-driven Approach to SPI
+7
+a hierarchy of benefits - higher level benefits are derived from elements that are
+lower in the benefit tree. Not all benefits are equal and the model differentiates
+between primary and secondary benefits. A primary benefit of a Process Area is one
+that is brought about as a direct result of implementation of a process area where the
+cause and effect relationship between the Process Area implementation and the
+benefit is very strong. Secondary benefits are those benefits which have a secondary
+impact or which are derived as a result of achieving another benefit. A Derived
+benefit is a benefit which is a hierarchical ancestor of either a primary or secondary
+benefit. For example, using Figure 2, if Better Product Quality (4-1) can be achieved,
+this will lead to Increased Productivity (3-2). We refer to Better Quality Product (4-1)
+as a primary benefit and Increased Productivity (3-2) as a derived benefit. As
+Increased Productivity (3-2) is a derived benefit of Better Quality Product (4-1), it is
+also classed as a secondary benefit
+Step 3 - Map between SPI Methodology and Benefits Model: To arrive at the
+mapping, each PA and its associated Generic Goals (GGs), Specific Goals (SGs), and
+Sub-Processes (SPs), with [24] as the reference document, were reviewed. This
+allowed us to determine which ones have particular relevance to the IGSI-ISM benefit
+model. In effect, we questioned “What objectives does this PA answer?” As a
+demonstration of how the mapping was created we illustrate using the CMMI Level 2
+Process Area - Measurement and Analysis (MA).
+Measurement and Analysis (MA)
+Definition
+The purpose of Measurement and Analysis (MA) is to develop and sustain a
+measurement capability that is used to support management information needs [25].
+MA consists of 2 specific goals (SG) - the alignment of Measurement and Analysis
+activities (SG1) and the obligation to provide measurement results (SG2).
+Measurement and analysis of appropriate metrics is essential in order to provide
+feedback to an organization on the current and potential future state of a project. SG1
+provides several important specific practices (SP) to enable the benefits described
+below. In particular, it provides for the specification of metrics (SP 1.2-1), the
+specification of data collection and storage procedures (SP 1.3-1), and the
+specification of analysis procedures (SP 1.4-1). SG2 in general provides for the
+feedback loop to enable an organization to act on the results of the results obtained in
+SG1.
+Expected Benefits
+MA involves the creation and reporting of various metrics to support management
+information needs. Such metrics will allow a project team to review important
+information with regard to the progress of a project. This will allow them to adapt
+their strategies to most efficiently bring a project to market. Therefore, Lower Time
+to Market (5-2) is a primary beneficiary of MA. We identified Better Quality Product
+(4-1) as another primary beneficiary, as product metrics such as quality are a major
+factor in establishing the quality of a product. With such metrics, it is possible to alter
+8
+Fionbarr McLoughlin & Ita Richardson
+processes and procedures to increase the quality of products. Without the ability to
+measure various facts, it would be virtually impossible to determine if a project is at
+risk. Once a project team is aware of a risk, only then can they remediate the risk.
+Thus MA provides a project team the ability to better manage risk. Therefore MA
+provides a primary benefit to Better Risk Management (4-2). Predictability (3-4) is
+also a primary benefit. This is because Predictability is gained when, over time,
+accurate measurements are taken of various aspects of projects. Only when accurate
+measures are available, is it possible to predict costs, times, and quality. By
+developing and maintaining a measurement capability within a project and
+organization, we will enable the organization to quantify various aspects of the whole
+development lifecycle. This will allow the organization to see where certain elements
+break down and do not live up to their full potential. As a result, the organization
+should be able to make appropriate changes to projects and processes to product better
+quality products, better manage risk, lower time to market, and increase predictability.
+When we validated Measurement and Analysis (MA), both interviewees, based on
+their experiences, agreed with the model. With regard to the impact of MA on Better
+Quality Product (4-1), the first interviewee stated that, in his experience, projects that
+aren't measured tend to bow to pressures about release dates while the second
+interviewee has specific experience that shows when people are aware they're being
+tracked, they change their mindsets and consequently improve the quality of the
+product being produced. The second interviewee stated that MA impacts
+Predictability directly. According to him, he has seen that if you don't have historical
+data then “project planning is more of an art than a science.”
+The only non-derived (secondary) benefit of MA was Setting Right Customer
+Expectations (3-3). This is because one of the most important factors in setting the
+right customer expectations is in ensuring predictability - a product should be ready
+when an organization says it should be ready. One of the main elements in aiding
+predictability is the collection of metrics across various projects which will allow an
+organization to create an organizational metric database. This database will aid in
+increasing predictability and, as a result, help in setting the right customer
+expectations.
+When we validated the model with two interviewees discussing each relationship, we
+found that
+• 10 combinations are 100% compliant with the original mapping
+• 6 combinations are 50% compliant with the original mapping
+• 2 combinations are 0% compliant with the original mapping
+There were 6 Process Area/Benefit combinations which were 50% compliant with
+expectations. In stating that there is a positive cause and effect relationship between
+MA and Competitive Proposals (3-5), the second interviewee states that it makes
+sense because if you measure accurately, you put just the right amount of resources in
+place and therefore cut down on waste. This then leads to competitive proposals.
+Again according to the second interviewee, there is a positive correlation between
+MA and Skill Development Facilitation by Management (6-1). The reason that the
+The Rosetta Stone Methodology - A Benefits-driven Approach to SPI
+9
+interviewee gives for this is that if accurate measurements are taken of the
+development process and specific components are buggy, the developers writing the
+buggy code may be identified and targeted training can then be given to the
+developers in question. The same interviewee also states that there is a positive
+correlation between MA and Teaming/Synergize (6-3) as he saw this effect in a
+consulting firm he worked for when low-level measurements were being taken on a
+daily basis. The second interviewee thought that there was a logical positive
+relationship between MA and New Technology (6-4).
+Expected Primary
+Benefits
+Lower Time To
+Market (5-2)
+Better Quality
+Product (4-1)
+Better Risk
+Management (4-2)
+Predictability (3-4)
+Expected Secondary Benefits
+Improved Institutionalization of Tools/Process/Methods (7-1)
+Skill Development Facilitation by Management (6-1)
+Efficient Information Management (6-2)
+Retain and Develop Skills and Domain Knowledge (5-1)
+Market Reach (3-1)
+Setting Right Customer Expectations (3-3)
+Competitive Proposals (3-5)
+Image (2-1)
+Higher Customer Satisfaction (2-2)
+Increased Revenues/Profits (1-1)
+Table 1: Post-validation Expected Benefits of Measurement and Analysis
+The complete list for Measurement and Analysis after validation is given in Table 1.
+There were 2 combinations which were 0% compliant with expectations. For the
+relationship between MA and Market Reach (3-1), the second interviewee did not feel
+she was competent to answer this question and, in order to be consistent with how
+weak or inconclusive answers are dealt with, the answer was deemed to be a “no.” For
+the relationship between MA and Improved Institutionalization of
+Tools/Process/Methods, (7-1) both interviewees disagreed with expectations. The
+second interviewee's analysis was that if things are being measured and analysed,
+issues (if there are any) will be seen. This may in turn lead to institutionalization of
+new technology or methods in order to solve the issues.
+Step 4 - Determine Implementation Order: In many cases, organizations are not so
+much concerned with faithfully implementing all CMMI Levels or all PAs as they are
+with achieving specific results within a mature and repeatable framework. Examples
+of specific results that organizations may want to achieve are Increasing Productivity
+and/or Lowering Time to Market.
+The process to achieve this is as follows:
+1. Determine which of the IGSI-ISM objectives that we wish to achieve
+2. Using the IGSI-ISM model, determine which other objectives, if any, contribute
+to achieving our primary objective
+3. Establish which PAs contribute to both the primary and secondary objectives and
+rank the PAs in order of relevance and implementation
+10
+Fionbarr McLoughlin & Ita Richardson
+Determine the IGSI-ISM Primary Objective to achieve. The choice of which IGSIISM
+objective to aim for is usually determined for us by outside forces such as senior
+management or, in some cases, external clients. For this example we discuss Lower
+Time to Market (5-2).
+Determine IGSI-ISM objectives contribute to the Primary Objective. From the IGSIISM
+model (see Figure 2), Lower Time to Market (5-2) depends on the lower-level
+objectives of Skill Development Facilitation by Management (6-1), Effective
+Information Management (6-2), Teaming/Synergize (6-3) and Improved
+Institutionalization of Tools/Process/Methods (7-1).
+Determine which PAs contribute to IGSI-ISM Objectives and rank them for
+implementation. Based on the full analysis of RS-ICMMI, there are several PAs
+which have an effect on Lower Time to Market (5-2). Most organizations have finite
+resources and so will not be able to implement them all concurrently so we are forced
+to prioritize them for implementation. There are many different ways to rank them but
+there are two very important factors to keep in mind when deciding on an order.
+Firstly, more consideration should be given to those PAs that primarily satisfy a
+particular objective. By this we mean that those PAs that satisfy an objective as a
+primary objective should be given higher ranking than those that do not. For example,
+both Process and Product Quality Assurance (PPQA) and Configuration Management
+(CM) both help to us attain Lower Time to Market. PPQA has Lower Time to Market
+as a primary objective while CM does not. As a result, PPQA should be implemented
+before CM. The reasoning behind this is that PPQA fully satisfies the Lower Time to
+Market objective while CM satisfies the Teaming/Synergize (6-3) objective which is
+only a contributing objective to Lower Time to Market. Secondly, more consideration
+should be given to those PAs that, in the Staged Model, are lower in the Stage phases.
+For example, both Requirements Management and Requirements Development
+directly satisfy Lower Time to Market but, as Requirements Management is a Level 2
+PA, it should be undertaken before Requirements Development.
+Using these principles, the recommended order for implementation of four Process
+Areas to improve Time to Market would be:
+• Requirements Management;
+• Supplier Agreement Management;
+• Measurement and Analysis;
+• Process and Product Quality Assurance.
+Step 5 - Identify Metrics for Benefits: Metrics which may be used to determine if an
+organization is succeeding in achieving its business objectives should be identified. A
+given metric may be associated with one or more benefits and a given benefit may be
+associated with one or more metrics. As a result, a metric may appear as an indicator
+for more than one benefit. For example, to measure the Better Quality Product (4-1),
+possible metrics include defect density at various phases in the lifecycle, costs due to
+lack of quality [26], loss of reputation to the firm, any lost bids, software reliability,
+software rate of change [27], or increase/decrease in software complexity [28].
+The Rosetta Stone Methodology - A Benefits-driven Approach to SPI
+11
+6
+Conclusion
+The RSM methodology is a flexible and straight-forward methodology that can be
+readily and easily modified by practitioners to fit their own particular needs. The RSICMMI
+instance presented uses an industry-standard SPI model and is of immediate
+use by practitioners with little, if any, modification. In addition, by describing in
+abstract terms what a metric/indicator is, what a generic benefit/objective is, what an
+SPI is, and the relationships between them, the door is open for practitioners to use
+the model on whatever SPI initiative of choice they wish to implement. Finally, the
+model is highly extensible in that practitioners can add their own metrics and
+benefits/objectives either as replacements or in addition to the ones currently
+described in the RS-ICMMI implementation instance. In short, RSM model is truly a
+Rosetta Stone Methodology allowing personnel in the field to freely translate between
+SPIs, Benefits/Objectives, and Metrics.
+Acknowledgement
+This research was supported by the Science Foundation Ireland funded projects,
+Global Software Development in Small to Medium Sized Enterprises (GSD for
+SMEs) grant number 03/IN3/1408C and B4-Step grant number 02/IN.1/108 within
+Lero - the Irish Software Engineering Research Centre (http://www.lero.ie).
+REFERENCES
+1. Organization for Economic Co-Operation and
+Technology Outlook, 2006. OECD (2006)
+2. SEI: CMMI for Development Version 1.2. SEI (2006)
+Development: OECD
+Information
+3. ISO: ISO/IEC 15504-2:2003 Information technology - Process assessment - Part 2:
+Performing an assessment. (2003)
+4. ISO: ISO 9000-3. International Standards Organization (1994)
+5. ISO: ISO 9001:2000. International Standards Organization (2000)
+6. Hailey, V.A.: ISO 9001: A Tool for Systematic Software Process Improvement. In: Hunter,
+R., thayer, R.H. (eds.): Software Process Improvement. IEEE Computer Society (2001) 291309
+7. Humphrey, W.S., Snyder, T.R., Willis, D.R.: Software Process Improvement at Hughes
+Aircraft. IEEE Software 8 (1991) 11-23
+8. Yamamura, G., Wigle, G.B.: SEI CMM Level 5: For the Right Reasons. CrossTalk - The
+Journal of Defense Software Engineering (1997)
+9. Butler, K.L., Lipke, W.: Software Process Achievement at Tinker Air force Base, Oklahma.
+Software Engineering Institute (2000) 58
+10.Brodman, J.G., Johnson, D.L.: Return on Investment (ROI) from Software Process
+Improvement as Measured by US Industry. Software Process: Improvement and Practice 1
+(1995) 35-47
+12
+Fionbarr McLoughlin & Ita Richardson
+11.Dion, R.: Process Improvement and the Corporate Balance Sheet. IEEE Software, Vol. 10
+(1993) 28-35
+12.Herbsleb, J., Carleton, A., Rozum, J., Siegel, J., Zubrow, D.: Benefits of CMM-Based
+Software Process Improvement: Executive Summary of Results. Software Engineering
+Institute (1994) 16
+13.Krasner, H., Pyles, J., Wohlwend, H.: A Case History of the Space Shuttle Onboard Systems
+Project. (1994)
+14.Putnam, L.H., Myers, W.: How Solved is the Cost Estimation Problem. IEEE Software 14
+(1997) 105-107
+15.Software Engineering Institute: CMMI Performance Results - 2005. Vol. 2008 (2005)
+16.Sapp, M., Stoddard, R., Christian, T.: Cost, Schedule and Quality Improvements at Warner
+Robins Air Logistics Center. Software Tech News 10 (2007) 10 - 13
+17.Goyal, A., Kanungo, S., Muthu, V., Jayadevan, S.: ROI for SPI: Lessons from Initiatives at
+IBM Global Services India. SEPG 2001 (2001)
+18.McLoughlin, F., Richardson, I.: The Rosetta Stone Methodology - A Benefits Driven
+Approach to Software Process Improvement. Profes 2010, University of Limerick,
+Limerick, Ireland (2010)
+19.Basili, V.: Software Modeling and Measurement: The Goal/Question/Metric Paradigm.
+University of Maryland (1992)
+20.Basili, V., Caldiera, G., Rombach, H.D.: The Goal Question Metric Approach. In:
+Marciniak, J.J. (ed.): Encyclopedia of Software Engineering, Vol. 1. John Wiley & Sons Inc
+(1994)
+21.Basili, V., Rombach, H.D.: The TAME Project: Towards Improvement-Oriented Software
+Environments. IEEE Transactions on Software Engineering SE-14 (1988) 758 - 773
+22.Basili, V., Weiss, D.M.: A Methodology for Collecting Valid Software Engineering Data.
+IEEE Transactions on Software Engineering SE-10 (1984) 728 - 738
+23.Software Engineering Institute: CMMI for Software Engineering, Version 1.1, Staged
+Representation (CMMI-SW, V1.1, Staged) - CMU/SEI-2002-TR-029. (2002)
+24.SEI: CMMI for Software Engineering, Version 1.1, Staged Representation (CMMI-SW,
+V1.1, Staged) - CMU/SEI-2002-TR-029. (2002)
+25.Chrissis, M.B., Konrad, M., Shrum, S.: CMMI : Guidelines for Process Integration and
+Product Improvement. Addison-Wesley, Boston (2003)
+26.Houston, D., Keats, J.B.: Cost of Software Quality: A Means of Promoting Software Process
+Improvement. (1996)
+27.Garmus, D., Herron, D.: Function Point Analysis - Measurement Practices for Successful
+Software Projects. Addison-Wesley (2001)
+28.McCabe, T.J.: A Complexity Measure. IEEE Transactions on Software Engineering 2
+(1976) 308-320

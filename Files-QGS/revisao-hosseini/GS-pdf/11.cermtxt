@@ -1,0 +1,3477 @@
+SOFTWARE TESTING, VERIFICATION AND RELIABILITY
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+Published online 8 March 2015 in Wiley Online Library (wileyonlinelibrary.com). DOI: 10.1002/stvr.1570
+Defect prediction as a multiobjective optimization problem
+Gerardo Canfora1, Andrea De Lucia2, Massimiliano Di Penta1,
+Rocco Oliveto3, Annibale Panichella2,*,† and Sebastiano Panichella1
+1University of Sannio, Via Traiano, 82100 Benevento, Italy
+2University of Salerno, Via Ponte don Melillo, 84084 Fisciano SA, Italy
+3University of Molise, Contrada Fonte Lappone, 86090 Pesche IS, Italy
+SUMMARY
+In this paper, we formalize the defect-prediction problem as a multiobjective optimization problem. Specifically,
+we propose an approach, coined as multiobjective defect predictor (MODEP), based on multiobjective
+forms of machine learning techniques-logistic regression and decision trees specifically-trained using a
+genetic algorithm. The multiobjective approach allows software engineers to choose predictors achieving a
+specific compromise between the number of likely defect-prone classes or the number of defects that the
+analysis would likely discover (effectiveness), and lines of code to be analysed/tested (which can be considered
+as a proxy of the cost of code inspection). Results of an empirical evaluation on 10 datasets from the
+PROMISE repository indicate the quantitative superiority of MODEP with respect to single-objective predictors,
+and with respect to trivial baseline ranking classes by size in ascending or descending order. Also,
+MODEP outperforms an alternative approach for cross-project prediction, based on local prediction upon
+clusters of similar classes. Copyright © 2015 John Wiley & Sons, Ltd.
+Received 26 July 2013; Revised 12 September 2014; Accepted 23 January 2015
+KEY WORDS: defect prediction; multiobjective optimization; cost-effectiveness; cross-project defect
+prediction
+1. INTRODUCTION
+Defect prediction models aim at identifying likely defect-prone software components to prioritize
+quality assurance (QA) activities. The main reason why such models are required can be found in the
+limited time or resources available that required QA teams to focus on subsets of software entities
+only, trying to maximize the number of discovered defects. Existing defect-prediction models try to
+identify defect-prone artefacts based on product or process metrics. For example, Basili et al. [1] and
+Gyimothy et al. [2] use Chidamber and Kemerer (CK) metrics [3] while Moser et al. [4] use process
+metrics, for example, number and kinds of changes occurred on software artefacts. Ostrand et al. [5]
+and Kim et al. [6] perform prediction based on knowledge about previously occurred faults. Also,
+Kim et al. [7] used their SZZ algorithm [8, 9] to identify fix-inducing changes and characterized
+them aiming at using change-related features-for example, change size and delta of cyclomatic
+complexity-to predict whether a change induces or not a fault.
+All these approaches, as pointed out by Nagappan et al. [10] and as it is true for any supervised
+prediction approach, require the availability of enough data about defects occurred in the history of
+a project. For this reason, such models are difficult to be applied on new projects for which limited
+or no historical defect data are available. In order to overcome this limitation, several authors
+*Correspondence to: Annibale Panichella, Delft University of Technology, Mekelweg 4, 2628 CD Delft, The Netherlands.
+†E-mail: apanichella@unisa.it
+Present address: Sebastiano Panichella, University of Zurich, Binzmühlestrasse 14, CH-8050 Zurich, Switzerland.
+Copyright © 2015 John Wiley & Sons, Ltd.
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+427
+[11-14] have argued about the possibility of performing cross-project defect prediction, that is,
+using data from other projects to train machine learning models and then perform a prediction on a
+new project. However, Turhan et al. [11] and Zimmermann et al. [12] found that cross-project defect
+prediction does not always work well. The reasons are mainly due to the projects' heterogeneity,
+in terms of domain, source code characteristics (e.g. classes of a project can be intrinsically larger
+or more complex than those of another project), and process organization (e.g. one project exhibits
+more frequent changes than another). Sometimes, such a heterogeneity can also be found within a
+single, large project consisting of several, pretty different subsystems. A practical approach to deal
+with heterogeneity-either for within-project prediction or, above all, for cross-project predictionis
+to perform local prediction [13, 14] by (i) grouping together similar artefacts possibly belonging
+to different projects according to a given similarity criteria, for example, artefacts having a similar
+size, similar metric profiles or similar change frequency and (ii) performing prediction within
+these groups.
+In summary, traditional prediction models cannot be applied out-of-the-box for cross-project
+prediction. However, a recent study by Rahman et al. [15] pointed out that cross-project defect predictors
+do not necessarily work worse than within-project predictors. Instead, such models are often
+quite good in terms of the cost-effectiveness. Specifically, they achieve a good compromise between
+the number of defect-prone artefacts that the model predicts and the amount of code-that is, lines
+of code (LOC) of the artefact predicted as defect-prone-that a developer has to analyse/test to discover
+such defects. Also, Harman [16] pointed out that when performing prediction models, there
+are different, potentially conflicting objectives to be pursued (e.g. prediction quality and cost).
+Stemming from the considerations by Rahman et al. [15], who analysed the cost-effectiveness
+of a single-objective prediction model, and from the seminal idea by Harman [16], we propose
+to shift from the single-objective defect-prediction model-which recommends a set or a ranked
+list of likely defect-prone artefacts and tries to achieve an implicit compromise between cost and
+effectiveness-towards multiobjective defect-prediction models. We use a multiobjective genetic
+algorithm (GA) and specifically the Non-dominated Sorting Genetic Algorithm II (NSGA-II) [17]
+to train machine learning predictors. The GA evolves the coefficients of the predictor algorithm (in
+our case a logistic regression or a decision tree, but the approach can be applied to other machine
+learning techniques) to build a set of models (with different coefficients), each of which provide a
+specific (near) optimum compromise between the two conflicting objectives of cost and effectiveness.
+In such a context, the cost is represented by the cumulative LOC of the entities (classes in
+our study) that the approach predicts as likely defect-prone. Such a size indicator (LOC) provides
+a proxy measure of the inspection cost; however, without loss of generality, one can also model
+the testing cost considering other aspects (such as cyclomatic complexity and number of method
+parameters) instead of LOC. As effectiveness measure, we use either (a) the proportion of actual
+defect-prone classes among the predicted ones or (b) the proportion of defects contained in the
+classes predicted as defect-prone out of the total number of defects. In essence, instead of training
+a single model achieving an implicit compromise between cost and effectiveness, we obtain a set
+of predictors, providing (near) optimum performance in terms of cost-effectiveness. Therefore, for
+a given budget (i.e. LOC that can be reviewed or tested with the available time/resources), the software
+engineer can choose a predictor that maximizes (a) the number of defect-prone classes tested
+(which might be useful if one wants to ensure that an adequate proportion of defect-prone classes
+has been tested), or (b) the number of defects that can be discovered by the analysis/testing. Note
+that the latter objective is different from the former because most of the defects can be in few classes.
+Also, we choose to adopt a cost-effectiveness multiobjective predictor rather than a precision-recall
+multiobjective predictor because-and in agreement with Rahman et al. [15]-we believe that cost
+is a more meaningful (and of practical use) information to software engineers than precision.
+The proposed approach, called multiobjective defect predictor (MODEP), has been applied on 10
+projects from the PROMISE dataset.‡ The results achieved show that MODEP (i) is more effective
+than single-objective predictors in the context of a cross-project defect prediction, that is, it identifies
+a higher number of defects at the same level of inspection cost; (ii) provides software engineers
+‡https://code.google.com/p/promisedata/.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+428
+G. CANFORA ET AL.
+the ability to balance between different objectives; and (iii), finally, outperforms a local prediction
+approach based on clustering proposed by Menzies et al. [13].
+Structure of the paper. The rest of the paper is organized as follows. Section 2 discusses the
+related literature, while Section 3 describes the multiobjective defect-prediction approach proposed
+in this paper, detailing its implementation using both logistic regression and decision trees. Section 4
+describes the empirical study we carried out to evaluate the proposed approach. Results are reported
+and discussed in Section 5, while Section 6 discusses the threats to validity. Section 7 concludes the
+paper and outlines directions for future work.
+2. RELATED WORK
+In the last decade, a substantial effort has been devoted to define approaches for defect prediction
+that train the model using a within-project training strategy. A complete survey on all these
+approaches can be found in the paper by D'Ambros et al. [18], while in this section, we focus on
+approaches that predict defect prone classes using a cross-project training strategy.
+The earliest works on such a topic provided empirical evidence that simply using projects in the
+same domain do not help to build accurate prediction models [12, 19]. For this reason, Zimmermann
+et al. [12] identified a series of factors that should be evaluated before selecting the projects to be
+used for building cross-project predictors. However, even when using such guidelines, the choice
+of the training set is not trivial, and there might be cases where projects from the same domain are
+not available.
+The main problem for performing cross-project defect prediction is in the heterogeneity of data.
+Several approaches have been proposed in the literature to mitigate such a problem. Turhan et al.
+[11] used nearest-neighbour filtering to fine tune cross-project defect-prediction models. Unfortunately,
+such a filtering only reduces the gap between the accuracy of within-project and cross-project
+defect-prediction models. Cruz et al. [20] studied the application of data transformation for building
+and using logistic regression models. They showed that simple log transformations can be useful
+when measures are not as spread as those measures used in the construction. Nam et al. [21] applied
+a data normalization (´-score normalization) for cross-project prediction in order to reduce data
+coming from different projects to the same interval. This data preprocessing is also used in this paper
+to reduce the heterogeneity of data. Turhan et al. [22] analysed the effectiveness of prediction models
+built on mixed data, that is, within-project and cross-project. Their results indicated that there
+are some benefits when considering mixed data. Nevertheless, the accuracy achieved considering
+project-specific data is greater than the accuracy obtained for cross-project prediction.
+Menzies et al. [13] observed that prediction accuracy may not be generalizable within a project
+itself. Specifically, data from a project may be crowded in local regions which, when considered at a
+global level, may lead to different conclusions in terms of both quality control and effort estimation.
+For this reason, they proposed a 'local prediction' that could be applied to perform cross-project or
+within-project defect prediction. In the cross-project defect-prediction scenario, let us suppose we
+have two projects, A and B, and suppose one wants to perform defect prediction in B based on data
+available for A. First, the approach proposed by Menzies et al. [13] clusters together similar classes
+(according to the set of identified predictors) into n clusters. Each cluster contains classes belonging
+to A and classes belonging to B. Then, for each cluster, classes belonging to A are used to train the
+prediction model, which is then used to predict defect-proneness of classes belonging to B. This
+means that n different prediction models are built. The results of an empirical evaluation indicated
+that conclusions derived from local models are typically superior and more insightful than those
+derived from global models. The approach proposed by Menzies et al. [13] is used in our paper as
+one of the experimental baselines.
+A wider comparison of global and local models has been performed by Bettenburg et al. [14], who
+compared (i) local models, (ii) global models and (iii) global models accounting for data specificity.
+Results of their study suggest that local models are valid only for specific subsets of data, whereas
+global models provide trends that are too general to be used in the practice.
+All these studies suggested that cross-project prediction is particularly challenging, and because
+of the heterogeneity of projects, prediction accuracy might be poor in terms of precision, recall
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+429
+and F-score. Rahman et al. [15] argued that, while broadly applicable, such measures are not wellsuited
+for the quality-control settings in which defect-prediction models are used. They showed that,
+instead, the choice of prediction models should be based on both effectiveness (e.g. precision and
+recall) and inspection cost, which they approximate in terms of number of source code lines that
+need to be inspected to detect a given number/percentage of defects. By considering such factors,
+they found that the accuracy of cross-project defect prediction are adequate and comparable to
+within-project prediction from a practical point of view.
+Arisholm et al. [23] also suggested to measure the performance of prediction models in terms
+of cost and effectiveness for within-project prediction. A good model is the one that identifies
+defect-prone files with the best ratio between (i) effort spent to inspect such files and (ii) number of
+defects identified. Once again, the cost was approximated by the percentage of LOC to be inspected,
+while the effectiveness was measured as the percentage of defects found within the inspected code.
+However, they used classical predicting models (classification tree, Projective Adaptive Resonance
+Theory (PART), logistic regression and back-propagation neural networks) to identify the defectprone
+classes. Arisholm and Briand [24] used traditional logistic regression with a variety of metrics
+(history data, structural measures, etc.) to predict the defect-proneness of classes between subsequent
+versions of a Java legacy system and used the cost-effectiveness to measure the performance
+of the obtained logistic models.
+Our work is also inspired by previous works that use cost-effectiveness when performing a prediction
+[15, 23, 24]. However, cost-effectiveness has been, so far, only used to assess the quality
+of a predictor, and previous work still relies on single-objective predictors (such as the logistic
+regression) which, by definition, find a model that minimizes the fitting error of precision and
+recall, thus achieving a compromise between them. In this paper, we introduce, for the first time, an
+explicit multiobjective definition of the defect-prediction problem, which produces a Pareto front
+of (near) optimal prediction models-instead of a single model as done in the past-with different
+effectiveness and cost values.
+Harman [16] was the first to argue that search-based optimization techniques, in particular multiobjective
+optimization, can be potentially used to build predictive models where the user can balance
+across multiple objectives, such as predictive quality, cost, privacy, readability, coverage and weighting.
+At that time, Harman pointed out that the way how such multiobjective predictors could be
+built remained an open problem. Our work specifically addresses this open problem, by specifying
+a multiobjective prediction model based on logistic regression and by using a GA to train it.
+Finally, this paper represents an extension of our previous conference paper [25], where we
+introduced the multiobjective defect-prediction approach. The specific contributions of this paper
+as compared with the conference paper can be summarized as follows: (i) we instanced MODEP
+by using two different machine learning techniques, namely logistic regression and decision trees,
+while in the conference paper, we only used logistic regression. In addition, we measure the effectiveness
+through the proportion of (i) correctly predicted defect-prone classes and (ii) defects in
+classes predicted as defect-prone. In the conference paper, we only used as effectiveness measure
+the proportion of correctly predicted defect-prone classes. The new measure was introduced to provide
+a more accurate measure of effectiveness but also to provide evidence that the approach can be
+easily extended by adding other goals. (ii) We evaluated MODEP on 10 projects from the PROMISE
+dataset as done in the conference paper. However, we extended the quantitative analysis, and we
+also performed a qualitative analysis to better highlight the advantages of the multiobjective defect
+prediction, that is, its ability to show how different values of predictor variables lead towards a high
+cost and effectiveness, and the capability the software engineer has to choose, from the provided
+prediction models, the model that better suits her needs.
+3. MULTIOBJECTIVE DEFECT PREDICTOR
+MODEP builds defect-prediction models following the process described in Figure 1. First, a set
+of predictors (e.g. product [1, 2] or process metrics [4]) is computed for each class of a software
+project. The computed data is then preprocessed or normalized to reduce data heterogeneity. Such
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+430
+G. CANFORA ET AL.
+Figure 1. The generic process for building defect-prediction models. CK, Chidamber and Kemerer.
+preprocessing step is particularly useful when performing cross-project defect prediction, as data
+from different projects-and in some cases in the same project-have different properties [13].
+Once the data have been preprocessed, a machine learning technique is used to build a prediction
+model. In this paper, we focus on logistic regression or decision trees. However, other techniques
+can be applied without loss of generality.
+3.1. Data preprocessing
+From a defect-prediction point-of-view, software projects are often heterogeneous because they
+exhibit different software metric distributions. For example, the average number of LOC of classes,
+which is a widely used (and obvious) defect-predictor variable, can be quite different from a project
+to another. Hence, when evaluating prediction models on a software project with a software metric
+distribution that is different with respect to the data distribution used to build the models themselves,
+the prediction accuracy can be compromised [13].
+In MODEP, we perform a data standardization, that is, we convert metrics into a z distribution
+aiming at reducing the effect of heterogeneity between different projects. Specifically, given the
+value of the metric mi computed on class cj of project P , denoted as mi .cj ; P /, we convert it into
+mQ i .cj ; P / D
+mi .cj ; P /
+.mi ; P /
+.mi ; P /
+:
+(1)
+In other words, we subtract from the value of the metric mi the mean value .mi ; P / obtained
+across all classes of project P and divide by the standard deviation .mi ; S /. Such a normalization
+transforms the data belonging to different projects to fall within the same range, by measuring the
+distance of a data point from the mean in terms of the standard deviation. The standardized dataset
+has mean zero and standard deviation one, and it preserves the shape properties of the original
+dataset (i.e. same skewness and kurtosis). Note that the application of data standardization is a quite
+common practice when performing defect prediction [2, 21]. Specifically, Gyimothy et al. [2] used
+such preprocessing to reduce CK metrics to the same interval before combining them (using logistic
+regression) for within-project prediction, while Nam et al. [21] recently demonstrated that the crossproject
+prediction accuracy can be better when the model is trained on normalized data. Note that
+in the study described Section 4, we always apply data normalization on both MODEP and the
+alternative approaches, so that the normalization equally influences both approaches.
+3.2. Multiobjective defect-prediction models
+Without loss of generality, a defect-prediction model is a mathematical function/model F W Rn !
+R, which takes as input a set of predictors and returns a scalar value that measures the likelihood that
+a specific software entity is defect-prone. Specifically, a model F combines the predictors into some
+classification/prediction rules through a set of scalar values A D ¹a1; a2; : : : ; ak º. The number of
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+scalar values and the type of classification/prediction rules depend on the model/function F itself.
+During the training process of the model F , an optimization algorithm is used to find the set of
+values A D ¹a1; a2; : : : ; ak º that provides the best prediction of the outcome. For example, when
+using a linear regression technique, the predictors are combined through a linear combination, where
+the scalar values A D ¹a1; a2; : : : ; ak º are the linear combination coefficients.
+Formally, given a set of classes C D ¹c1; c2; : : : ; cnº and a specific machine learning model F
+based on a set of combination coefficients A D ¹a1; a2; : : : ; ak º, the traditional defect-prediction
+problem consists of finding the set of coefficients A, within the space of all possible coefficients,
+that minimizes the root-mean-square error (RMSE) [26]:
+431
+(2)
+(3)
+vu n
+uX .FA.ci /
+min RMSE D t
+iD1
+DefectProne.ci //2;
+where FA.ci / and DefectProne.ci / range in ¹0I 1º and represent the predicted defect-proneness and
+the actual defect-proneness of ci .
+In other words, such a problem corresponds to minimizing the number of defect-prone classes
+erroneously classified as defect-free (false negatives) and the number of defect-free classes classified
+as defect-prone ones (false positives) within the training set. Thus, optimizing this objective
+function means maximizing both precision (no false positives) and recall (no false negatives) of the
+prediction. Because the two contrasting goals (precision and recall) are treated using only one function,
+an optimal solution for a given dataset represents an optimal compromise between precision
+and recall.
+However, focusing on precision and recall might be not enough for building an effective and
+efficient prediction model. In fact, for the software engineer-who has to test/inspect the classes
+classified as defect-prone-the prediction error does not provide any insights on the effort required
+to analyse the identified defect-prone classes (that is a crucial aspect when prioritizing QA activities).
+Indeed, larger classes might require more effort to detect defects than smaller ones, because in
+the worst case, the software engineer has to inspect the whole source code. Furthermore, it would be
+more useful to analyse early classes having a high likelihood to be affected by more defects. Unfortunately,
+all these aspects are not explicitly captured by traditional single-objective formulation of
+the defect-prediction problem.
+For this reason, we suggest to shift from the single-objective formulation of defect prediction
+towards a multiobjective one. The idea is to measure the goodness of a defect-prediction model in
+terms of cost and effectiveness that, by definition, are two contrasting goals. More precisely, we
+provide a new (multiobjective) formulation of the problem of creating defect-prediction models.
+Given a set of classes C D ¹c1; c2; : : : ; cnº and a specific machine learning model F based on a
+set of combination coefficients A D ¹a1; a2; : : : ; ak º, solving the defect-prediction problem means
+finding a set of values A D ¹a1; a2; : : : ; ak º that (near) optimize the following objective functions:
+n
+max effectiveness.A/ D X FA.ci / DefectProne.ci /;
+n
+min cost.A/ D X FA.ci / LOC.ci /;
+iD1
+iD1
+where FA.ci / and DefectProne.ci / range in ¹0I 1º and represent the predicted defect-proneness and
+the actual defect-proneness of ci , respectively, while LOC.ci / measures the number of LOC of ci .
+In this formulation of the problem, we measure the effectiveness in terms of the number of actual
+defect-prone classes predicted as such. However, defect-prone classes could have different densities
+of defects. In other words, there could be classes with only one defect and other classes with several
+defects. Thus, could be worthwhile-at the same cost-to focus the attention on classes having a
+high-defect density. For this reason, we propose a second multiobjective formulation of the problem.
+Given a set of classes C D ¹c1; c2; : : : ; cnº and a specific machine learning model F based on a
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+432
+G. CANFORA ET AL.
+set of combination coefficients A D ¹a1; a2; : : : ; ak º, solving the defect-prediction problem means
+finding a set of values A D ¹a1; a2; : : : ; ak º that (near) optimizes the following objective functions:
+n
+max effectiveness.A/ D X FA.ci / DefectNumber.ci /;
+n
+min cost.A/ D X FA.ci / LOC.ci /;
+iD1
+iD1
+cost.x/
+or
+where DefectNumber.ci / denotes the actual number of defects in the class ci .
+In both formulations, cost and effectiveness are two conflicting objectives, because one cannot
+increase the effectiveness (e.g. number of defect-prone classes correctly classified) without increasing
+(worsening) the inspection cost.§ As said in the introduction, we choose not to consider precision
+and recall as the two contrasting objectives, because precision is less relevant than inspection cost
+when choosing the most suitable predictor. Similarly, it does not make sense to build models using
+cost and precision as objectives, because precision is related to the inspection cost, that is, a low
+precision would imply a high code inspection cost. However, as pointed out by Rahman et al. [15],
+the size (LOC) of the software components to be inspected provides a better measure of the cost
+required by the software engineer to inspect them with respect to the simple number of classes to be
+inspected (using the precision all classes have an inspection cost equals to one).
+Differently from single-objective problems, finding optimal solutions for problems with multiple
+criteria require trade-off analysis. Given the set of all possible coefficients, generally referred
+to as feasible region, for a given prediction model FA, we are interested in finding the solutions
+that allows to optimize the two objectives. Therefore, solving the multiobjective defect-prediction
+problems defined earlier requires to find the set of solutions which represent optimal compromises
+between cost and effectiveness [27]. Hence, the goal becomes to find a multitude of optimal sets of
+decision coefficients A, that is, a set of optimal prediction models. For multiobjective problems, the
+concept of optimality is based on two widely used notions of Pareto dominance and Pareto optimality
+(or Pareto efficiency), coming from economics, and having also a wide range of applications
+in game theory and engineering [27]. Without loss of generality, the definition of Pareto dominance
+for multiobjective defect prediction is the following:
+Definition 1
+A solution x dominates another solution y (also written x <p y) if and only if the values of the
+objective functions satisfy the following conditions:
+cost.y/ and effectiveness.x/ > effectiveness.y/
+cost.x/ < cost.y/ and effectiveness.x/
+effectiveness.y/:
+Conceptually, the aforementioned definition indicates that x is preferred to (dominates) y if and
+only if, at the same level of effectiveness, x has a lower inspection cost than y. Alternatively, x
+is preferred to (dominates) y if and only if, at the same level of inspection cost, x has a greater
+effectiveness than y. Figure 2 provides a graphical interpretation of Pareto dominance in terms of
+effectiveness and inspection cost in the context of defect prediction. All solutions in the line-pattern
+rectangle (C , D, E) are dominated by B , because B has both a lower inspection cost and a greater
+effectiveness, that is, it is better on both dimensions. All solutions in the gray rectangle (A and B )
+dominate solution C . Solution A does not dominate solution B because it allows to improve the
+effectiveness (with respect to B ) but at the same time it increases the inspection cost. Vice versa,
+solution B does not dominate solution A because B is better in terms of inspection cost but it is also
+worsen in terms of effectiveness. Thus, solutions A and B are nondominated by any other solution,
+while solutions C , D and E are dominated by either A or B .
+§In the ideal case, the inspection cost is increased by the cost required to analyse the new classes classified as
+defect-prone.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+(4)
+(5)
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+433
+Figure 2. Graphical interpretation of Pareto dominance.
+Among all possible solutions (coefficients A for defect-prediction model FA), we are interested
+in finding all the solutions that are not dominated by any other possible solution. These properties
+correspond to the concept of Pareto optimality:
+Definition 2
+A solution x is Pareto optimal (or Pareto efficient) if and only if it is not dominated by any other
+solution in the space of all possible solutions (feasible region), that is, if and only if
+À x ¤ x
+2
+W f .x/ <p f .x /;
+(6)
+In others words, a solution x is Pareto optimal if and only if no other solution x exists which
+would improve effectiveness, without worsening the inspection cost, and vice versa. While singleobjective
+optimization problems have one solution only, solving a multiobjective problem may lead
+to find a set of Pareto-optimal solutions which, when evaluated, correspond to trade-offs in the
+objective space. All the solutions (i.e. decision vectors) that are not dominated by any other decision
+vector are said to form a Pareto optimal set, while the corresponding objective vectors (containing
+the values of two objective functions effectiveness and cost) are said to form a Pareto front. Identifying
+a Pareto front is particularly useful because the software engineer can use the front to make a
+well-informed decision that balances the trade-offs between the two objectives. In other words, the
+software engineer can choose the solution with lower inspection cost or higher effectiveness on the
+basis of the resources available for inspecting the predicted defect-prone classes.
+The two multiobjective formulations of the defect-prediction problem can be applied to any
+machine learning technique, by identifying the Pareto optimal decision vectors that can be used
+to combine the predictors in classification/prediction rules. In this paper, we provide a multiobjective
+formulation of logistic regression and decision trees. The details of both multiobjective logistic
+regression and multiobjective decision tree are reported in Sections 3.2.1 and 3.2.2, respectively.
+Once the two prediction models are reformulated as multiobjective problems, we use search-based
+optimization techniques to solve them, that is, to efficiently find Pareto optimal solutions (coefficients).
+Specifically, in this paper, we use multiobjective GAs. Further details on multiobjective
+GAs and how they are used to solve the multiobjective defect-prediction problems are reported in
+Section 3.3.
+3.2.1. Multiobjective logistic regression. One of the widely used machine learning techniques is
+the multivariate logistic regression [28]. In general, multivariate logistic regression is used for
+modelling the relationship between a dichotomous predicted variable and one or more predictors
+p1; p2; : : : ; pm. Thus, it is suitable for defect-proneness prediction, because there are only
+two possible outcomes: either the software entity is defect-prone or it is nondefect-prone. In the
+context of defect-prediction, logistic regression has been applied by Gyimothy et al. [2] and by
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+logit.cj / D
+e˛Cˇ1 pj;1C Cˇm pj;m
+1 C e˛Cˇ1 pj;1C Cˇm pj;m
+;
+F .cj / D
+² 1 if logit.cj / > 0:5I
+0 otherwise:
+434
+G. CANFORA ET AL.
+Nagappan et al. [10], which related product metrics to class defect-proneness. It was also used by
+Zimmermann et al. [12] in the first work on cross-project defect prediction.
+Let C D ¹c1; c2; : : : ; cnº be the set of classes in the training set, and let P be the corresponding
+class-by-predictor matrix, that is, an m n matrix, where m is the number of predictors and n is
+the number of classes in the training set, while its generic entry pi;j denotes the value of the i th
+predictor for the j th class. The mathematical function used for regression is called logit:
+(7)
+(8)
+where logit.cj / is the estimated probability that the j th class is defect-prone, while the scalars
+.˛; ˇ1; : : : ; ˇm/ represent the linear combination coefficients for the predictors pj;1; : : : ; pj;m.
+Using the logit function, it is possible to define a defect-prediction model as follows:
+In the traditional single-objective formulation of the defect-prediction problem, the predicted values
+F .cj / are compared against the actual defect-proneness of the classes in the training set, in order to
+find the set of decision scalars .˛; ˇ1; : : : ; ˇn/ minimizing the RMSE. The procedure used to find
+such a set of decision scalars is the maximum likelihood [26] search algorithm, which estimates the
+coefficients that maximize the likelihood of obtaining the observed outcome values, that is, actual
+defect-prone classes or number of defects. Once the model is obtained, it can be used to predict the
+defect-proneness of other classes.
+The multiobjective logistic regression model can be obtained from the single-objective model,
+by using the same logit function, but evaluating the quality of the obtained model by using (i) the
+inspection cost and (ii) the effectiveness of the prediction, which can be the number of defective
+classes or defect density. In this way, given a solution A D .˛; ˇ1; : : : ; ˇm/ and the corresponding
+prediction values F .cj / computed applying Equation 7, we can evaluate the Pareto optimality
+of A using the cost and effectiveness functions (according to Equation 3 or 4). Finally, given this
+multiobjective formulation, it is possible to apply multiobjective GAs to find the set of Pareto optimal
+defect-prediction models which represents optimal compromises (trade-offs) between the two
+objective functions. Once this set of solutions is available, the software engineer can select the one
+that she considers the most appropriate and uses it to predict the defect-proneness of other classes.
+3.2.2. Multiobjective decision trees. Decision trees are also widely used for defect prediction, and
+they are generated according to a specific set of classification rules [12, 29]. A decision tree has,
+clearly, a tree structure where the leaf nodes are the prediction outcomes (class defect-proneness in
+our case), while the other nodes, often called as decision nodes, contain the decision rules. Each
+decision rule is based on a predictor pi , and it partitions the decision in two branches according to
+a specific decision coefficient ai . In other words, a decision tree can be viewed as a sequence of
+questions, where each question depends on the previous questions. Hence, a decision corresponds
+to a specific path on the tree. Figure 3 shows a typical example of decision tree used for defect
+prediction. Each decision node has the form if pi < ai , while each leaf node contains 1 (defective
+class) or 0 (nondefective class).
+The process of building a decision tree consists of two main steps: (i) generating the structure
+of the tree and (ii) generating the decision rules for each decision node according to a given set of
+decision coefficients A D ¹a1; a2; : : : ; ak º. Several algorithms can be used to build the structure
+of a decision tree [30] that can use a bottom-up or top-down approach. In this paper, we use the
+ID3 algorithm developed by Quinlan [31], which applies a top-down strategy with a greedy search
+through the search space to derive the best structure of the tree. In particular, starting from the root
+node, the ID3 algorithm uses the concepts of information entropy and information gain to assign
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+435
+Figure 3. Decision tree for defect prediction.
+a given predictor pi to the current node¶ and then to split each node in two children, partitioning
+the data in two subsets containing instances with similar predictors values. The process continues
+iteratively until no further split affects the information entropy.
+Once the structure of the tree is built, the problem of finding the best decision tree in the traditional
+single-objective paradigm consists of finding for the all decision nodes the set of coefficients
+A D ¹a1; a2; : : : ; ak º, which minimizes the root-square prediction error. Similarly to the logistic
+regression, we can shift from the single-objective formulation towards a multiobjective one by using
+the two-objective functions reported in Equation 3 or 4. We propose to find a multiple sets of decision
+coefficients A D ¹a1; a2; : : : ; anº that (near) represent optimal compromises between (i) the
+inspection cost and (ii) the prediction effectiveness. Note that MODEP only acts on the decision
+coefficients, while it uses a well-known algorithm, that is, the ID3 algorithm, for building the tree
+structure. This means that the set of decision trees on the Pareto front has all the same structure but
+different decision coefficients.
+3.3. Training the multiobjective predictor using genetic algorithms
+The problem of determining the coefficients for the logistic model or for the decision tree can be
+seen as an optimization problem with two conflicting goals (i.e. fitness functions). In MODEP, we
+decided to solve such a problem using a multiobjective GA. The first step for the definition of a GA
+is the solution representation. In MODEP, a solution (chromosome) is represented by a vector of
+values. For the logistic regression, the chromosome contains the coefficients of the logit function.
+Instead, the decision coefficients of the decision nodes are encoded in the chromosome in the case of
+decision trees. For example, a chromosome for the decision tree is A D ¹a1; a2; a3; a4º (Figure 3)
+which is the set of decision coefficients used to make a decision on each decision node.
+Once the model coefficients are encoded as chromosomes, multiobjective GAs are used to determine
+them. Several variants of multiobjective GA have been proposed, each of which differs from
+the others on the basis of how the contrasting objective goals are combined for building the selection
+algorithm. In this work, we used NSGA-II, a popular multiobjective GA proposed by Deb et al. [17].
+As shown in Algorithm 1, NSGA-II starts with an initial set of random solutions (random vectors of
+coefficients in our case) called population, obtained by randomly sampling the search space (line 3
+of Algorithm 1). Each individual (i.e. chromosome) of the population represents a potential solution
+¶A predictor pi is assigned to a given node nj if and only if the predictor pi is the larger informational gain with respect
+to the other predictors.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+436
+G. CANFORA ET AL.
+Algorithm 1: NSGA-II
+Input:
+Number of coefficients N for defect-prediction model
+Population size M
+Result: A set of Pareto efficient solutions (coefficients for defect-prediction model)
+1 begin
+2 t 0 // current generation
+3 Pt RANDOM-POPULATION(N; M )
+4 while not (end condition) do
+5 Qt MAKE-NEW-POP(Pt )
+6 Rt Pt S Qt
+7 F FAST-NONDOMINATED-SORT.Rt /
+89 iPtC1 1 ;
+10 while j PtC1 j C j Fi j M do
+11 CROWDING-DISTANCE-ASSIGNMENT.Fi /
+1123 iPtC1 i C 1PtC1 S Fi
+14 Sort(Fi ) //according to the crowding distance
+15 tPtC1 t C 1PtC1 S Fi Œ1 W .M j PtC1 j/
+16
+17 S Pt
+to the optimization problem. Then, the population is evolved towards better solutions through
+subsequent iterations, called generations, to form new individuals by using genetic operators.
+Specifically, to produce the next generation, NSGA-II first creates new individuals, called offsprings,
+by merging the genes of two individuals in the current generation using a crossover operator or
+modifying a solution using a mutation operator (function MAKE-NEW-POP [17], line 5 of Algorithm
+1). A new population is generated using a selection operator, to select parents and offspring
+according to the values of the objective functions. The process of selection is performed using the
+fast nondominated sorting algorithm and the concept of crowding distance. In line 7 of Algorithm 1,
+the function FAST-NONDOMINATED-SORT [17] assigns the nondominated ranks to individuals
+parents and offsprings. The loop between lines 10 and 14 adds as many individuals as possible
+to the next generation, according to their nondominance ranks. Specifically, at each generation,
+such an algorithm identifies all nondominated solutions within the current population and assigns
+to them the first nondominance rank (rank D 1). Once this step is terminated, the solutions with
+assigned ranks are removed from the assignment process. Then, the algorithm assigns rank D 2
+to all nondominated solutions remaining in the pool. Subsequently, the process is iterated until the
+pool of remaining solutions is empty, or equivalently until each solution has an own nondominance
+rank. If the number of individuals in the next generation is smaller than the population size
+M , then further individuals are selected according to the descending order of crowding distance
+in lines 15-16. The crowding distance to each individual is computed as the sum of the distances
+between such an individual and all the other individuals having the same Pareto dominance rank.
+Hence, individuals having higher crowding distance are stated in less densely populated regions of
+the search space. This mechanism is used to avoid the selection of individuals that are too similar
+to each other.
+The population evolves under specific selection rules by adapting itself to the objective functions
+to be optimized. In general, after some generations, the algorithm converges to the set of best
+individuals, which hopefully represents an approximation of the Pareto front [27].
+It is important to clarify that we apply NSGA-II to define decision/coefficient values based on
+data belonging to the training set.
+After that, each Pareto-optimal solution can be used to build a model (based on logistic regression
+or decision tree) for performing the prediction outside the training set.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+437
+4. DESIGN OF THE EMPIRICAL STUDY
+This section describes the study we conducted to evaluate the proposed multiobjective formulation
+of the defect-prediction problem. The description follows a template originating from the goalquestion-metric
+paradigm [32].
+4.1. Definition and context
+The goal of the study is to evaluate MODEP, with the purpose of investigating the benefits introduced
+by the proposed multiobjective model in a cross-project defect-prediction context. The reason
+why we focus on cross-project prediction is because of the following: (i) this is very useful when
+project history data is missing and challenging at the same time [12]; and (ii) as pointed out by
+Rahman et al. [15], cross-project prediction may turn out to be cost-effective while not exhibiting
+high precision values.
+The quality focus of the study is the capability of MODEP to highlight likely defect-prone classes
+in a cost-effective way, that is, recommending the QA team to perform a cost-effective inspection
+of classes giving higher priority to classes that have a higher defect density and in general maximizing
+the number of defects identified at a given cost. The perspective is of researchers aiming
+at developing a better, cost-effective defect-prediction model, also able to work well for crossproject
+prediction, where the availability of project data does not allow a reliable within-project
+defect prediction.
+The context of our study consists of 10 Java projects having the availability of information about
+defects. All of them come from the Promise repository.| A summary of the project characteristics
+is reported in Table I. All the datasets report the actual defect-proneness of classes, plus a pool of
+metrics used as predictors, that is, LOC and the CK metric suite [3]. Table II reports the metrics
+(predictors) used in our study.
+It is worth noting that, while in this paper we used only LOC and the CK metric suite, other
+software metrics have been used in literature as predictors for building defect-prediction models.
+The choice of the CK suite is not random, but it is guided by the wide use of such metrics to
+measure the quality of object-oriented software systems. However, the purpose of this paper is not
+to evaluate which is the best suite of predictors for defect prediction but to show the benefits of
+multiobjective approaches independently of the specific model the software engineer can adopt . An
+extensive analysis of the different software metrics used as predictors can be found in the survey by
+D'Ambros et al. [33].
+4.2. Research questions
+In order to evaluate the benefits of MODEP, we preliminarily formulate the following research
+questions.
+RQ1: How does MODEP perform, compared with trivial prediction models and to an ideal prediction
+model? This research question aims at evaluating the performances of MODEP with
+respect to an ideal model that selects all faulty classes first (to maximize effectiveness) and in
+increasing order of LOC (to minimize the cost). While we do not expect that MODEP performs
+better than the ideal model, we want to know how much our approach is close to it. In addition,
+as larger classes are more likely defect-prone, we compare MODEP with a trivial model, ranking
+classes in decreasing order of LOC. Finally, we consider a further trivial model ranking
+classes in increasing order of LOC, mimicking how developers could (trivially) optimized their
+effort by testing/analysing smaller classes first, in absence of any other information obtained
+by means of predictor models.
+The comparison of MODEP with these three models is useful in (ii) understanding to what
+extent is MODEP able to approximate an optimal model; and (i) investigating whether we really
+| https://code.google.com/p/promisedata/.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+Characteristics
+Release
+Classes
+Number of defectprone
+classes
+Defect-prone
+classes (%)
+WMC
+DIT
+NOC
+CBO
+RFC
+LCOM min
+mean
+max
+LOC
+min
+mean
+max
+min
+mean
+max
+min
+mean
+max
+min
+mean
+max
+min
+mean
+max
+min
+mean
+max
+1.7
+745
+166
+22
+4
+11
+120
+1
+3
+7
+0
+1
+102
+0
+11
+499
+0
+34
+288
+0
+89
+6,692
+4
+280
+4,571
+1.2
+205
+189
+92
+4
+8
+105
+1
+2
+5
+0
+0
+12
+0
+8
+65
+0
+25
+392
+0
+54
+4,900
+5
+186
+2,443
+1.6
+965
+188
+19
+4
+9
+166
+0
+2
+6
+0
+1
+39
+0
+11
+448
+0
+21
+322
+2.0
+352
+40
+11
+5
+11
+157
+1
+2
+8
+0
+0
+17
+1
+13
+150
+1
+34
+312
+LOC
+WMC
+CBO
+DIT
+NOC
+RFC
+4.0
+306
+75
+25
+4
+13
+407
+1
+3
+7
+0
+0
+35
+1
+12
+184
+1
+38
+494
+2.4
+340
+203
+60
+5
+10
+166
+1
+2
+6
+0
+1
+17
+0
+11
+128
+1
+25
+390
+0 0
+69 100
+6,747 7,059
+5 4
+303 293
+8,474 9,886
+Poi
+3.0
+442
+281
+64
+4
+14
+134
+1
+2
+5
+0
+1
+134
+0
+10
+214
+0
+30
+154
+6.0
+661
+66
+10
+5
+9
+40
+1
+1
+6
+0
+0
+20
+0
+10
+76
+1
+24
+511
+0
+42
+492
+5
+148
+1,051
+6.0
+858
+77
+9
+4
+13
+252
+1
+2
+3
+0
+0
+31
+0
+8
+109
+0
+33
+428
+0
+176
+29,258
+4
+350
+7,956
+2.7
+910
+898
+99
+4
+11
+138
+1
+3
+8
+0
+1
+29
+0
+12
+172
+0
+29
+511
+0
+126
+8,413
+4
+471
+4,489
+0 0 0
+79 132 197
+13,617 11,749 16,6336
+4
+117
+2,077
+5
+249
+2,894
+5
+473
+23,683
+Table II. Metrics used as predictors in our study.
+Abbreviation
+Description
+438
+G. CANFORA ET AL.
+Table I. Characteristics of the Java projects used in the study.
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Prop
+Tomcat
+Xalan
+Name
+Lines of Code 7
+Weighted methods per class
+Coupling Between Objects
+Depth of Inheritance
+Number Of Children
+Response For a Class
+Lack of Cohesion Among Methods
+LCOM
+Number of noncommented lines of code
+for each software component (e.g. in a class)
+Number of methods contained in a class
+including public, private and protected methods
+Number of classes coupled to a given class
+Maximum class inheritance depth for a given class
+Number of classes inheriting from a
+given parent class
+Number of methods that can be invoked
+for an object of given class
+Number of methods in a class that are not
+related through the sharing of some of the class fields
+WMC, weighted methods per class; DIT, depth of inheritance; NOC, number of children; CBO, coupling between
+objects; RFC, response for a class; LCOM, lack of cohesion among methods; LOC, lines of code.
+need a multiobjective predictor or whether, instead, a simple ranking based on LOC would be
+enough to achieve the cost-benefit tradeoff outlined by Rahman at al. [15].
+After this preliminary investigation, we analyse the actual benefits of MODEP as compared
+with other defect-prediction approaches proposed in the literature. Specifically, we formulate the
+following research questions.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+439
+RQ2: How does MODEP perform compared with single-objective prediction? This research
+question aims at evaluating, from a quantitative point of view, the benefits introduced by the
+multiobjective definition of a cross-project defect-prediction problem. We evaluate multiobjective
+predictors based on logistic regression and decision trees. Also, we consider models
+producing Pareto fronts of predictors (i) between LOC and number of predicted defect-prone
+classes and (ii) between LOC and number of predicted defects.
+RQ3: How does MODEP perform compared with the local prediction approach? This research
+question aims at comparing the cross-project prediction capabilities of MODEP with those
+of the approach-proposed by Menzies et al. [13]-that uses local prediction to mitigate the
+heterogeneity of projects in the context of cross-project defect prediction. We consider such
+an approach as a baseline for comparison because it is considered as the state-of-the-art for
+cross-project defect prediction.
+In addition, we provide qualitative insights about the practical usefulness of having Pareto fronts
+of defect predictors instead of a single predictor. Also, we highlight how, for a given machine
+learning model (e.g. logistic regression or decision trees), one can choose the appropriate rules (on
+the various metrics) that leads towards a prediction achieving a given level of cost-effectiveness.
+Finally, we report the time performance of MODEP, to provide figures about the time needed to
+train predictors.
+4.3. Variable selection
+Our evaluation studied the effect of the following independent variables.
+Machine learning algorithm: both single and multiobjective prediction are implemented using
+logistic regression and decision trees. We used the logistic regression and the decision tree
+implementations available in MATLAB (release R2010b) [34]. The glmfit routine was used to
+train the logistic regression model with binomial distribution and using the logit function as
+generalized linear model, while for the decision tree model, we used the classregtree class to
+built decision trees.
+Objectives (MODEP versus other predictors): the main goal of RQ2 is to compare singleobjective
+models with multiobjective predictors. The former are a traditional machine learning
+models in which the model is built by fitting data in the training set. As explained in Section 3.2,
+the latter are a set of Pareto-optimal predictors built by a multiobjective GA, achieving different
+cost-effectiveness tradeoffs. In addition to that, we preliminarily (RQ1) compare MODEP with
+two simple heuristics, that is, ideal model and trivial model, aiming at investigating whether
+we really need a multiobjective predictor.
+Training (within-project versus cross-project prediction): we compare the prediction capability
+in the context of within-project prediction with those of cross-project prediction. The
+conjecture we want to test is wether the cross-project strategy is comparable/better than the
+within-project strategy in terms of cost-effectiveness when using MODEP.
+Prediction (local versus global): we consider-within RQ3-both local prediction (using the
+clustering approach by Menzies et al. [13]) and global prediction.
+In terms of dependent variables, we evaluated our models using (i) code inspection cost, measured
+as the KLOCs of the of classes predicted as defect-prone (as performed by Rahman et al. [15]) and
+(ii) recall, which provides a measure of the model effectiveness. In particular, we considered two
+granularity levels for recall, by counting (i) the number of defect-prone classes correctly classified
+and (ii) the number of defects:
+Copyright © 2015 John Wiley & Sons, Ltd.
+n
+X F .ci / DefectProne.ci /
+n
+X DefectProne.ci /;
+iD1
+recallclass D iD1
+recalldefect D iD1
+n
+X F .ci / DefectNumber.ci /
+n
+X DefectNumber.ci /;
+iD1
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+440
+G. CANFORA ET AL.
+where F .ci / denotes the predicted defect proneness of the class ci , DefectProne.ci / measures its
+actual defect proneness and DefectNumber.ci / is the number of defects in ci . Hence, the recall metric
+computed at class granularity level corresponds to the traditional recall metric, which measures
+the percentage of defect prone classes that are correctly classified as defect-prone or defect-free.
+The recall metric computed at defect granularity level provides a weighted version of recall where
+the weights are represented by the number of defects in the classes. That is, at the same level of
+inspection cost, it would be more effective to inspect early classes having a higher defect density,
+that is, classes that are affected by a higher number of defects.
+During the analysis of the results, we also report precision to facilitate the comparison with
+other models:
+precision D iD1
+n
+X F .ci / DefectProne.ci /
+n
+X F .ci /
+iD1
+It is important to note that precision, recall and cost refer to defect-prone classes only. It is advisable
+not to aggregate such values with those of defect-free classes and hence show overall precision
+and recall values. This is because a model with a high overall precision (say 90%) when the number
+of defect-prone classes is very limited (say 5%) performs worse than a constant classifier (95%
+overall precision). Similar considerations apply when considering the cost instead of the precision;
+a model with lower cost (lower number of KLOC to analyse) but with a limited number of
+defect-prone classes might not be effective.
+We use a cross-validation procedure [35] to compute precision, recall and inspection cost. Specifically,
+for the within-project prediction, we used a 10-fold cross validation implemented in MATLAB
+by the crossvalind routine, which randomly partitions a software project into 10-equal-size folds;
+we used ninefolds as training set and the 10th as test set. This procedure was performed 10 times,
+with each fold used exactly once as the test set. For the cross-project prediction, we applied a similar
+procedure, removing each time a project from the set, training on nine projects and predicting
+on the 10th one.
+4.4. Analysis method
+To address RQ1, we compare MODEP with an ideal model and two trivial models. For MODEP, we
+report the performance of logistic regression and decision trees. Also, we analyse the two multiobjective
+models separately, that is, the one that considers as objectives cost and defect-prone classes
+and the one that considers cost and number of defect. In order to compare the experimented predictors,
+we visually compare the Pareto fronts obtained with MODEP (more specifically, the line
+obtained by computing the median over the Pareto fronts of 30 GA runs), and the cost-effectiveness
+curve of the ideal and the two trivial models. The latter have been obtained by plotting n points in
+the cost-effectiveness plane, where the generic i th point represents the cost-effectiveness obtained
+considering the first i classes ranked by the model (ideal or trivial). In order to facilitate the comparison
+across models, we report the area under the curve (AUC) obtained by MODEP and the two
+trivial models. An area of one represents a perfect cost-effective classifier, whereas for a random
+classifier, an area of 0.5 would be expected.
+As for RQ2, we compare the performance of MODEP with those of the single-objective (i) withinproject
+and (ii) cross-project predictors. For both MODEP and the single-objective predictors, we
+report the performance of logistic regression and decision trees. Also, in this case, we analyse the
+two multiobjective models separately, that is, the one that considers as objectives cost and defectprone
+classes and the one that considers cost and number of defect. To compare the experimented
+predictors, we first visually compare the Pareto fronts (more specifically, the line obtained by computing
+the median over the Pareto fronts of 30 GA runs) and the performance (a single dot in
+the cost-effectiveness plane) of the single-objective predictors. Then, we compare the recall and
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+441
+precision of MODEP and single-objective predictors at the same level of inspection cost. Finally, by
+using the precision and recall values over the 10 projects, we also statistically compare MODEP with
+the single-objective models using the two-tailed Wilcoxon paired test [36] to determine whether the
+following null hypotheses could be rejected:
+H0R : there is no significant difference between the recall of MODEP and the recall of the
+single-objective predictor.
+H0P : there is no significant difference between the precision of MODEP and the precision of
+the single-objective predictor.
+Note that the comparison is made by considering both MODEP and the single-objective predictor
+implemented with logistic regression and decision tree and with the two different kinds of recall
+measures (based on the proportion of defect-prone classes and of defects). In addition, we use the
+Wilcoxon test, because it is nonparametric and does not require any assumption upon the underlying
+data distribution; also, we perform a two-tailed test because we do not know a priori whether the
+difference is in favour of MODEP or of the single-objective models. For all tests, we assume a
+significance level ˛ D 0:05, that is, 5% of probability of rejecting the null hypothesis when it should
+not be rejected.
+Turning to RQ3, we compare MODEP with the local prediction approach proposed by
+Menzies et al. [13]. In the following, we briefly explain our reimplementation of the local prediction
+approach using the MATLAB environment [34] and, specifically, the RWeka and cluster packages.
+The prediction process consists of three steps:
+1. Data preprocessing: we preprocess the data set as described in Section 3.1.
+2. Data clustering: we cluster together classes having similar characteristics (corresponding to
+the WHERE heuristic by Menzies et al. [13]). We use a traditional multidimensional scaling
+algorithm (MDS)** to cluster the data based on the Euclidean distance to compute the dissimilarities
+between classes. We use its implementation available in MATLAB with the mdscale
+routine and setting as number of iterations i t D pn, where n is the number of classes in the
+training set (such a parameter is the same used by Menzies et al. [13]). As demonstrated by
+Yang et al. [37], such an algorithm is exactly equivalent to the FASTMAP algorithm used by
+Menzies et al. [13], except for the computation cost. FASTMAP approximates the classical
+MDS by solving the problem for a subset of the data set and by fitting the remainder solutions
+[37]. A critical factor in the local prediction approach is represented by the number of clusters
+k to be considered. To determine the number of clusters, we used an approach based on the
+silhouette coefficient [38]. The silhouette coefficient ranges between -1 and 1 and measures
+the quality of a clustering. A high silhouette coefficient means that the average cluster cohesion
+is high, and that clusters are well separated. Clearly, if we vary the number of considered
+clusters (k) for the same clustering algorithm, we obtain different silhouette coefficient values,
+because this leads to a different assignment of classes to the extracted clusters. Thus, in order
+to determine the number of clusters, we computed the silhouette coefficients for all the different
+clusterings obtained by FASTMAP when varying the number of clusters k from one to the
+number of classes contained in each dataset, and we considered the k value that resulted in
+the maximum for the silhouette coefficient value. In our study, we found a number of clusters
+k D 10 to be optimal.
+3. Local prediction: finally, we perform a local prediction within each cluster identified using
+MDS. Basically, for each cluster obtained in the previous step, we use classes from n 1
+projects to train the model, and then we predict defects for classes of the remaining project. We
+use an association rule learner to generate a predicting model according to the cluster-based
+cross-project strategy (WHICH heuristic by Menzies et al. [13]). We used a MATLAB's tool,
+**Specifically, we used a metric-based multidimensional scaling algorithm, where the metric used is the Euclidean
+distance in the space of predictors.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+442
+G. CANFORA ET AL.
+called ARMADA,†† which provides a set of routines for generating and managing association
+rule discovery.
+4.5. Implementation and settings of the genetic algorithm
+MODEP has been implemented using MATLAB Global Optimization Toolbox (release R2011b).
+In particular, the gamultiobj routine was used to run the NSGA-II algorithm, while the routine
+gaoptimset was used to set the GA parameters. We used the GA configuration typically used for
+numerical problems [27]:
+Population size: we choose a moderate population size with p D 200.
+Initial population: for each software system, the initial population is uniformly and randomly
+generated within the solution's space. Because such a problem in unconstrained, that is, there
+are no upper and lower bounds for the values that the coefficients can assume, we consider
+as feasible solutions all the solutions ranging within the interval Œ 10; 000I 10; 000 , while the
+initial population was randomly and uniformly generated in the interval Œ 10I 10 .
+Number of generations: we set the maximum number of generation equal to 400.
+Crossover function: we use arithmetic crossover with probability pc D 0:60. This operator
+combines two selected parent chromosomes to produce two new offsprings by linear combination.
+Formally, given two parents x D .x1; : : : ; xn/ and y D .y1; : : : ; yn/, the arithmetic
+crossover generates two offsprings ´ and w as follows: ´i D xi p C yi .1 p/ and
+wi D xi .1 p/ C yi p, where p is a random number generated within the interval Œ0I 1 .
+Graphically, the two generated offsprings lie on the line segment connecting the two parents.
+Mutation function: we use a uniform mutation function with probability pm D 1=n where
+n is the size of the chromosomes (solutions representation). The uniform mutation randomly
+changes the values of each individual with small probability pm, replacing an element (real
+value) of the chromosome with another real value of the feasible region, that is, within the
+interval Œ 10; 000I 10; 000 . Formally, given a solution x D .x1; : : : ; xn/ with lower bound
+xmin D 10; 000 and upper bound xmax D 10; 000. The uniform mutation will change with
+small probability pm a generic element xi of x as follows: xi D ximin C p .ximax ximin /, where
+p is a random number generated within the interval Œ0I 1 .
+Stopping criterion: if the average Pareto spread is lower than 10 8 in the subsequent 50 generations,
+then the execution of the GA is stopped. The average Pareto spread measures the average
+distance between individuals of two subsequent Pareto fronts, that is, obtained from two subsequent
+generations. Thus, the average Pareto spread is used to measure whether the obtained
+Pareto front does not change across generations (i.e. whether NSGA-II converged).
+The algorithm has been executed 30 times on each object programme to account the inherent randomness
+of GAs [39]. Then, we select a Pareto front composed of points achieving the median
+performance across the 30 runs.
+4.6. Replication package
+The replication package of our study is publicly available.‡‡ In the replication package, we provide
+the following:
+the script for running MODEP on a specific dataset;
+the datasets used in our experimentation; and
+the raw data for all the experimented predictors.
+5. STUDY RESULTS
+This section discusses the results of our study aimed at answering the research questions formulated
+in Section 4.2.
+††http://www.mathworks.com/matlabcentral/fileexchange/3016-armada-data-mining-tool-version-1-4.
+‡‡http://distat.unimol.it/reports/MODEP.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+443
+5.1. RQ1: How does multiobjective defect predictor perform, compared to trivial prediction
+models and to an ideal prediction model?
+As planned, we preliminarily compare MODEP with an ideal model and two trivial models that
+select the classes in increasing and decreasing order of LOC, respectively. This analysis is required
+(i) to understand whether we really need a multiobjective predictor or to achieve the cost-benefit
+tradeoff outlined by Rahman at al. [15], a simple ranking would be enough; and (ii) to analyse to
+what extent MODEP is able to approximate the optimal cost-effectiveness predictor.
+Figure 4 compares MODEP with the ideal model and the two trivial models when optimizing
+inspection cost and number of defect-prone classes. TrivialInc and TrivialDec denote the trivial models
+ranking classes in increasing and decreasing order of LOC, respectively. As we can see, in five
+cases (jEdit, Log4j, Lucene, Xalan and Poi) out of 10, MODEP reaches a cost-effectiveness that is
+very close to the cost-effectiveness of the ideal model, confirming the usefulness of the proposed
+approach. Also, as expected, in all cases, MODEP outperforms the trivial model TrivialDec. This
+result is particular evident for Tomcat, Xalan, Lucene and Log4j. MODEP solutions also generally
+Figure 4. Comparison of multiobjective defect predictor with ideal and trivial models when optimizing
+inspection cost and number of defect-prone classes.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+444
+G. CANFORA ET AL.
+Figure 5. Comparison with trivial models when optimizing inspection cost and number of defects.
+dominate the solutions provided by the trivial model TrivialInc. However, MODEP is not able to
+overcome TrivialInc on Xalan and Log4j, where the results obtained by MODEP and the trivial model
+are substantially the same. This means that for projects like Log4j and Xalan, where the majority of
+classes are defect-prone (92% and 99%, respectively), the trivial model TrivialInc provides results
+that are very close to those achieved by MODEP and by the ideal model. These findings are also
+confirmed by the quantitative analysis reported in Tables III and IV. Indeed, on eight out of 10
+projects, the AUC values achieved by MODEP are better (higher) than the AUC values of the trivial
+models. In such cases, the improvement achieved by MODEP with respect to the two trivial models
+varies between 10% and 36%. This result suggests that the use of trivial models based only on LOC
+is not sufficient to build a cost-effectiveness prediction model.
+Similar results are also obtained when comparing MODEP with the ideal and trivial models when
+optimizing inspection cost and number of defects (see Figure 5). Specifically, MODEP always outperforms
+the trivial models, and in some cases (on three projects, Log4j, Lucene, Xalan), it is able
+to reach a cost-effectiveness very close to the cost-effectiveness of the ideal model.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+445
+Table III. Area-under-the-curve values achieved when comparing multiobjective
+defect predictor (MODEP) (using logistic regression and decision trees (DTree))
+with trivial models when considering as objective functions inspection cost (Inc) and
+number of defect-prone classes (Dec).
+MODEP-Logistic
+MODEP-DTree
+TrivialInc
+TrivialDec
+0.71
+0.85
+0.70
+0.86
+0.97
+0.93
+0.96
+0.68
+0.68
+0.99
+0.79
+0.70
+0.72
+0.79
+0.95
+0.86
+0.83
+0.68
+0.67
+0.99
+0.64
+0.74
+0.60
+0.76
+0.97
+0.85
+0.88
+0.56
+0.60
+0.99
+0.65
+0.61
+0.57
+0.53
+0.94
+0.78
+0.74
+0.58
+0.57
+0.99
+0.54
+0.35
+0.49
+0.38
+0.27
+0.29
+0.40
+0.50
+0.47
+0.19
+0.68
+0.49
+0.59
+0.58
+0.30
+0.41
+0.49
+0.48
+0.56
+0.26
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+0.71
+0.85
+0.70
+0.87
+0.97
+0.93
+0.97
+0.69
+0.68
+0.99
+0.78
+0.69
+0.70
+0.83
+0.95
+0.88
+0.84
+0.68
+0.67
+0.99
+Table IV. Area-under-the-curve values achieved when comparing multiobjective
+defect predictor (MODEP) (using logistic regression and decision trees(DTree)) and
+Trivial models when considering as objective functions inspection cost (Inc) and
+number of defects (Dec).
+MODEP-Logistic
+MODEP-DTree
+TrivialInc
+TrivialDec
+In conclusion, we can claim that MODEP can be particularly suited for cross-project defect prediction,
+because it is able to achieve in several cases a cost-effectiveness very close to the optimum.
+As expected, MODEP also outperforms two trivial models that just rank classes in decreasing or
+increasing order of LOC. Finally, the results are pretty consistent across most of the studied projects
+(except Log4j and Xalan). This means that a developer can rely in MODEP because it seems to
+be independent of the specific characteristics of a given project (in terms of predictors and number
+of defects).
+5.2. RQ2: How does multiobjective defect predictor perform compared to single-objective
+prediction?
+In this section, we compare MODEP with a single-objective defect predictor. We first discuss the
+results achieved when using as objective functions inspection cost and number of defect-prone
+classes classified as such. Then, we discuss the results achieved when considering as objective functions
+inspection cost and number of defects (over the total number of defects) contained in the
+defect-prone classes classified as such.
+5.2.1. Multiobjective defect predictor based on inspection cost and defect-prone classes. Figure 6
+shows the Pareto fronts achieved by MODEP (using logistic regression and decision trees), when
+predicting defect-prone classes-and optimizing the inspection cost and the number of defect-prone
+classes identified-on each of the 10 projects after training the model on the remaining nine. The
+plots also show as single points: (i) the single-objective cross-project logistic regression and decision
+tree predictors (as a black triangle for logistic regression and gray triangle for decision trees) and
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+446
+G. CANFORA ET AL.
+Figure 6. Performances of predicting models achieved when optimizing inspection cost and number of
+defect-prone classes.
+(ii) the single-objective within-project for logistic and decision tree predictors (a black square for
+the logistic and a gray square for the decision tree), where the prediction has been performed using
+10-fold cross-validation within the same project.
+A preliminary analysis indicates that, generally, the solutions (sets of predictors) provided by
+MODEP (based on logistic regression or decision tree) dominate the solutions provided by both
+cross-project and within-project single-objective models. This means that the Pareto-optimal predictors
+provided by MODEP are able to predict a larger number of defect-prone classes with a lower
+inspection cost. Only in one case, MODEP is not able to overcome the single-objective predictors.
+Specifically, for Tomcat the single-objective solutions (both cross-project and within-project) are
+quite close to the Pareto fronts provided by MODEP based on decision trees.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+447
+In order to provide a deeper comparison of the different prediction models, Table V compares the
+performances of MODEP with those of the cross-project single-objective predictors (both logistic
+and decision tree predictors) in terms of precision and r ecal lclass. Specifically, the table reports
+the recallclass and the precision of the two models for the same level of inspection cost. Results
+indicate that the logistic model MODEP always achieves better recallclass levels. In particular, for
+six systems (Ant, Camel, Log4j, Lucene, Poi and Prop) the recallclass is greater (of at least 10%) than
+the recallclass of the single-objective predictors. However, the precision generally decreases, even if
+in several cases the decrement is negligible. The same considerations also apply when MODEP uses
+decision trees.
+We also compare MODEP with the single-objective predictors trained using a within-project
+strategy. This analysis is necessary to analyse to what extent MODEP trained with a crossproject
+strategy is comparable/better than single-objective predictors trained with a within-project
+strategy in terms of cost-effectiveness. Table V reports the achieved results in terms of precision and
+recallclass for the same level of inspection cost. Not surprisingly, the within-project logistic predictor
+achieves a better precision, for 8 out of 10 projects (Ant, Camel, Ivy, jEdit, Lucene, Poi, Prop
+Table V. Multiobjective defect predictor versus single-objective predictors when optimizing inspection
+cost and number of defect-prone classes identified. Single-objective predictors are also applied using a
+within-project training strategy.
+Logistic
+Dtree
+Logistic
+System
+Metric
+SO-C MO
+Diff
+SO-C MO
+Diff
+SO-W MO
+Diff
+SO-W MO
+Diff
+285 285
+0.38 0.95
+1 0.99
+-
+0.01
+158 - 429
+0.81 C0.45 6 1.00
+0.98 0.01 0.99
+429
+1.00
+0.99
+-
+SO-C,
+single-objective cross-project; SO-W, single-objective within-project; MO, multiobjective; Diff, difference.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+121
+0.49
+0.50
+83
+0.57
+0.37
+75
+0.72
+0.22
+95
+0.49
+0.66
+20
+0.41
+0.93
+66
+0.62
+0.63
+96
+0.64
+0.73
+107
+0.83
+0.81
+241
+0.84
+0.22
+158
+0.36
+0.99
+121 0.68
+C0.19
+0.17 0.33
+83 0.90
+C0.33
+0.19 0.18
+75 0.90
+C0.18
+0.21 0.01
+95 0.97
+C0.38
+0.24 0.42
+20 0.85
+C0.44
+0.92 0.01
+66
+0.94
+0.59
+32
+0.04
+96 0.96
+C0.32
+0.63 0.10
+107 0.97
+C0.14
+0.63 0.18
+241 0.87
+C0.03
+0.08 0.14
+101
+0.39
+0.68
+13
+0.09
+0.54
+28
+0.25
+0.50
+66
+0.33
+0.66
+38
+0.99
+0.92
+86
+0.77
+0.74
+120
+0.90
+0.79
+74
+0.87
+0.77
+64
+0.18
+0.58
+101 0.60
+C0.21
+0.52 0.16
+13 0.36
+C0.25
+0.14 0.30
+28 0.40
+C0.15
+0.06 0.44
+66 0.84
+C0.51
+0.22 0.44
+38
+0.99
+0.92
+-
+86
+0.99
+C0.22
+0.60 0.14
+120 1.00
+C0.10
+0.64 0.15
+74 0.90
+C0.03
+0.61 0.16
+64 0.33
+C0.15
+0.04 0.53
+Ant
+Ivy
+jEdit
+Poi
+Prop
+Camel Cost
+Recallclass
+Precision
+Log4j Cost
+Recallclass
+Precision
+Lucene Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Tomcat Cost
+Recallclass
+Precision
+Xalan Cost
+Recallclass
+Precision
+167
+0.77
+0.43
+93
+0.54
+0.26
+74
+0.83
+0.27
+121
+0.64
+0.42
+30
+0.42
+0.94
+83
+0.53
+0.80
+102
+0.53
+0.87
+76
+0.69
+0.67
+214
+0.82
+0.21
+167
+0.90 C0.13
+0.21 0.22
+93 0.94
+C0.40
+0.19 0.07
+74 0.90
+C0.07
+0.11 0.16
+121
+1.00
+0.25
+-
+0.19
+30 0.96
+C0.54
+0.92 0.02
+83 0.97
+C0.44
+0.59 0.21
+102 0.98
+C0.45
+0.63 0.24
+76 0.91
+C0.22
+0.62 0.05
+214 0.86
+C0.04
+0.08 0.13
+104
+0.43
+0.35
+33
+0.25
+0.33
+38
+0.35
+0.37
+85
+0.49
+0.50
+35
+0.92
+0.93
+81
+0.73
+0.74
+104
+0.83
+0.81
+104
+0.82
+0.83
+54
+0.18
+0.59
+428
+0.99
+0.99
+Dtree
+104 0.60
+C0.17
+0.15 0.20
+33 0.59
+C0.24
+0.16 0.17
+38 0.52
+C0.17
+0.07 0.30
+85 0.91
+C0.42
+0.23 0.27
+35 0.99
+C0.07
+0.92 0.01
+81 0.95
+C0.13
+0.59 0.15
+104 0.96
+C0.13
+0.64 0.23
+104 0.95
+C0.13
+0.63 0.20
+54 0.32
+C0.14
+0.59 428
+1.00
+C0.01
+0.99 448
+G. CANFORA ET AL.
+and Tomcat). Instead, the precision is the same for both logistic-based models for Log4j, and Xalan.
+Similarly, the within-project decision tree predictor achieves a better precision, for eight out of 10
+projects. However, the difference between the precision values achieved by MODEP and the singleobjective
+predictor are lower then 5% on three projects. Thus, the within-project single-project
+predictors achieve-for both logistic and decision tree-better precision than MODEP trained with
+a cross-project strategy. These results are consistent with those of a previous study [12], and show
+that, in general, within-project prediction outperforms cross-project prediction (And when this does
+not happen, performances are very similar). However, although the precision decreases, MODEP is
+able to generally achieve higher recallclass values using both the machine learning algorithms. This
+means that-for the same cost (KLOC)-the software engineer has to analyse more false positives,
+but she is also able to identify more defect-prone classes.
+Let us now deeply discuss some specific cases among the projects we studied. For some of themsuch
+as Ivy or Tomcat-a cross-project single-objective logistic regression reaches a high recall
+and a low precision, whereas for others-such as Log4j or Xalan-it yields a relatively low recall
+and a high precision. Instead, MODEP allows the software engineer to understand, based on the
+amount of code she can analyse, what would be the estimated level of recall-that is, the percentage
+of defect-prone classes identified-that can be achieved, and therefore to select the most suitable
+predictors. For example, for Xalan, achieving a (estimated) recall of 80% instead of 38% would
+require the analysis of about 132 KLOC instead of 13 KLOC (Figure 6(j)). In this case, the higher
+additional cost can be explained because most of the Xalan classes are defect-prone; therefore,
+achieving a good recall means analysing most of the system, if not the entire system. Let us suppose,
+instead, to have only a limited time available to perform code inspection. For Ivy, as indicated by
+the multiobjective decision tree predictor, we could choose to decrease the inspection cost from 32
+KLOC to 15 KLOC if we accept a recall of 50% instead of 83% (Figure 6(c)). It is important to
+point out that the recall value provided by the multiobjective model is an estimated one (based on
+the training set) rather than an actual one, because the recall cannot be known a priori when the
+prediction is made. Nevertheless, even such an estimated recall provides the software engineering
+with a rough idea that high inspection cost would be paid back by more defects detected.
+All these findings are also confirmed by our statistical analysis. As for the logistic regression,
+the Wilcoxon test indicate that the precision of MODEP is significantly lower (p-value D 0:02)
+than for the single-objective, but at the same time the recallclass is also significantly greater
+(p-value < 0:01) than for the single objective. Similarly, for the decision tree, we also obtained
+a significant difference in terms of both precisions (it is significantly lower using MODEP, with
+p-value < 0:01) and recallclass (It is significantly higher using MODEP with p-value < 0:01).
+Thus, we can reject both the null hypotheses, H0R in favour of MODEP and H0P in favour of the
+single-objective predictors. This means that, for the same inspection cost, MODEP achieves a lower
+prediction precision, but it increases the number of defect-prone classes identified, with respect to
+the single-objective predictors.
+5.2.2. Multiobjective defect predictor based on inspection cost and number of defects. Figure 7
+shows the Pareto fronts produced by MODEP when optimizing inspection cost and number of
+defects. Also in this case, the models were evaluated on each of the 10 projects after training the
+model on the remaining nine.
+A preliminary analysis shows that, also when considering the number of defects as effectiveness
+measure, MODEP dominates the solutions provided by both cross-project and within-project singleobjective
+models, using either logistic regression or decision trees. This means that the Paretooptimal
+predictors provided by MODEP are able to predict classes having more defects with a lower
+inspection cost. Only in few cases, that is, for Tomcat and Ivy, the single-objective solutions (both
+cross-project and within-project) are quite close to the Pareto fronts provided by MODEP, while only
+in one case, that is, for Ant, the within-project logistic regression dominates the solutions achieved
+by MODEP.
+As performed for the previous two-objective formulation of the defect-prediction problem,
+Table VI reports the performances, in terms of precision and recalldefect, achieved by the experimented
+defect-prediction models for the same inspection costs. Results indicate that MODEP is
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+449
+Figure 7. Performances of predicting models achieved when optimizing inspection cost and number
+of defects.
+able to provide better results than the corresponding single-objective predictors in terms of number
+of predicted defects-that is, contained in the classes identified as defect-prone-at the same cost.
+Indeed, on eight out of 10 projects and for both logistic regression and decision trees, the number of
+defects contained in the classes predicted by MODEP as defect-prone is greater than the number of
+defects contained in the classes predicted as defect-prone by the single-objective predictors. Specifically,
+MODEP allows the software engineer to analyse the trade-off between cost and percentage
+of defects contained in the classes identified as defect-prone and then to select the predictors that
+best fit the practical constraints (e.g. limited time for analysing the predicted classes). For example,
+let us assume to have enough time/resources to inspect the Xalan source code. In this case,
+by selecting a predictor that favours recall over precision, we can achieve a recall (percentage of
+defects) of 80% instead of 40% by analysing about 200 KLOC instead of 50 KLOC (Figure 7(j)).
+Let us suppose, instead, to have only a limited time available to perform code inspection. For Ivy,
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+450
+G. CANFORA ET AL.
+Table VI. Multiobjective defect predictor versus single-objective predictors when optimizing inspection
+cost and number of defects identified. Single-objective predictors are also applied using a within-project
+training strategy.
+System
+Metric
+SO-C MO
+Diff
+SO-C MO
+Diff
+SO-W MO
+Diff
+SO-W MO
+Diff
+Logistic
+Dtree
+Logistic
+Dtree
+Cost
+Recalldefects
+Precision
+167 168
+0.85 0.85
+0.43 0.43
+-
+93 92 1
+0.74 0.90 C0.16
+0.26 0.18 0.08
+74 74 0.89
+0.93 C0.04
+0.27 0.11 0.16
+121 121 0.64
+1.00 C0.36
+0.42 0.24 0.20
+30 30 0.51
+0.90 C0.39
+0.94 0.93 0.01
+83 83 0.67
+0.94 C0.27
+0.80 0.59 0.21
+102 102 0.67
+0.89 C0.22
+0.87 0.63 0.16
+76 76 0.67
+0.92 C0.25
+0.67 0.62 0.05
+Ant
+Ivy
+jEdit
+Log4j
+Poi
+Prop
+Xalan
+Camel Cost
+Recalldefects
+Precision
+Lucene Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Tomcat Cost
+Recalldefects
+Precision
+214 214
+0.86 0.83
+0.22 0.08
+0.03
+0.14
+Cost
+Recalldefects
+Precision
+285 285 0.38
+0.70 C0.32
+1 0.99 0.01
+121 121 0.64
+0.64 0.50
+0.56 C0.06
+83 83 0.67
+0.90 C0.023
+0.37 0.18 0.19
+75 75 0.79
+0.80 C0.01
+0.22 0.16 0.06
+95 95 0.49
+0.97 C0.48
+0.66 0.24 0.42
+20 20 0.42
+0.79 C0.37
+0.93 0.92 0.01
+66 66 0.56
+0.79 C0.23
+0.63 0.58 0.05
+96 96 0.64
+0.90 C0.26
+0.73 0.63 0.10
+107 107 0.67
+1.00 C0.33
+0.81 0.63 0.19
+241 241 0.56
+0.83 C0.27
+0.22 0.09 0.13
+158 158 0.37
+0.78 C0.41
+0.99 0.99 101
+101
+0.57 0.48
+0.68 0.25
+0.09
+0.43
+13 13 0.15
+0.20 C0.05
+0.54 0.14 0.40
+28 28 0.29
+0.30 C0.01
+0.71 0.45 0.26
+66 66 0.33
+0.84 C0.51
+0.66 0.22 0.44
+38 38 0.98
+1.00 C0.02
+0.92 0.92 86
+86 0.84
+0.95 C0.11
+0.74 0.55 0.19
+120 120 0.92
+1.00 C0.08
+0.77 0.63 0.14
+112 112 0.91
+1.00 C0.09
+0.77 0.61 0.16
+64 64
+0.28 0.28
+0.58 0.04
+429 429
+1.00 1.00
+0.99 0.99
+-
+0.54
+-
+104
+104
+0.51 0.49
+0.35 0.30
+0.03
+0.05
+33 33 0.30
+0.36 C0.06
+0.33 0.16 0.17
+38 38 0.39
+0.45 C0.06
+0.37 0.35 0.02
+85 85 0.49
+0.93 C0.44
+0.50 0.23 0.27
+35 35 0.92
+0.98 C0.06
+0.93 0.92 0.01
+81 81 0.24
+0.87 C0.63
+0.74 0.57 0.17
+104 104 0.58
+0.92 C0.34
+0.81 0.64 0.17
+104 104 0.84
+1.00 C0.16
+0.83 0.59 0.24
+54 54 0.11
+0.22 C0.11
+0.59 0.04 0.55
+428 428 0.99
+1.00 C0.01
+0.99 0.99 SO-C,
+single-objective cross-project; SO-W, single-objective within-project; MO, multiobjective; Diff, difference.
+as indicated by the multiobjective decision tree predictor, we could choose to decrease the inspection
+cost from 80 KLOC to 40 KLOC if we accept to identify defect-prone classes containing 50%
+of the total amount of defects instead of 83% (Figure 7(c)). The only exceptions is represented by
+Tomcat for the logistic regression, where the number of defects is the same for both MODEP and
+single-objective cross-project predictors.
+In summary, also when formulating the multiobjective problem in terms of cost and number of
+defects, MODEP is able to increase the number of defects in the predicted classes. However, the
+prediction achieved with single-objective predictors provides a higher precision.
+We also compare MODEP with single-objective defect predictors trained using a within-project
+strategy (Table VI). Results indicate that MODEP is able to better prioritize classes with more
+defects than the single-objective models. Indeed, for the logistic model, at same level of cost
+MODEP classifies as defect-prone classes having more defects than the classes classified as
+defect-prone by the within-project single-objective logistic regression. For three out of 10 projects
+(Ant, Ivy, and Tomcat), the recalldefects is (about) the same, while for the other projects the difference
+in favour of MODEP ranges between C1% and C48% in terms of recalldefects for the same amount
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+451
+of source code to analyse (KLOC), mirroring an increase of the number of defects contained in the
+classes identified as defect-prone ranging between C11 and C121 defects. The only exception to
+the rule is represented by Ant where the within-project single-objective predictor identifies a higher
+number of defects as compared to MODEP. Once again, MODEP provides an improvement in number
+of defects but also a general decrement of precision. For what concerns the decision trees, we
+can observe that the results achieved are even better. MODEP predicts classes having more defects
+than those predicted by the single-objective within project prediction for 8 out of 10 projects. In
+this case, the difference in terms recalldefects ranges between C1% and C63% with a corresponding
+increase of number of defects ranging between C3 and C401. Also for the decision tree predictor,
+there is a decrement of the precision for all the projects (lower than 6% in 50% of cases).
+Also in this case, the statistical analysis confirmed our initial findings. Considering the logistic
+regression, the p r eci si on is significantly lower (p-value D 0:02) while, at the same cost,
+the recalldefects significantly increases (p-value D 0:02). Similarly, for the decision tree, we also
+obtained a significant decrement in terms of precision using MODEP (p-value D 0:03) but at
+the same inspection cost value we also achieved a statistically significant increase of recalldefects
+(p-value < 0:01). Thus, we can reject both the null hypotheses, H0R in favour of MODEP and H0P
+in favour of the single-objective predictors.
+In summary, besides the quantitative advantages highlighted earlier, a multiobjective model (like
+MODEP and the two trivial models presented earlier) has also the advantage of providing the software
+engineer with the possibility to make choices to balance between prediction effectiveness
+and inspection cost. Certainly, on the one hand, this does not necessarily mean that the use of
+MODEP would necessarily help the software engineer to reduce the inspection cost or to increase
+the number of detected defects. On the other hand, it provides the software engineer with different
+possible choices, instead of only one as single-objective models do. Indeed, a single-objective
+predictor (either logistic regression or decision trees) provides a single model that classifies a given
+set of classes as defect-prone or not. This means that, given the results of the prediction, the software
+engineer should inspect all classes classified as defect-prone. Depending on whether the model
+favours a high recall or a high precision, the software engineer could be asked to inspect a too
+high number of classes (hence, an excessive inspection cost) or the model may fail to identify some
+defect-prone classes.
+5.3. RQ3: How does multiobjective defect predictor perform compared to the local prediction
+approach?
+In this section, we compare the performance of MODEP with an alternative method for cross-project
+predictor, that is, the 'local' predictor based on clustering proposed by Menzies et al. [13]. Table VII
+shows recallclass and precision-for both approaches-at the same level of inspection cost. Results
+indicate that, at the same level of cost, MODEP is able to identify a larger number of defect-prone
+classes (higher recallclass values). Specifically, the difference in terms of recallclass ranges between
+C13% and C64%. We can also note that in the majority of cases MODEP achieves a lower precision,
+ranging between 2% and 22% except for jedit where it increases of 1%.
+These findings are supported by our statistical analysis. Specifically, the Wilcoxon test indicates
+that the differences are statistically significant (p-value < 0:01) for both recallclass and precision.
+Such results are not surprising because the local prediction model where designed to increase the
+prediction accuracy over the traditional (global) model in the context of cross-project prediction.
+Table VIII shows recalldefect and precision-for both MODEP and the local prediction approachat
+the same level of cost. We can observe that MODEP is able to identify a larger number of defects
+(higher recalldefect values), mirroring a better ability to identify classes having a higher density of
+defects. The difference, in terms of number of defects, ranges between C3% and C44%. There is
+only one exception, represented by Ant, for which the recalldefect value is lower ( 3%). At the same
+time, the results reported in Table VII also show that, in the majority of cases, MODEP achieves
+a lower precision, raging between 3% and 25%, with the only exception of Camel where it
+increases by 3%. Also in this case, the Wilcoxon test highlight that the differences in terms of
+recalldefect and precision are statistically significant (p-value < 0:01).
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+452
+G. CANFORA ET AL.
+Table VII. Multiobjective defect predictor versus local predictors when
+optimizing inspection cost and number of predicted defect-prone classes.
+Local
+MO-Logistic
+MO-DTree
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+Metric
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+132
+0.62
+0.32
+68
+0.34
+0.26
+59
+0.68
+0.25
+104
+0.56
+0.46
+28
+0.52
+0.94
+73
+0.42
+0.80
+85
+0.62
+0.88
+91
+0.66
+0.85
+201
+0.68
+0.22
+201
+0.68
+0.22
+132
+0.74
+0.28
+68
+0.82
+0.18
+59
+0.78
+0.20
+104
+0.97
+0.24
+28
+0.94
+0.92
+73
+0.95
+0.58
+85
+0.66
+0.62
+91
+0.96
+0.63
+201
+0.83
+0.08
+201
+0.81
+0.08
+C0.12
+0.04
+C0.48
+0.08
+C0.10
+0.05
+C0.41
+0.22
+C0.42
+0.02
+C0.43
+0.22
+C0.64
+0.26
+C0.30
+0.21
+C0.15
+0.14
+C0.13
+0.14
+132
+0.66
+0.17
+68
+0.86
+0.17
+59
+0.78
+0.10
+104
+0.85
+0.22
+28
+0.94
+0.92
+73
+0.95
+0.59
+85
+0.93
+0.59
+91
+0.94
+0.62
+201
+0.83
+0.08
+201
+0.73
+0.08
+C0.04
+0.15
+C0.52
+0.15
+C0.10
+0.15
+C0.44
+-
+C0.42
+0.02
+C0.43
+0.21
+C0.43
+0.21
+C0.28
+0.23
+C0.15
+0.14
+C0.05
+0.14
+Local, local prediction; MO, multiobjective; DTree, decision tree.
+5.4. Further analyses
+In this section, we report further analyses related to the evaluation of MODEP. Specifically, we analysed
+the execution time of MODEP as compared to traditional single-objective prediction models
+and the benefits provided by the data standardization.
+5.4.1. Execution time. Table IX reports the average execution time required by MODEP and traditional
+single-objective algorithm to build prediction models when using cross-project strategy. For
+MODEP, the table reports the average execution time required over 30 independent runs for each
+system considered in our empirical study. The execution time was measured using a machine with
+an Intel Core i7 processor running at 2.6 GHz with 12 GB RAM and using the MATLAB's cputime
+routine, which returns the total CPU time (in seconds) used by a MATLAB script.
+Measurement results reported in Table IX show how MODEP requires more time than the
+traditional single objective models. Specifically, executing MODEP requires, on average, 2 min
+and 27 s when using logistic regression, and 2 min and 52 s when using decision trees. This is
+an expected result because MODEP has to find a set of multiple solutions instead of only one.
+However, the running time required by MODEP is always lower than 3 min. In our understanding,
+such an increase of execution time can be considered as acceptable if compared with the
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+453
+Table VIII. Multiobjective defect predictor versus local predictors
+when optimizing inspection cost and number of predicted defects.
+Local
+MO-Logistic
+MO-DTree
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+Metric
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+Cost
+Recalldefects
+Precision
+132
+0.66
+0.32
+68
+0.46
+0.26
+59
+0.48
+0.25
+104
+0.56
+0.46
+28
+0.56
+0.94
+73
+0.57
+0.80
+85
+0.65
+0.88
+91
+0.70
+0.85
+201
+0.71
+0.22
+201
+0.73
+0.22
+132
+0.63
+0.18
+68
+0.62
+0.18
+59
+0.66
+0.09
+104
+0.97
+0.24
+28
+0.90
+0.92
+73
+0.99
+0.59
+85
+0.85
+0.63
+91
+0.89
+0.63
+201
+0.75
+0.08
+201
+0.75
+0.08
+0.03
+0.13
+C0.16
+0.08
+C0.18
+0.16
+C0.39
+0.22
+C0.34
+0.02
+C0.42
+0.21
+C0.20
+0.25
+C0.19
+0.22
+C0.04
+0.14
+C0.03
+0.14
+132
+0.58
+0.64
+68
+0.62
+0.18
+59
+0.66
+0.14
+104
+0.97
+0.24
+28
+0.91
+0.92
+73
+0.87
+0.56
+85
+0.87
+0.59
+91
+0.87
+0.69
+201
+0.78
+0.13
+201
+0.73
+0.08
+0.08
+C0.32
+C0.16
+0.08
+C0.18
+0.11
+C0.39
+0.22
+C0.35
+0.02
+C0.44
+0.24
+C0.22
+0.21
+C0.17
+0.16
+C0.07
+0.09
+C0.05
+0.14
+Local, local prediction; MO, multiobjective; DTree, decision tree.
+improvement in terms of inspection cost (measures as number of LOC to be analysed) obtained
+by MODEP. For example, on Ant the single objective logistic regression is built in 0.31 s while
+MODEP requires 136 s to find multiple trade-offs between recall and LOC. Despite this increase
+of running time, MODEP allows to reduce by thousands the number of LOC to analyse. Specifically,
+the single-objective logistic regression requires the analysis of 167,334 LOC to cover 77% of
+defect-prone classes, while MODEP is able to reach the same percentage of defect-prone classes
+with 125,242 LOC.
+5.4.2. Effect of data standardization. In the previous sections, we reported the results obtained
+by the different defect-prediction techniques when applying a data standardization. Such a preprocessing
+has been performed in order to mitigate the effect of project heterogeneity in cross-project
+prediction. Even if data standardization is a quite common practice in defect prediction, we are still
+interested in analysing to what extent such a preprocessing affected the achieved results. Thus, we
+compared MODEP with traditional single-objective defect-prediction models, without performing
+data standardization. The comparison was based on precision and recallclass.
+Table X compares the performances of MODEP with those of the cross-project single-objective
+predictors (both logistic and decision tree predictors) when optimizing inspection cost and number
+of defect-prone classes identified. Specifically, the table reports the recallclass and the precision of
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+454
+G. CANFORA ET AL.
+Table IX. Average execution time in seconds.
+MO logistic (s)
+SO logistic (s)
+MO decision tree (s)
+SO decision tree (s)
+SO, single-objective cross-project; MO, multiobjective cross-project.
+Table X. Multiobjective defect predictor versus single-objective predictors when optimizing inspection cost
+and number of defect-prone classes identified. Data are not normalized. Single-objective predictors are also
+applied using a within-project training strategy.
+Logistic
+Dtree
+Logistic
+Dtree
+SO-C
+Diff SO-C
+Diff SO-W
+Diff SO-W
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Lucene
+Poi
+Prop
+Tomcat
+Xalan
+Metric
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+Cost
+Recallclass
+Precision
+SO-C, single-objective cross-project; SO-W, single-objective within-project; MO, multiobjective; Diff, difference.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+0.31
+0.54
+0.56
+0.43
+0.45
+0.50
+0.61
+0.45
+0.39
+0.39
+141
+1.00
+0.22
+110
+1.00
+0.19
+83
+1.00
+0.11
+83
+1.00
+0.24
+38
+1.00
+0.92
+61
+1.00
+0.60
+92
+1.00
+0.64
+94
+1.00
+0.10
+144
+1.00
+0.09
+197
+1.00
+0.98
+155.30
+130.47
+141.39
+120.95
+134.48
+171.39
+157.81
+207.95
+203.75
+294.17
+0.63
+1.04
+2.23
+2.21
+2.07
+1.63
+1.35
+1.39
+1.38
+1.31
+136.27
+167.14
+74.55
+163.66
+176.70
+164.64
+162.20
+155.88
+123.80
+148.83
+38
+0.23
+0.15
+41
+0.69
+0.17
+13
+0.15
+0.06
+15
+0.20
+0.15
+13
+0.70
+0.92
+19
+0.58
+0.54
+26
+0.52
+0.57
+32
+0.41
+0.08
+37
+0.18
+0.05
+62
+0.68
+0.98
+MO
+38
+0.41
+0.14
+41
+0.72
+0.17
+13
+0.25
+0.04
+15
+0.37
+0.16
+13
+0.75
+0.93
+19
+0.70
+0.57
+26
+0.61
+0.57
+32
+0.49
+0.07
+37
+0.59
+0.07
+62
+0.75
+0.99
+C0.18
+0.01
+C0.04
+-
+C0.10
+0.02
+C0.17
+C0.01
+C0.05
+C0.01
+C0.12
+C0.03
+C0.09
+-
+C0.08
+0.01
+C0.41
+C0.02
+C0.07
+C0.01
+MO
+141
+1.00
+0.22
+110
+1.00
+0.19
+81
+1.00
+0.12
+82
+1.00
+0.25
+35
+1.00
+0.93
+61
+1.00
+0.60
+90
+1.00
+0.64
+97
+1.00
+0.10
+129
+1.00
+0.09
+194
+1.00
+0.99
+2
+C0.01
+1
+C0.01
+3
+C0.01
+-
+-
+-
+-
+2
+-
+3
+-
+15
+-
+3
+C0.01
+101
+0.39
+0.68
+13
+0.09
+0.54
+28
+0.25
+0.50
+66
+0.33
+0.66
+38
+0.99
+0.92
+86
+0.77
+0.74
+120
+0.90
+0.79
+74
+0.70
+0.77
+64
+0.18
+0.58
+197
+1.00
+0.99
+MO
+101
+0.71
+18
+13
+0.46
+0.17
+28
+0.63
+0.08
+66
+1.00
+0.25
+35
+1.00
+0.93
+61
+1.00
+0.60
+92
+1.00
+0.64
+74
+0.80
+0.09
+64
+0.70
+0.08
+194
+1.00
+0.99
+C0.32
+0.50
+C0.35
+0.27
+C0.38
+0.42
+C0.67
+0.41
+3
+C0.01
+C0.01
+25
+C0.23
+0.14
+28
+C0.10
+0.15
+C0.10
+0.69
+C0.52
+0.50
+3
+-
+104
+0.43
+0.35
+33
+0.25
+0.33
+38
+0.35
+0.37
+85
+1.00
+0.50
+35
+0.92
+0.93
+81
+0.73
+0.74
+104
+0.83
+0.81
+104
+0.82
+0.83
+54
+0.18
+0.59
+197
+0.99
+0.99
+MO
+104
+0.78
+0.19
+0.64
+0.17
+38
+0.63
+0.09
+85
+1.00
+0.24
+35
+0.93
+0.93
+61
+1.00
+0.60
+104
+1.00
+0.64
+97
+1.00
+0.10
+54
+0.68
+0.08
+194
+1.00
+0.99
+Diff
+C0.35
+0.16
+C0.39
+0.16
+C0.28
+0.28
+-
+0.26
+C0.01
+20
+C0.27
+0.14
+14
+C0.17
+0.17
+7
+C0.18
+0.73
+C0.50
+0.51
+3
+C0.01
+DEFECT
+PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+455
+Table XI. Multiobjective defect predictors versus single-objective predictors when optimizing inspection
+cost and number of defects identified. Data are not normalized. Single-objective predictors are also applied
+using a within-project training strategy.
+Logistic
+Dtree
+Logistic
+Dtree
+Metric
+SO-C
+Diff SO-C
+Diff SO-W
+Diff SO-W
+38
+0.14
+0.15
+41
+0.44
+0.17
+13
+0.11
+0.06
+15
+0.09
+0.15
+13
+0.63
+0.92
+19
+0.41
+0.54
+26
+0.40
+0.58
+32
+0.42
+0.08
+37
+0.13
+0.09
+62
+0.62
+0.98
+MO
+38
+0.47
+0.14
+41
+0.55
+0.17
+13
+0.21
+0.04
+15
+0.48
+0.17
+13
+0.68
+0.93
+19
+0.70
+0.57
+26
+0.56
+0.56
+32
+0.47
+0.07
+37
+0.64
+0.07
+62
+0.68
+0.99
+C0.33
+0.01
+C0.11
+-
+C10
+0.02
+C0.39
+C0.02
+C0.05
+C0.01
+C0.29
+C0.03
+C0.16
+0.02
+C0.05
+0.01
+C0.51
+0.02
+C0.07
+C0.01
+141
+1.00
+0.22
+110
+1.00
+0.19
+83
+1.00
+0.11
+82
+1.00
+0.24
+38
+1.00
+0.92
+61
+1.00
+0.60
+92
+1.00
+0.64
+97
+1.00
+0.10
+144
+1.00
+0.05
+197
+1.00
+0.99
+MO
+141
+1.00
+0.22
+110
+1.00
+0.19
+77
+1.00
+0.12
+82
+1.00
+0.25
+35
+1.00
+0.93
+60
+1.00
+0.60
+90
+1.00
+0.64
+93
+1.00
+0.10
+128
+1.00
+0.09
+195
+1.00
+0.99
+-
+-
+-
+1
+-
+2
+-
+4
+-
+2
+-
+6
+C0.01
+-
+C0.01
+3
+C0.01
+16
+C0.04
+System
+Ant
+Camel
+Ivy
+jEdit
+Log4j
+Poi
+Prop
+Xalan
+Lucene Cost
+Tomcat Cost
+Cost
+recalldefects
+precision
+Cost
+recalldefects
+precision
+Cost
+recalldefects
+precision
+Cost
+recalldefects
+precision
+Cost
+recalldefects
+precision
+recalldefects
+precision
+Cost
+recalldefects
+precision
+Cost
+recalldefects
+precision
+recalldefects
+precision
+Cost
+recalldefects
+precision
+SO-C, single-objective cross-project; SO-W, single-objective within-project; MO, multiobjective; Diff, difference.
+the different models for the same level of inspection cost. Results indicate that MODEP (based on
+the logistic regression) always achieves better recallclass levels. In particular, for five systems (Ant,
+Ivy, jEdit, Lucene and Tomcat) the recallclass is greater (of at least 10%) than the recallclass of the
+single-objective predictors. Moreover, the precision generally increases, even if the improvement
+is negligible (less than 4% in all the cases). As for the decision tree, we observe an interesting
+behaviour of the prediction models. The traditional single-objective cross-project approach always
+(i.e. for all the systems) produces a constant classifier which classifies all the classes as defect-prone
+ones, hence, reaching the maximum recallclass and also the maximum (worst) inspection cost. This
+is due to the data heterogeneity and such a result emphasizes the need of data standardization when
+performing cross-project defect prediction. Instead, the decision tree MODEP does not produce
+constant classifier and then it reaches the same maximum recallclass but with a lower inspection cost
+(cost decrease raging between 2% and 21%).
+We also compare MODEP with the single-objective predictors trained using a within-project
+strategy without data standardization (Table V). Not surprisingly, in this case the single-objective
+predictors achieve a better precision, for eight out of 10 projects. These results are consistent with
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+101
+0.57
+0.68
+13
+0.15
+0.54
+28
+0.29
+0.71
+66
+0.33
+0.66
+38
+0.98
+0.92
+86
+0.84
+0.74
+120
+0.92
+0.77
+112
+0.91
+0.77
+64
+0.28
+0.58
+197
+1.00
+0.99
+MO
+101
+0.75
+0.20
+13
+0.35
+0.17
+28
+0.39
+0.07
+66
+0.90
+0.23
+35
+1.00
+0.93
+60
+1.00
+0.60
+90
+1.00
+0.64
+93
+1.00
+0.10
+64
+0.75
+0.08
+194
+1.00
+0.99
+C0.18
+0.48
+C0.20
+0.37
+C0.10
+0.64
+C0.57
+0.43
+3
+C0.02
+C0.01
+26
+C0.16
+0.14
+30
+C0.08
+0.13
+C0.09
+0.67
+C0.47
+0.50
+3
+-
+104
+0.51
+0.35
+33
+0.30
+0.33
+38
+0.39
+0.37
+85
+0.49
+0.50
+35
+0.92
+0.93
+81
+0.24
+0.74
+104
+0.58
+0.81
+104
+0.84
+0.83
+54
+0.11
+0.59
+197
+0.99
+0.99
+MO
+104
+0.79
+0.20
+33
+0.48
+0.17
+38
+0.55
+0.08
+81
+1.00
+0.25
+35
+1.00
+0.93
+60
+1.00
+0.60
+90
+1.00
+0.64
+93
+1.00
+0.10
+54
+0.72
+0.07
+194
+1.00
+0.99
+Diff
+C0.28
+0.15
+C0.18
+0.16
+C0.14
+0.29
+4
+C0.51
+0.25
+C0.08
+21
+C0.86
+0.14
+14
+C0.42
+0.17
+11
+C0.16
+0.73
+C0.61
+0.52
+3
+-
+456
+G. CANFORA ET AL.
+those achieved with data standardization and of a previous study [12]. However, although the precision
+decreases, MODEP is able to generally achieve higher recallclass values using both the machine
+learning algorithms. This means that-for the same or lower cost (KLOC)-the software engineer
+has to analyse more false positives, but she is also able to identify more defect-prone classes. Indeed,
+the improvements in terms of recallclass range between C1% and C67%, with the only exception of
+jEdit when using the decision tree and jEdit when using the logistic regression.
+Table XI reports the results of the comparison of MODEP with the other predictors when optimizing
+inspection cost and number of defects identified (problem formulation in Equation 3).
+Considering the logistic regression as machine learning technique used to build the prediction models,
+the results are consistent with those achieved with data standardization: MODEP is able to
+provide better performance than the corresponding single-objective predictors in terms of number
+of predicted defects-that is, contained in the classes identified as defect-prone-at the same cost.
+When using the decision tree, we observe the same behaviour observed with the first two-objective
+formulation, that is, the model works as a constant classifier. Once again, this behaviour is due to
+the data heterogeneity problem.
+Also for the second two-objective formulation of the defect-prediction problem (Equation 4),
+we compare MODEP with single-objective defect predictors trained using a within-project strategy
+(Table XI). Results indicate that MODEP is able to better prioritize classes with more defects than
+the single-objective models, similarly to the results obtained using the data standardization process.
+Indeed, for both logistic regression and decision tree in nine out of 10 projects the difference in
+favour of MODEP ranges between C1% and C61% in terms of recalldefects for the same amount of
+source code to analyse (KLOC). Also for this two-objective formulation, there is a decrement of the
+precision for all the projects and for both logistic regression and decision tree.
+6. THREATS TO VALIDITY
+This section discusses the threats that could affect the validity of MODEP evaluation and of the
+reported study. Threats to construct validity concern the relation between theory and experimentation.
+Some of the measures we used to assess the models (precision and recall) are widely adopted
+in the context of defect prediction. We computed recall in two different ways, that is, (i) as percentage
+of defect-prone classes identified as such by the approach and (ii) as percentage of defects the
+approach is able to highlight. In addition, we use the LOC to be analysed as a proxy indicator of the
+analysis/testing cost, as also performed by Rahman et al. [15]. We are aware that such a measure
+is not necessarily representative of the testing cost especially when black-box testing techniques
+or object-oriented (e.g. state-based) testing techniques are used. Also, another threat to construct
+validity can be related to the used metrics and defect data sets. Although we have performed our
+study on widely used data sets from the PROMISE repository, we cannot exclude that they can be
+subject to imprecision and incompleteness. Threats to internal validity concern factors that could
+influence our results. We mitigated the influence of the GA randomness when building the model by
+repeating the process 30 times and reporting the median values achieved. Also, it might be possible
+that the performances of the proposed approach and of the approaches being compared depend on
+the particular choice of the machine learning technique. In this paper, we evaluated the proposed
+approach using two machine learning techniques-logistic regression and decision trees-that have
+been extensively used in previous research on defect prediction (e.g. Basili et al. [1] and Gyimothy
+et al. [2] for the logistic, Zimmermann et al. [12] for the decision tree). We cannot exclude that
+specific variants of such techniques would produce different results, although the aim of this paper
+is to show the advantages of the proposed multiobjective approach, rather than comparing different
+machine learning techniques. Threats to conclusion validity concern the relationship between the
+treatment and the outcome. In addition to showing values of cost, precision and recall, we have also
+statistically compared the various model using the Wilcoxon, nonparametric test, indicating whether
+differences in terms of cost and precision are statistically significant. Threats to external validity
+concern the generalization of our findings. Although we considered data from 10 projects, the study
+deserves to be replicated on further projects. Also, it is worthwhile to use the same approach with
+different kinds of predictor metrics, for example, process metrics or other product metrics.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+457
+7. CONCLUSION AND FUTURE WORK
+In this paper, we proposed a novel formulation of the defect-prediction problem. Specifically, we
+proposed to shift from the single-objective defect-prediction model-which recommends a set or
+a ranked list of likely defect-prone artefacts and tries to achieve an implicit compromise between
+cost and effectiveness-towards multiobjective defect-prediction models. The proposed approach,
+named MODEP, produces a Pareto front of predictors (in our work a logistic regression or a decision
+tree, but the approach can be applied to other machine learning techniques) that allow to achieve
+different trade-off between the cost of code inspection-measured in this paper in terms of KLOC of
+the source code artefacts (class)-and the amount of defect-prone classes or number of defects that
+the model can predict (i.e. recall). In this way, for a given budget-that is, LOC that can be reviewed
+or tested with the available time/resources-the software engineer can choose a predictor that (a)
+maximizes the number of defect-prone classes to be tested (which might be useful if one wants to
+ensure that an adequate proportion of defect-prone classes has been tested) or (b) maximizes the
+number of defects that can be discovered by the analysis/testing.
+MODEP has been applied on 10 datasets from the PROMISE repository. Our results indicated
+the following.
+1. While cross-project prediction is worse than within-project prediction in terms of precision
+and recall (as also found by Zimmermann et al. [12]), MODEP allows to achieve
+a better cost-effectiveness than single-objective predictors trained with both a within- or
+cross-project strategy.
+2. MODEP outperforms a state-of-the-art approach for cross-project defect-prediction [13],
+based on local prediction among classes having similar characteristics. Specifically, MODEP
+achieves, at the same level of cost, a significantly higher recall (based on both the number of
+defect-prone classes and the number of defects).
+3. Instead of producing a single predictor MODEP, allows the software engineer to choose the
+configuration that better fits her needs, in terms of recall and of amount of code she can inspect.
+In other words, the multiobjective model is able to tell the software engineer how much code
+one needs to analyse to achieve a given level of recall. Also, the software engineer can easily
+inspect the different models aiming at understanding what predictor variables lead towards
+a higher cost and/or a higher recall. Although in principle (and in absence of any prediction
+model) a software engineer could simply test larger or smaller classes first, hence optimizing
+the likelihood of finding bugs or the testing effort, our results indicate that, with the exception
+of two projects where over 90% of the classes are fault-prone, MODEP achieves significantly
+better results than when using such trivial heuristics.
+In summary, MODEP seems to be particularly suited for cross-project defect prediction, although
+the advantages of such a multiobjective approach can also be exploited in within-project predictions.
+Future work aims at replicating the experiment on other datasets (considering software projects
+written in other programming languages) and considering different kinds of cost-effectiveness models.
+As said, we considered LOC as a proxy for code inspection cost, but certainly it is not a perfect
+indicator of the cost of analysis and testing. It would therefore be worthwhile to also consider alternative
+cost models, for example, those better reflecting the cost of some testing strategies, such as
+code cyclomatic complexity for white box testing, or input characteristics for black box testing. Last,
+but not least, we plan to investigate whether the proposed approach could be used in combination
+with-rather than as an alternative to-the local prediction approach [13].
+REFERENCES
+1. Basili VR, Briand LC, Melo WL. A validation of object-oriented design metrics as quality indicators. IEEE
+Transactions on Software Engineering 1996; 22(10):751-761.
+2. Gyimóthy T, Ferenc R, Siket I. Empirical validation of object-oriented metrics on open source software for fault
+prediction. IEEE Transactions on Software Engineering 2005; 31(10):897-910.
+3. Chidamber SR, Kemerer CF. A metrics suite for object oriented design. IEEE Transactions on Software Engineering
+1994; 20(6):476-493.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+458
+G. CANFORA ET AL.
+4. Moser R, Pedrycz W, Succi G. A comparative analysis of the efficiency of change metrics and static code attributes
+for defect prediction. 30th International Conference on Software Engineering (ICSE 2008), ACM: Leipzig, Germany,
+2008; 181-190.
+5. Ostrand TJ, Weyuker EJ, Bell RM. Predicting the location and number of faults in large software systems. IEEE
+Transactions on Software Engineering 2005; 31(4):340-355.
+6. Kim S, Zimmermann T, Whitehead JE, Zeller A. Predicting faults from cached history. 29th International Conference
+on Software Engineering (ICSE 2007), IEEE Computer Society, Minneapolis, MN, USA, 2007; 489-498.
+7. Kim S, Whitehead JE, Zhang Y. Classifying software changes: Clean or buggy? IEEE Transactions on Software
+Engineering 2008; 34(2):181-196.
+8. Sliwerski J, Zimmermann T, Zeller A. When do changes induce fixes? Proceedings of the 2005 International
+Workshop on Mining Software Repositories, MSR 2005, ACM: Saint Louis, Missouri, USA, 2005; 1-5.
+9. Kim S, Zimmermann T, Pan K, Whitehead JE. Automatic identification of bug-introducing changes. 21st IEEE/ACM
+International Conference on Automated Software Engineering (ASE 2006), IEEE Computer Society, Tokyo, Japan,
+2006; 81-90.
+10. Nagappan N, Ball T, Zeller A. Mining metrics to predict component failures. 28th International Conference on
+Software Engineering (ICSE 2006), ACM: Shanghai, China, 2006; 452-461.
+11. Turhan B, Menzies T, Bener AB, Di Stefano JS. On the relative value of cross-company and within-company data
+for defect prediction. Empirical Software Engineering 2009; 14(5):540-578.
+12. Zimmermann T, Nagappan N, Gall H, Giger E, Murphy B. Cross-project defect prediction: A large scale experiment
+on data vs. domain vs. process. Proceedings of the 7th Joint Meeting of the European Software Engineering Conference
+and the ACM SIGSOFT International Symposium on Foundations of Software Engineering, ACM: Amsterdam,
+The Netherlands, 2009; 91-100.
+13. Menzies T, Butcher A, Marcus A, Zimmermann T, Cok DR. Local vs. global models for effort estimation and
+defect prediction. 26th IEEE/ACM International Conference on Automated Software Engineering (ASE 2011), IEEE:
+Washington, DC, USA, 2011; 343-351.
+14. Bettenburg N, Nagappan M, Hassan AE. Think locally, act globally: Improving defect and effort prediction models.
+9th IEEE Working Conference o Mining Software Repositories, MSR 2012, IEEE: Zurich, Switzerland, 2012; 60-69.
+15. Rahman F, Posnett D, Devanbu P. Recalling the “imprecision” of cross-project defect prediction. Proceedings of the
+ACM-Sigsoft 20th International Symposium on the Foundations of Software Engineering (FSE-20), ACM: Research
+Triangle Park, NC, USA, 2012; 61-72.
+16. Harman M. The relationship between search based software engineering and predictive modeling. Proceedings of
+the 6th International Conference on Predictive Models in Software Engineering, PROMISE 2010, ACM: Timisoara,
+Romania, 2010; 1-13.
+17. Deb K, Pratap A, Agarwal S, Meyarivan T. A fast elitist multi-objective genetic algorithm: NSGA-II. IEEE
+Transactions on Evolutionary Computation 2000; 6:182-197.
+18. D'Ambros M, Lanza M, Robbes R. Evaluating defect prediction approaches: A benchmark and an extensive
+comparison. Empirical Software Engineering 2012; 17(4-5):531-577.
+19. Briand LC, Melo WL, Würst J. Assessing the applicability of fault-proneness models across object-oriented software
+projects. IEEE Transactions on Software Engineering 2002; 28:706-720.
+20. Camargo Cruz AE, Ochimizu K. Towards logistic regression models for predicting fault-prone code across software
+projects. Proceedings of the Third International Symposium on Empirical Software Engineering and Measurement
+(ESEM 2009): Lake Buena Vista, Florida, USA, 2009; 460-463.
+21. Nam J, Pan SJ, Kim S. Transfer defect learning. Proceedings of the 2013 International Conference on Software
+Engineering, ICSE '13, IEEE Press: Piscataway, NJ, USA, 2013; 382-391.
+22. Turhan B, Misirli AT, Bener AB. Empirical evaluation of mixed-project defect prediction models. Proceedings of
+the 37th Euromicro Conference on Software Engineering and Advanced Applications, IEEE: Oulu, Finland, 2011;
+396-403.
+23. Arisholm E, Briand LC, Johannessen EB. A systematic and comprehensive investigation of methods to build and
+evaluate fault prediction models. Journal of Systems and Software 2010; 83(1):2-17.
+24. Arisholm E, Briand LC. Predicting fault-prone components in a Java legacy system. Proceedings of the 2006
+ACM/IEEE International Symposium on Empirical Software Engineering, ISESE '06, ACM: Rio de Janeiro, Brazil,
+2006; 8-17.
+25. Canfora G, De Lucia A, Di Penta M, Oliveto R, Panichella A, Panichella S. Multi-objective cross-project defect
+prediction. Proceedings of the International Conference on Software Testing, Verification and Validation, ICST 2013,
+IEEE: Luxemburg, 2013; 252-261.
+26. Devore JL, Farnum N. Applied Statistics for Engineers and Scientists. Cengage Learning: Duxbury, 1999.
+27. Coello CA, Lamont GB, Veldhuizen DAV. Evolutionary Algorithms for Solving Multi-Objective Problems (Genetic
+and Evolutionary Computation). Springer-Verlag New York, Inc.: Secaucus, NJ, USA, 2006.
+28. Marsland S. Machine Learning: An Algorithmic Perspective, 1st edn. Chapman & Hall/CRC: Boca Raton, Florida,
+USA, 2009.
+29. Knab P, Pinzger M, Bernstein A. Predicting defect densities in source code files with decision tree learners. Proceedings
+of the 2006 International Workshop on Mining Software Repositories, MSR '06, ACM: Shanghai, China, 2006;
+119-125.
+30. Rokach L, Maimon O. Decision trees. The Data Mining and Knowledge Discovery Handbook 2005; 6:165-192.
+31. Quinlan JR. Induction of decision trees. Machine Learning 1986; 1(1):81-106.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr
+DEFECT PREDICTION AS A MULTIOBJECTIVE OPTIMIZATION PROBLEM
+459
+32. Basili V, Caldiera G, Rombach DH. The Goal Question Metric Paradigm, Encyclopedia of Software Engineering.
+John Wiley and Sons: New York, USA, 1994; 528-532.
+33. D'Ambros M, Lanza M, Robbes R. Evaluating defect prediction approaches: A benchmark and an extensive
+comparison. Empirical Software Engineering 2012; 17(4-5):531-577.
+34. MATLAB. Version 7.10.0 (r2010b). The MathWorks Inc.: Natick, Massachusetts, 2010.
+35. Stone M. Cross-validatory choice and assesment of statistical predictions (with discussion). Journal of the Royal
+Statistical Society B 1974; 36:111-147.
+36. Sheskin DJ. Handbook of Parametric and Nonparametric Statistical Procedures (Fourth Edition). Chapman & Hall:
+Boca Raton, Florida, USA, 2007.
+37. Yang T, Liu J, Mcmillan L, Wang W. A fast approximation to multidimensional scaling, by. Proceedings of the
+ECCV Workshop on Computation Intensive Methods for Computer Vision (CIMCV), New York, USA, 2006; 1-8.
+38. Kogan J. Introduction to Clustering Large and High-Dimensional Data. Cambridge University Press: New York, NY,
+USA, 2007.
+39. Arcuri A, Briand LC. A practical guide for using statistical tests to assess randomized algorithms in software engineering.
+Proceedings of the 33rd International Conference on Software Engineering, ICSE 2011, ACM: Waikiki,
+Honolulu , HI, USA, 2011; 1-10.
+Copyright © 2015 John Wiley & Sons, Ltd.
+Softw. Test. Verif. Reliab. 2015; 25:426-459
+DOI: 10.1002/stvr

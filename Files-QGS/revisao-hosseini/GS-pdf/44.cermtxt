@@ -1,0 +1,4625 @@
+Software Qual J (2017) 25:235-272
+DOI 10.1007/s11219-015-9287-1
+A transfer cost-sensitive boosting approach
+for cross-project defect prediction
+Duksan Ryu1 • Jong-In Jang1 • Jongmoon Baik1
+Published online: 1 September 2015
+Springer Science+Business Media New York 2015
+Abstract Software defect prediction has been regarded as one of the crucial tasks to
+improve software quality by effectively allocating valuable resources to fault-prone
+modules. It is necessary to have a sufficient set of historical data for building a predictor.
+Without a set of sufficient historical data within a company, cross-project defect prediction
+(CPDP) can be employed where data from other companies are used to build predictors. In
+such cases, a transfer learning technique, which extracts common knowledge from source
+projects and transfers it to a target project, can be used to enhance the prediction performance.
+There exists the class imbalance problem, which causes difficulties for the learner
+to predict defects. The main impacts of imbalanced data under cross-project settings have
+not been investigated in depth. We propose a transfer cost-sensitive boosting method that
+considers both knowledge transfer and class imbalance for CPDP when given a small
+amount of labeled target data. The proposed approach performs boosting that assigns
+weights to the training instances with consideration of both distributional characteristics
+and the class imbalance. Through comparative experiments with the transfer learning and
+the class imbalance learning techniques, we show that the proposed model provides significantly
+higher defect detection accuracy while retaining better overall performance. As a
+result, a combination of transfer learning and class imbalance learning is highly effective
+for improving the prediction performance under cross-project settings. The proposed
+approach will help to design an effective prediction model for CPDP. The improved defect
+prediction performance could help to direct software quality assurance activities and
+reduce costs. Consequently, the quality of software can be managed effectively.
+& Duksan Ryu
+dsryu@kaist.ac.kr
+Jong-In Jang
+forestar0719@kaist.ac.kr
+Jongmoon Baik
+jbaik@kaist.ac.kr
+1
+School of Computing, Korea Advanced Institute of Science and Technology, 291 Daehak-ro (373-1
+Guseong-dong), Yuseong-gu, Daejeon 305-701, Republic of Korea
+123
+236
+Software Qual J (2017) 25:235-272
+Keywords
+prediction
+Boosting Class imbalance
+Software defect prediction
+Cost-sensitive learning
+Transfer learning
+Cross-project defect
+1 Introduction
+Software defects may inflict system failures and result in significant financial and human
+losses in the end. Such defects can be detected and removed by different levels of testing
+before the release of software. However, software testing activities are labor intensive and
+time consuming. It is very crucial to effectively allocate valuable resources for making a
+project successful. In this context, accurate software defect prediction is an important task
+to improve software quality by allocating valuable resources to fault-prone modules. A
+sufficient set of historical data is required when building a defect prediction model to attain
+a high prediction performance. Without a sufficient set of data within a company, crossproject
+defect prediction (CPDP), where data from other companies are used to build
+predictors, can be employed. Due to the different distributions between the source project
+and target project data, defect predictors learned from cross-project (CP) data show much
+lower prediction performance than the ones learned from within-project (WP) data (He
+et al. 2011; Ma et al. 2012; Nam et al. 2013; Ryu et al. 2014; Zimmermann et al. 2009).
+Thus, until a sufficient set of WP data is collected, how to use both sufficient CP data and
+insufficient WP data for building a predictor could be a key issue. In such cases, a transfer
+learning technique, which extracts common knowledge from the source project and
+transfers it to the target project, can be used to enhance the prediction performance.
+In general, there is a considerably smaller number of defective examples than nondefective
+examples on software defect data sets. This class imbalance problem causes
+difficulties for the learner to predict defects. To overcome the class imbalance problem,
+researchers have proposed different approaches, such as cost-sensitive learning that treats
+the different misclassifications differently, data sampling that includes over-/under-sampling,
+and ensemble methods, including boosting and bagging techniques.
+None of the existing CPDP approaches aggressively utilizes a small amount of WP data
+with considering the impact of imbalanced data. In this paper, we investigate how the costsensitive
+learning and a small amount of WP data can be utilized for CPDP. To this end,
+we explore the following research questions:
+•
+•
+RQ1: Is the combination of the transfer learning and the cost-sensitive learning more
+effective than each of them for CPDP?
+RQ2: Is a small amount of WP data not sufficient to build a WPDP model effective for
+CPDP?
+The main objective of this research is to develop an effective prediction model for
+CPDP given a small set of labeled target data with consideration of the class imbalance.
+We propose a transfer cost-sensitive boosting (TCSBoost) method to overcome the
+problems mentioned above. The proposed approach performs boosting that assigns the
+correct/incorrect classification costs to the data weight vectors differently, based on the
+distributional characteristics and the class imbalance.
+To evaluate the prediction performances, TCSBoost approach is compared with the
+transfer learning and class imbalance learning techniques. The performance results are
+analyzed based on the research of D'Ambros et al. (2011 and Menzies et al. (2010),
+123
+Software Qual J (2017) 25:235-272
+237
+assessing the variability of the predictors across multiple runs. The performance between
+the two distributions is evaluated by using Wilcoxon's rank-sum test (Wilcoxon 1945) at a
+1 % significance level. A-statistics effect size test (Vargha and Delaney 2000) is also
+performed to evaluate the magnitude of the improvement. The experimental results show
+that TCSBoost provides significantly higher defect prediction power than those of the
+models we compared it with.
+As a result, a combination of transfer learning and class imbalance learning is highly
+effective for improving the prediction performance under CP settings when given a small
+set of labeled target data. TCSBoost will help to design an effective prediction model for
+CPDP. The improved defect prediction performance could help to direct software quality
+assurance activities and reduce development costs. Thus, the quality of software can be
+managed effectively.
+The remainder of this paper is organized as follows. In Sect. 2, we describe related
+work. In Sect. 3, our proposed classification model is discussed. The experimental setup is
+described in Sect. 4. The results of the experiments are described in Sect. 5. We explain
+the threats to validity of our approach in Sect. 6. In the last section, we conclude the paper
+and discuss future work.
+2 Related work
+2.1 Software defect prediction
+Software defect prediction (SDP) is a mechanism to predict defective software modules.
+Resource required for testing can be optimized by the virtue of SDP. To find more effective
+SDP models, many approaches have been proposed (Arisholm et al. 2010; D'Ambros et al.
+2011; Dejaeger 2013; Elish and Elish 2008; Hall et al. 2012; Singh et al. 2009). Most
+approaches focused on within-project defect prediction (WPDP) models that are only
+applicable in cases having a sufficient set of historical data. Recently, more attention has
+been shown to the question of if CPDP is applicable to a project when a development
+organization has no or insufficient local data.
+Zimmermann et al. (2009) indicated that CPDP is important for projects with little or
+insufficient data to construct predictors. They performed 622 CPDPs, and only 3.4 % were
+successful. The characteristics of the data and the process are crucial elements to lead the
+success of CPDP. CPDP has been considered a challenging issue that more researchers
+should investigate.
+Turhan et al. (2009) proposed a CPDP mechanism using nearest-neighbor filtering.
+They pointed out that a defect classifier learned from WP data was superior to those
+learned from CP data. Based on the findings, they recommended a two-phase approach. In
+phase one, companies are recommended to use CPDP and start gathering WP data. Once
+enough WP data are gathered, companies should stop using CP data and employ predictors
+learned from WP data as phase two. They noted that WP data are very important to
+improving prediction performance.
+Turhan et al. (2013) carried out the evaluation of the effects of mixed projects. They
+simulated two cases of when there are sufficient historical data of a project and when the
+WP data are insufficient. They examined whether mixing CP data with the WP data
+improves the prediction performance of both cases. The evaluation was done with 73
+versions of 41 projects and Na¨ıve Bayes classifier. The authors concluded that the mixed
+123
+238
+Software Qual J (2017) 25:235-272
+project data of insufficient WP data and CP data significantly improved the performance of
+the defect predictor.
+In our research, we investigate whether WP data are useful for CPDP although they are
+insufficient for WPDP. Unlike the research of Turhan et al. (2013), in which only a Na¨ıve
+Bayes classifier with simple nearest-neighbor filter was used, we propose a novel CPDP
+model that combines transfer learning and cost-sensitive learning techniques. We analyzed
+the change in prediction performance of six different models when 5, 10, and 25 % of total
+WP data are added.
+He et al. (2011) proposed a CPDP method based on the instance selection. By carrying
+out three experiments using 34 data sets, they asserted that the distributional attributes of
+data sets, e.g., the median, mean, and variance, are closely related to the prediction results.
+Ma et al. (2012) presented a Transfer Na¨ıve Bayes (TNB). This method transferred CP
+information to the weights of the training data, which are used to build a prediction model.
+Nam et al. (2013) applied transfer component analysis (TCA) for CPDP to improve
+prediction performance. They showed that suitable normalization options for TCA can
+enhance the performance for CPDP.
+Jureczko and Madeyski (2010) investigated the clustering of software projects from the
+perspective of defect prediction. They performed clustering on 92 versions of 38 proprietary,
+open-source, and academic software projects based on the characteristics they have.
+The authors analyzed the result, and the existence of two out of six clusters was statistically
+proven. This research gives insight into reusing defect predictors among the projects in a
+same cluster.
+Ryu et al. (2014) proposed a value-cognitive boosting with a support vector machine
+(VCB-SVM). The authors pointed out the class imbalance problem in the software defect
+prediction and carried out an approach that can deal with the problem in the context of
+CPDP. VCB-SVM derives the similarity weights and asymmetric misclassification cost
+from the distribution characteristics of the training and target data set, and utilizes them to
+aid the effective resampling mechanism for CPDP.
+Chen et al. (2015) proposed a double transfer boosting (DTB). DTB utilizes a mixed
+data set of target and source project. The algorithm is mainly constructed upon two levels
+of data transfer. The first part is to change the entire distribution of CP data by reweighting
+the instances based on a data gravitation method. The remaining part conducts the transfer
+boosting learning to refine the CP data by eliminating the negative data. The authors
+carried out the evaluation of the proposed approach with 15 selected publicly available data
+sets, concluding that the DTB algorithm makes an effective defect prediction model in the
+CPDP setting.
+Previous researches (He et al. 2011; Ma et al. 2012; Nam et al. 2013; Ryu et al. 2014;
+Zimmermann et al. 2009) emphasized the identification of the distributional characteristics
+of data sets for the success of CPDP. The distributional characteristics, e.g., mean, median,
+minimum, and maximum, are typically used to compute the similarity between a source
+project and a target project. Likewise, in this study, the range between the minimum and
+the maximum values of the attribute, which is one of the distributional characteristics, is
+used to compute the similarity weight.
+CPDP is a technique that is useful in the case of no or insufficient WP data. If sufficient
+WP data are accumulated, WPDP can be employed.
+Until now, there are no existing CPDP methods considering class imbalance that use
+WP data aggressively. Although WP data are insufficient for WPDP, it may improve the
+prediction performance for CPDP.
+123
+Software Qual J (2017) 25:235-272
+2.2 Transfer learning
+239
+Machine learning approaches assume that the feature distribution between training data
+and test data is the same. If such assumption fails, the performance of prediction models
+will be poor. To overcome this problem, transfer learning techniques transfer knowledge
+extracted from a source project to construct models to the target project.
+Some approaches have been presented to address the problem setting, given sufficient
+labeled source data and insufficient labeled target data.
+Dai et al. (2007) proposed TrAdaBoost, which applies boosting to knowledge transfer. The
+target and source data are considered in isolation. AdaBoost (Freund and Schapire 1997) is
+used to increase the weight of misclassified target examples for the target data. The weighted
+majority algorithm is used to decrease the weight of misclassified source examples.
+According to Shi et al. (2008), TrAdaBoost shows poor performance if source data are
+irrelevant. To address this issue, Yao and Doretto (2010) proposed the MultiSrcTrAdaBoost
+algorithm, which transfers knowledge from multiple sources to find one source
+highly related to the target.
+Eaton and DesJardins (2011) presented a task-based boosting approach named TransferBoost.
+The boosting mechanism in this method is applied at both the instance level and the
+task level. If source tasks show positive transferability to the target task, they get higher weight.
+The weights of individual example within each source task are fine-tuned by AdaBoost.
+Like these studies, methods that improve the prediction performance using WP data
+could be introduced into CPDP.
+2.3 Class imbalance learning
+The class imbalance issue indicates that the number of non-defective examples is much
+more than that of defective examples (Tan et al. 2005). According to Hall et al. (2012) who
+performed a systematic literature review on SDP, class imbalance may be related to poor
+performance of classification models. They pointed out that class imbalance should be
+addressed in more SDP studies.
+The correct classification of the minority example is of greater value even though its
+frequency is low. If defective examples are not identified, testing efforts may not be
+directed and thus software quality could be significantly low. The goal of the class
+imbalance learning is to obtain the predictor that can produce high accuracy for the
+minority class without jeopardizing the accuracy of the majority class.
+Various methods at data and algorithm levels have been proposed to identify the
+examples of the minority class effectively. Sampling techniques are widely used as a datalevel
+method. Cost-sensitive learning methods assigning distinct costs to the training
+examples are proposed as an algorithm-level method.
+Fan et al. (1999) proposed an AdaCost. AdaCost is a misclassification cost-sensitive
+boosting method. The algorithm tackles the class imbalance problem by assigning the misclassification
+cost of instances from majority class and minority class differently. The method
+that the AdaCost approach took is to conservatively decrease the weights of costly correct
+classifications and aggressively increase the weights of costly incorrect classifications.
+Chawla et al. (2002) proposed SMOTE. The algorithm SMOTE, which stands for synthetic
+minority over-sampling technique, is a combination of under-sampling the majority
+class and over-sampling the minority class. In the over-sampling schema, SMOTE produces
+synthetic minority class examples, rather than just duplicating the existing examples.
+123
+240
+Software Qual J (2017) 25:235-272
+Tomek (1976) proposed Tomek links, which could be used as an under-sampling or a data
+cleaning method. They consider only instances close to the class boundary, unlike previous
+methods that chose the instances randomly. Applying Tomek links method to under-sampling,
+the data set can aid the classification by making a fat boundary with a large margin.
+Grbac and Goran (Grbac et al. 2013) investigated how the class imbalance of software defect
+data sets influences the performance stability of machine learning techniques. The results
+indicated that prediction performance could be unstable due to a high level of imbalance.
+Wang et al. (2010) proposed a negative correlation learning algorithm called AdaBoost.NC.
+This algorithm exploits the ambiguity term in the decomposition to improve
+diversity.
+Wang and Yao (2013) examined various class imbalance learning techniques and their
+effects on software defect prediction. They carried out an evaluation of resampling techniques,
+threshold moving, and ensemble algorithms and showed that AdaBoost.NC produced
+the best overall performance.
+Wang and Japkowicz (2009) proposed a support vector machine with asymmetric
+misclassification cost to solve the skewed vector space problems. The data distribution and
+the classifier are both modified in their proposed Boosting-SVM algorithm. The class
+imbalance problem is addressed by using the property of soft margins.
+In our study, first, by applying cost-sensitive learning techniques, we focus on locating
+the defect class having greater value in CPDP. In this way, we aim at presenting a more
+practical model for CPDP. Second, since the use of WP data for CPDP was not investigated
+in depth in the existing CPDP studies, we investigate whether WP data can be used to
+improve the prediction performance for CPDP.
+3 TCSBoost approach
+We propose a TCSBoost approach, which exploits the similarity weight. This approach
+aims at providing high performance by assigning distinct weights drawn from distributional
+characteristics and class imbalance. Figure 1 shows the overall defect prediction
+process using the TCSBoost method.
+Fig. 1 Overall process with transfer cost-sensitive boosting approach
+123
+Software Qual J (2017) 25:235-272
+3.1 Defect data set preparation
+241
+Source and target defect data are prepared for training and testing, respectively. An
+example of data is marked as clean if there is no defect in it. If there is at least one defect, it
+is marked as buggy.
+3.2 Similarity weight computation
+In the second phase, the similarity weight is computed by dividing the number of similar
+attributes by the total number of attributes. This measure, employed in several CPDP
+studies (Chen et al. 2015; Ma et al. 2012; Ryu et al. 2014), is a simple way to identify the
+distributional characteristics between data sets.
+Let us say aij is the jth attribute of xi, given a sequence xi ¼ fai1; ai2; . . .; aikg: The
+maximum value and minimum value of jth attribute in the test set are calculated as below:
+mjax ¼ max a1j; a2j; . . .; amj ; mjin ¼ min a1j; a2j; . . .; amj ;
+where m is the number of the test data, k is the number of attributes, and j ¼ 1; 2; . . .; k. The
+vector Max ¼ fmax1; max2; . . .; maxkg has the maximum value of the attribute on the test
+set, and the vector Min ¼ fmin1; min2; . . .; minkg has the minimum value of the attribute
+on the test set. Then, we compute the similarity weight of each training instance by using
+the following formula:
+Si ¼
+k
+X
+j¼1
+h aij =k;
+1
+0
+if minj
+otherwise
+aij
+maxj :
+where aij is the jth attribute of instance xi and h aij ¼
+3.3 Training data set resampling
+SMOTE (Chawla et al. 2002) and Tomek links (Tomek 1976) are used in the proposed
+approach to enhance the representation of the defect class instances. In the light of the CP
+settings, distributional characteristics are considered when employing them. By introducing
+those resampling methods, the probability of detection (PD) can be enhanced even
+though the probability of a false alarm (PF) becomes worse. PD and PF are described in
+detail in the performance report phase.
+SMOTE is a method that over-samples the minority class. In our approach, SMOTE is
+applied by taking into account the distributional differences. SMOTE is only applied to
+similar instances (with similarity weight = 1), since different instances are considered as
+negatively affecting to the prediction performance.
+Our approach used Tomek links (Tomek 1976) as an under-sampling method. Ii and Ij
+are two different class instances and d(Ii, Ij) is the distance between Ii and Ij. A (Ii, Ij) is
+defined as a Tomek link if there is no instance Il, such that d(Ii, Il) \ d(Ii, Ij) or d(Ij,
+Il) \ d(Ii, Ij). Either one of the instances in a Tomek link is noise, or both instances are
+borderline. Thus, Tomek links can be utilized as an under-sampling method, meaning that
+only instances belonging to the majority class are eliminated.
+It may not be helpful to under-sample the majority class instances based on a minority
+class instance belonging to a different distribution. Thus, the minority class instances in
+123
+242
+Software Qual J (2017) 25:235-272
+different distributions are excluded in the process of under-sampling. Based on the
+minority instances from the same distribution, the majority instances from all distributions
+are under-sampled. By repeatedly carrying out Tomek link-based under-sampling, overlapping
+around the class boundary can be reduced, and thus PD values can be increased
+(and usually PF values are also increased). We repeated Tomek link-based under-sampling
+five times.
+3.4 Transfer cost-sensitive boosting model construction
+We present a TCSBoost dealing with feature distributional differences between source and
+target projects, as well as the class imbalance between buggy and clean classes. Algorithm
+1 describes our proposed algorithm.
+Algorithm 1. TCSBoost algorithm
+Input parameters
+S: source project data
+T: target project data
+SW: similarity weight
+Local variables
+Xtrain: training set of input sequence
+M: the maximum number of iterations
+N: the number of training examples in Xtrain
+tn: binary target variable of Xtrain where tn ∈ {-1,1} and n = 1, …, N.
+w: the data weight vector
+λ: parameter of the penalty scale for each iteration (0<λ≤1)
+α: the weight coefficient
+cn: the cost factor (0≤cn≤1)
+Function calls:
+h: base learner
+Train(X): train a base learner h
+Classify(X,h): classify X by the learner h
+I: an indicator function where I(false) = 0, I(true) = 1
+β: the cost adjustment function
+1. Initialize
+Xtrain = S ∪ T
+wn = 1/N for n = 1, …, N.
+2. For m = 1, 2, …, M:
+Xtrain(x) Xtrain(x) using weights wn
+hm Train(Xtrain)
+Output
+wn
+λ 1n
+wn
+the hypothesis H =
+123
+Software Qual J (2017) 25:235-272
+243
+As input parameters, source project data (S), a small amount of target project data (T),
+and the similarity weight (SW) are given. In the first step, source project data and a small
+set of target project data are formed as a training set to produce a final ensemble classifier.
+The initial weight vector of the training instances is set as 1/N. In the second step, the
+boosting algorithm is repeatedly applied to the training data. The base classifier (h) uses the
+data weight vector (wn) for training. The quantities (em) represent the weighted error rates
+of each base learner. The weighting coefficient (aj) gives higher weights to more accurate
+learners when calculating the final hypothesis (H).
+In general boosting algorithms, e.g., AdaBoost (Freund and Schapire 1997) and AdaCost
+(Fan et al. 1999), the data weight vector (wn) is increased for misclassified examples
+and decreased for correctly classified examples in successive iterations. Thus, subsequent
+learners concentrate on those examples misclassified by previous learners. Under the CPDP
+environments, we propose different weighting policies within the boosting algorithm. The
+core concept of the proposed algorithm is about how effectively the distributional characteristics
+and the class imbalance nature can be combined together. Unlike AdaCost,
+which only addresses the class imbalance, our approach considers the distributional
+characteristics as well as the class imbalance. In the approach, we propose a cost adjustment
+function adapted for CPDP. We assign correct/incorrect classification costs differently,
+depending on the similarity between training data and test data. We disregard the
+misclassified instances of different distribution while concentrating on the misclassified
+instances of similar distribution. To this end, source project data (S) are divided into
+instances having similar distribution (XS) and instances having different distribution (XD)
+based on the similarity weight, indicating that S = XS [ XD. The similarity weight represents
+how much each instance is similar to test data according to distributional characteristics.
+If the similarity weight equals to one, all the attributes of an instance are similar
+to those of test data.
+The labeled target data having the same distribution (T) and source project instances
+having similar distribution (XS) are treated in the same way. For the two data sets, we
+conservatively decrease the weights of instances that are correctly classified, and conservatively
+increase the weights of costly misclassifications. For source project data having
+the different distribution (XD), we conservatively decrease the weights of instances that are
+correctly classified and conservatively decrease the weights of costly misclassifications.
+The cost adjustment function (b(n)) is defined as b(n) = b(sign(tn, hm), cn), where
+sign(tn, hm) is positive for correct classification (b?) and negative for misclassification
+(b-). We applied the cost adjustment function in accordance with the proposed weighting
+policy to the experiments:
+•
+•
+The cost adjustment function for the instances having the same or similar distribution
+b?(c) = -0.25 c ? 0.25
+b-(c) = 0.25 c
+The cost adjustment function for the instances having different distributions
+b?(c) = -0.25 c ? 0.25
+b-(c) = 0.25 c - 0.5
+3.5 Classification prediction
+In this phase, the final ensemble classifier predicts whether unseen data in a target project
+are defective or not. The training and test sets are extracted from the same project in
+WPDP. Thus, they have the same space feature and the same distribution feature. In CPDP,
+123
+244
+Table 1 Confusion matrix
+Software Qual J (2017) 25:235-272
+Actual class
+Buggy
+Clean
+Predicted class
+Buggy
+TP (true positive)
+FP (false positive)
+Clean
+FN (false negative)
+TN (true negative)
+the training and test sets come from different projects. Thus, although they have the same
+feature space, they might have different feature distributions. Such different feature distributions
+are known as the main obstacle to prediction performance.
+3.6 Performance report
+The learner built on the software defect data sets, which have the imbalanced nature, is
+typically evaluated by both the performance on the buggy class and the overall performance.
+The performance on the buggy class is commonly measured by the probability of
+detection (PD) and the probability of a false alarm (PF). Confusion matrix for the performance
+evaluation is given in Table 1. True positive (TP) is the number of buggy
+modules correctly predicted as buggy. True negative (TN) is the number of clean modules
+correctly predicted as clean. False positive (FP) is the number of clean modules predicted
+as buggy. False negative (FN) is the number of buggy modules predicted as clean. PD is
+TP
+computed by: PD ¼ ðTPþFNÞ. PD, also known as the recall, represents the proportion of
+FP
+appropriate instances retrieved. PF is calculated by: PF ¼ ðFPþTN . The performance of
+Þ
+PF, also called the false positive rate, is better when its value is lower, in contrast to PD.
+Geometric mean (G-mean) and Balance are utilized for the overall evaluation of predictors
+in the imbalanced context. G-mean is the geometric mean of recall values of the
+defect class (PD) and the non-defect class (1-PF) such as the following: G-mean ¼
+pffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+PDð1 PFÞ: A predictor with a high G-mean would have high accuracies on both
+classes and thus be a good predictor. The measure Balance is introduced by calculating the
+Euclidean distance from the real (PD, PF) point to (1, 0), since the point (PD = 1, PF = 0)
+is the ideal point where all defects are detected without missing. By definition, Balance ¼
+1 pffiðffi0ffiffiffiffiPffiffiFffiffiÞpffi2ffiffiþffi2ffiffiffiðffi1ffiffiffiffiffiPffiffiDffiffiÞffi2ffi : To sum up, in our experiment, PD and PF are computed for the
+defect class. PD and PF are desired to be high and low, respectively, for a good predictor.
+Then, G-mean and Balance are used to assess the overall performance. Like PD, higher
+G-mean and Balance are desired. The evaluation of the overall performance aims at
+showing how well the learner can balance the performance between the buggy and the
+clean classes.
+4 Experimental setup
+To answer the following two research questions, we set up comparative experiments.
+•
+RQ1: Is the combination of transfer learning and cost-sensitive learning more effective
+than each of them for CPDP?
+123
+Software Qual J (2017) 25:235-272
+245
+•
+RQ2: Is a small amount of WP data not sufficient to build a WPDP model effective for
+CPDP?
+For RQ1, we compared our approach with Na¨ıve Bayes, Na¨ıve Bayes by applying
+SMOTE (Chawla et al. 2002), Burak Filter (Turhan et al. 2009), AdaCost (Fan et al. 1999),
+and TransferBoost (Eaton and DesJardins 2011). AdaCost is a cost-sensitive learning
+method utilizing the cost adjustment function. As a transfer learning method, TransferBoost
+uses WP data to enhance the performance.
+For RQ2, we investigate how 5, 10, and 25 % of target training data can affect the
+prediction performance of CPDP. Labeled target training data are used as the training set of
+all classification models, along with source project data.
+To compare the performance of our approach with other classifiers, 15 data sets (Marian
+2010; Jureczko and Madeyski 2010) from the PROMISE repository (Menzies et al. 2012)
+are employed. Since G-mean and Balance are related to the values of both PD and PF, they
+are commonly considered effective performance measures in the context of the class
+imbalance. Thus, G-mean and Balance are chosen for the experiments. There is a trade-off
+between the defect detection performance (e.g., PD) and the overall performance (e.g.,
+G-mean and Balance) (Wang and Yao 2013). Consequently, obtaining a learner to provide
+high accuracy for the minority class without severely lowering the accuracy of the majority
+class is important. PD is also considered to be a practically useful measure, according to
+Menzies et al. (2007).
+To answer RQ1, we formalize the following hypotheses:
+•
+•
+H10: TCSBoost is not better than transfer learning and class imbalance learning
+techniques.
+H1A: TCSBoost is better than transfer learning and class imbalance learning
+techniques.
+We also need to consider the context of class imbalance while evaluating prediction
+performance. If the overall performances among classifiers are statistically the same, a
+classifier producing better PD values is considered more effective than the others. If the PD
+Table 2 Projects in the Jureczko
+data set
+# Instances
+# Buggy
+% Buggy
+Description
+Project
+ant
+arc
+camel
+e-Learning
+jedit
+log4j
+lucene
+poi
+prop-6
+redaktor
+synapse
+systemdata
+tomcat
+xalan
+xerces
+125
+234
+339
+64
+272
+135
+195
+237
+660
+176
+157
+65
+858
+723
+162
+20
+27
+13
+5
+90
+34
+91
+141
+66
+27
+16
+9
+77
+110
+77
+16
+11.5
+3.8
+7.8
+33.1
+25.2
+46.7
+59.5
+10
+15.3
+10.2
+13.8
+9
+15.2
+47.5
+Open source
+Academic
+Open source
+Academic
+Open source
+Open source
+Open source
+Open source
+Proprietary
+Academic
+Open source
+Open source
+Open source
+Open source
+Open source
+123
+Table 3 Features of the Jureczko data sets
+246
+Type
+Chidamber and
+Kemerer (1994)
+Henderson-Sellers
+(1995)
+Bansiya and Davis
+(2002)
+Tang et al. (1999)
+Martin (1994)
+McCabe (1976)
+Lines of code
+Software Qual J (2017) 25:235-272
+Features
+Weighted methods per class (WMC), depth of inheritance tree (DIT), number of
+children (NOC), coupling between object classes (CBO), response for a class
+(RFC), lack of cohesion in methods (LCOM)
+Lack of cohesion in methods (LCOM3)
+Number of public methods (NPM), data access metric (DAM), measure of
+aggregation (MOA), measure of functional abstraction (MFA), cohesion among
+methods of class (CAM)
+Inheritance coupling (IC), coupling between methods (CBM), average method
+complexity (AMC)
+Afferent couplings (Ca), efferent couplings (Ce)
+Maximum McCabe's cyclomatic complexity (Max(CC)), average McCabe's
+cyclomatic complexity (Avg(CC))
+Lines of code (LOC)
+performances among classifiers are statistically the same, a classifier producing better
+overall performance values is considered more effective than the others.
+The following hypotheses are formalized to answer RQ2.
+•
+•
+H20: The prediction performance is not increased as the percentage of WP data used as
+a training set increases.
+H2A: The prediction performance is increased as the percentage of WP data used as a
+training set increases.
+We consider WP data are effective if the prediction performance increases as the
+percentage of WP data used as a training set increase.
+4.1 Data collection
+The Jureczko data sets were originally collected by Jureczko and Madeyski (2010). The
+instances of data sets are represented with 20 independent attributes; static code features based
+mainly on Chidamber and Kemerer (1994) object-oriented metrics and one dependent label
+that indicates whether the instance is defective or not. We chose 15 data sets among all of the
+Jureczko data sets obtained from the PROMISE repository (Menzies et al. 2012), as Chen et al.
+(2015) did. As shown in Table 2, the selected 15 data sets include a proprietary project built for
+customer solutions, three academic projects done by students, and 11 open-source projects
+collected from Apache projects. In Table 3, features of the Jureczko datasets are described.
+We chose each of these data set to be test data, and used the remaining data sets as
+training data, to set up the CPDP setting. Each experiment of CPDP was iteratively
+performed 30 times.
+4.2 Learning algorithms
+We employed Na¨ıve Bayes as a base learner for the TCSBoost and implemented the
+WEKA machine learning toolkit (Hall et al. 2009). We applied z-score normalization to all
+of the training and test data. Other learning algorithms, i.e., Na¨ıve Bayes, Na¨ıve Bayes with
+SMOTE, Burak Filter, AdaCost, and TransferBoost, were compared with our proposed
+123
+Software Qual J (2017) 25:235-272
+247
+method. As the base learner for AdaCost and TransferBoost, we utilized Na¨ıve Bayes from
+the WEKA machine learning toolkit as well. The reason why we chose Na¨ıve Bayes is that
+it generally shows high prediction performance in SDP compared with other classification
+models (Hall et al. 2012; Ryu et al. 2014). We applied z-score normalization to all of
+training and test data before running those algorithms, except for the Burak Filter. For that
+relevancy filter, we normalized all instances with the log-normal transformation method, as
+shown in Turhan et al. (2009).
+4.3 Parameter configurations
+Lambda (k) is an empirical user-defined parameter in the boosting algorithm, which is used for
+the penalty magnitude during each iteration. For AdaCost and TransferBoost, we set the value
+of k as 0.5 and the maximum number of iterations (M) in the algorithm was set as 50. The value
+was carefully adjusted, since if it is too large, over-fitting problem can occur, and if it is too
+small, the effectiveness of boosting algorithm can be reduced. Considering efficiency and
+effectiveness, M is set as 30 and k is set as 0.6 for TCSBoost. For TCSBoost and AdaCost, the
+cost factors of the majority class are set as 0.5 and 0.1, respectively. The cost factor of the
+minority class is fixed as 1.0. We performed all the combinations of the cost factors in our
+experiments. In our experiments, AdaCost performed best when the cost factor of the majority
+class was 0.1. For AdaCost, as suggested by Fan et al. (1999), the cost adjustment function was
+used as the following: b?(c) = -0.5 c ? 0.5, b-(c) = 0.5 c ? 0.5. For TransferBoost,
+source project data were divided into ten tasks by using k-means clustering algorithm.
+5 Experimental results
+Tables 4, 5, 6, 7, 8, and 9 show the prediction performance of classification models using
+CP data, as well as 5, 10, and 25 % of WP data during the training phase. Values in
+boldface represent the best performers for each experiment.
+In Table 4, the median performance values of classification models using 5 % of WP
+data in terms of PD and PF are given. Figure 2 shows scatter plots of median PD and PF
+values of six models over 15 data sets using 5, 10, and 25 % of WP data. Since high PD
+and low PF are desired, the better predictor has more points at the bottom right of the areas.
+NB shows the worst PD (0.210) and the best PF (0.054), and thus, all points are positioned
+at the bottom left of the areas in Fig. 2. NB with SMOTE (NB ? SMOTE) shows low
+performance (0.375) even though it produces 75 % higher PD than NB. As opposed to NB
+and NB ? SMOTE, TransferBoost produces the best PD (0.937) and the worst PF (0.620),
+showing more points at the top right of the areas. Through the nearest-neighbor-based
+relevancy filtering technique, Burak Filter reduces the PF, but the PF value is still high
+(0.512). AdaCost and TCSBoost show more balanced performance with regard to PD and
+PF. AdaCost (PD: 0.5, PF: 0.153) and TCSBoost (PD: 0.593, PF: 0.340) show higher PD
+than NB (0.210) and NB ? SMOTE (0.375), while showing lower PF than TransferBoost
+(0.620) and Burak Filter (0.512). The practically useful predictor should provide high
+accuracy for the defect class without lowering the accuracy of the clean class, meaning that
+acceptably high PD and low PF values are desired. Compared with AdaCost, TCSBoost
+shows 18 % higher defect detection performance in terms of the total median PD.
+Table 5 shows the median G-mean and Balance values of each classifier on the data
+sets. On the whole, TCSBoost outperforms other classification models (G-mean: 0.641;
+Balance: 0.636). SMOTE was effective for improving the prediction performance (G123
+248
+Software Qual J (2017) 25:235-272
+0 5 5 7 1 5 2 0 4 5 0 2 5 8 8 0
+0 3 8 0 8 2 8 4 6 3 7 3 2 7 0 4
+F .4 .2 .3 .10 .30 .10 .20 .30 .30 .50 .04 .01 .02 .04 .03 .03
+P 0 0 0
+SBC D .8 .4 .5 .50 .50 .50 .50 .70 .60 .70 .80 .50 .70 .70 .30 .50
+T P 0 0 0
+2 1 3 0 8 3 6 8 4 0 6 0 9 8 8 3
+4 6 8 0 8 9 4 0 3 3 6 0 3 8 2 9
+0 7 8 0 6 2 3 4 9 8 3 0 6 7 3 0
+2 8 4 8 3 4 3 9 8 7 4 2 4 5 9 2
+t FP .60 .80 .80 .00 .40 .90 .30 .40 .90 .90 .04 .08 .02 .08 .04 .06
+s
+o
+o
+B
+r
+e
+rfsanT PD .1000 .0980 .1000 .0500 .0693 .1000 .0518 .0850 .1000 .1000 .0866 .0973 .0762 .0917 .0338 .0973
+5 1 0 7 5 2 1 3 4 2 5 8 6 5 2 3
+FP .050 .800 .010 .010 .110 .060 .150 .150 .209 .102 .107 .305 .201 .400 .022 .015
+t
+s
+o
+o
+t
+s
+o
+g
+n
+i
+s
+u
+f
+o
+e
+c
+n
+a
+n T
+o O
+i
+t
+a M
+c S
+m
+r
+o
+f
+r
+e s
+p e
+y
+F a
+P B
+n
+a
+i
+d
+e
+a
+M t
+a
+D
+4
+t
+e e
+l
+g
+b r
+a a
+T T
+7 4 0 0 1 6 9 3 7 9 3 0 2 8 7 0
+adCA PD .490 .830 .050 .500 .410 .400 .270 .470 .508 .206 .703 .705 .701 .606 .208 .500
+0 2 7 0 1 6 3 5 4 9 1 1 1 7 8 2
+taa FP .305 .501 .601 .500 .409 .066 .032 .061 .037 .085 .067 .047 .022 .064 .059 .051
+d
+r
+P te
+l
+W i
+f F
+o5% raukB PD .750 .160 .660 .001 .480 .390 .360 .680 .605 .010 .903 .705 .201 .903 .401 .705
+8 5 6 0 7 7 9 5 0 0 3 0 9 2 0 0
+lsedo F .951 .860 .930 .1700 .3210 .3010 .8000 .6050 .4130 .6110 .4190 .3070 .9160 .2320 .4260 .3120
+m E P 0 0 0
+ilssafi B? D .473 .384 .500 .2500 .4110 .2500 .2440 .2008 .3065 .2069 .6000 .0375 .0739 .0636 .0278 .0357
+c N P 0 0 0
+0 0 5 0 4 0 0 3 4 0 2 0 2 0 8 4
+0 2 7 4 5
+FP .010 .500 .400 .000 .100 .010 .030 .004 .005 .007 .008 .00 .10 .20 .01 .00
+and ¨ıaevN PD .201 .109 .050 .000 .300 .108 .100 .103 .105 .101 .303 .307 .500 .506 .021 .021
+0 2 0 0 5 7 4 4 8 5 3 5 6 7 9 0
+D
+P
+123
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem raeL tid jg4 ecen i -p6o taekd apny tseym caom laanx recex iedM
+a a c e je lo lu po rp r s s t
+n r a Software
+Qual J (2017) 25:235-272
+249
+5 2 2 0 4 1 1 2 6 6 9 7 7 0 7 6
+laB .960 .850 .060 .460 .060 .070 .602 .608 .603 .507 .605 .603 .705 .603 .407 .603
+S
+C
+T G 0 0 0 0 0 0
+0 0 2 4 4 5 3 3 6 2 2 5 7 1 6 1
+.17 .95 .06 .76 .06 .27 .620 .680 .603 .508 .608 .606 .705 .604 .407 .604
+9 1 9 2 1 2 7 2 9 7 9 6 6 2 8 8
+la .51 .37 .39 .47 .57 .33 .46 .50 .20 .30 .06 .04 .07 .03 .04 .04
+9 0 6 1 3 9 4 4
+0 0 0 0 0 0
+2 5 6 5 4 2 8 3 7 5 0 9 8 0 5 5
+.45 .23 .38 .49 .59 .23 .47 .52 .00 .10 .60 .40 .70 .03 .04 .04
+9 4 9 0 3 7 4 4
+0 0 0 0 0 0
+7 1 8 6 6 8 1 1 4 3 5 9 7 8 2 1
+laB .620 .560 .630 .640 .570 .570 .480 .610 .060 .047 .077 .067 .073 .062 .047 .061
+0 4 9 0 3 1 2 2 1 1 9 8 0 9 3 9
+7 9 6 0 0 2 9 3 1 8 7 8 4 2 7 2
+.6 .5 .60 .70 .60 .60 .40 .60 .60 .40 .70 .60 .70 .60 .40 .60
+t
+s
+o
+o
+B
+t
+s
+o
+C
+a
+d
+t B 0 0
+s
+o
+o
+B
+r
+e
+f
+s
+n
+a
+r
+T G 0 0
+c O
+f
+o M
+S
+e
+c
+n ?
+a B
+o
+f
+r
+e
+p
+d e
+y
+n a
+a
+n
+a
+i
+d
+e
+M ta
+a
+d
+5
+t
+e e
+l
+g
+b r
+a a
+T T
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem reaL tid jg4 ecen i -op6 taedk anyp tseym caom laaxn reecx iedM
+a a c e je lo lu po rp r s s t
+n r a 123
+a A G 0 0
+t
+a
+d
+P
+%
+r
+5 e
+t
+l
+g i
+in F
+s k
+u a
+s r
+l u
+e
+d B G 0 0 0
+o
+foW laB .160 .450 .500 .640 .630 .520 .660 .550 .630 .309 .502 .602 .042 .053 .040 .054
+2 6 5 6 6 6 2 5 8 2 2 2 6 9 9 6
+3 7 6 4 6 9 2 9 8 5 3 9 3 1 9 1
+1 4 0 9 5 5 6 7 3 7 5 2 1 7 0 7
+.6 .5 .5 .60 .60 .50 .60 .50 .60 .03 .05 .06 .04 .05 .04 .05
+m
+n
+o
+iitscafi la .0605 .5600 .6309 .6409 .5702 .4609 .4602 .4309 .5039 .4070 .6099 .0575 .6078 .0696 .0436 .0575
+s E B
+la T
+rm N G 0 0 0
+1 1 2 5 6 2 3 5 8 4 7 6 0 9 1 1
+.62 .59 .67 .490 .590 .490 .470 .440 .505 .407 .701 .060 .077 .066 .046 .059
+lacen la .437 .427 .644 .2092 .5004 .4025 .3066 .3087 .0403 .0372 .0525 .0558 .0639 .0636 .0440 .0437
+a B 0 0 0
+B s
+B
+n
+a e
+e ıv
+¨
+m a
+- N G 0 0 0
+G
+5 7 9 0 5 0 8 8 6 7 3 2 5 1 6 5
+.43 .42 .68 .000 .520 .430 .310 .350 .30 .30 .50 .06 .06 .06 .04 .04
+8 2 5 1 6 4 3 3
+123
+t
+s
+o
+o
+B
+t
+s
+o
+g
+n
+i
+s
+u
+f
+o
+e
+c
+n
+a
+n T
+io O
+t
+a M
+c S
+fi
+i
+s ?
+s
+y
+F a
+P B
+n
+a
+i
+d
+e
+M ta
+a
+d
+6
+t
+e e
+l
+g
+b r
+a a
+T T
+250
+Software Qual J (2017) 25:235-272
+4 6 9 3 7 4 1 7 4 9 4 0 6 6 8 7
+F .04 .23 .38 .11 .38 .11 .28 .33 .30 .50 .40 .10 .02 .04 .03 .03
+6 2 6 2 2 7 0 3
+P 0 0 0
+0 0 0 0 0
+3 8 3 0 4 0 2 0 7 0 7 0 9 2 8 4
+SC D .38 .54 .85 .50 .60 .58 .54 .70 .60 .70 .80 .50 .70 .07 .03 .06
+2 5 5 0 3 9 1 0
+T P 0 0 0
+0 0 0 0 0
+2 0 7 6 7 9 5 8 6 2 2 0 7 6 5 0
+F .62 .84 .97 .39 .84 .98 .51 .98 .90 .90 .90 .70 .30 .80 .60 .80
+8 9 9 1 0 0 0 4
+t P 0 0 0 0 0 0 0 0
+s
+o
+o
+B
+r
+e
+rfsan D .792 .598 .000 .570 .795 .000 .671 .894 .0100 .0100 .0100 .8012 .7006 .9095 .4029 .9027
+T P 0 0 1 0 0 1 0 0
+3 4 2 8 5 5 8 8 6 6 3 0 3 4 0 3
+F .74 .01 .01 .01 .11 .06 .13 .20 .10 .10 .10 .30 .20 .30 .20 .10
+9 2 7 6 4 8 1 7
+P 0 0 0
+0 0 0 0 0
+4 6 0 0 9 9 0 9 7 0 4 0 4 6 9 9
+adC D .49 .14 .05 .25 .41 .41 .28 .55 .30 .20 .70 .70 .70 .60 .20 .40
+9 5 1 5 2 5 8 1
+A P 0 0 0
+0 0 0 0 0
+1 6 7 9 4 9 9 4 8 8 9 0 2 3 8 6
+taa F .63 .15 .16 .05 .84 .56 .31 .60 .30 .80 .60 .40 .20 .60 .50 .50
+6 5 6 8 2 4 7 1
+d P 0 0 0
+0 0 0 0 0
+P r
+e
+W tl
+f i
+o F
+01% raukB PD .160 .260 .660 .001 .850 .930 .650 .870 .604 .010 .902 .705 .022 .092 .042 .075
+1 5 6 0 1 5 8 0 4 0 8 0 4 9 0 0
+lsedo F .911 .806 .902 .108 .218 .302 .704 .508 .4100 .5106 .4101 .4000 .9106 .0307 .4203 .2108
+m E P 0 0 0
+0 0 0 0 0
+0 5 0 0 7 8 3 2 5 0 2 5 9 6 5 5
+la B D .05 .73 .50 .250 .400 .250 .240 .210 .30 .20 .60 .30 .07 .06 .02 .03
+5 5 4 7 3 4 7 7
+c N P 0 0 0
+5 3 4 0 3 0 1 6 6 7 8 0 3 9 4 6
+rfom FP .900 .050 .040 .000 .100 .010 .030 .040 .00 .00 .00 .00 .01 .02 .01 .00
+5 6 7 0 2 5 4 5
+r
+e s
+p e
+d e 5 2 8 7 9 5 1 1
+2 6 0 0 0 3 7 3 2 5 5 5 2 5 7 7
+anD ¨ıavN PD .220 .160 .500 .000 .320 .190 .090 .130 .10 .10 .20 .30 .04 .05 .02 .02
+P
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem raeL tid jg4 ecen i -op6 taedk anyp tseym caom laaxn recex iedM
+a a c e je lo lu po rp r s s t
+n r a Software
+Qual J (2017) 25:235-272
+251
+6 2 0 0 1 3 2 2 2 0 8 6 3 2 6 2
+laB .690 .580 .600 .640 .600 .690 .602 .608 .063 .058 .065 .063 .075 .063 .046 .063
+S
+C
+T G 0 0
+0 1 0 2 1 8 7 3 2 9 2 3 4 3 4 3
+1 9 0 7 0 1 2 8 3 8 8 6 5 4 6 4
+.7 .5 .60 .60 .60 .70 .60 .60 .60 .50 .60 .60 .07 .06 .04 .06
+t B 0 0 0
+s
+o
+o
+B
+r
+e
+f
+s
+n 5 8 4
+a
+r
+T G 0 0 0
+3 2 8 4 9 0 9 0 2 8 8 0 4 8 4 2
+la .53 .40 .30 .57 .39 .30 .44 .30 .30 .20 .20 .40 .07 .04 .04 .04
+0 9 9 9 1 2 4 0
+0 0 0 0 0
+9 4 8 7 4 4 0 5 4 6 8 3 4 1 9 4
+.5 .3 .1 .06 .38 .10 .45 .07 .10 .00 .00 .50 .70 .40 .40 .30
+1 8 8 0 1 3 3 8
+0 0 0 0 0
+5 4 8 9 2 7 4 1 2 2 6 0 0 1 1 7
+la .26 .75 .36 .64 .85 .85 .84 .46 .50 .40 .70 .60 .70 .60 .40 .50
+5 6 6 9 4 3 7 8
+B 0 0 0
+0 0 0 0 0
+8 7 8 7 1 1 7 3 5 8 2 2 3 1 2 1
+.66 .85 .66 .94 .16 .36 .94 .56 .50 .40 .70 .60 .70 .60 .40 .60
+6 6 7 9 4 3 7 3
+0 0 0 0 0
+t
+s
+o
+o
+B
+t
+s
+o
+C
+a
+d
+f
+o M
+S
+e
+c
+n ?
+a B
+o
+f
+r
+e
+p
+B s
+d e
+y
+n a
+a
+n
+a
+i
+d
+e
+M ta
+a
+d
+7
+t
+e e
+l
+g
+b r
+a a
+T T
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem reaL tid jg4 ecen i -p6o taekd apny tseym caom laanx recex iedM
+a a c e je lo lu po rp r s s t
+n r a 123
+ta A G 0 0 0
+a
+d
+P
+0 r
+1 e
+t
+l
+g i
+in F
+s k
+u a
+s r
+l u
+e
+d B G 0 0 0 0 0
+o
+W 8 8 0 9 9 1 8 9 5 3 4 9 8 2 9 8
+fo% laB .600 .540 .510 .630 .630 .530 .660 .505 .603 .039 .052 .062 .042 .054 .041 .054
+0 9 1 6 7 4 8 0 6 6 4 6 7 4 9 4
+.16 .45 .15 .86 .56 .650 .660 .580 .630 .307 .505 .603 .401 .507 .401 .507
+m
+n
+o
+itiscafi la .2601 .5503 .6309 .6409 .5701 .4704 .4601 .4401 .5033 .4059 .7026 .0557 .6075 .0671 .0460 .0553
+s E B
+la T
+c O
+rm N G 0 0 0
+5 5 1 5 7 9 2 4 3 1 9 0 7 2 8 5
+.36 .85 .76 .940 .950 .940 .470 .440 .550 .460 .730 .600 .706 .607 .405 .508
+lacen la .444 .049 .464 .9202 .5104 .4209 .3601 .3806 .3099 .3079 .4092 .5058 .6003 .6053 .4093 .4093
+a B 0 0 0
+B
+n
+a e
+e ıv 4 9 8
+¨
+m a
+- N G 0 0 0
+G
+5 8 9 0 8 7 7 7 9 0 6 2 6 0 7 7
+.4 .3 .6 .00 .53 .43 .30 .35 .30 .30 .50 .60 .60 .60 .40 .40
+7 4 1 1 5 4 3 3
+0 0 0 0 0
+123
+t
+s
+o
+o
+t
+s
+o
+g
+n
+i
+s
+u
+f
+o
+e
+c
+n
+a
+n T
+io O
+t
+a M
+c S
+fi
+i
+s ?
+s
+y
+F a
+P B
+P
+n
+a
+i
+d
+e
+M ta
+a
+d
+8
+t
+e e
+l
+g
+b r
+a a
+T T
+252
+Software Qual J (2017) 25:235-272
+5 9 7 0 1 8 9 2 4 8 2 9 5 4 6 2
+F .04 .21 .37 .09 .45 .11 .26 .30 .30 .50 .40 .10 .02 .04 .02 .03
+1 4 0 6 1
+2 4 9 1
+P 0 0 0
+0 0 0 0
+SCB D .68 .45 .60 .50 .64 .58 .53 .609 .603 .700 .803 .507 .07 .08 .03 .06
+6 0 0 0 1 0 6 3 2 0 3 1 1 0 8 2
+4 1 1 3
+T P 0 0 0
+0 0 0 0
+6 9 0 4 1 4 1 0 0 0 0 0 0 9 2 9
+F .93 .91 .95 .95 .41 .62 .14 .010 .80 .01 .01 .60 .50 .90 .80 .90
+9 0 0 3 3 3 8 1
+t P 0 0 0 0 0 0 0
+s
+o
+o
+B
+r
+e
+rfsanT PD .0010 .0010 .0010 .0010 .7053 .0100 .3008 .0100 .9059 .0100 .0100 .8057 .0844 .1000 .0878 .1000
+3 6 8 2 7 4 8 4 9 7 3 4 8 1 8 9
+F .32 .90 .01 .02 .11 .39 .12 .12 .10 .10 .20 .40 .10 .30 .20 .10
+3 0 7 0 8 4 1 3
+P 0 0 0
+0 0 0 0 0
+3 0 0 0 4 0 0 1 6 0 3 7 6 8 5 0
+adC D .35 .04 .05 .050 .840 .720 .250 .470 .340 .250 .803 .805 .700 .605 .207 .500
+A P 0 0 0
+1 9 0 0 6 7 0 8 9 8 9 6 5 6 1 9
+taa F .46 .50 .61 .50 .49 .65 .32 .61 .30 .80 .60 .04 .02 .06 .06 .05
+6 4 6 7 2 3 0 0
+d P 0 0 0
+0 0 0 0 0
+P r
+e
+W tl
+f i
+o F
+52% raukB PD .380 .600 .700 .001 .850 .960 .670 .850 .650 .001 .091 .078 .022 .091 .039 .083
+3 0 0 0 0 0 6 3 3 0 6 5 4 4 6 3
+lsedo F .819 .806 .900 .202 .215 .206 .706 .602 .3102 .6100 .4101 .3005 .8108 .8200 .1208 .2105
+m E P 0 0 0
+0 0 0 0 0
+6 5 0 0 7 0 0 6 6 0 6 8 4 7 5 5
+la B D .64 .73 .05 .250 .410 .200 .250 .210 .30 .20 .60 .40 .70 .60 .20 .30
+4 5 6 2 2 2 7 7
+c N P 0 0 0
+4 8 5 0 2 3 8 1 4 1 9 0 2 1 5 8
+rfom FP .090 .050 .040 .000 .100 .001 .003 .004 .00 .00 .00 .00 .01 .02 .01 .00
+5 7 7 0 2 4 2 5
+r
+e s
+p e
+d e 6 0 3 8 6 4 1 0
+0 0 0 0 8 0 2 1 3 0 3 5 5 8 5 0
+anD ¨ıavN PD .020 .020 .050 .000 .350 .180 .100 .140 .10 .10 .30 .20 .40 .50 .02 .02
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem raeL tid jg4 ecen i -op6 teadk anyp tseym caom laaxn reecx iedM
+a a c e je lo lu po rp r s s t
+n r a Software
+Qual J (2017) 25:235-272
+253
+8 1 1 0 7 2 9 4 3 0 3 5 4 5 9 3
+laB .690 .580 .610 .640 .590 .690 .601 .608 .064 .058 .066 .068 .075 .065 .047 .064
+S
+C
+T G 0 0 0 0 0 0
+8 3 1 4 9 9 4 7 3 5 0 9 6 7 1 7
+.71 .59 .61 .67 .59 .71 .602 .608 .064 .058 .069 .070 .075 .066 .048 .066
+t B 0 0 0 0 0 0 0 0 0 0 0 0
+s
+o
+o
+7 9 7 5 9 1 6 2 9 2 2 2 8 5 1 9
+la .33 .43 .32 .32 .61 .53 .47 .29 .36 .29 .29 .54 .060 .033 .037 .034
+B
+r
+e
+f
+s
+n
+a
+r
+T G 0 0
+0 3 1 3 3 8 4 0 4 0 0 3 9 5 3 3
+5 8 2 1 4 6 8 0 2 0 0 6 2 4 2 8
+.2 .2 .20 .20 .60 .50 .40 .00 .03 .00 .00 .05 .06 .02 .03 .02
+5 1 8 6 6 9 3 5 1 5 2 7 1 3 2 6
+laB .630 .570 .630 .640 .620 .650 .460 .610 .502 .046 .073 .059 .073 .065 .047 .062
+9 8 5 9 5 5 0 7 7 7 9 6 8 3 3 3
+5 9 6 9 5 7 7 3 3 7 3 3 3 5 7 5
+.6 .5 .60 .60 .60 .60 .40 .60 .50 .40 .70 .60 .70 .60 .40 .60
+t
+s
+o
+o
+B
+t
+s
+o
+C
+a
+d
+c O
+f
+o M
+S
+e
+c
+n ?
+a B
+o
+f
+r
+e
+p
+B s
+d e
+y
+n a
+a
+n
+a
+i
+d
+e
+M ta
+a
+d
+9
+t
+e e
+l
+g
+b r
+a a
+T T
+g
+n
+i
+n
+a
+t
+a
+ro se d t s an
+t c lem reaL tid jg4 ecen i -op6 taedk aynp tseym caom laaxn reecx iedM
+a a c e je lo lu po rp r s s t
+n r a 123
+ta A G 0 0
+a
+d
+P
+5 r
+2 e
+t
+l
+g i
+in F
+s k
+u a
+s r
+l u
+e
+d B G 0 0 0
+o
+W 8 7 4 6 1 1 3 9 3 0 0 6 1 5 9 7
+fo% laB .850 .450 .150 .460 .630 .530 .670 .540 .640 .400 .502 .602 .403 .504 .400 .504
+8 9 7 0 3 1 5 7 4 9 0 8 0 6 9 7
+2 4 1 9 5 6 7 6 4 8 5 3 2 7 0 6
+.6 .5 .5 .60 .60 .50 .60 .50 .60 .30 .50 .60 .40 .50 .40 .50
+m
+n
+o
+itiscafi la .0603 .5503 .4600 .6409 .7505 .4304 .4604 .4404 .5027 .4060 .3708 .9505 .6703 .6027 .0495 .0535
+s E B
+la T
+rm N G 0 0 0
+1 4 3 4 7 4 3 9 6 3 8 6 7 2 6 4
+2 8 7 9 9 4 7 4 4 6 4 4 6 7 5 8
+.6 .5 .6 .40 .50 .40 .40 .40 .50 .40 .07 .06 .07 .06 .04 .05
+lacean laB .4280 .4320 .6440 .2920 .5400 .4200 .3605 .3902 .4006 .3062 .0524 .0494 .0611 .0673 .0463 .0423
+B
+n
+a e
+e ıv
+¨
+m a
+- N G 0 0 0
+G
+0 2 9 0 6 2 4 9 1 6 2 4 7 6 1 1
+2 3 8 0 6 2 1 6 9 0 5 3 3 4 3 3
+.4 .4 .6 .00 .50 .40 .30 .30 .03 .03 .05 .05 .06 .06 .04 .04
+NB
+NB+SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+TCSBoost
+0.4
+0.6
+PD
+25% of WP data
+1
+0.9
+0.8
+0.7
+0.6
+FP0.5
+0.4
+0.3
+0.2
+0.1
+0
+254
+1
+0.9
+0.8
+0.7
+0.6
+FP0.5
+0.4
+0.3
+0.2
+0.1
+0
+1
+0.9
+0.8
+0.7
+0.6
+FP0.5
+0.4
+0.3
+0.2
+0.1
+0
+0
+0.2
+0.8
+1
+0
+0.2
+0.4
+0.6
+PD
+0.8
+1
+Software Qual J (2017) 25:235-272
+5% of WP data
+10% of WP data
+0
+0.2
+0.8
+1
+0.4
+0.6
+PD
+Fig. 2 Scatter plots of median PD and PF values of six models over 15 data sets using 5, 10, and 25 % of WP data
+mean: 0.591; Balance: 0.557) compared to NB (G-mean: 0.435; Balance: 0.437). AdaCost,
+a cost-sensitive learning approach, is the second best predictor.
+In Table 6, the median performance values of classification models using 10 % of WP
+data in terms of PD and PF are shown. The performance results among six classification
+models are consistent with the results using 5 % of WP data.
+In Table 7, G-mean and Balance are used as performance measures for classification
+models using 10 % of WP data. The performance results are similar to the results using
+5 % of WP data. TCSBoost outperforms other classification models overall.
+Table 8 shows the median performance values of classification models using 25 % of
+WP data in terms of PD and PF. The performance results among six predictors are consistent
+with the results using 5 and 10 % of WP data.
+Table 9 shows G-mean and Balance values used as performance measures for classification
+models using 25 % of WP data. The performance results are similar to the results
+using 5 and 10 % of WP data. The overall performance of TCSBoost is superior to those of
+other classification models.
+5.1 RQ1
+123
+The following RQ1 is answered in this subsection.
+•
+RQ1: Is the combination of the transfer learning and the cost-sensitive learning more
+effective than each of them alone for CPDP?
+Software Qual J (2017) 25:235-272
+255
+We analyzed the performance results based on the research of D'Ambros et al. (2011)
+and Menzies et al. (2010), evaluating the variability of the predictors across multiple runs.
+The first, second (median), and third quartile of each CP case were calculated and sorted by
+their medians and then displayed by using mini box plot. A bar represents the first-third
+quartile range and a circle indicates the median. The minimum and maximum values are
+not displayed. For each performance measure, the 30 data points for each target project
+were merged. Four hundred and fifty data points for 15 projects are used to compute the
+first, second, and third quartile. The performance results for individual projects using 5 %
+of WP data are illustrated in Appendix. To investigate which predictors are better than
+others, the Wilcoxon rank-sum test (Wilcoxon 1945) at a 1 % significance level was
+performed. In addition, A-statistics effect size test (Vargha and Delaney 2000) recommended
+by (Arcuri and Briand 2011) was performed to evaluate the magnitude of the
+improvement. Based on the guidelines from Vargha and Delaney (2000), the A-statistics
+greater than 0.64 for PD, G-mean, and Balance (or less than 0.36 for PF) indicates a
+medium effect size. For the two tests, 450 data points for 15 projects were used.
+Figures 3, 4, and 5 show mini box plots of median PD, PF, G-mean, and Balance values
+of six models for all the projects using 5, 10, and 25 % of WP data, sorted by median.
+Tables 10, 11, and 12 show the comparison of TCSBoost with classification models
+using 5, 10, and 25 % of WP data, based on the Wilcoxon's rank-sum test at a 1 %
+significance level and A-statistics effect size test. The boldface in the table shows the
+1
+0.8
+0.6
+D
+P0.4
+0.2
+0
+1
+0.8
+0.6
+D
+P0.4
+0.2
+0
+1
+0.8
+0.6
+F
+P0.4
+0.2
+0
+1
+0.8
+0.6
+F
+P0.4
+0.2
+0
+1
+0.8
+an0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+ae0.6
+m
+-G0.4
+0.2
+0
+ftrssneooB iltrkaeF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+r r
+ftrssneooB iltrkaeF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+r r
+t
+TE ltre s
+o
+tsooB tso SOM ikaF frseoB
+TSC daAC +BN ruB ranT BN
+t
+TE ltre s
+o
+tsooB tso SOM ikaF frseoB
+TSC daAC +BN ruB ranT BN
+Fig. 3 Mini box plots of median PD, PF, G-mean, and Balance values of six models over 15 data sets using
+5 % WP data
+tfrssooenB litrkeaF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+r r
+ftrsseoonB litrkeaF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+r r
+t
+s
+tsooB tso TSEOM iltrkaeF frsoeoB
+TSC daAC +BN ruB BN ranT
+Fig. 4 Mini box plots of median PD, PF, G-mean, and Balance values of six models over 15 data sets using
+10 % WP data
+1
+0.8
+ce0.6
+n
+a
+la0.4
+B
+0.2
+0
+1
+0.8
+cen0.6
+a
+l
+aB0.4
+0.2
+0
+t
+s
+tsooB tso TESOM iltrkeaF frsooenB
+TSC daAC +BN ruB BN raT
+123
+256
+1
+0.8
+0.6
+D
+P0.4
+0.2
+0
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+1
+0.8
+0.6
+F
+P0.4
+0.2
+0
+0.001
+0.95
+0.001
+0.95
+0.001
+0.86
+0.001
+0.88
+0.001
+0.95
+0.001
+0.94
+0.001
+0.86
+0.001
+0.89
+0.001
+0.84
+0.001
+0.87
+0.001
+0.71
+0.001
+0.74
+0.001
+0.84
+0.001
+0.87
+0.001
+0.70
+0.001
+0.73
+1
+0.8
+an0.6
+e
+-m0.4
+G
+0.2
+0
+0.001
+0.32
+0.001
+0.16
+0.001
+0.76
+0.001
+0.77
+0.001
+0.31
+0.001
+0.16
+0.001
+0.75
+0.001
+0.76
+Software Qual J (2017) 25:235-272
+1
+0.8
+ce0.6
+n
+a
+la0.4
+B
+0.2
+0
+0.001
+0.65
+0.001
+0.68
+0.001
+0.60
+0.001
+0.63
+0.001
+0.64
+0.001
+0.68
+0.001
+0.58
+0.001
+0.61
+0.001
+0.35
+0.001
+0.34
+0.001
+0.80
+0.001
+0.82
+0.001
+0.21
+0.001
+0.21
+0.001
+0.83
+0.001
+0.84
+ftrrsseoonB litrrkaeF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+tfrrssooenB litrrkeaF tsooB tso TEOM
+aT uB TSC daAC +BSN BN
+t
+tsooB tso iltrkaeF +TSEOM frsseonoB
+TSC daAC ruB BN BN raT
+t
+tsooB tso iltrkeaF +TESOM frssooenB
+TSC daAC ruB BN BN raT
+Fig. 5 Mini box plots of median PD, PF, G-mean, and Balance values of six models over 15 data sets using
+25 % WP data
+Table 10 Comparison of TCSBoost with classification models using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 11 Comparison of TCSBoost with classification models using 10 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+significantly better result of TCSBoost with p value \ 0.01 or A-statistics [ 0.64 (For PF,
+A-statistics \ 0.36).
+In Table 10, the Wilcoxon's rank-sum test showed that the differences in G-mean and Balance
+values between TCSBoost and other predictors were statistically significant with
+p value 0.001. However, in case of AdaCost, the effect size for G-mean and Balance is 0.6 and
+0.63, respectively, indicating a small effect. In this case, we additionally consider PD values for
+the evaluation of H1, as we describe in Sect. 4. In terms of PD, the effect size is 0.65, indicating a
+medium effect. Therefore, we reject H10. In cases of 10 and 25 % of WP data, H1 can be
+123
+Software Qual J (2017) 25:235-272
+257
+Table 12 Comparison of TCSBoost with classification models using 25 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+0.001
+0.95
+0.001
+0.94
+0.001
+0.87
+0.001
+0.90
+0.001
+0.84
+0.001
+0.86
+0.001
+0.71
+0.001
+0.73
+0.001
+0.30
+0.001
+0.14
+0.001
+0.75
+0.001
+0.77
+0.001
+0.65
+0.001
+0.67
+0.001
+0.61
+0.001
+0.64
+0.001
+0.16
+0.001
+0.15
+0.001
+0.87
+0.001
+0.88
+evaluated in the same way. Noticeably, the G-mean and Balance performance of TCSBoost
+shows the least variability, indicating that its performance is stable regardless of WP data.
+The experimental results show that TCSBoost provides significantly higher defect
+prediction power than those of the models we compared with. TCSBoost is worse than
+other classification models in terms of PF. However, it shows better performance in terms
+of PD, G-mean and Balance. PD is considered more valuable than PF. Thus, the combination
+of the transfer learning and the cost-sensitive learning can be considered a practical
+approach that can effectively identify defects.
+5.2 RQ2
+The following RQ2 is addressed in this subsection.
+•
+RQ2: Is a small amount of WP data not sufficient to build a WPDP model effective for
+CPDP?
+In Figs. 6, 7, 8, and 9, mini box plots of median PD, PF, G-mean, and Balance values of
+six models over 15 data sets using 5, 10, and 25 % of WP data are shown.
+Tables 13, 14, and 15 show the comparison of the model using 25 % of WP data with
+the model using 5 or 10 % of WP data. The boldface in the table shows the significantly
+better result of the model using 25 % of WP data with p value \ 0.01 or A-statistics [ 0.64
+(For PF, A-statistics \ 0.36).
+In Tables 13, 14, and 15, the Wilcoxon's rank-sum test showed that the difference in
+performance values between 25 and 5 % of WP data was not statistically significant, with
+p value [ 0.01. The case between 25 and 10 % of WP data was the same as well.
+Therefore, we fail to reject H20. The performances of all predictors except for TransferBoost
+remain unchanged as the percentage of WP data increase. The performance of
+1
+0.8
+D0.6
+P0.4
+0.2
+1
+0.8
+D0.6
+P0.4
+0.2
+1
+0.8
+D0.6
+P0.4
+0.2
+1
+0.8
+D0.6
+P0.4
+0.2
+1
+0.8
+D0.6
+P0.4
+0.2
+0 5 10 25
+NB
+0 5 10 25
+NB+SMOTE
+0 5 10 25
+Burak Filter
+0 5 10 25
+AdaCost
+0 5 10 25
+TransferBoost
+0 5 10 25
+TCSBoost
+Fig. 6 Mini box plots of median PD values of six models over 15 data sets using 5, 10, and 25 % WP data
+1
+0.8
+D0.6
+P0.4
+0.2
+123
+10 25
+NB
+10 25
+NB
+10 25
+NB
+258
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5
+Fig. 8
+data
+Table 13
+WP data
+NB
+25 % vs.
+PD
+PF
+G-mean
+Balance
+123
+Fig. 7
+Mini box plots of median PF values of six models over 15 data sets using 5, 10, and 25 % WP data
+Mini box plots of median G-mean values of six models over 15 data sets using 5, 10, and 25 % WP
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5 10 25
+NB+SMOTE
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5 10 25
+Burak Filter
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5 10 25
+NB+SMOTE
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5 10 25
+Burak Filter
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5 10 25
+NB+SMOTE
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5 10 25
+Burak Filter
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5 10 25
+AdaCost
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5 10 25
+AdaCost
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5 10 25
+AdaCost
+Software Qual J (2017) 25:235-272
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5 10 25
+TransferBoost
+1
+0.8
+F0.6
+P0.4
+0.2
+0 5 10 25
+TCSBoost
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5 10 25
+TransferBoost
+1
+0.8
+ane0.6
+-m0.4
+G
+0.2
+0 5 10 25
+TCSBoost
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5 10 25
+TransferBoost
+1
+0.8
+e
+cn0.6
+a
+laB0.4
+0.2
+0 5 10 25
+TCSBoost
+Fig. 9
+Mini box plots of median Balance values of six models over 15 data sets using 5, 10, and 25 % WP data
+Comparison of NB and NB ? SMOTE using 25 % of WP data with those using 5 and 10 % of
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+5 %
+0.882
+0.49
+0.856
+0.50
+0.859
+0.49
+0.912
+0.49
+10 %
+0.828
+0.49
+0.987
+0.49
+0.826
+0.49
+0.767
+0.49
+NB ? SMOTE
+25 % vs.
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+5 %
+0.647
+0.49
+0.418
+0.48
+0.886
+0.49
+0.682
+0.49
+10 %
+0.823
+0.49
+0.579
+0.48
+0.983
+0.50
+0.959
+0.50
+Software Qual J (2017) 25:235-272
+Table 14 Comparison of Burak Filter and AdaCost using 25 % of WP data with those using 5 and 10 % of
+WP data
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+Burak Filter
+25 % vs.
+PD
+PF
+G-mean
+Balance
+TransferBoost
+25 % vs.
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+5 %
+0.425
+0.51
+0.535
+0.51
+0.696
+0.50
+0.723
+0.50
+0.001
+0.63
+0.001
+0.61
+0.001
+0.41
+0.001
+0.41
+5 %
+10 %
+10 %
+0.468
+0.51
+0.434
+0.51
+0.947
+0.50
+0.933
+0.49
+0.001
+0.56
+0.069
+0.53
+0.110
+0.46
+0.101
+0.46
+AdaCost
+25 % vs.
+PD
+PF
+G-mean
+Balance
+TCSBoost
+25 % vs.
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+5 %
+0.685
+0.49
+0.915
+0.49
+0.973
+0.50
+0.996
+0.49
+5 %
+0.923
+0.49
+0.280
+0.47
+0.290
+0.52
+0.266
+0.52
+259
+10 %
+0.705
+0.49
+0.919
+0.50
+0.800
+0.49
+0.876
+0.49
+10 %
+0.611
+0.50
+0.257
+0.47
+0.126
+0.52
+0.096
+0.53
+Table 15 Comparison of TransferBoost and TCSBoost using 25 % of WP data with those using 5 and
+10 % of WP data
+TransferBoost decreases as the percentage of WP data increases. This indicates that simply
+adding a specific percentage of WP data may not help to enhance the prediction performance
+for CPDP. Thus, we assume that it is necessary to utilize a small amount of WP data
+systematically, aimed at providing the high prediction performance for CPDP.
+6 Threats to validity
+6.1 Construct validity
+The range between minimum and maximum values is used to compute the similarity
+weights. This method may not be sufficient for identifying the distributional characteristics
+between source and target projects.
+We assign classification costs differently according to the similarity weights based on
+the feature distributional characteristics and class imbalance. Depending on the distributional
+difference and class imbalance, the degree of increasing/decreasing the data weights
+is determined via the cost adjustment function. This mechanism may be too simple to
+reflect both the distributional difference and the class imbalance sufficiently.
+123
+260
+Software Qual J (2017) 25:235-272
+There are several configurations in the proposed algorithm, e.g., the maximum number
+of iteration (M), the penalty magnitude in each boosting iteration (k), and the cost factor
+(c). Since we have chosen single values for M, k, and c, experiments with other values may
+lead to different conclusions.
+6.2 External validity
+Open-source software project data from Promise repository were used to validate our
+proposed method. Our findings might not be generalizable to other closed software projects,
+due to their different distributional characteristics.
+6.3 Statistical conclusion validity
+We performed Wilcoxon's rank-sum test at a 1 % significance level to check statistically
+significant differences. It is usually recommended for comparing the performance between
+two classifiers. A-statistics effect size test is employed to evaluate the magnitude of
+improvement. This method is recommended for assessing randomized algorithms in
+software engineering (Arcuri and Briand 2011).
+7 Conclusion and future work
+Software defect prediction plays an important role in improving software quality by
+directing resource allocation to buggy modules. In cases where local data are not sufficient,
+CPDP employing defect data from other projects is used to improve the prediction performance.
+Typically, to tackle the distributional difference, the similarity weights based on
+distributional characteristics between the source and the target projects are computed and
+then transferred to build a classification model.
+Software defect data sets have the class imbalance problem. The imbalanced distribution
+can lead to poor prediction performance of specific models. Techniques known to be
+effective for dealing with the class imbalance are data sampling, cost-sensitive learning,
+and ensemble methods.
+Applicability of the cost-sensitive learning and a small amount of WP data for CPDP is
+investigated in this paper. We calculate the classification cost based on distributional similarity
+and class imbalance, and they are used to focus on/disregard instances that increase/decrease
+the prediction performance. In addition, we investigate whether a small amount of WP data can
+be used to enhance the prediction performance of six classification models for CPDP.
+Through Wilcoxon's rank-sum test, we show that TCSBoost considering distributional
+difference and the class imbalance is better in terms of the overall performance and the
+probability of detection (PD). Since our approach is particularly better in the PD and the
+overall performance (i.e., G-mean and Balance), it is practically useful in the context of
+software defect prediction. We show that simply adding a small amount of WP data for
+training may not be helpful for CPDP. To sum up, by directing resources on defective
+modules correctly, our approach can help reduce the cost of software quality assurance
+control.
+We can further enhance TCSBoost in several ways. Other transfer learning techniques
+that might be more effective for our approach can be studied. In addition, we can study
+whether there exist optimal class imbalance learning techniques for CPDP that maximize
+the PD while minimizing the PF.
+123
+Software Qual J (2017) 25:235-272
+261
+Acknowledgments This work was partly supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (Ministry of Science, ICT and Future Planning (MSIP)) (No. NRF2013R1A1A2006985)
+and Institute for Information & communications Technology Promotion (IITP) grant
+funded by the Korea government (MSIP) (No.R0101-15-0144, Development of Autonomous Intelligent
+Collaboration Framework for Knowledge Bases and Smart Devices).
+Appendix
+Figures 10, 11, 12, and 13 show mini box plots of median PD, PF, G-mean, and Balance
+values of six models for each target project over 15 data sets using 5 % of WP data.
+Tables 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, and 30 show the comparison of
+TCSBoost with classification models for each target project using 5 % of WP data. The
+boldface in the table shows the significantly better result of TCSBoost with p value\0.01
+or A-statistics [ 0.64 (For PF, A-statistics \ 0.36).
+ant
+arc
+camel
+elearn
+jedit
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+D
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+t
+s
+r o E
+e o t T
+ilt rB so O t
+F fe o M so
+k s B S C
+ra n S + a
+u ra C B d B
+B T T N A N
+redactor
+r o E
+e o t T
+ilt rB so O t
+F fe o M so
+k s B S C
+ra n S + a
+u ra C B d B
+B T T N A N
+xerces
+t
+s
+t
+s
+r o E
+e o t T
+ilt rB so O t
+F fe o M so
+k s B S C
+ra n S + a
+u ra C B d B
+B T T N A N
+123
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+D
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+t
+s
+o r E
+o t te T
+e s so li
+rB t O
+f o o F M
+s C B k S
+n a S ra +
+ra d C u B B
+T A T B N N
+log4j
+t
+s
+o r E
+o te t T
+rB il
+e F soo tso M
+O
+f
+s k B C S
+ran rua S a +
+C d B B
+T B T A N N
+synapse
+t
+s
+r o E
+e o t T
+ilt r O
+F eB soo tso M
+f
+k s B C S
+ra n S a +
+u ra C d B B
+B T T A N N
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+D
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+t
+s
+o r E
+o te ts T
+rB il O t
+fe F oo M so
+s k B S C
+ran rua SC +B ad B
+T B T N A N
+lucene
+t
+s
+r o E
+e o t T
+ilt r O
+F eB soo tso M
+f
+k s B C S
+ra n S a +
+u ra C d B B
+B T T A N N
+system
+t
+s
+o r E
+o e t T
+t
+rB il t s O
+fe F so oo M
+s k C B S
+ran rua da SC B B
++
+T B A T N N
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+D
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+t
+s
+o r E
+o te ts T
+rB il
+O t
+fe F oo M so
+s k B S C
+ran rua SC B B d
++ a
+T B T N N A
+poi
+t
+s
+r o E
+e o t T
+ilt r O
+F eB soo tso M
+f
+k s B C S
+ra n S a +
+u ra C d B B
+B T T A N N
+tomcat
+t
+s
+E o r
+T t o e
+O so rB t lit
+e s F
+M o f o
+S B s k
++ S n aC ra
+B C ra d B u
+N T T A N B
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+D
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+D
+P
+0.4
+0.2
+0
+t
+s
+r o E
+e o t T
+ilt t rB so O
+F so fe o M
+k B S
+ra aC sn S +
+u d ra C B B
+B A T T N N
+prop-6
+t
+s
+o r E
+o te t T
+rB il O
+e F soo tso M
+f
+s k B C S
+ran rua S a +
+C d B B
+T B T A N N
+xalan
+t
+s
+o r E
+o te t T
+e F soo tso M
+rB il O
+f
+s k B C S
+ran rua S a +
+C d B B
+T B T A N N
+Fig. 10 Mini box plots of median PD values of six models over 15 data sets using 5 % WP data
+t
+s
+o r E
+o t te T
+reB ts so li O
+f o o F M
+s C B k S
+n a S ra +
+ra d C u B B
+T A T B N N
+log4j
+t
+s
+oo r E
+te t T
+e F soo tso M
+rB il O
+f
+s k B C +S
+ran rua C d B B
+S a
+T B T A N N
+t
+s
+oo r E
+te ts T
+rB il O t
+fe F oo M so
+s k B S C
+ran rua C B d B
+S + a
+T B T N A N
+lucene
+t
+s
+oo r E
+te t T
+e F soo tso M
+rB il O
+f
+s k B C +S
+ran rua C d B B
+S a
+T B T A N N
+t
+s
+oo r E
+te t T
+e F soo tso M
+rB il O
+f
+s k B C +S
+ran rua C d B B
+S a
+T B T A N N
+poi
+t
+s
+r o E
+e o t T
+lit r O
+F feB soo tso M
+k s B C +S
+ra n S a
+u ra C d B B
+B T T A N N
+synapse system tomcat
+t
+s
+r o E
+te t o T
+li so rB t O
+F o fe so M
+k B s C +S
+rau SC rna da B B
+B T T A N N
+t
+s
+oo re t T
+E
+t
+rB il t s
+F s o O
+e
+fs k o o M
+C B S
+ran rua da C B B
+S +
+T B A T N N
+t
+s
+o r E
+o t e T
+rB so lit t O
+fe oB kF so M
+sn C +S
+a S ra a
+r C u d B B
+T T B A N N
+Fig. 11 Mini box plots of median PF values of six models over 15 data sets using 5 % WP data
+Software Qual J (2017) 25:235-272
+ant
+arc
+camel
+elearn
+jedit
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+262
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+123
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+1
+0.8
+0.6
+F
+0.4
+P
+0.2
+0
+1
+0.8
+0.6
+F
+P
+0.4
+0.2
+0
+t
+s
+r o E
+te t o T
+li so rB O t
+s
+F o fe M o
+k B s S C
+rau SC rna +B ad B
+B T T N A N
+t
+s
+r o E
+e o t T
+lit rB so O ts
+F fe o M o
+k s B S C
+ra n S + a
+u ra C B d B
+B T T N A N
+prop-6 redactor
+t
+s
+oo r E
+te t T
+e F soo tso M
+rB il O
+f
+s k B C +S
+ran rua C d B B
+S a
+T B T A N N
+xalan
+t
+s
+oo r E
+te t T
+e F soo tso M
+rB il O
+f
+s k B C +S
+ran rua C d B B
+S a
+T B T A N N
+t
+s
+oo r E
+te ts T
+rB il O t
+fe F oo M so
+s k B S C
+ran rua C B d B
+S + a
+T B T N A N
+xerces
+t
+s
+r o E
+e o t T
+lit rB so O ts
+F fe o M o
+k s B S C
+ra n S + a
+u ra C B d B
+B T T N A N
+Software Qual J (2017) 25:235-272
+263
+ant
+arc
+camel
+elearn
+jedit
+1
+0.8
+n
+a0.6
+e
+m
+0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+t
+s
+E r o
+t TO tso lite roB
+so M o F fe
+aC +S SB rka sn
+d B C u B ra
+A N T B N T
+lucene
+t
+s
+r o E
+te t o T
+F soo ts re M
+li B O
+o f
+k B C sn +S
+ra S a
+u C d ra B B
+B T A T N N
+t
+s
+E r o
+t T te o
+soo tso M F fe
+O il rB
+BS aC +S rka sn
+C d B u ra B
+T A N B T N
+log4j
+t
+s
+r E o
+t te T o
+sooB tsoC ikaF +SM f
+l O rB
+e
+s
+n
+S a r
+C d u B B ra
+T A B N N T
+synapse system
+t
+s
+E o r
+t TO roB ts ilte
+s M fe oo F
+o
+k
+aC +S sn SB a
+r
+d B ra C B u
+A N T T N B
+t
+s
+r E o
+t te T o
+O rB
+tso soo liF
+C B k S s
+a S ra + n
+d C u B B ra
+A T B N N T
+M fe
+1
+0.8
+n
+a0.6
+e
+m
+0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+t
+s
+E r o
+T t te o
+O t so li rB
+M so o F fe
+S C B k s
++ a S ra n
+B B d C u ra
+N N A T B T
+poi
+t
+s
+r o E
+tsoo tso lite roB TO
+F fe M
+B C ka sn +S
+S a r
+C d u ra B B
+T A B T N N
+tomcat
+t
+s
+E o r
+T t oB ilte
+OM soo ts re F
+o f
++S BS aC sn rka
+B C d ra B u
+N T A T N B
+1
+0.8
+n
+a0.6
+e
+m
+0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+t
+s
+r E o
+te ts T o
+t il O rB
+s F oo M fe
+oaC rka S + n
+B S s
+d u C B ra B
+A B T N T N
+prop-6
+t
+s
+r E o
+te t T o
+F soo tso M e
+il O rB
+f
+rka SB aC +S n
+s
+u C d B B ra
+B T A N N T
+xalan
+t
+s
+E r o
+TO tso t ilte roB
+M o s F fe
+S B o k s
++ S aC ra n
+B C B d u ra
+N T N A B T
+1
+0.8
+n
+a0.6
+e
+m
+0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+1
+0.8
+n
+a0.6
+e
+m
+-0.4
+G
+0.2
+0
+t
+s
+r E o
+te t T o
+li O rB
+F soo tso
+M fe
+k B C +S sn
+ra S a
+u C d B ra B
+B T A N T N
+redactor
+t
+s
+E r o
+t T te o
+soo tso M F fe
+O il rB
+BS aC +S rka sn
+C d B u B ra
+T A N B N T
+xerces
+t
+s
+E o r
+t TO roB lite
+soo tso M fe F
+k
+B C +S sn a
+S a r
+C d B ra B u
+T A N T N B
+Fig. 12 Mini box plots of median G-mean values of six models over 15 data sets using 5 % WP data
+123
+Software Qual J (2017) 25:235-272
+ant
+arc
+camel
+elearn
+jedit
+Fig. 13 Mini box plots of median Balance values of six models over 15 data sets using 5 % WP data
+Table 16 Comparison of TCSBoost with classification models for the ant project using 5 % of WP data
+TCSBoost vs.
+NB NB ? SMOTE Burak Filter AdaCost TransferBoost
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+t
+s
+r o E
+e t o T
+lt
+F s so rB O
+i t
+k o o fe M
+C B s S
+ra a
+u d SC rna +B B
+B A T T N N
+prop-6
+t
+s
+r E o
+te t T o
+F soo tso M e
+il O rB
+f
+rka BS aC +S n
+s
+u C d B B ra
+B T A N N T
+xalan
+t
+s
+r E o
+te t T o
+F soo tso
+il O rB
+M fe
+k B C +S sn
+ra S a
+u C d B ra B
+B T A N T N
+redactor
+t
+s
+E r o
+t T te o
+soo tso OM ilF freB
+SB aC +S rka n
+s
+C d B u B ra
+T A N B N T
+xerces
+t
+s
+E r o
+TO tso ts ilte roB
+M o o F fe
+S B C ka sn
++ S a r
+B B C d u ra
+N N T A B T
+t
+s
+E o r
+tso ts TO roB lite
+o o M fe F
+B C +S sn ka
+S a r
+C d B ra B u
+T A N T N B
+0.001 0.001 0.108
+0.96 0.20 0.38
+0.001 0.001 0.180
+0.80 0.2 0.39
+0.001 0.001 0.001
+1.0
+1.0
+0.83 0.97
+0.97 0.94
+264
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+t
+s
+r E o
+t te T o
+so ts li O rB
+F M fe
+oB oC ka + n
+S s
+S a r
+C d u B ra B
+T A B N T N
+log4j
+t
+s
+r E o
+t te T o
+so ts il O rB
+F M fe
+oB oC ka +S s
+n
+S a r
+C d u B B ra
+T A B N N T
+synapse
+t
+s
+E o r
+T o t e
+tso OM freB soo litF
+k
+aC +S sn SB a
+r
+d B ra C B u
+A N T T N B
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+t
+s
+E r o
+t T te o
+so ts O il rB
+o o M F fe
+B C S k s
+S a + ra n
+C d B u B ra
+T A N B N T
+lucene
+t
+s
+r o E
+te t o T
+il so ts rB O
+F o o fe M
+k B C sn +S
+ra S a
+u C d ra B B
+B T A T N N
+system
+t
+s
+r E o
+t te T o
+ts so li O rB
+o o F M fe
+C B k S s
+a S ra + n
+d C u B B ra
+A T B N N T
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+t
+s
+E r o
+T t te o
+O t so li rB
+M so o F fe
+S C B k s
++ a S ra n
+B B d C u ra
+N N A T B T
+poi
+t
+s
+r o E
+t e o T
+so ts lit rB O
+o o F fe M
+B C ka sn +S
+S a r
+C d u ra B B
+T A B T N N
+tomcat
+t
+s
+E o r
+TO tso ts roB ilte
+e F
+M o o f
++S SB aC sn rka
+B C d ra B u
+N T A T N B
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+1
+0.8
+e
+c0.6
+n
+a
+l
+a0.4
+B
+0.2
+0
+PD p value 0.001 0.001
+PF p value 0.001 0.001
+G-mean p value 0.001 0.001
+A-statistics 1.0 1.0
+A-statistics 1.0 1.0
+A-statistics 1.0 1.0
+A-statistics 1.0 1.0
+123
+Balance p value 0.001 0.001
+0.001 0.001 0.001
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.97
+0.001
+1.0
+0.001
+0.17
+0.053
+0.35
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.958
+0.50
+0.003
+0.71
+0.001
+0.98
+0.001
+1.0
+0.001
+0.18
+0.864
+0.48
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+Software Qual J (2017) 25:235-272
+265
+Table 17 Comparison of TCSBoost with classification models for the arc project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 18 Comparison of TCSBoost with classification models for the camel project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 19 Comparison of TCSBoost with classification models for the e-learning project using 5 % of WP
+data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+0.001
+0.0
+0.001
+0.0
+0.001
+0.99
+0.001
+0.97
+0.001
+0.17
+0.001
+0.0
+0.001
+0.99
+0.001
+1.0
+0.001
+0.02
+0.001
+0.0
+0.645
+0.53
+0.001
+0.71
+0.174
+0.6
+0.182
+0.6
+0.228
+0.41
+0.416
+0.56
+0.001
+0.93
+0.001
+0.96
+0.001
+0.18
+0.946
+0.50
+0.001
+0.72
+0.001
+0.83
+0.117
+0.61
+0.075
+0.63
+0.006
+0.3
+0.007
+0.3
+0.001
+0.87
+0.001
+0.89
+0.001
+0.25
+0.026
+0.33
+0.140
+0.61
+0.016
+0.68
+0.808
+0.51
+0.400
+0.56
+0.001
+0.80
+0.001
+0.79
+123
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.023
+0.67
+0.001
+0.95
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+Table 20 Comparison of TCSBoost with classification models for the jedit project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+0.001
+0.0
+0.001
+0.04
+0.001
+0.0
+0.001
+0.0
+0.001
+0.0
+0.001
+0.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.0
+0.001
+0.03
+0.001
+0.0
+0.001
+0.0
+Software Qual J (2017) 25:235-272
+0.001
+0.97
+0.001
+1.0
+0.917
+0.5
+0.001
+0.86
+0.053
+0.35
+0.238
+0.41
+0.257
+0.58
+0.001
+0.73
+0.004
+0.7
+0.007
+0.7
+0.001
+0.96
+0.001
+0.92
+0.001
+0.74
+0.001
+0.78
+0.001
+0.81
+0.001
+0.81
+0.006
+0.3
+0.001
+0.26
+0.001
+1.0
+0.001
+0.99
+0.396
+0.43
+0.518
+0.45
+0.001
+0.77
+0.001
+0.77
+266
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+123
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+Table 21 Comparison of TCSBoost with classification models for the log4j project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 22 Comparison of TCSBoost with classification models for the lucene project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+Software Qual J (2017) 25:235-272
+267
+Table 23 Comparison of TCSBoost with classification models for the poi project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 24 Comparison of TCSBoost with classification models for the prop-6 project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 25 Comparison of TCSBoost with classification models for the redaktor using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+0.001
+0.0
+0.001
+0.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.20
+0.001
+0.12
+0.130
+0.38
+0.153
+0.39
+0.001
+0.0
+0.001
+0.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.99
+0.001
+0.99
+0.001
+0.86
+0.001
+0.91
+0.071
+0.63
+0.007
+0.7
+0.001
+0.78
+0.001
+0.79
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.174
+0.39
+0.174
+0.39
+0.001
+0.93
+0.001
+0.94
+0.001
+0.13
+0.001
+0.13
+0.001
+0.96
+0.001
+0.99
+0.165
+0.4
+0.180
+0.4
+0.001
+0.98
+0.001
+0.97
+123
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.0
+0.001
+0.0
+0.001
+0.87
+0.001
+1.0
+0.001
+0.74
+0.001
+0.74
+0.279
+0.57
+0.001
+0.97
+0.001
+0.17
+0.001
+0.20
+Table 27 Comparison of TCSBoost with classification models for the systemdata project using 5 % of WP
+data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+Table 28 Comparison of TCSBoost with classification models for the tomcat project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+0.001
+0.10
+0.001
+0.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.0
+0.001
+0.0
+0.001
+0.78
+0.001
+0.75
+0.001
+1.0
+0.087
+0.62
+0.001
+1.0
+0.001
+1.0
+0.001
+0.93
+0.001
+0.83
+0.001
+0.16
+0.001
+0.16
+0.001
+0.06
+0.001
+0.06
+0.367
+0.56
+0.383
+0.56
+0.001
+0.81
+0.958
+0.50
+0.001
+0.76
+0.001
+0.86
+0.749
+0.52
+1
+0.5
+1
+0.5
+1
+0.5
+0.008
+0.31
+0.133
+0.38
+0.001
+0.79
+0.001
+0.79
+0.561
+0.54
+0.411
+0.43
+0.001
+0.8
+0.001
+0.86
+Software Qual J (2017) 25:235-272
+Table 26 Comparison of TCSBoost with classification models for the synapse project using 5 % of WP
+data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+268
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+123
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+Software Qual J (2017) 25:235-272
+269
+Table 29 Comparison of TCSBoost with classification models for the xalan project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+0.001
+0.0
+0.001
+0.0
+0.001
+1.0
+0.001
+1.0
+0.001
+0.0
+0.001
+0.0
+0.001
+0.99
+0.001
+0.99
+0.001
+1.0
+0.001
+0.96
+0.001
+0.92
+0.370
+0.56
+0.001
+0.98
+0.001
+0.99
+0.09
+0.62
+0.007
+0.70
+0.001
+0.16
+0.001
+0.10
+0.001
+0.99
+0.001
+0.97
+0.055
+0.35
+0.019
+0.32
+0.001
+0.88
+0.001
+0.89
+PD
+PF
+G-mean
+Balance
+PD
+PF
+G-mean
+Balance
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+p value
+A-statistics
+0.001
+1.0
+0.001
+1.0
+0.646
+0.53
+0.001
+0.22
+0.001
+1.0
+0.001
+1.0
+0.001
+0.98
+0.001
+0.98
+0.001
+1.0
+0.001
+1.0
+0.001
+0.0
+0.001
+0.0
+0.001
+0.98
+0.001
+0.96
+0.001
+0.86
+0.001
+0.87
+Table 30 Comparison of TCSBoost with classification models for the xerces project using 5 % of WP data
+TCSBoost vs.
+NB
+NB ? SMOTE
+Burak Filter
+AdaCost
+TransferBoost
+References
+Arcuri, A., & Briand, L. (2011). A practical guide for using statistical tests to assess randomized algorithms
+in software engineering. In 33rd International Conference on Software Engineering (ICSE) (pp. 1-10).
+doi:10.1145/1985793.1985795.
+Arisholm, E., Briand, L. C., & Johannessen, E. B. (2010). A systematic and comprehensive investigation of
+methods to build and evaluate fault prediction models. Journal of Systems and Software, 83(1), 2-17.
+doi:10.1016/j.jss.2009.06.055.
+Bansiya, J., & Davis, C. G. (2002). A hierarchical model for object-oriented design quality assessment.
+IEEE Transactions on Software Engineering, 28(1), 4-17. doi:10.1109/32.979986.
+Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE : Synthetic minority oversampling
+technique. Journal of Artificial Intelligence Research, 16, 321-357.
+Chen, L., Fang, B., Shang, Z., & Tang, Y. (2015). Negative samples reduction in cross-company software
+defects prediction. Information and Software Technology, 62, 67-77. doi:10.1016/j.infsof.2015.01.014.
+Chidamber, S. R., & Kemerer, C. F. (1994). A metrics suite for object oriented design. IEEE Transactions
+on Software Engineering, 20(6), 476-493. doi:10.1109/32.295895.
+D'Ambros, M., Lanza, M., & Robbes, R. (2011). Evaluating defect prediction approaches: A benchmark and
+an extensive comparison. Empirical Software Engineering,. doi:10.1007/s10664-011-9173-9.
+Dai, W., Yang, Q., Xue, G., & Yu, Y. (2007). Boosting for transfer learning. In Proceedings of the 24th
+international conference on Machine learning (pp. 193-200). http://dl.acm.org/citation.cfm?id=
+1273521. Accessed February 25, 2014.
+Dejaeger, K. (2013). Toward Comprehensible Software Fault Prediction Models Using Bayesian Network
+Classifiers. IEEE Transactions on Software Engineering, 39(2), 237-257. http://ieeexplore.ieee.org/
+xpls/abs_all.jsp?arnumber=6175912. Accessed February 25, 2014.
+123
+270
+Software Qual J (2017) 25:235-272
+Eaton, E., & DesJardins, M. (2011). Selective transfer between learning tasks using task-based boosting.
+AAAI, 337-342. http://www.aaai.org/ocs/index.php/AAAI/AAAI11/paper/viewFile/3752@misc/3915.
+Accessed June 11, 2014.
+Elish, K. O., & Elish, M. O. (2008). Predicting defect-prone software modules using support vector
+machines. Journal of Systems and Software, 81(5), 649-660. doi:10.1016/j.jss.2007.07.040.
+Fan, W., Stolfo, S., Zhang, J., & Chan, P. (1999). AdaCost: misclassification cost-sensitive boosting. ICML.
+http://scholar.google.com/scholar?hl=en&btnG=Search&q=intitle:AdaCost?:
+?Misclassification?Cost-sensitive?Boosting#0. Accessed November 25, 2014.
+Freund, Y., & Schapire, R. E. (1997). A decision-theoretic generalization of on-line learning and an
+application to boosting. Journal of Computer and System Sciences, 55(1), 119-139. doi:10.1006/jcss.
+1997.1504.
+Grbac, T., Mausa, G., & Basic, B. (2013). Stability of Software defect prediction in relation to levels of data
+imbalance. SQAMIA. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.402.8978&rep=
+rep1&type=pdf. Accessed November 13, 2014.
+Hall, T., Beecham, S., Bowes, D., Gray, D., & Counsell, S. (2012). A systematic literature review on fault
+prediction performance in software engineering. IEEE Transactions on Software Engineering, 38(6),
+1276-1304. doi:10.1109/TSE.2011.103.
+Hall, M., Frank, E., & Holmes, G. (2009). The WEKA data mining software: An update. ACM SIGKDD
+Explorations Newsletter, 11(1), 10-18. http://dl.acm.org/citation.cfm?id=1656278. Accessed November
+13, 2014.
+He, Z., Shu, F., Yang, Y., Li, M., & Wang, Q. (2011). An investigation on the feasibility of cross-project
+defect prediction. Automated Software Engineering,. doi:10.1007/s10515-011-0090-3.
+Henderson-Sellers, B. (1995). Object-oriented metrics: measures of complexity, Prentice-Hall, Inc.
+Jureczko, M., & Madeyski, L. (2010). Towards identifying software project clusters with regard to defect
+prediction. In Proceedings of the 6th international conference on predictive models in software
+engineering-PROMISE '10, 1. doi:10.1145/1868328.1868342.
+Jureczko, M., & Spinellis, D. (2010). Using object-oriented design metrics to predict software defects. In
+Models and Methods of System Dependability. Oficyna Wydawnicza Politechniki Wrocławskiej (pp.
+69-81).
+Ma, Y., Luo, G., Zeng, X., & Chen, A. (2012). Transfer learning for cross-company software defect
+prediction. Information and Software Technology, 54(3), 248-256. doi:10.1016/j.infsof.2011.09.007.
+Martin, R. (1994). OO design quality metrics. An analysis of dependencies, 12, 151-170.
+McCabe, T. J. (1976). A complexity measure. IEEE Transactions on Software Engineering SE, 2(4),
+308-320. doi:10.1109/TSE.1976.233837.
+Mei-Huei, T., Ming-Hung, K., & Mei-Hwa, C. (1999). An empirical study on object-oriented metrics. In
+Proceedings sixth international software metrics symposium (Cat. No.PR00403) (pp. 242-249). IEEE
+Computer Society. doi:10.1109/METRIC.1999.809745.
+Menzies, T., Caglayan, B., He, Z., Kocaguneli, E., Krall, J., Peters, F., & Turhan, B. (2012). The PROMISE
+Repository of empirical software engineering data. http://openscience.us/repo/.
+Menzies, T., Dekhtyar, A., Distefano, J., & Greenwald, J. (2007). Problems with precision: A response to
+''Comments on 'data mining static code attributes to learn defect predictors'''. IEEE Transactions on
+Software Engineering,. doi:10.1109/TSE.2007.70721.
+Menzies, T., Milton, Z., Turhan, B., Cukic, B., Jiang, Y., & Bener, A. (2010). Defect prediction from static
+code features: Current results, limitations, new approaches. Automated Software Engineering, 17(4),
+375-407. doi:10.1007/s10515-010-0069-5.
+Nam, J., Pan, S. J., & Kim, S. (2013). Transfer defect learning. In 35th International Conference on
+Software Engineering (ICSE) (pp. 382-391). doi:10.1109/ICSE.2013.6606584.
+Ryu, D., Choi, O., & Baik, J. (2014). Value-cognitive boosting with a support vector machine for crossproject
+defect prediction. Empirical Software Engineering. doi:10.1007/s10664-014-9346-4.
+Shi, X., Fan, W., & Ren, J. (2008). Actively transfer domain knowledge. In Machine Learning and
+Knowledge Discovery in Databases, (60703110) (pp. 342-357). http://link.springer.com/chapter/10.
+1007/978-3-540-87481-2_23. Accessed November 29, 2014.
+Singh, Y., Kaur, A., & Malhotra, R. (2009). Empirical validation of object-oriented metrics for predicting
+fault proneness models. Software Quality Journal, 18(1), 3-35. doi:10.1007/s11219-009-9079-6.
+Tan, P.-N., Steinbach, M., & Kumar, V. (2005). Introduction to data mining. Journal of School Psychology,
+19, 51-56. doi:10.1016/0022-4405(81)90007-8.
+Tomek, I. (1976). Two modifications of CNN. IEEE Transaction Systems, Man and Cybernetics, 769-772.
+http://ci.nii.ac.jp/naid/80013575533/. Accessed January 26, 2015.
+123
+Software Qual J (2017) 25:235-272
+271
+Turhan, B., Menzies, T., Bener, A. B., & Di Stefano, J. (2009). On the relative value of cross-company and
+within-company data for defect prediction. Empirical Software Engineering, 14(5), 540-578. doi:10.
+1007/s10664-008-9103-7.
+Turhan, B., Tosun Mısırlı, A., & Bener, A. (2013). Empirical evaluation of the effects of mixed project data
+on learning defect predictors. Information and Software Technology, 55(6), 1101-1118. doi:10.1016/j.
+infsof.2012.10.003.
+Vargha, A., & Delaney, H. D. (2000). A critique and improvement of the CL common language effect size
+statistics of McGraw and Wong. Journal of Educational and Behavioral Statistics,. doi:10.3102/
+10769986025002101.
+Wang, S., Chen, H., & Yao, X. (2010). Negative correlation learning for classification ensembles. In The
+2010 International Joint Conference on Neural Networks (IJCNN) (pp. 1-8). doi:10.1109/IJCNN.2010.
+5596702.
+Wang, B. X., & Japkowicz, N. (2009). Boosting support vector machines for imbalanced data sets.
+Knowledge and Information Systems, 25(1), 1-20. doi:10.1007/s10115-009-0198-y.
+Wang, S., & Yao, X. (2013). Using class imbalance learning for software defect prediction. IEEE Transactions
+on Reliability, 62(2), 434-443. doi:10.1109/TR.2013.2259203.
+Wilcoxon, F. (1945). Individual comparisons by ranking methods. Biometrics Bulletin, 1(6), 80-83. http://
+www.jstor.org/stable/3001968. Accessed October 14, 2014.
+Yao, Y., & Doretto, G. (2010). Boosting for transfer learning with multiple sources. IEEE Computer Society
+Conference on Computer Vision and Pattern Recognition, 2010, 1855-1862. doi:10.1109/CVPR.2010.
+5539857.
+Zimmermann, T., Nagappan, N., Gall, H., Giger, E., & Murphy, B. (2009). Cross-project defect prediction. In
+Proceedings of the 7th joint meeting of the European software engineering conference and the ACM
+SIGSOFT symposium on The foundations of software engineering (p. 91). doi:10.1145/1595696.1595713.
+Duksan Ryu is a Ph.D. student in School of Computing, KAIST. He
+earned a Bachelor's degree in Computer Science from Hanyang
+University and a Master's dual degree in Software Engineering from
+KAIST and Carnegie Mellon University. His research areas are software
+defect prediction and software reliability engineering.
+Jong-In Jang is an M.S. student in School of Computing, KAIST. He
+earned a Bachelor's degree in School of Computing from KAIST. His
+research areas are software reliability engineering and requirements
+engineering.
+123
+272
+Software Qual J (2017) 25:235-272
+Jongmoon Baik received his M.S. degree and Ph.D. degree in Computer
+Science from University of Southern California in 1996 and
+2000, respectively. He received his B.S. degree in Computer Science
+and Statistics from Chosun University in 1993. He worked as a principal
+research scientist at Software and Systems Engineering Research
+Laboratory, Motorola Labs, where he was responsible for leading
+many software quality improvement initiatives. Currently, he is an
+associate professor in School of Computing at Korea Advanced
+Institute of Science and Technology (KAIST). His research activity
+and interest are focused on software six sigma, software reliability and
+safety, and software process improvement.
+123

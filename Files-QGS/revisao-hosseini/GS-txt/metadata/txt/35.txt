@@ -1,0 +1,5 @@
+Towards Logistic Regression Models for Predicting Fault-prone Code across Software Projects
+
+In this paper, we discuss the challenge of making logistic regression models able to predict fault-prone object- oriented classes across software projects. Several studies have obtained successful results in using design-complexity metrics for such a purpose. However, our data exploration indicates that the distribution of these metrics varies from project to project, making the task of predicting across projects difficult to achieve. As a first attempt to solve this problem, we employed simple log transformations for making design-complexity measures more comparable among projects. We found these transformations useful in projects which data is not as spread as the data used for building the prediction model.
+
+Logistics, Predictive models, Object oriented modeling, Open source software, Software measurement, Software engineering, Usability, Information science, Buildings, Testing

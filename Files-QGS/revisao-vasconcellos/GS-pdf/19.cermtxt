@@ -1,0 +1,589 @@
+Defining and Monitoring Strategically Aligned Software
+Improvement Goals
+Andrea Oliveira Soares Barreto and Ana Regina Rocha
+COPPE/UFRJ, Universidade Federal do Rio de Janeiro
+Caixa Postal 68511, CEP 21945-970, Rio de Janeiro, Brazil
+{ansoares,darocha}@cos.ufrj.br
+Abstract. Software engineers are always aiming at improving software processes
+and products. However, the adoption of these improvements on software
+organizations must be aligned to their strategic goals. Otherwise, these improvements
+may not improve the organization. However, to guarantee this
+alignment can be complex, since improvement initiatives would have to be
+planned and monitored considering aspects starting from strategic level and going
+all the way to the organization daily operations. Thus, this work presents an
+approach to define and monitor software improvement goals, which are decompositions
+of strategic goals and are related to software products or processes.
+Our approach comprises strategic, tactical and operational planning activities,
+always aiming at strategic alignment. As important tools to monitor the goals
+defined, software measurement and statistical process control are also considered.
+An infrastructure to monitor the goals is described, and also an experience
+of use of the approach at a Brazilian software development organization.
+Keywords: Software Improvement Goal, Strategic Planning, Software Process.
+1 Introduction
+The increase of demand for high quality software products has forced organizations to
+find out alternatives to improve their products, including the improvement of their
+software processes. However, the search for better software processes and products
+without aligning them to business goals can be insufficient. Software process improvement
+initiatives have to be consistent with business goals of an organization and
+also with its business strategy [1].
+Although the literature highlights the need for strategic alignment in software
+process improvement [2], [3], [4], [5], [6], achieving this alignment may be difficult.
+Even existent software reference models, such as CMMI-DEV [5], do not provide
+proper guidance on how organizations should define their processes based on their
+strategic priorities. As a result, although the practices suggested by the models may be
+successfully deployed in an organization, there is no guarantee that they will satisfy
+business goals [2]. Moreover, translating business goals into actions and more specific
+plans that can be enacted in projects can be difficult, mainly when there is no specification
+of the steps to be followed.
+M. Ali Babar, M. Vierimaa, and M. Oivo (Eds.): PROFES 2010, LNCS 6156, pp. 380-394, 2010.
+© Springer-Verlag Berlin Heidelberg 2010
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+381
+In this context, we define a software improvement goal as a decomposition of a
+business goal (i.e., it is strategically aligned) which is related to software products or
+processes and that can guide software process improvement.
+One of the ways an organization can control its processes is through the use of
+statistical process control - SPC. Applying SPC means using statistical methods to
+analyze processes and provide subsidies for its improvement [5]. Moreover, SPC
+practices are required by maturity models, like the CMMI-DEV, to achieve their
+higher maturity levels. Although SPC can be seen as a practice usually performed
+only by more mature organizations, it can be a powerful tool to determine whether
+goals are being achieved or not. However, if SPC is adopted in an organization without
+taking business goals into account, it is possible that the initiative does not satisfy
+or even conflict with them. In this context, planning software process improvement
+initiatives that are strategically aligned can be even harder.
+Software improvement goals must be measurable, making it possible to frequently
+check their achievement. If monitoring is not continuous, even if goals are strategically
+aligned, the effort to define suitable goals can be less beneficial, since it will not
+be possible to determine if they tend to be achieved. Nowadays, organizations have
+realized that monitoring and continuously analyzing business performance is crucial
+to achieve operational excellence, and to better align daily operations with long-term
+business strategies [7].
+In this context, we present an approach that aims to define and monitor software
+improvement goals promoting their alignment with business goals. Our approach
+defines a method to support strategic planning activities, tactical planning activities
+related to software, considering software improvement goals, SPC and software
+measurement planning, and also project planning activities related to the defined
+goals. Our approach also defines an infrastructure to monitor the defined goals.
+This paper is divided into six sections, including this introduction. Section 2 presents
+some background concepts and related work on strategic planning and software
+improvement goals. In Section 3 we present the proposed method to define software
+improvement goals and Section 4 describes the infrastructure to monitor the defined
+goals. Section 5 presents the experience of defining software improvement goals
+at a Brazilian software development organization. Finally, Section 6 presents some
+conclusions and future work.
+2 Strategic Planning and Software Improvement Goals
+According to Mintzberg et al. [8], strategic planning can be seen as the definition of
+goals, investments and plans based on the analysis of strengths, weaknesses, opportunities
+and threats related to the organization. Each organization can be analyzed in
+three different levels [9]:
+•
+Strategic or Top level: the highest level of the organization, responsible for
+identifying the business goals and performing strategic planning. This level
+aims at long term goals.
+382
+A.O.S. Barreto and A.R. Rocha
+•
+•
+Tactical or Middle level: the intermediate level responsible for linking the
+strategic and operational levels, defining tactical goals and performing tactical
+planning. This level aims at medium term goals.
+Operational or Low level: is the basis of the organization and is related to the
+actual accomplishment of tasks. In this level, operational planning is performed
+to define the tasks to be done. This level aims at short term goals.
+To accomplish strategic planning, one of the possible approaches is to use BSC Balanced
+Score Card [10], a framework for describing strategy and managing its
+execution, linking goals, actions and indicators. BSC recommends an analysis based
+on performance indicators using four perspectives: (i) Financial; (ii) Customer; (iii)
+Internal Business Process; and (iv) Learning and Growth.
+Aiming at aligning the efforts related to support business goals applied to the context
+of information technology (IT), COBIT - Control Objectives for Information
+Technology [11] was proposed. COBIT describes a set of generic business goals and
+a set of generic IT goals linked to business goals. Although COBIT is a synthesis of
+good practices about management, measurement and control of business and IT goals,
+it does not address specifically the software improvement.
+Some researchers have investigated how to support and improve strategic planning.
+Huang [12] presents an integrated approach for the BSC and a knowledge-based
+system to support strategic planning. In [13] the MECIMPLAN is presented as a
+methodology to support strategic planning using agents to generate a list of the most
+possible scenarios, considering some events and their influence and probability.
+To achieve what was established by strategic planning we have to implement the
+strategies at lower levels of the organization. This requires breaking down strategic
+planning into tactical planning that can be understood and enacted by the middle level
+[9]. In software organizations, some tactical goals can be related to software while
+others can be related to other issues like marketing, training and so on. The tactical
+goals that are related to software usually indicate the organization desires to improve
+its software processes and products. Thus, in this work, we are considering the tactical
+goals related to software as the software improvement goals.
+Although tactical planning addresses strategic planning translation to the middle
+level, the actions defined on the tactical level aim at medium term goals. These actions
+still have to be more detailed to allow their execution on the operational level,
+which is the operational planning purpose. Sometimes, projects are utilized as a
+mean to achieve strategic plan of an organization [14]. Specifically in software organizations,
+operational level is frequently arranged in software projects. Therefore,
+operational planning usually becomes project planning.
+In project planning, one of the first steps is to define project goals. Projects may
+have a wide variety of goals. They can also include cost, schedule, and quality requirements
+[14]. Project goals, as operational goals, provide the basis for measuring
+the progress toward meeting strategic goals [15].
+In addition to identify the strategic, tactical and operational goals, it is important to
+plan how to monitor and control the defined goals. The measurement of a goal is a
+way to check whether it has been achieved or not [15]. In software organizations, the
+control of the goals depends on software measures. Thus, these organizations also
+need to plan how to measure their software processes and products.
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+383
+An approach for software measurement is Goal Question Metric - GQM [16],
+which proposes to plan the measurement based on measurement goals. A variant of
+GQM is the Goal-Question-(Indicator)-Measure - GQ(I)M [17], a measurement
+method to guide the identification and definition of software measures to support
+business goals of the organization. This method defines ten steps to explicitly align
+software measures to business goals. Another software measurement approach is the
+GQM+ Strategies that provides mechanisms for explicitly linking software measurement
+goals, to higher-level goals for the software organization [18]. These software
+measurement approaches focus on measurement and they do not intend to guide the
+execution of strategic planning activities.
+Monitoring and controlling the processes is crucial. However it can be difficult to
+effectively monitor process data, analyze current status, detect and diagnose process
+anomalies, or take appropriate actions to control the processes [19]. As mentioned
+earlier, SPC can be used as a mean to monitor software processes. However, SPC may
+bring some extra complexity to the context of strategically aligned software improvements,
+since some extra steps need to be performed in this case.
+One of the possible ways to continuously monitor processes is to use agents. An
+agent is anything that can be viewed as perceiving its environment through sensors
+and acting upon that environment through effectors [20]. Huang et al. [7] propose an
+agent based system to support business performance monitoring and analysis. An
+agent based architecture to business performance monitoring is presented in [21].
+Although there are several works that deal with strategic planning, goals monitoring,
+measurement planning and SPC, these works usually do not address these issues
+together. We believe that an integrated approach that deals with the definition of
+strategic, tactical and project goals, considering SPC and software measurement, also
+supporting the monitoring of the defined goals would be of great value for organizations
+aiming at addressing these questions.
+3 Defining Strategically Aligned Software Improvement Goals
+Before the definition of software improvement goals, an organization needs to perform
+its strategic planning, which will provide guidelines to define these goals in a
+way that they are aligned with business goals. Our approach defines a method that
+describes steps to plan and monitor the strategic, tactical and operational levels. The
+method starts on the strategic level, as shown in Fig. 1.
+The characterization of the organization is necessary as a guide for the beginning
+of strategic planning, outlining the expected time period to perceive planning results,
+and defining the perspectives of the organization to be considered. In this step, the
+scope of planning and the intervals of short, medium and long term adopted for the
+organization, considering its specific characteristics are specified.
+To make it easier to establish the right focus on critical areas of the organization,
+some perspectives which focus on specific issues and are interrelated can be defined,
+making it possible to address each critical area in a balanced way. In our method, the
+characterization of the organization includes the definition of important perspectives
+for the organization. As an example, organizations can use the perspectives suggested
+by BSC.
+384
+A.O.S. Barreto and A.R. Rocha
+Fig. 1. Context of definition, monitoring and review strategic planning
+The next step is to perform strategic planning followed by tactical and operational
+planning. In the following sections we describe our method considering each level,
+i.e. strategic, tactical and operational (project). Throughout the description, some
+examples based on real situations are presented.
+3.1 Strategic Planning
+In our approach, strategic planning is performed by eight steps, as Fig. 2 illustrates.
+The first step is the definition of the mission and the vision of the organization, which
+will guide the definition of strategic goals. The mission of an organization represents
+its overall purpose and the vision describes what it would like to be, considering a
+determined time period [9]. After that, the strategic goals and their indicators must be
+defined. To make it possible to focus on critical areas of the organization, each strategic
+goal must be related to one perspective, among those that were specifically defined
+for the organization. To assure balanced perspectives, there must be at least one
+strategic goal for each perspective defined to the organization.
+The definition of a strategic goal must describe the following information: (i) Action:
+desired action, such as: increase, decrease, improve, maintain; (ii) Action target:
+what must be affected by the action, for example: revenue, client satisfaction, quality;
+(iii) Perspective: perspective to analyze the goal, such as financial. Table 1 shows
+some examples of strategic goals.
+In addition to identify the strategic goals, it is important to plan how to continuously
+monitor them. Therefore, indicators must be identified and related to each strategic
+goal defined. To promote pro-active monitoring, the description of the indicators
+specifies the target in three ranges of values: (i) Acceptable range: values are considered
+within the target and there is no risk of deviation around; (ii) Risk range: values
+are considered within the target, however, they indicate some risk of deviation around
+(potential deviation); and (iii) Unacceptable range: values are considered out of the
+target, pointing a real deviation.
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+385
+Fig. 2. Strategic planning steps
+Depending on the defined indicator, it can be necessary to specify three targets
+considering the expected results in the short, medium and long term. These targets can
+be specified in an ad-hoc way, based on historical data or using simulation to identify
+possible values. A high maturity organization (i.e. the one that performs the practices
+required by higher levels of maturity models, like the CMMI-DEV) must specify
+these targets based on knowledge about its processes, acquired using SPC.
+Action
+Increase
+Increase
+Table 1. Examples of strategic goals
+Strategic Goals
+Action Target
+Revenue
+Client satisfaction
+Perspective
+Financial
+Client
+To facilitate the achievement of strategic goals, it is important to analyze the internal
+and the external environments of the organization, identifying forces that can
+contribute or threaten their achievement. The analysis of external environment includes
+identifying factors or tendencies which are external to the organization and
+could represent threats or opportunities. Moreover, it is necessary to analyze possible
+impacts related to each factor: an impact can be positive, identifying an opportunity,
+or negative, identifying a threat. The analysis of internal environment includes an
+evaluation of its strengths and weaknesses based on the defined strategic goals.
+Strategic goals aim at long term results. Thus it is necessary to decompose them
+into strategic actions that when executed, make it easier to achieve the strategic goals
+defined. Strategic actions must aim at achieving strategic goals increasing the opportunities
+and strengths identified and addressing the threats and weaknesses perceived
+in external and internal environments analysis. Potential strategic actions should be
+identified with the participation of professionals from the tactical level. The definition
+of a strategic action must describe the action, the expected value, the target of the
+action and the expected contribution for the related strategic goal. This definition
+must determine if the strategic action is related to software. Table 2 shows examples
+of these actions.
+386
+A.O.S. Barreto and A.R. Rocha
+Table 2. Examples of strategic actions
+Strategic Goal:
+Improve client satisfaction
+Strategic Actions
+Contribution
+Software Related
+Decrease
+Improve
+Decrease
+Improve
+20%
+15%
+-
+Software products price
+Software products quality
+Time to market
+Client attendance
+40%
+30%
+20%
+10%
+Yes
+Yes
+Yes
+No
+After the identification of the strategic actions, it is necessary to analyze their viability
+and select those that will be executed. For each strategic action selected, it
+must be defined: (i) Its priority; (ii) Responsible: responsible for executing the action
+(tactical level); (iii) Resources: financial resources available for executing the action;
+(iv) Indicator: indicator related to the action monitoring.
+To complete strategic planning, it is important to analyze the strategic goals defined,
+the strategic actions and the indicators to identify and document possible interactions
+among them. Each interaction among any goals defined in our method can be
+classified as a qualitative and direct interdependence, a qualitative and inverse interdependence
+or a quantitative interdependence.
+3.2
+Tactical Planning Aligned to Strategic Planning
+In strategic planning, strategic actions are planned and the responsibility for their
+implementation is assigned to some professionals. In tactical level, on the other hand,
+these professionals perform tactical planning to execute the assigned strategic actions.
+Tactical planning guides operational planning. It can be monitored through the use of
+operational level execution and monitoring data. If any deviation is detected, an
+analysis must be performed to determine if it is necessary to execute corrective actions
+or if tactical planning has to be revised.
+Tactical planning starts with the decomposition of the strategic actions into tactical
+goals. Fig. 3 shows the steps for tactical planning. Since the focus of this work is on
+software organizations, the method proposed by us details only the tactical goals that
+are related to software products or processes, what we name software improvement
+goals, as mentioned earlier. However, to allow adequate monitoring of strategic goals,
+it is also recommended to identify tactical goals not related to software and their
+monitoring indicators. A tactical goal not related to software is described as the action,
+the action target, the expected value, the expected contribution to the related
+strategic action, and the interactions with other goals.
+Strategic actions related to software must be decomposed into software improvement
+goals. To make it easier to monitor software improvement goals and to allow a
+better visibility of the results, we propose the definition of medium term software
+improvement goals (from now on, MTSIG) and short term software improvement
+goals (from now on, STSIG). Each MTSIG has to be decomposed into STSIGs, which
+indicate nearer milestones in the way to achieve the MTSIG. From time to time, tactical
+planning needs have to be updated, and in these occasions, MTSIG could become
+STSIG. To illustrate, an organization could have as a MTSIG to adopt CMMI Level 3
+practices, while adopting CMMI Level 2 practices could be one of its STSIG.
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+387
+Fig. 3. Tactical planning steps
+The definition of software improvement goals describes: the action, the expected
+value, the action target, the expected contribution to the strategic action related (if it is
+a MTSIG) or to the MTSIG (if it is a STSIG). The interactions with other goals are
+also described. Table 3 exemplifies two MTSIG. To allow the monitoring of the defined
+software improvement goals, indicators related to each goal are defined in the
+same way as the indicators related to strategic goals.
+Table 3. Examples of medium term software improvement goals
+Strategic Action: Improve software products quality
+Medium Term Software Improvement Goals
+Action Value Action Target Contribution
+Deploy - CMMI level 3 40%
+Decrease 10% Defect density 60%
+The definition of software improvement goals (considering MTSIG and STSIG)
+may involve important decisions to the organizations, which may need the approval
+from higher level management. Therefore, once the goals are defined it may be
+necessary to present them to higher level management to guarantee their approval and
+commitment. This step could be unnecessary, depending on the relationship among
+the different levels of the organizations, considering the autonomy of the tactical level
+and the participation of higher level management throughout the definition phase.
+Once their software improvement goals are defined, an organization needs to plan
+SPC of its processes (if it is a requirement) and also plan the measurement initiative
+of the organization. Our method applies to organizations that want to statistically
+388
+A.O.S. Barreto and A.R. Rocha
+control its processes as well to the ones that want to use less formal ways of control,
+since it optionally supports software SPC planning as part of tactical planning.
+SPC requires time and adds costs to the organization and, therefore, does not need
+to be applied to all software processes of the organization. Thus, this step starts with
+the selection of the subprocesses that are going to be statistically controlled. This
+selection must be based on the software improvement goals defined. Based on the
+selected subprocesses, it is necessary to identify the quantitative quality and
+performance goals of the organization and analyze the behavior of these subprocesses,
+considering these goals and also measurement data from the enactment of the
+subprocesses. This knowledge must be stored through the establishment of process
+performance baselines, that characterize real results previously obtained through the
+enactment of the processes, describing their expected behavior. It is also possible to
+define process performance models, which relate statistically controlled process
+attributes to try to forecast the process behavior.
+Regardless of the adoption of SPC by the organization, the monitoring of each of
+the defined goals is strongly related to measurement data from projects and from the
+organization itself. However, if SPC is used, software measurement becomes even
+more critical. Therefore, organizational measurement planning is part of tactical
+planning, and is performed in parallel with SPC planning (if applicable).
+The measurement planning step consists of identifying measurement goals from
+the short term software improvement goals and from the quantitative quality and
+performance goals, if available. Afterwards, it is necessary to specify organizational
+measurement, identifying and describing measures from the goals. Literature presents
+some approaches to derive measures from goals, such as GQM [16].
+The monitoring of software improvement goals is done through the analysis of the
+indicators related to these goals, as described earlier. However, the expected values
+for these indicators have to be defined or updated in the last step of tactical planning,
+since SPC and measurement on the organization could influence these values. Thus,
+to complete tactical planning related to software, it is necessary to establish expected
+values to the indicators related to the software improvement goals.
+3.3 Project Planning Aligned to Tactical Planning
+On the operational level of software organizations, tactical planning guides the planning
+and execution of each software project. Each project is monitored, and if any
+deviation is detected, an analysis is done to determine if it is necessary to run corrective
+actions or if project planning has to be revised.
+Our approach to project planning focuses on project goals, SPC and measurement
+as shown in Fig. 4. Therefore, the several other steps usually required to plan a project
+are not considered.
+Each project has its unique characteristics that must be addressed. Thus, project
+planning begins characterizing the project. This step defines, among other kinds of
+information, the expected contribution of the project to the tactical goals, considering
+each project being run. This information is important to determine the achievement of
+tactical and strategic goals.
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+389
+Fig. 4. Project planning steps
+Once the project is characterized, it is necessary to define its goals, which are initially
+selected from short term software improvement goals (STSIG) and from quantitative
+quality and performance goals (if SPC was selected during tactical planning)
+that apply to the project. To assure project alignment to tactical planning, and therefore
+to strategic planning, it is common to consider all STSIG and quantitative quality
+and performance goals (if available) as project goals. If on very specific situations
+some of these goals do not apply to the project, it is necessary to document and justify
+this situation. An example of this situation is when the organization has some projects
+related to a specific software product and there is a STSIG which specifies the maximum
+response time for this product. This STSIG is not applicable to a project that is
+not related to this product.
+Project goals definition also considers the needs of projects, their characteristics
+and constraints, as well as customer requirements. Thus, the analysis of these project
+specific kinds of information can lead to new project goals, regardless of the software
+improvement goals. Therefore, it is possible to assure that projects are going to implement
+the software improvement goals, but projects are not constrained by them.
+Each new project goal has to describe the action, the expected value, the action target,
+and the interactions with other project goals.
+If the organization has adopted SPC and planned it on the tactical level, each project
+needs to plan how to statistically control processes throughout its enactment. SPC
+planning on a project consists of selecting subprocesses that will be statistically
+controlled on the project, based on quantitative quality and performance goals. This
+selection must be based on the subprocesses selected for SPC during tactical planning.
+Regardless of the adoption of SPC by the project, the monitoring of each project
+goal is performed through measurement. Therefore, measurement planning of the
+project is part of project planning, and is performed in parallel with SPC planning (if
+applicable). The measurement planning step consists of identifying measurement
+goals from the project goals, identifying measures related to measurement goals,
+planning how to collect and analyze each measure, based on the measurement planning
+performed on tactical level.
+To complete project planning, it is necessary to define or update the expected values
+for the indicators related to the project goals. At this point it is important to check
+390
+A.O.S. Barreto and A.R. Rocha
+the consistency among these expected values and the quantitative quality and performance
+goals considered on the project.
+4 An Infrastructure to Monitor Software Improvement Goals
+Throughout the enactment of projects, project goals must be continuously monitored
+aiming at detecting real or potential deviations. This information is also used to monitor
+goals that were defined on tactical and strategic levels. However, to continuously
+monitor the three levels at the same time can be very hard.
+To support monitoring activities, our approach suggests an infrastructure to continuously
+and proactively monitor the defined goals. This infrastructure is based on
+agents and is capable of monitoring goals, searching for deviations and alerting whenever
+a real or potential deviation is detected. To do so, we have defined two agents:
+Indicators Update Agent and Deviation Detection and Notification Agent, as depicted
+in Fig. 5 and Fig. 6.
+Fig. 5. Steps of the Indicators Update Agent
+The monitoring of the goals defined on each level happens through the monitoring
+of the actual values of the indicators related to the goals. However, indicators are
+often measures derived from other ones. Thus, to be able to get an online updated
+monitoring of these indicators, it is necessary to continuously monitor the collection
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+391
+of new measures, to analyze if any indicator has to be updated (recalculated), and
+update it, if necessary. Likewise, the analysis and detection of deviations are accomplished
+through the collection of measures that are part of indicators related to goals.
+Thus, goals' monitoring begins by monitoring each measure collected.
+The Indicators Update Agent is responsible for assessing the need to update indicators
+whenever new measurement data is collected, and then update them. Fig. 5 shows
+the steps performed by the Indicators Update Agent. The Deviation Detection and
+Notification Agent is responsible for analyzing each measure collection that affects
+indicators related to the defined goals, checking the occurrence of deviation and,
+whenever a deviation is detected, notifying the occurrence through an alert. The deviation
+checking consists of analyzing the data collected to compare it with the three
+ranges of values defined for the indicator (as defined in Section 3.1). If data is out of
+the acceptable range, a real or potential deviation occurred. The main steps performed
+by the Deviation Detection and Notification Agent are shown in Fig. 6. These agents
+and the related infrastructure are currently being implemented and will be fully functional
+in the near future. Once implementation is complete, we will be able to use
+them in real situations and properly evaluate their behavior.
+Fig. 6. Steps of the Deviation Detection and Notification Agent
+5 Defining Software Improvement Goals at a Brazilian Software
+Development Organization
+COPPE/UFRJ is one of the most important Software Engineering research and consulting
+centers in Brazil, located at Rio de Janeiro. Its Software Engineering initiatives
+are supported by the Software Engineering Laboratory - LENS (the acronym in
+392
+A.O.S. Barreto and A.R. Rocha
+Portuguese), which develops software products aiming to aid these initiatives [22]. As
+a software organization, this laboratory was successfully appraised in accordance with
+the level E of MR-MPS model [3], a Brazilian reference model for software process
+improvement, compatible with CMMI-DEV [5]. Recently, our approach was used by
+LENS to accomplish its strategic and tactical planning.
+We believe this experience was a great opportunity to evaluate parts of our approach.
+Subjects were all master or PhD students or professionals, but all of them
+were also working on industry initiatives. The group of subjects consisted of fourteen
+people and involved professionals that had never took part on strategic planning activities
+before as well as professionals that had already participated in different strategic
+planning efforts. The strategic and tactical level professionals accomplished some
+meetings at which each strategic planning step proposed by our approach was enacted.
+During this planning, five strategic goals, eight external factors, three strengths
+and two weaknesses were identified. Based on the external and internal analysis,
+eighteen strategic actions were planned. One of the defined strategic goals was
+“Achieve the level A of MR-MPS” model and one related strategic action defined was
+“Deploy new software processes required by the level A”.
+After performing strategic planning, as suggested by our method, we have performed
+tactical planning activities. It is important to mention that strategic level professionals
+also participated in this planning. The strategic actions which were related to software
+were decomposed into software improvement goals. However, we have observed that
+before planning statistical process control, it was necessary to address some specific
+issues identified throughout the strategic and tactical planning. Thus, the tactical planning
+was temporarily suspended and some action plans were defined to address these
+issues. It was interesting to realize that throughout strategic planning it was possible to
+identify issues that could threaten the achievement of the defined goals. Thus, before
+finishing this planning, strategic level professionals took some important decisions in
+order to address these issues and notified them to all organization.
+To complete the study, a brief survey about the proposed approach was sent to all
+subjects of the study. We have reached 86% of answer rate. Subjects were asked
+about some aspects of our approach, such as: the expected benefits from the enactment
+of the strategic planning performed, the adequacy of the method used and the
+adequacy of the sequence of steps. The survey showed that the professionals expected
+good benefits from the enactment of the strategic planning accomplished. In regard of
+the proposed method, considering the opinion of the subjects, there is some indication
+that the sequence of steps is adequate. According to the subjects, the use of a method
+that guides the steps that need to be followed and the information that has to be provided,
+considering the specific context of a software organization, made it easier to
+accomplish strategic and tactical planning and guided the debate, avoiding waste of
+time. Some improvements to our approach were identified and they were already
+analyzed and deployed.
+6 Conclusions
+Software process improvement initiatives need to be aligned with the business goals of
+the organization. If these initiatives are performed in an organization without taking
+Defining and Monitoring Strategically Aligned Software Improvement Goals
+393
+business goals into account, it is possible that the initiatives do not satisfy or even
+conflict with them.
+In this paper we present an approach to define and monitor software improvement
+goals promoting strategic alignment. Our approach supports strategic, tactical and
+operational planning activities focusing on software processes and products. Measurement
+planning and statistical process control are addressed too. A method for strategic,
+tactical and operational planning is described and an infrastructure to support
+the monitoring of the defined goals across the three levels is presented.
+Our method was partially used on a real context and brought several good results,
+guiding the strategic and tactical planning, promoting the software improvement
+alignment and avoiding waste of time. There is some expectative that the aspects
+addressed by our approach can help software organizations to achieve the expected
+software improvement benefits.
+We intend to use our approach on other real contexts soon. We are also developing
+the infrastructure to continuously monitor the goals defined in the strategic, tactical
+and operational levels. We also intend to develop a tool to support the use of the
+method to make it easier to use the approach in others situations. Currently, we are
+performing a survey to characterize similarities among software projects. We believe
+this characterization will make it possible to compare similar deviation scenarios.
+Based on previous deviations, our infrastructure can monitor the project goals, recommend
+adequate actions to address detected deviations and propagate it to the upper
+levels.
+References
+1. Conradi, R., Fuggetta, A.: Improving Software Process Improvement. IEEE Software
+19(4), 92-99 (2002)
+2. Becker, A., Prikladnicki, R., Audy, J.: Strategic Alignment of Software Process Improvement
+Programs Using QFD. In: 1st International Workshop on Business Impact of Process
+Improvements, Leipzig, Germany, pp. 9-14 (2008)
+3. SOFTEX: MPS.BR Official Web site (hosted by Association for Promoting the Brazilian
+Software Excellence - SOFTEX),
+http://www.softex.br/mpsbr/_home/default.asp
+4. Rocha, A., Montoni, M., Santos, G., Oliveira, K., Natali, A., Mian, P., Conte, T., Mafra,
+S., Barreto, A., Albuquerque, A., Figueiredo, S., Soares, A., Bianchi, F., Cabral, R., Neto,
+A.: Success Factors and Difficulties in Software Process Deployment Experiences based
+on CMMI and MR-MPS.BR. In: 8th International Workshop on Learning Software Organizations,
+Rio de Janeiro, Brasil, pp. 77-87 (2006)
+5. Chrissis, M.B., Konrad, M., Shrum, S.: CMMI: Guidelines for Process Integration and
+Product Improvement, 2nd edn. Addison-Wesley, Nova York (2006)
+6. Dyba, T.: An Empirical Investigation of the Key Factors for Success in Software Process
+Improvement. IEEE Transactions on Software Engineering 31(5), 410-424 (2005)
+7. Huang, P., Lei, H., Lim, L.: Real Time Business Performance Monitoring and Analysis
+Using Metric Network. In: IEEE International Conference on e-Business Engineering,
+Shanghai, China, pp. 442-449 (2006)
+8. Mintzberg, H., Ahlstrand, B., Lampel, J.: Safári De Estratégia: Um Roteiro Pela Selva Do
+Planejamento Estratégico. Bookman, Porto Alegre (2000)
+394
+A.O.S. Barreto and A.R. Rocha
+9. Chiavenato, I.: Administração: Teoria, Processo e Prática, 3rd edn. Makronbooks, São
+Paulo (2000)
+10. Kaplan, R., Norton, D.P.: The Balanced Scorecard Translating Strategy Into Action.
+Havard Business School Press, Boston (1996)
+11. IT Governance Institute: Control Objectives for Information and Related Technology,
+4.1th edn., http://www.itgi.org
+12. Huang, H.: Designing a knowledge-based system for strategic planning: A balanced scorecard
+perspective. Expert Systems with Applications 36, 209-218 (2009)
+13. Castillo, J., Ossowski, S., Pastor, L.: The 'MECIMPLAN' approach to Agent-based Strategic
+Planning. In: International Conference on Web Intelligence and Intelligent Agent
+Technology, Hong Kong, China, pp. 540-543 (2006)
+14. Project Management Institute: PMBOK - A Guide to the Project Management Body of
+Knowledge, 3rd edn., Newtown Square (2004)
+15. Markovic, I., Kowalkiewicz, M.: Linking Business Goals to Process Models in Semantic
+Business Process Modeling. In: 12th International IEEE Enterprise Distributed Object
+Computing Conference, Munich, Germany, pp. 332-338 (2008)
+16. Basili, V., Caldiera, G., Rombach, H.: Goal Question Metric Paradigm. Encyclopedia of
+Software Engineering 1, 528-532 (1994)
+17. Park, R.E., Goethert, W.B., Florac, W.A.: Goal-Driven Software Measurement - A
+Guidebook. CMU/SEI-96-HB-002, Carnegie Mellon University (1996)
+18. Basili, V., Heidrich, J., Lindvall, M., Münch, J.: GQM+ Strategies - Aligning Business
+Strategies with Software Measurement. In: 1st International Symposium on Empirical
+Software Engineering and Measurement, Madrid, Spain, pp. 488-490 (2007)
+19. Uraikul, V., Chan, C.W., Tontiwachwuthikul, P.: Artificial Intelligence for Monitoring and
+Supervisory Control of Process Systems. Engineering Applications of Artificial Intelligence
+20(2), 115-131 (2007)
+20. Russell, S., Norvig, P.: Artificial Intelligence: A Modern Approach, 2nd edn. Prentice
+Hall, Englewood Cliffs (2003)
+21. Thomas, M., Redmond, R., Yoon, V., Singh, R.: A Semantic Approach to Monitor Business
+Process Performance. Communications of the ACM 48(12), 55-59 (2005)
+22. Montoni, M., Santos, G., Rocha, A., Weber, K., Araújo, E.: MPS Model and TABA Workstation:
+Implementing Software Process Improvement Initiatives in Small Settings. In: 5th
+International Workshop on Software Quality, Minneapolis, USA, pp. 4-9 (2007)

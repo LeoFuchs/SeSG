@@ -1,0 +1,537 @@
+Strategic Alignment of Software Process Improvement
+Programs Using QFD
+André Luiz Becker
+Computer Science School, PUCRS
+Ipiranga Av, 6681, BLD 32
+Porto Alegre, RS, Brazil
++ 55 51 3320.3558
+abecker@inf.pucrs.br
+Rafael Prikladnicki
+Computer Science School, PUCRS
+Ipiranga Av, 6681, BLD 32
+Porto Alegre, RS, Brazil
++ 55 51 3320.3558
+rafaelp@pucrs.br
+Jorge L. N. Audy
+Computer Science School, PUCRS
+Ipiranga Av, 6681, BLD 32
+Porto Alegre, RS, Brazil
++ 55 51 3320.3558
+audy@pucrs.br
+ABSTRACT
+Software process improvement programs increase the
+competitiveness of software development organizations. But a
+critical success factor in this context is the proper alignment
+between the strategy of such programs and the organization's
+business strategy. In this paper, we discuss how Quality Function
+Deployment can be used as a technique to align strategic goals
+and software process within an organization, presenting results of
+its application in a small company in Brazil.
+Categories and Subject Descriptors
+D.2.9 [Software Engineering]: Management - Software process
+models (e.g., CMM, ISO, PSP), productivity, cost estimation,
+time estimation, life cycle.
+General Terms
+Management, Documentation, Standardization.
+Keywords
+Software process improvement, strategic planning, strategic
+alignment, CMMI.
+1. INTRODUCTION
+Software process improvement (SPI) programs increase the
+competitiveness of software development organizations [6]. But a
+critical success factor in this context is the proper alignment
+between the strategy of such programs and the organization's
+business strategy [2, 3, 7, 9, 17, 21].
+However, the existing software quality models, such as the
+CMMI-SW, don't provide proper guidance on how organizations
+should define their processes based on their strategies [5, 15]. As
+the result, processes are implemented, but there is no guarantee
+that they will satisfy the strategic goals [10].
+Permission to make digital or hard copies of all or part of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific
+permission and/or a fee.
+BIPI'08, May 13, 2008, Leipzig, Germany.
+Copyright 2008 ACM 978-1-60558-041-8/08/05...$5.00.
+9
+According to McCoy, process improvement may result in
+processes that, when institutionalized, aimed at the complete
+satisfaction of goals defined based on the organization's strategic
+planning (SP) [11]. The same author states that competitive
+advantages may be obtained when there is synergy between SP
+and process improvement.
+QFD (Quality Function Deployment) is an effective technique
+that can be used to align SP and software process improvement.
+Several studies have proposed [8, 18, 22] the use of QFD
+together with SPI programs, but they fail on presenting empirical
+results from the use of this method.
+For this reason, the purpose of this paper is to present QFD as an
+alternative to the strategic alignment of a SPI program. We
+briefly explain the concepts involved in strategic planning, SPI,
+and QFD, and present results of the use of QFD in a small
+company in Brazil. A preliminary evaluation indicates that the
+use of QFD can help organizations to see better and faster results
+in their SPI programs, with a reduced investment in the early
+phases.
+This paper has the following structure: Section 2 presents the
+theoretical background. Section 3 discusses the use of QFD to
+support the strategic alignment of SPI programs. Section 4
+presents the results obtained from the use of QFD in a small
+company in Brazil. Section 5 presents the lessons learned, and
+Section 6 concludes the paper.
+2. THEORETICAL BACKGROUND
+2.1 Strategic Planning (SP)
+Strategic planning is a managerial tool that produces important
+decisions and actions to guide an organization in the long-term
+(usually three or five years). According to Mintzberg, SP can be
+summarized by the analysis of strengths and weaknesses, threats
+and opportunities (SWOT) of an organization, the definition of
+goals, investment and operational plans [12].
+The organizational goals, derived from the SP, indicate “what”
+has to be done in order to achieve the results planned [14]. The
+goals are usually related to quantifiable milestones.
+2.2 Software Process Improvement (SPI)
+According to Pitterman [16] and Yamamura [20], a software
+development process improvement has been raising the quality of
+the information systems produced, reducing costs and effort spent
+in the projects, while increasing the productivity of the activities
+performed. In this sense, the improvement of process quality is
+one of the main purposes of the software manufacturers, which
+can result in improvements in the final product as well.
+Generally, companies structure process improvement programs
+based on pre-established software process reference models, such
+as the CMMI-SW. Such models establish, through maturity
+levels, software engineering best practices so that the companies
+can develop their processes.
+Although the main software process reference models are
+structured by means of maturity levels, the investment required
+for the implementation of each one of these levels is still the
+main difficulty, mainly for small companies [6, 13]. Therefore,
+an option to make such initiatives feasible in such companies is
+prioritizing the implementation of the most important process
+improvements for the organization.
+2.3 Strategic Alignment of SPI Programs
+Process improvement may result in processes that, when
+institutionalized, intend to meet the goals defined in the
+organization's strategic planning [15]. Furthermore, the
+alignment between the strategy of a process improvement
+program and the organizations' business strategies has been
+mentioned as a critical factor of success of software process
+improvement programs [2, 3, 7, 9, 17, 21]. Such alignment shall
+guarantee that the processes institutionalized by an organization
+are guided towards the strategic goals, instead of only
+approaching the software engineering best practices established
+in the software process reference models.
+Nevertheless, the strategic goals are not easily related to the
+process improvements to be implemented by an organization in
+the main software process reference models [5, 10, 15].
+Companies develop their processes using these guidelines, but
+with no guaranty that these processes will be focused on the
+companies' business strategic goals. In this context, Quality
+Function Deployment (QFD) was found to be an effective
+technique to align and prioritize the process improvements based
+on the organizations' strategic goals.
+2.4 Quality Function Deployment (QFD)
+QFD was found to be an effective technique to align and
+prioritize the process improvements based on the organizations'
+strategic goals. It has been used in several domains, such as food,
+electronics, and information technology [10]. Thus, such
+technique was used as basis for the application of a strategic
+alignment process for improvement programs.
+The QFD technique proposes the planning of goal-oriented
+actions in order to maximize the quality of a product.
+Approaching an organization's software development processes
+as a product, such technique is applied so that the process
+improvements are oriented towards the organization's goals as
+defined in the strategic planning.
+This paper is not intended to describe the QFD technique;
+however, such technique can be seen in details from [1]. The
+main difference between this technique and traditional quality
+systems for example is the attempt to maximize the product
+quality through satisfying the client's goals [1].
+This technique uses several matrices to collect, analyze and
+manage goals towards a final product. However, 95% of the
+studies applying QFD so far use only the first matrix, called
+House of Quality (HoQ) [4]. Basically, such matrix relates
+“what” - goals on a high abstraction level - to “how” - actions
+on low level [22]. Therefore, a crossover between rows versus
+columns is established and the impact analysis of each one of the
+relationships is determined in accordance with Table 1.
+Table 1. Relationship levels
+Value
+Symbol
+Impact
+High
+Medium
+Low
+None
+9
+3
+1
+0
+N/A
+An example of HoQ is presented in figure 1.
+10
+Figure 1. House of Quality matrix.
+The final product of an SPI program is the evolution of software
+development processes based on Software Engineering (SE) best
+practices. Then, the success of a SPI program is related to how
+the new and defined processes satisfy the organizational goals.
+In this paper, we have applied three House of Quality matrices to
+collect, analyze and manage organizational goals within a SPI
+program, adapting the original QFD proposal. These matrices are
+used to link organizational goals with SE best practices. Such
+best practices are usually found in quality models such as
+CMMI-SW. As the result, an organization can identify what are
+the most important process improvement actions to be taken in
+the beginning, based on their strategic goals.
+3. APPLYING THE PROPOSAL
+This proposal was applied in a small software development
+company in Brazil. Such company develops corporate portals and
+web solutions related to information and knowledge
+management, focusing especially on increasing the productivity
+of its customers. The company has been active in the market for
+10 years now, employing nearly seventy professionals allocated
+in two Brazilian capitals (Sao Paulo and Porto Alegre).
+In order to fill in the first matrix, called HoQ Strategic Goals x
+Tactical Goals, four strategic goals with the improvement of
+processes were defined from the strategic planning: increase
+profit, increase customer satisfaction, improve product quality,
+and prospect and produce larger projects. The current situation of
+these goals was checked via metrics (Table 2).
+Table 2. Current situation
+Stategic Goals
+Increase profit
+Increase customer
+satisfaction
+Improve product
+quality
+Prospect and develop
+larger projects
+Situation
+Profit margin: 9,25%
+customer assessing vendor:
+range from 1 to 5 (where 1 is
+very bad and 5 is excellent): 3.6
+Number of defects (after
+delivery): 21 per project
+Average project sale price: U$
+45000
+For each one of the strategic goals, the strategic planning was
+analyzed again, and related tactical goals were defined. In Figure
+2, the matrix developed is presented.
+Figure 2. Strategic Goals Vs. Tactical Goals Matrix.
+In the next step, current problems with the organization's
+software development process and its respective causes were
+identified. A value was also established to represent the priority
+of each cause of process problems. And the second matrix, called
+HoQ Tactical Goals x Cause of Problems was defined.
+The last matrix, HoQ Tactical Goals x Processes, was used to
+link tactical goals to the CMMI-SW level 2 process areas. In the
+end, the priority of each process area was defined, based on the
+priority of each tactical goal.
+3.1 Results
+On applying the proposal, three process areas came up as the
+most important within the organization: Requirements
+Management (REQM), Project Planning (PP), and Project
+Monitoring and Control (PMC). It is important to say that this
+does not mean that the organization will invest only in those
+three areas, but will focus on them first, since apparently most of
+the problems and goals are related to such areas. The result of
+this QFD application was the planning of the SPI program
+focusig the three process areas as an initial step. According to
+11
+Table 3, the expectation with the SPI program was established
+using quantitative measures, related to the strategic goals.
+Table 3. Organization's expectation with the SPI program
+Stategic Goals
+Increase profit
+Increase customer
+satisfaction
+Improve product
+quality
+Prospect and develop
+larger projects
+Expectation
+Profit margin: 20%
+customer assessing vendor:
+range from 1 to 5 (where 1 is
+very bad and 5 is excellent): >4
+Number of defects (after
+delivery): zero per project
+Average project sale price: >
+U$ 120000
+In order to evaluate in what extent the SPI program was helpful
+on reaching the goals, four pilot projects were developed and
+observed. Those projects were developed using the new
+processes defined based on the three process areas, REQM, PP,
+and PMC. The results are presented in Table 4.
+Table 4. Results achieved with the SPI program
+Strategic Goals
+Increase profit (%)
+Increase customer
+Satisfacton
+Improve product
+quality
+Prospect and develop
+larger projects (U$)
+*NC - not collected yet, projects not finished.
+P1
+23,04
+5
+5
+P2
+17,29
+5
+3
+P3
+20,05
+3.5
+NC*
+P4
+29,90
+5
+NC*
+Av
+22,5
+4,6
+4
+23800
+21000
+22400
+119600
+46700
+4. DISCUSSION
+Analyzing the four projects, a number of benefits were obtained
+from the implementation of the three process areas, based on the
+application of QFD. This is described next.
+4.1 Increase Profit
+The organization's expectation for the strategic goal of increasing
+profit is that the process improvement secures a profit margin of
+20% in the projects. Analyzing the profit margins of the four
+projects presented, it is found that only one of them stayed below
+that expectation. Project 2, with profit margin below 20%, was
+the only one with a smaller sale price. Thus, it is clear that the
+setting of a profit margin basically depends on a commercial
+process.
+However, the implementation of the three process areas assured
+that the margins established during such commercial process
+could be secured until the end of the project (or at collection
+time, for projects in progress), including the margin of 17% of
+project 2, although it is below the expectations.
+4.2 Prospect Larger Projects
+The process definition using as basis a software process
+reference model resulted in smaller projects having a higher cost.
+In addition, it was found that as the project value is smaller,
+proportionally, the profit margin of these projects is also smaller.
+Therefore, the process improvement did not facilitate the
+accomplishment of the strategic goal related to obtaining larger
+projects, but actually obstructed the execution of smaller
+projects. The management view is that process improvement
+establishes the company's need in working with larger projects.
+That becomes clear when one of the organization's strategic
+goals is prospecting and producing projects greater than $45
+thousand.
+The average sale price of the four projects was $47 thousand, but
+projects 1, 2 and 3 are characterized by the organization as small
+projects, with the exception of project 4, which brought the
+average value up. Generally, the organization's perspective is
+that the process improvement guarantees that the profit margins
+of the medium and large projects are established and kept above
+20%.
+4.3 Increase Customer Satisfaction
+The implementation of the three process areas guaranteed that
+the deadlines of the pilot projects could be better established and
+maintained. Thus, in project 4, the customer attributed value 5
+(highest grade) for his satisfaction with the project and stated:
+“Things are going really well. The deadline is being complied
+and that was an important requirement for this project.”
+Nevertheless, the definition of process improvements generated
+the need of more documentation and approvals from the
+customer. For that reason, project 3 received the value 3.5
+concerning customer satisfaction. The customer reported the
+following reason for such grade: “I think the control sending is
+excessive. For example, in certain weeks I receive 3 or 4 control
+documents, and this excess ends up being a little confusing”.
+Projects 3 and 4, as previously mentioned, are currently in
+progress. Thus, the customer satisfaction was pretty much related
+to meeting delivery deadlines, and the three process areas had
+direct impact on customer satisfaction.
+Regarding the fact that project 3 received a low grade because of
+excessive control, such situation was identified as normal. In an
+improvement program, the first processes defined tend to require
+excessive bureaucracy; however, as the process is developed, this
+problem is dealt with.
+4.4 Improve Product Quality
+The customer satisfaction in concluded projects, such as projects
+1 and 2, approaches other matters, besides deadline compliment.
+At this point, the customer assesses the product quality
+delivered. Now, there is a direct relation between the increase of
+customer satisfaction and the improvement of product quality.
+In that sense, it is found that both pilot projects had grade 5 in
+customer satisfaction, precisely for having a small number of
+defects and low rework rate. In spite of that, a direct relation
+between the improvement of product quality and the process
+improvements performed was not explicitly found. Generally, the
+12
+changes in Requirements Management and Project Management
+have little effect on the work of developers and testers, for
+example.
+The organization's expectation with the process improvement is
+increasing its customer-satisfaction current average of 3.6 to a
+minimum of 4. With the process improvement which was carried
+out, it is found that such expectation can be secured in customer
+satisfaction polls throughout the project, when the main point
+analyzed is compliance with delivery deadline. Regarding the
+customer-satisfaction poll at the end of the project, not much will
+be established for the process improvement made.
+5. LESSONS LEARNED
+Generally, SPI programs have been conducted disregarding the
+importance of a strategic alignment process at an early stage.
+Based on the use of QFD, the following lessons learned were
+identified.
+#1 - Strategic goals with the improvement program: Despite
+the importance of having defined and analyzed strategic goals
+with the software process improvement program [10], it became
+clear that, in general, process improvements are planned and
+carried out without taking such goals into account. In case the
+proposed process was not applied to the studied organization,
+little effort would be made in that sense. Moreover, the
+possibility of defining processes oriented towards the strategic
+goals of the organizations is unknown by those involved in an
+improvement program. Generally, it was found that the
+programs have been structured to meet the requirements of a
+software process reference model, and not the organization's
+strategic goals.
+#2 - Existing problems in the software development process:
+It is essential that a process improvement program approaches
+the existing problems in the software development process and
+proposes solutions [8]. The organizations' everyday problem
+solving produces commitment and interest from those who
+perform the defined processes. Nevertheless, it was found that
+different roles identify different problems, and the existence of a
+consolidation of such problems on organizational level is not
+common. Most of the times, a problem is solved, not because
+proactive action was taken, but because there was a requirement
+from a software process reference model comprising it.
+#3 - Involvement of associates: At the beginning of an
+improvement program, the first versions of the processes defined
+are very difficult to be implemented. Generally, such initial
+processes tend to be excessively bureaucratic, change the way
+how the work was previously done, and require more capacities
+from the associates. From the case study, it was found that the
+associates who overcome such difficulties and execute the
+defined processes are justly those who are involved in the
+decisions and activities of the improvement program. According
+to [14], the involvement of an organization's associates in a
+process improvement program is one of the main critical factors
+of success of these initiatives. In practice, the strategic alignment
+process can involve different hierarchical levels and secure the
+commitment from those who were involved.
+#4 - Monitoring of SPI programs: Defining strategic goals for
+a process improvement program from the organizations' strategic
+planning facilitates the assessment of such initiatives. Generally,
+a strategic planning analyzes the organization's current situation
+by means of metrics. Therefore, when a strategic goal is
+established for a process improvement program, it can be related
+to clear goals, generating expectations. Such goals involve the
+senior management and allow assessing whether an improvement
+program is being successful.
+#5 - Required investment: One of the main difficulties to carry
+out improvement programs is the required investment [6, 13, 19].
+Therefore, the expectation is that such programs generate results
+as quickly as possible. In addition, the most important element
+identification of a software process reference model for an
+organization allows the first efforts to be spent on these
+elements. Considering that these elements were prioritized from
+a consolidation of the organization's needs, the probability of
+effective results right from the beginning of improvement
+programs is increased.
+6. CONCLUSIONS
+The purpose of this paper was to present QFD as an alternative
+to align a SPI program and the organization's strategic goals. It is
+known that one of the main difficulties of SPI programs is the
+investment necessary [6, 13, 19]. And the definition of priorities
+related to process areas can help in this direction.
+In addition, the strategic alignment of SPI programs allows the
+identification of what investments should be planned up front
+when engaging in such programs, maximizing the results of these
+programs in a shorter period of time.
+The results attained from this research point towards the
+importance of having approaches allowing the identification of
+the organizations' strategic goals and, from those, the priorities
+in a software process reference model. In such case, SPI
+programs can be directed towards the company's strategy and
+seek for better results.
+7. ACKNOWLEDGMENTS
+Study partially supported by the PDTI program, financed by Dell
+Computers of Brazil Ltd. (Law 8.248/91).
+8. REFERENCES
+[1] Akao, Y., QFD: Integrating customer requirements into
+product design, Productivity Press, Portland, 1990.
+[2] Biro, M., Tully, C., “The Software Process in the Context of
+Business Goals and Performance”, Better Software Practice
+for Business Benefit: Principles and Experience, 1999.
+[3] Brodman, J.G., Johnson, D.L., “Return on Investment (ROI)
+from Software Process Improvement as Measured by US
+Industry”, SPIP, 1995.
+[4] Cox, C. A., “Keys to success in quality function
+deployment”, APICS-The Performance Advantage, 1992.
+[5] Debou, C., Courtel, D., Lambert, H.-B., Fuchs, N., Haux,
+M., “Alcatel's Experience with Process Improvement”,
+13
+Better Software Practice for Business Benefit: Principles
+and Experience, 1999.
+[6] Dybå, T., “An Empirical Investigation of the Key Factors for
+Success in Software Process Improvement”, IEEE Trans.
+Software Eng., v. 31, n. 5, 2005, pp.410-424.
+[7] Grady, R.B., Successful Software Process Improvement,
+Prentice-Hall, New Jersey, 1997.
+[8] Hierholzer, A., Herzwurm, G., Schlang, H., “Applying QFD
+for Software Process Improvement at SAP AG”,
+Proceedings of the World Innovation and Strategy
+Conference, Sydney, 1998.
+[9] Humphrey, W.S., Managing the Software Process, AddisonWesley,
+1989.
+[10] Liu, X., Sun, Y., Kane, G., Kyoya, Y., Noguchi, K., “QFD
+Application in Software Process Management and
+Improvement Based on CMM”. ACM SIGSOFT Software
+Engineering. SESSION: Software Quality (WOSQ), 2005.
+[11] McCoy, W. L., “Interfacing Three Complementary
+Technologies: Strategic Planning, Process Modeling, and
+System Dynamics”, IEEE International Conference on
+Systems, Man, and Cybernetics, 1998.
+[12] Mintzberg, H., Ahlstrand, B., Lampel, J., Safári de
+estratégia: um roteiro pela selva do planejamento
+estratégico. Bookman, Porto Alegre, 2000.
+[13] Niazi, M., Wilson, D., Zowghi, D., “A model for the
+implementation of software process improvement: A pilot
+study”, Journal of Systems and Software, ACM, 2003.
+[14] Oliveira, D. P. R., Planejamento estratégico: conceitos,
+metodologias e práticas, Atlas, São Paulo, 1998 (in
+Portuguese).
+[15] Peterson, B., “Transitioning the CMM into practice”,
+Proceedings of the European Conference on Software
+Process Improvement, Barcelona, 1995.
+[16] Pitterman, B., “Telcordia Technologies: The journey to high
+maturity”. IEEE Software, 2000.
+[17] Pulford, K, Kuntzmann-Combelles, A., Shirlaw, and S., A
+Quantitative Approach to Software Management, AddisonWesley,
+Wokingham, England, 1996.
+[18] Richardson, I., Ryan, K., “Software Process Improvements
+in a Very Small Company”, Quality Management, 2001.
+[19] Serrano, M. A., Oca, C. M., Cedillo, K., “An Experience on
+using the Team Software Process for Implementing the
+Capability Maturity Model for Software in a Small
+Organization”, Third International Conference On Quality
+Software, 2003.
+[20] Yamamura, G., “Software process satisfied employees”,
+IEEE Software, 1999.
+[21] Zahran, S., Software Process Improvement: Practical
+Guidelines for Business Success. Addison-Wesley, 1998.
+[22] Zaijun, H., “Value-Centric Process Improvement for Small
+Organizations by Using QFD and CMMI”, Proceedings of
+the First International Research Workshop for Process
+Improvement in Small Settings, 2005.

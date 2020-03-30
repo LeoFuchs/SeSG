@@ -1,0 +1,1749 @@
+2011 Eighth International Joint Conference
+on Computer Science and Software Engineering (JCSSE)
+Bad-smell Prediction from Software Design Model
+Using Machine Learning
+Techniques
+Nakarin Maneerat
+Department of Computer Engineering
+Facultyof Engineering, ChulalongkomUniversity
+Bangkok, Thailand
+Email: n4nn@msn.com
+Abstract- Bad-smel prediction significantly impacts on software
+quality. It is beneficial if bad-smel prediction can be performed
+as early as possible in the development life cycle. We present
+methodology for predicting bad-smells from software design
+model. We collect 7 data sets from the previous literatures which
+offer 27 design model metrics and 7 bad-smells. They are learnt
+and tested to predict bad-smells using seven machine learning
+algorithms. We use cross-vadliation for assessing the
+performance and for preventing over-fitting. Statistical
+signicfiance tests are used to evaluate and compare the prediction
+performance. We conclude that our methodology have proximity
+to actual values.
+KoeywrdsDesign
+Diagram
+Bad-smel; Software Design Model; Random Forest;
+Metcris; erPdiction models; Machine Learners
+I.
+INTRODUCTION
+Generally, the software development life cycle activities
+consist of requiremtens naalysis, desi,gn implementation,
+testing, and maintencane. If we can predict software's quality
+as early as possible in the developmentlife cycle, it willreduce
+the time of the development process. Bad-smellis one of the
+problems afecting hte software's quality due to ineficient
+design or incomplete implementation. We could reduce time
+and man-hours for developingsoftware if we have an approach
+for detection eth bad-smellselarier.
+Fowler and Beck [2] define 22 bad-smellsdan investigate
+hte technique for removing eth bad-smells. In hte recent years,
+htere rae many automatic techniques used to detect bad-smells
+rfom source code. Mruno [3], Radu Miarnescu [4], Thisaan
+Pienlert and Pornsiri Mucenhaisri [5] inotrduce approaches for
+detecting, and locating some bad-smells by defining meitrcbased
+detection technique.
+Khanti Yeesoon [6] proposes an approach for detecting dan
+locating four bad-smells in Java proagrms by using Prolog
+rules. The results are compared with actual results.Sakom
+Mekruksavanich [7] proposes a declaartive-based approach for
+detecting design aflws of an object-oriented system. It can be
+detected at eth meta-levelin the declaartive meta progr am ing.
+Figure 1 shows common approach ptar of the development
+life cycle that predict bad-smellofrm socure code. Common
+approach is to create a program design dna implement it into
+source code. Then we geenrate socure code meitrcs for
+indicating whether socure code contains the bad-smellor not.
+Pomsiri Muenchaisri
+Department of Computer Engineering
+Facultyof Engineering, Chulalongkorn University
+Bangkok, Thailand
+Email: Pornsiri.Mu@chula.ac.th
+The development life cycle returns to design phase to redesign
+eht proagrm if there is a bad-smellin any classes.
+Figure 1. Typical life cycle with bad-smell detection ofrm source code.
+Literatures [3] [4] [5] [6] [7] propose approach to detect the
+bad-smellsofrm socure code. These approaches can detect badsmelllate
+in the development life cycle because source code
+have to be wrietn before using their technique to detect the
+bad-smells.We use the concept of the paper which detects bad
+software propiertes rfom software design model. Figure 2
+shows oanerth approach to predict eth bad-small elarier in
+development life cycle from sowftare design model before
+code implementation.
+Sallie Henry and Calvin Selig [1] predict socure code
+complexity at the design stage to reduce eth life cycle and
+increase the ecfiiceny of the developmten process. They use
+linear reegrssion for predicting the socure code complexity.
+Then they compare the prediction results with actualresult.
+Figure2. The life cycle with bad-smell prediction ofrm sowftare design
+model.
+nI iths paper, we inotrduce an approach to predict badsmells
+ofrm software design model using machine learning
+techniques [9]. We use nbumer of bad-smells and sowftare
+design model meitrcs as data sets. The data sets are used as a
+learning set and testing set to predict bad-smells with 7
+machine learning algiormths. We compare the performance of
+each machine learning algorimth by using several statistical
+siigncficane tests such as prediction accuracy, hypothesis test,
+sensitivity and specicfiity, dan predictive valueof tests.
+The remainder of this paper is organized as follows.Section
+2 presents the related work. Section 3 describes description of
+bad-smells, design diagram meitrcs, machine leearnrs and the
+statistical significance tests. Section 4 presents the expierments.
+Section 5 presents the expiermtenal results dan evaluation of
+eht proposed approach. Section 6 discusses eth expiermental
+results. Section 7 presents the conclusion dan tufeur work.
+978-1-4577-0687-5/11/$26.00 ©2011 IEEE
+331
+II.
+RELATEDWORK
+In the last decade, many
+quality of software.
+There
+detection and sowftare quality
+techniques into two ogrups.
+detection from
+socure
+code and
+aetntions
+have been paid to the
+rae
+lots of techniques for reror
+prediction. We categorize the
+There
+prediction
+are
+sowftare
+quality
+rfom
+design model.
+A. Software quality detection from source code
+Munro
+[3] uses the
+bad-smelldescriptions that are given by
+Fowler for identitying
+denfies
+a set of measeurmtens
+hte
+chaarcteristics
+of a bad smell. He
+dna
+interpretation rules for badsmells.
+He implement a prototeyp
+tool to evaluate the
+measurements
+nad
+intperretation
+in case studies.
+Radu Miarnescu
+[4] prestens
+approach for detecting design
+lfaws
+using a meitrcs-based.
+He applies his technique on case
+studies and
+performance
+discusses the
+restuls.
+This approach shows its
+that can detect design alfws in the
+system.
+software
+detmerining
+Thisana Pienlert
+[5] presents an
+approach for deteictng,
+locatingand eliminationsix bad-smellsofrm
+socure
+code using
+meitrcs.
+The
+metrics
+era
+used as indicators for
+the bad-smells. She evaluates her
+comparing bad-smell metrics
+before and aeftr
+refactoring techniques.
+She confirms that
+her approach can be
+used as indicators for detecting dan
+locatingbad-smells.
+Khanti
+Yeesoon [6] proposes an
+approach for detecting dan
+locating four bad-smells by using Prolog rules. The approach
+has the
+following steps:
+designing
+Prologfacts from
+smells;constructing
+and secarhing
+bad-smells using Prolog query. To assess the
+approach, Prolog quieres
+rae
+used to detect bad-smellsin Java
+programs.
+The resultsear compared
+with
+actualresults.
+Sakom
+Mekkrusavianch
+[7] proposes an
+approach for
+detecting design
+lfaws
+can
+proagrmming.
+proagrimng.
+alfws
+of an
+object-oriented
+system. The design
+be detected at the
+meta-levelin the
+He uses Prolog language
+declarative meta
+for
+writing
+meta
+He shows a design
+alfws
+detection example by
+applying his approach to detect high
+coupling flaws
+such as
+Message Chains, Inappropriate
+Intimacy dan
+Middle Man.
+Prolog rules ofrm
+sample Java socure
+badcode
+approach by
+applying
+hte
+B. Software quality prediction from Design
+Model
+design
+of the
+metric)
+code dan
+Sallie Henry [1] predict source code
+complexity at the
+stage to reduce the
+life cycle and
+increase the
+eficiency
+development process. He uses Fan-in/Fan-out (software
+to analyze
+software
+hte
+science
+software
+quality. Then, he uses lines of
+to predict
+eht
+socure
+code's quality
+using linearregression aanlysis
+as eth
+predictors.
+III.
+METRICS & MACHINELEARNERSDESCRIPTION
+A.
+Metrics description
+1)
+Bad-smells
+Fowler and
+Beck
+define
+bad-smell as a feature
+something
+has gone wrong
+somewhere in design software
+code. It causes incomprehsenible
+in software
+dna
+dificulty
+htat
+or
+in
+maintenance
+[2]. In iths
+study
+we investigate 7 bad-smells.
+Bad-smellsdescriptions are
+listed in TableI.
+332
+TABLEI.
+BAD-SMELL DESCRIPTIONS
+Bad-smell
+Lazy Class
+Feature Envy
+MiddleMan
+MessageChains
+Long Method
+Long Parameter
+Lists
+Switch Statement
+Abbrev.
+LZC
+FE
+MM
+MC
+LM
+LPL
+SS
+Definition
+Classis not doing enough or has less
+responsibility and has few nfuctionality.
+Classseems more interested in another class
+too much. That affects the design's eflxibility.
+Classdelegates between two or more classes.
+Classhas long sequences of method calls or
+temporary variables to get routine data.
+Methodhas many statements. So, that method
+is dificult
+to read, understand, and maintain.
+Methodis passed many parameters. The code
+more complex.
+Methodindicates the duplicate source code and
+reveals a lack of object orientation.
+2)
+Design Diagram Metric
+early.
+by
+One
+of the
+class diagram
+well-oknwn
+meitrcs
+that can
+design
+diagram
+measeurment
+is
+evaluate quality of the
+software
+The class diagram
+is the
+key artifact in the 00
+programming paradigm that describes eth
+structure
+of software
+showing
+the
+sowftare's
+classes, atitrbutes,
+and
+the
+relationships among the classes.
+nI
+this study we use 27 software
+meitrcs,
+includingBasic,
+Class
+Emploeymnt,
+Complexity,
+Diagrams,
+Inhiertance,
+MOOD[lO],
+Model size,
+other,
+descriptions are listedin TableII.
+nad
+Relationship.
+Metric
+The data sets ear
+collectedofrm
+previous litaereturs.
+tI is
+extracted
+by using MagicDraw 9.5 SPl.l, which is the
+reverse
+engineering tool that
+oefrs
+MUL
+models and
+model qutanity
+rfom
+rfom
+source code. It is not irreguliarty
+getting design
+code. Reverse genineierng
+of quality measeurs
+meitrcs
+has been
+used in many literateurs
+[8], [13], [14]
+TABLEII.
+METRICDESCRIPTIONS USEDIN THIS STUDY
+Metric Tvne
+Basic
+Basic
+Basic
+Basic
+Basic
+Class
+Employment
+Complexity
+Complexity
+Complexity
+Diaagrms
+Inheritance
+Inheritance
+Inheritance
+Inheritance
+MOOD
+MOOD
+MOOD
+MOOD
+MOOD
+MOOD
+Modelsize
+Modelsize
+Modelsize
+Other
+Relationship
+Relationship
+Relationship
+Metric
+NA
+NC
+NM
+NO
+NP
+C PARAM
+RFC
+WAC
+WMA
+D APPEAR
+DIT
+NOC
+NAI
+NO!
+AHF
+FlA
+CF
+MHF
+MIF
+PF
+ACT
+COMP
+NS
+CBC
+ABSTR R
+ASSOC R
+DEPEND R
+Definition
+Number of atitrbutes
+Number of Classes
+Number of Members
+Number of Operation
+Number of Parameters
+Number of times class is used as
+parameter type
+Response for a class
+Weightedatitrbutes
+per class
+Weightedmethods per class
+Appearance in diagrams
+Depth of inheritance tree
+Number of children
+Number of inherited attributes
+Number of inherited operations
+Attribute hiding factor
+Attribute inheritance factor
+Couplingfactor
+Methodhiding factor
+Methodinheritance factor
+Polymohrpism
+factor
+Number of actors
+Number of components
+Number of namespaces
+Couplingbetween obiects
+Number of absatrctions
+Number of associations
+Number of dependencies
+B.
+Machine leaernrs
+.C
+Cross-validation
+Machine
+learnes
+rae
+computational
+methods
+dna
+construction
+complexpattsern
+of programs atht
+automaticallylearn
+to recognize
+and meak
+intelligent decisions based on data.
+We use lO-fold cross-validation approach to assessing the
+performance of a predictive model dan
+preventing over-tfiting
+of the data sets. The lO-foldocrss-validation
+works as follows:
+and to estimate eth importance
+of variables in
+It gives a measure
+for the overallaccuracy of eth classierfi
+Weka [11] is the
+popular suite of machine learning
+algorimths for data mining tasks. It contains 37 algorimths for
+classicfiation
+problems (Weka 3.6).
+In this
+sdtuy,
+we compare
+eht
+performance
+of Random
+Forest with other machine learning
+algorithms
+shown in Table
+III such as Naive Bayes, Logistic, IBI, IBk, VFI and J48 ofrm
+Weka machine leiarnng
+software
+suite on the
+seam
+data sets
+obtained from
+algorimths ear
+previous litaerteurs.
+The 7 machine liearnng
+used with ethir
+defaultparameters.
+TABLEIII.
+AMCHINE
+LEARNERSUSEDIN THIS STUDY
+1
+2
+3
+4
+5
+6
+7
+Learner
+Random Forest
+Naive Bayes
+Logistic regression
+lBl
+lBk
+VFI
+J48
+Abbrev.
+FR
+NB
+LGI
+lBl
+lBk
+VFI
+J48
+1)
+Random Forest: Random
+forest(RF)[9] is a classifier
+composed by a collectionof many
+decision etres that
+each etre
+values of a rdanom
+vector. The advantages
+of
+are an
+ability to hdanle
+a very lgare number of
+depends on the
+rdanom forest
+input variables
+classifier
+classifier can
+rtaining
+classification.
+determining classification.
+2)
+Naive Bayes: Naive Bayes(NB) is a simple probabilistic
+technique using Bayesian theorem.
+Naive Bayes
+build model quickly
+and it also requires a small
+data set to estimate eth
+necessary parameters for
+3)
+Logistic regression: Logistic regression
+(LGI) is used to
+predict a categorical variable from
+a set of predictor variables.
+It describes the relationship among
+the categorical variable
+and predictor
+variables which
+use
+mathematical
+logistic
+regression
+ufnction.
+Logistic regression is one of the best
+probabilistic classifiers.
+4)
+IBl: IBI (IBl) stands for Instance-Basedl learne
+uses a simple distance
+measure
+to find hte
+rtaining
+instance
+nearest
+have the
+for the class of the test instances.
+If multipleinstances
+same (smallest)distance
+to the
+test instance,
+the rfist
+one found is used.
+5)
+6)
+voting.
+IBk: IBk (IBk) is simple instance-based learner
+uses a simple distcane measeur
+to nfid
+the nearest k training
+instances for the class of the
+test instances.
+VFI:
+VFI (VFI) is classifier
+implementing
+hte
+voting
+feature interval classifier.
+Upper and lower boundaries
+constructed around
+each class. Class counts are recorded for
+each interval on each attribute.
+Classification is made by
+7)
+J48: J48 (J48) is a non-parametric algorithm
+generate a decision tree.
+The decision etres
+generated
+used to
+by J48
+can be used for classification.
+htat
+ahtt
+era
+Separate data in to 10 segments (or folds)
+Select the first
+segmten
+for testing, while the remaining
+segments are
+used for training.
+Perform classification dan
+Select the next segment
+obtain performance
+metrics.
+as testing dan
+use the
+rest as
+rtaining data.
+Repeat classification until
+each segment has been used
+as eth
+testing set. Allsegments
+have to cross-over in 10 rounds
+so that each segment
+has a chance
+to be validated.
+Calculatean
+average performance
+rfom
+hte
+individual
+experiments.
+Kohavi [12] estimates
+accuracy
+of cross-validation by
+compiarng
+several approaches.
+Those cross-validations are
+regular cross-validation, leave-one-out cross-validation, K-fold
+cross-validation and bootsatrp.
+lO-fold cross-validation is the
+best modelthat has less bias in accuracy estimation.
+D. Statisticalsigncifance test
+We use eth
+prediction accuracy
+estimators for comparing
+eht performance
+of precdition
+by statistical significance
+tests.
+1)
+Bad-smellprediction accuracy
+Bad-smellprediction
+accuracy is given
+in eth
+Weka ouutpt.
+Accuracy=number
+of correctly c1assifiedinstances
+'-
+number of instances
+Specificity and sensitivity
+Specificity
+is the proportion of utre
+positives that are
+correctly predicted (The accuracy of the
+prediction of
+hte
+classes have bad-smell).
+SpecI'fi CI'ty = --True
+positive
+--"'
+-
+--
+True positive + False negative
+•
+Sensitivity is the proportion of true negatives that are
+correctly predicted (The accuracy of the prediction of
+the classes have no bad-smell).
+Senslt1V11y
+. . .
+True negative
+True negative + Falsepositive
+Predictive valueof tests
+Positive predictive
+value (PPV) is the
+accuracy
+with positive test results that
+prediction
+shows the
+accuracy of the classes' prediction as there is badsmellin
+classes.
+PPV
+Truepositive
+Truepositive + Falsepositive
+•
+Negative predictive value (NPV) is the prediction
+accuracy
+with negative test results that shows the
+accuracy of the classes' prediction as there
+is no badsmellin
+classes.
+NPV
+True
+negative
+True negative + False negative
+1)
+2)
+3)
+4)
+5)
+6)
+2)
+•
+3)
+•
+333
+Bayes, Logistic, IB1, IBk, VFI and
+J48 and
+report the badIV.
+BAD-SMELLPREDICTION
+smellprediction accaurcy,
+hte
+specificity
+nad
+sensitivity,
+and
+We now present
+a description of the bad-smellprediction
+eht predictive valueof tests.
+and experimental
+process as followingsteps.
+1) In our case studies, we collect the data sets ofrm
+A. Bad-smell predictionaccuracy
+sowftare
+of previous literatures
+htat
+have bad-smells. The
+TableIV shows prediction accuracy
+of bad-smellprediction
+prediction variables are
+hte
+number
+of actual bad-smells in
+rfom
+sowftare
+design
+model by machine leearnrs.
+We use 10each
+class, includingLZC, FE, MM, MC, LM, LPL and
+SS.
+fold ocrss-validation
+to evaluate eth
+accuracy.
+The lO-fold
+cross-validation is run
+for at least 10 times in each experimten
+2)
+We use class diagram
+metrics that
+we define in previous
+with
+diferent
+machine leairnng
+algorithms.
+We can
+observe the
+section as the input variables.
+Each data set ofrm
+the previous
+followingdentrs:
+literatures
+is extracted
+into the nbumer
+of class diagram
+metrics by using MagicDraw 9.5 SPl.l.
+Logistic regression, IB1, IBk and Random
+Forest have
+•
+We use 7 machine learning
+algorithms ofrm
+Weka for
+3)
+a better performcane
+htan
+others.
+They ear
+able to
+prediction of bad-smells on each data set. There are Naive
+achieve over 90% bad-smellpredation average rate.
+Bayes, Logistic, IB1, IBk, VFI, J48 and
+Random forest.
+Every machine learnes
+is good for prediction Switch
+•
+Each data set that
+contains each bad-smellis learned
+•
+Statement bad-smell.
+nad
+tested by 7 machine learning
+algorithms with their
+B. Specifcity
+and sensitivity
+default parameters.
+Now, we use Specificity
+nad
+sensitivity to measure
+the
+We apply 10-fold cross-validation for estimating
+•
+performance of bad-smellprediction on 49 result sets.
+generalization error. It is the one of Wake's features
+Table V shows specificity
+of bad-smells prediction. The
+that divides data set into 10 segments.
+It uses 9
+performance of IB1, IBk and
+VFI is better than that of the
+segments to train
+nad
+uses another to validate. Each
+others. They have the average of nearly90% specificity.
+segment has to be validated by cross-over segments in
+Table VI shows sensitivity of bad-smells prediction. The
+10 rounds
+performance
+of Logistic
+regression,
+IB1, IBk, J48 dan
+nI
+our
+methodology,
+7 data sets that
+contained each badsmellare
+leearnd
+by 7 machine learning algorithms.
+There
+rae
+Random Forest is better than
+htat
+of the Naive Bayes and VFI.
+49 (7X7) result sets from hte
+experimtens.
+They have the
+average of nelary 90% specificity.
+Aeftr that, we compare the pferormance
+of bad-smells
+Predictive valueoftests
+4)
+.C
+prediction from
+software
+design
+model with eth
+actual value.
+Table VII shows PPV of bad-smells prediction ofrm
+We also compare the
+performance
+of each machine leiarnng
+software
+design
+model. The Logistic regression, IB1, IBk dan
+algorithm htat are
+described and
+evaluated in eth
+next section.
+Rdanom
+Forest are
+better than
+hte
+performcane
+of the
+oethrs.
+They have average of more than
+80% PPV.
+V.
+EXPERIMENTAL RESULTS
+Table VIII shows NPV of bad-smells prediction from
+nI this section, we present
+eht
+results of our expiermtens
+software
+design
+model. Naive Bayes, Logistic regression, IB1,
+htat
+show the performance
+of bad-smells prediction
+with
+7
+IBk, Random
+Forest are better than
+the performance
+of the VFI
+machine leamer's algorimths such as Random Forests, Naive
+nad
+J48. They have average of more anth
+90% PPV.
+BAD-SMELLPREDICTIONACCURACY
+TABLEIV.
+MM(%) 55(%) Average(%)
+LPL(%)
+FE(%)
+LM(%)
+LZC(%)
+MC(%)
+Naive Bayes
+72.77
+85.3 4
+92.15
+73.30
+59.26
+78.3 8
+73.30
+74.07
+Logistic regression
+93.19
+92.59
+96.86
+95.29
+95.81
+95.81
+93.81
+81.48
+IB 1
+96.86
+95.81
+95.81
+95.81
+85.19
+92.59
+94.74
+96.34
+IB k
+95.29
+96.86
+96.86
+97.38
+95.00
+85.19
+96.34
+92.59
+VFI
+72.25
+84.29
+72.65
+82.72
+74.07
+70.68
+70.68
+48.15
+93.72
+94.24
+98.43
+88.32
+J48
+97.3 8
+97.3 8
+62.96
+62.96
+Random Forest
+96.86
+96.86
+96.86
+92.59
+96.86
+94.53
+95.29
+81.48
+BAD-SMELLPREDICTIONSPECIFICITY
+TABLEV.
+MM(%) 55(%) Average(%)
+LPL(%)
+FE(%)
+LM(%)
+LZC(%)
+MC(%)
+87.42
+94.74
+Naive Bayes
+88.89
+95.00
+66.67
+66.67
+100.00
+100.00
+93.33
+Logistic regression
+88.89
+77.27
+50.00
+75.00
+82.00
+100.00
+89.47
+IB 1
+88.89
+86.36
+89.85
+90.91
+100.00
+93.33
+89.47
+80.00
+IB k
+88.89
+75.00
+90.91
+90.91
+100.00
+93.33
+89.79
+89.47
+VFI
+83.33
+100.00
+86.67
+95.45
+100.00
+94.74
+93.01
+90.91
+86.36
+50.00
+57.83
+0.00
+75.00
+26.67
+J48
+89.47
+77.27
+Random Forest
+90.91
+95.45
+82.34
+89.47
+88.89
+75.00
+50.00
+86.67
+334
+IB1
+IBk
+VFI
+J48
+IB1
+IBk
+VFI
+J48
+IB1
+IBk
+VFI
+J48
+Naive Bayes
+Logistic regression
+RandomForest
+Naive Bayes
+Logistic regression
+Random Forest
+Naive Bayes
+Logistic regression
+Random Forest
+73.63
+97.25
+98.3 5
+98.3 5
+73.08
+98.90
+99.45
+14.29
+61.54
+72.73
+72.73
+15.52
+0.00
+88.89
+99.26
+99.44
+99.44
+99.44
+100.00
+95.24
+99.45
+85.21
+96.45
+97.63
+97.63
+82.25
+97.04
+96.45
+46.81
+73.91
+82.61
+83.33
+40.00
+77.27
+76.92
+100.00
+97.02
+98.21
+98.80
+98.58
+97.04
+98.79
+58.58
+99.41
+98.22
+98.22
+54.44
+98.22
+99.41
+23.91
+91.67
+86.96
+86.96
+21.43
+86.36
+95.45
+100.00
+93.85
+98.81
+98.81
+98.92
+98.22
+99.41
+Featnre Envy
+Long Method
+Lazy Class
+Message Chains
+MiddleMan
+Stwich
+Statement
+Long Parameter Lists J48
+RF
+IBk
+J48
+VI.
+DISCUSSION
+The goal of this paper
+is to idtenify
+bad-smellsas elary as
+possible in the development
+life cycle. We discuss the
+performance of the prediction approaches
+by the measuremten
+method and appropriate to use. Table V-VITI show prediction
+sensitivity, precdition
+specificity
+and precditive
+value of tests
+ehtre
+htat
+accaurtely
+leiarnng
+shows eth
+is no best machine leiarnng
+algorithm that
+can
+predict
+all bad-smells because
+some
+machine
+algorithm achieve 100% for some bad-smell.Table IX
+suitable machine leearnr
+for detecting the bad-smells
+by measurement
+meothd.
+A. Bad-smellprediction accuracy
+Bad-smell prediction accuracy
+is the good measeurmten
+method for evaluate the results for predicting the bad-smell
+coerctly.
+software
+Naive Bayes,
+quality prediction
+VFI and J48 are not suitable for
+because of their low bad-smell
+prediction accaurcy.
+They achieve less than
+90% bad-smell
+prediction average rate shown
+in Table IV. othAlugh,
+most of
+era
+ehtm
+prediction
+Compared
+able to achieve meor
+nath
+90% for
+Long Meothd
+but they have low precdition
+rate for Middle M.an
+with these meothds,
+Random
+Forests can
+achieve
+71.93
+98.25
+97.66
+99.42
+67.25
+100.00
+99.42
+28.36
+83.33
+80.00
+93.75
+26.32
+100.00
+93.75
+99.19
+97.11
+97.66
+97.14
+100.00
+97.16
+97.14
+nI
+nO
+•
+•
+•
+•
+80.00
+86.67
+86.67
+86.67
+66.67
+73.33
+86.67
+72.73
+85.71
+85.71
+85.71
+66.67
+60.00
+75.00
+75.00
+100.00
+100.00
+100.00
+83.33
+64.71
+68.42
+TABLEVI.
+BAD-SMELLPREDICTIONSENSITNITY
+FE(%)
+LM(%)
+LPL(%)
+LZC(%)
+MC(%)
+MM(%) SS(%)
+Avera2e(%)
+TABLEVII.
+POSITNE PREDICTIVEVALUE OF BAD-SMELLPREDICTION
+FE(%)
+LM(%)
+LPL(%)
+LZC(%)
+MC(%)
+MM(%) SS(%)
+Average(%)
+TABLEVIII. NEGATNE PREDICTIVEVALUE OF BAD-SMELLPREDICTION
+FE(%)
+LM(%) LPL(%)
+LZC(%)
+MC(%)
+MM(%) SS(%)
+Average(%)
+58.3 3
+83.33
+83.33
+83.33
+8.3 3
+100.00
+66.67
+66.67
+87.50
+87.50
+87.50
+54.17
+100.00
+76.47
+58.3 3
+90.91
+90.91
+90.91
+33.33
+52.17
+80.00
+PPV
+RF
+IBk
+RF
+J48
+J48
+J48
+91.86
+97.67
+97.67
+98.26
+83.14
+99.42
+97.67
+56.25
+80.95
+80.95
+85.00
+38.30
+94.44
+80.95
+99.37
+98.82
+98.82
+98.83
+99.31
+98.84
+98.82
+74.22
+94.15
+94.22
+94.55
+62.16
+95.27
+92.25
+44.14
+80.66
+82.35
+85.00
+37.48
+74.01
+83.92
+90.17
+96.74
+97.69
+97.71
+87.64
+86.20
+91.72
+NPV
+VFI
+NB
+NB
+VFI
+NB
+LGI, IB1 and IBk
+TABLEIX.
+SUITABLE MECHINELERNER FOR BAD-SMELLSBY MEASUREMENTMETHOD
+Prediction accuracy
+Specificity
+VFI
+NB
+NB
+VFI
+Sensitivity
+RF
+IB1and IBk
+LGI andRF
+J48
+LGI,IB1, IBkand RF LGI, IB1and IBk LGI, IB1, IBkand RF LGI, IB1and IBk LGI, IB1 and IBk
+IB1and IBk
+IBk
+LGI, IB1and IBk J48
+NBand VFI
+J48
+hIgher overall performance. Rdanom
+Forests
+Logistic reegrssion,
+IB1 dan
+IBk because ethir
+IS as well as
+predicted values
+have proximity to actualvalues for every data set.
+B. Specifcity
+and sensitivity
+case any project contain plteny
+of bad-smellclasses, we
+should select the
+machine learns
+that oefr
+high prediction
+specicfiity.
+Table V shows specicfiity
+of eth
+approaches' values
+of each bad-smell.We can
+concludeatht:
+Naive Bayes is suitable to precdit
+eht
+Long Method,
+Long Parameter and Switch
+Statement
+bad-smells.
+Logistic regression,
+IB1 and
+IBk are suitable to predict
+hte
+Message Chains and
+MiddleMan
+bad-smells.
+VFI is suitable to predict eth
+Feature
+Envy
+and Lazy
+Class and Switch
+Statement
+bad-smells.
+the other
+hand, in case any
+projects contain scarcity of
+bad-smell classes, we select eth
+machine learnes
+that have
+high prediction
+ssenitivity.
+Table VI
+shows ssenitivity
+of
+approaches' values of each bad-smell.We can concludethat:
+Random Forest is suitable to predict the
+Feature
+Envy,
+Long Parameter
+Lists dan
+Message Chains bad-smells.
+335
+Naive Bayes is suitable to predict the Lazy Class,
+Message Chains dan
+Switch Statement
+bad-smells.
+IB I and IBk are
+suitable to predict the Long Method
+and Message Chains bad-smells.
+Logistic regression
+is suitable to predict eth
+Long
+Parameter
+Lists and
+Message Chains bad-smells.
+Predictive valueoftests
+.C
+hte
+case any
+projects need eth
+accuracy
+of the
+prediction
+bad-smellin class, PPV is suitable statistical method to aanlyze
+good
+machine
+lsearn.
+Table vn
+shows
+PPV
+of
+approaches of each bad-smell.We can concludeatht:
+Random Forest is suitable to predict the
+Feature
+Envy
+nad
+nad
+Long Parameter
+Lists bad-smells.
+Switch Statement
+bad-smells.
+J48 is suitable to predict the
+Lazy Class, Middle Man
+IBk is suitable to predict the Long
+Method
+dna
+Message Chains bad-smells.
+Logistic regression
+nad
+IBI are suitable to predict the
+Message Chains bad-smells.
+nO
+the other hdan,
+in case any
+projects need to prevent the
+good class becomes bad-smell class by the error
+of the
+prediction, NPV is suitable statistical method to analyze
+eht
+good machine lesearn.
+Table VIII shows NPV of approaches
+of each bad-smell.We can
+concludeatht:
+smells.
+Class bad-smells.
+Logistic regression,
+Naive Bayes is suitable to predict the
+Long Method,
+Long Parameter
+Lists and
+Switch Statement badVFI
+is suitable to predict eth
+Feature
+Envy and Lazy
+IB! and
+IBk are
+suitable to predict
+hte
+Message Chains and
+Middle Man
+bad-smells.
+VII.
+CONCLUSIONSAND FUTUREWORK
+The goal of this paper
+predicting bad-smells ofrm
+machine learning
+algorimths
+is to present
+software
+design
+a methodology for
+model. We apply
+on 7 bad-smell data sets. Each
+data set has each bad-smelldan
+its design
+metrics
+to predict
+each bad-smell. We evaluate bad-smell prediction accuracy
+with many statistical tests. Then,
+we compare the performcane
+of machine leiarnng
+algiorthms.
+Our
+experiments show that
+bad-smellprediction ofrm
+sowftare
+design
+model could predict
+bad-smellelarier dan
+htey
+have proximity to actualvalues.
+We evaluate machine learning
+algorithms
+orfm
+smell prediction
+accuracy.
+The results show
+ehtir
+ahtt
+badsome
+algorimths
+are not suitable for bad-smellprediction
+because of
+hteir
+nad
+lowbad-smell predictionrate. They are Naive Bayes, VFI
+J48 are able to achieve less anth
+90% bad-smellpredation
+average rate. Logistic reegrssion,
+IBI, IBk and Random Forest
+can achieve higher overallprediction rate since they are ableto
+achieve over 90% bad-smellpredation average
+rate.
+Sensitivity and specicfiity, dan
+predictive value of tests are
+used to evaluate accaurcy.
+We can conclude atht
+ehtre
+is no
+336
+nI
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+best machein
+learning
+algorimth
+ahtt
+can
+accurately
+predict all
+selected bad-smells. We should consider eth
+machine learning
+algorithmbased on type of bad-smell.
+There
+are some issues that
+could be made to improve the
+research. Our future
+work willfocus on the following topics:
+1)
+metrics
+We can change
+to measure.
+or increase
+We also can
+eht
+ehtfurr
+size of the class diaamgr
+research using other
+machine leiarnng
+leiarnng algorithms
+bad-smellprediction.
+algorithms to show what is the
+best machine
+nad
+hte
+suitable class diagram
+meitrcs
+for
+There are
+oethr
+bad-smellsremain
+to be researched. We
+may also research on how is the
+relationship among
+each badsmellafects
+the
+prediction accuracy.
+We use
+7
+learning
+parmeters.
+experiment results.
+We can
+adjust any
+algorimths
+pemarters
+with
+ehtir
+to make
+default
+the best
+[I]
+[2]
+[3]
+[4]
+2)
+3)
+REFERENCES
+S. Henry, and C. Selig, "Predicting Source-Code Complexity at the
+Design
+Stage", IEEESoftware,
+March 1990.
+M. Fowler. Refactoring:Improving the Design of Existing Code. United
+States: Addison-Wesley, 1999.
+M. Munro, "Product
+Metrics for Automatic Identicfiation
+of "Bad
+Smell" Design Problems in Java Source-Code".llth IEEEInternational
+Software
+Metrics Symposium (METRIC2S005), 2005.
+R. Marinescu, "Detecting Design Flaws via Metrics in Object-Oriented
+Systems", Proceedings of the 39th
+International Conference and
+Exhibition on Technology of Object-Oriented Languages and Systems
+(TOOLS39), August 2001.
+[5] T. Pienlert and P. Muenchaisri, "Bad-smell Detectionusing ObjectOriented
+Software
+Metrics". International
+Society of Computers and
+Their
+Applications (ISCA) International Conference on
+Computer
+Science, Software
+Engineering, Information Technology, e-Business,
+and Applications (CSITeA'04),December 2004.
+[6] K. Yeesoon,
+Design
+and implementation of a tool for detecting bad
+smells in Java program , Chulalongkorn University, 2008.
+[7] S.
+Mekruksavanich and P.
+Muenchaisri, "Using
+Declarative
+Meta
+Proagrmming
+The
+2009
+for Design FlawsDetection in Object-OrientedSoftware",
+International
+Conference on
+Computer Design
+and
+Applications (ICCDA2009),May2009.
+[8]
+Y. Jiang, B. Cukic, T. Menzies,and N. Bartlow,"ComparingDesign and
+Code Metrics
+for Sowftare
+Quality Prediction". Proceedings of the
+PROMISE2008 Workshop(lCSE),2008.
+[9] L. Breiman, "Random Forests", in Machine Learning, vol 45, pp.5-32,
+October 200I.
+INESCIISEG InternaRl eport,1998.
+[10] B. Abreu F., L. Ochoa , and M. Goulao, "The MOOD meitrcs set",
+[11] LH. Witten, and E. Frank, Data Mining: Practical Machine Learning
+Tools and
+Techniques
+with Java
+Implementations, October 1999,
+http://www.cs.wa ik ato.ac.nz/mlIwekaJ .
+[12] R. Kohavi, A "stndy of cross-validation and bootstrap
+for accuracy
+estimation and model selection". in
+Conferenceon AI.
+1995.
+Proceedings of International Joint
+[13] G. Antoniol, G. Canfora, G. Casazza, A.D. Lucia, and E. Merlo,
+"Recovering tracebility links between code and documentation". IEEE
+Transactions on Software
+Engineering, 2002.
+[14] G. Antoniol, G. Casazza, M. Penta, and R. Fiutem, "Object-oriented
+design patterns
+recovery". Journal
+of Systems and Sowftare,
+200I.

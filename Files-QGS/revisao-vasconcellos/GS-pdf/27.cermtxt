@@ -1,0 +1,733 @@
+Applying and Adjusting
+a Software Process Improvement Model in Practice:
+The Use of the IDEAL Model in a Small Software Enterprise
+Karlheinz Kautz
+Copenhagen Business School
+Department of Informatics
+Howitzvej 60
+DK-2000 Frederiksberg
+Denmark
+KarlKautz 0cbs.dk
+Henrik Westergaard Hansen
+Mindpass as
+Vardevej 1
+DK-9220 Aalborg
+Denmark
+hwh @mindpass.dk
+Kim Thaysen
+Mindpass as
+Vardevej 1
+DK-9220 Aalborg
+Denmark
+kth@mindpass&
+ABSTRACT
+Software process improvement is a demanding and
+complex undertaking. To support the constitution and
+implementation of software process improvement schemes
+the Software Engineering Institute (SEI) proposes a
+framework, the so-called IDEAL model. This model is
+based on experiences from large organizations. The aim of
+the research described here was to investigate the suitabilit
+of the model for small software enterprises. It has therefore
+been deployed and adjusted for successful use in a small
+Danish software company. The course of the project and
+the application of the model are presented and the case is
+reflected on the background of current knowledge about
+managing software process improvement as organizational
+change.
+Keywords
+Software process improvement, improvement models
+1 INTRODUCTION
+Software process improvement is a demanding and
+complex undertaking. To support the constitution and
+implementation of software process improvement schemes
+and projects, the Software Engineering Institute (SEI)
+proposes a framework, the so-called IDEAL model, which
+consists of five phases and which provides a structured
+approach for continuous improvement.
+Perniission to make digital or hard copies of all or part of this work for
+personal or classroom use is granted without fee provided that copies
+are not made or distributed for prolit or comniercial advantage and that
+copies bear this notice and the full citation on the first pagc. To copy
+otherwise, to republish, to post on senws or to redistribute to lists,
+requires prior specific permission and/or a fee.
+ICSE 2000 Limerick Ireland
+Copyright ACM 2000 1-58113-206-9/00/6...$5.00
+626
+This model is based on the SEI'S experiences with their
+governmental and industry customers in the US. These are
+usually very large organizations. However, most software
+enterprises, even in the US, but more so in Europe and
+other parts of the world, belong to the category of small and
+very small software enterprises. Yet, although vital for both
+academics and practitioners in the field, insights about
+software process improvement in general and the use of
+such a model as IDEAL in minor organizations is still
+scarce (as exceptions, see for example [11, [2]).
+The work presented in this article wants to contribute to
+that body of knowledge. We have therefore investigated the
+suitability of the IDEAL model for small software
+enterprises and report our experiences of deploying the
+approach in a young and small Danish software company.
+The approach was tailored to meet the organization's needs
+and this resulted in the successful completion of a first
+improvement cycle.
+The aim of the undertaking was to change the practices in
+the involved organization, thus the research approach
+applied falls into the category of action research [3]. The
+authors participated, each to a different extent, actively in
+the process as change agents and mentors for the intended
+alterations. In addition to the involvement in the project,
+observations, informal conversations, formal interviews,
+official meetings and document studies were used as
+methods for collection of the data, on which this article is
+based.
+The article is structured as follows. In the next section the
+IDEAL model is explained in more detail. Then, the course
+of the project and the application of the model are
+presented. Finally, the alignment process and the content of
+the adjustments and their impact on the improvement
+project as a whole are discussed and the case is reflected on
+the background of current knowledge about managing
+software process improvement as organizational change.
+2
+THE IDEAL MODEL
+The IDEAL has been by the r41' The
+objective of the model is to provide a path of actions that
+constitute a software process improvement program. The
+model defines five phases: the Initiating phase, the
+Diagnosing phase, the Establishing phase, the Acting
+phase, and the Leveraging phase. Each phase consists of up
+to 10 tasks and some tasks comprise 5 or 6 subtasks. The
+main activities in each phase are as follows:
+achievement are developed.
+In the Acting phase solutions, which address the areas of
+improvement discovered during the Diagnosing phase are
+created, piloted, and deployed throughout the organization.
+In the Leveraging phase the information collected in the
+earlier phases, lessons learned, and metrics on
+performances, are evaluated to make the next pass through
+the IDEAL model more effective. By doing this,
+adjustments of the strategy, the methods and the
+Figure 1: The Ideal Model
+In the Initiating phase an improvement infrastructure is
+established, the roles and responsibilities are initially
+defined and initial resources are assigned. The general
+goals of the initiative based on business needs are defined
+and a management steering group and a software
+engineering process group are typically established. In
+addition, an initial improvement plan to guide the
+organization through the next two phases is created.
+In the Diagnosing phase appraisal activities are performed
+to establish a baseline of the organization's current state.
+The results and recommendations from the appraisals are
+included in a first version of an improvement action plan.
+In the Establishing phase, the issues that the organization
+has decided to address are prioritized and strategies for
+pursuing the solutions are formed. The action plan draft is
+completed and measurable goals and metrics to control goal
+infrastructure used in the SPI program can be performed.
+This description, which is a very brief summary of a 220pages
+long, very detailed document, the above included
+graphical representation of the phases, and the tasks'
+presentations in process flow charts as a series of activities
+in the user's guide, suggest a sequential course through all
+phases and tasks.
+Such a sequential pass is indeed recommended as a best
+case scenario. However, it is acknowledged that “real-life
+events prevent organizations from following a set
+sequence” - a formulation that seems to convey an attitude,
+where deviations from a model are seen as a problem rather
+than an opportunity. Therefore, it is expected that
+organizations will, respectively must tailor the steps to their
+particular situation and it is affirmed that the boundaries
+between the phases are not as clearly defined as shown in
+627
+the graphical representation of the model. Furthermore it is
+indicated that many activities can be pursued in a parallel
+fashion.
+Little advice is however given of how to tailor the approach
+and which factors and their interdependencies have to be
+taken into account other than that the adjusted methodolog
+has to fit an organization's vision, business objectives and
+resources.
+The model is based on the SEI'S experiences with their
+governmental and industry customers, which are usually
+very large organizations. However, most software
+companies belong to the categoIy of small and very small
+enterprises. Therefore, insight about the use of such model
+as IDEAL in minor organizations is vital, but still scarce.
+The work presented here wants to contribute to that body of
+knowledge. We have investigated the suitability of the
+IDEAL model for small software enterprises and report our
+experiences of deploying the approach in a small Danish
+software company.
+3. THE CASE
+The company NP was founded in early 1997 by 2 persons,
+with a business and an. IT background, respectively. The
+company's business idea is to pursue a solution for the
+problem of how to present 20000 warehouse items on a
+14” screen through a slow network in a fast and structured
+way.
+At the start of the investigation in early 1998 it had 25
+employees of whom 15 were directly involved in software
+development and the rest in business administration,
+marketing, and sales. The two founders function as
+management. Software development is roughly divided in 2
+divisions of the same size: A production division, which
+delivers standard intra- and internet solutions. This division
+generates the company's income for the time being. It
+consists besides software developers also of operational network
+administration - staff and art designers.
+The other part of the organization's operation is largely
+financed by public money and takes place in the other
+division, which is called research and development. It deals
+with the future product of the organization.
+It is this division, which is in the main focus of our
+investigation. During the period of time, which is described
+here, the first version of the product was still under
+development, though some of its modules underwent
+internal integration tests already.
+The work in this division is rather project-oriented. Two
+project leaders function as coordinators for a varying
+number of subprojects where the employees, in groups of 4
+- 5 , perform all sorts of development tasks. These project
+groups often only exist for a short period of time and are
+dissolved when the problem, which led to the establishment
+of the subproject, is solved. To solve these problems quite
+628
+regularly also members, especially the art designers, of the
+production group are involved.
+From the start, the organization showed an originative
+interest in quality and quality management matters. In
+addition, the company's economical foundation is for a
+limited period largely based on EU support forthe
+development of new businesses. In its business plan, which
+functions as a contract with the sponsor, the organization
+has committed itself to create a quality assurance group or
+division and it is determined that some of the support
+actually has to be used for this objective.
+Management therefore, continuously explores the market
+both with respect to improve the product and to improve its
+business processes and took contact with the university] as
+they had heard about research there conceming software
+process improvement.
+This set the stage for the first period of an ongoing
+improvement project. Here we report our experience with
+the deployment of the IDEAL model during a 10 weeks
+period in 1998: one week initiating, three weeks
+diagnosing, and six weeks establishing and acting in
+parallel. Leveraging, respectively learning, took place
+throughout the whole period.
+The improvement project is still going on and is subject of
+a longitudinal study
+3.1 T h e Initiating Phase
+As a consequence of the initial contact, a start-up meeting
+between company management and university personal
+took place. On that meeting management stated their vision
+for their organization as a company known for high qualit
+products based on professional craftsmanship. Therefore
+they wanted to have all basic work practices established
+and kept under control as soon as possible, especially with
+regard to the expected increase of personal. The
+researchers explained how an improvement project could
+look like.
+As a result, it was determined that two researchers should
+be hired as full time consultants for an initial 10 weeks
+project with options for extension to start a process
+improvement initiative. One project leader was direct1
+assigned half time to the project.
+The consultants' first tasks were to prepare a contract and
+to draft a general improvement plan to be discussed at an
+introductory meeting 2 days later. The contract comprised
+the mutual commitments between management and
+consultants, in particular resources, which the organization
+was willing to use. It was for example determined that each
+At the time of performing the study, all three authors were
+members of the Department of Computer Science at
+Aalborg University, Denmark.
+employee was granted at least 90 minutes interview time
+for an appraisal. The first version of the improvement plan,
+which served as a project plan contained preliminary
+descriptions of the objectives for the project, of possible
+approaches and of a time schedule. The plan was inspired
+by the known Plan-Do-Check-Act cycle and as a more
+concrete refinement of this approach the course of the work
+was oriented tentatively at the IDEAL model.
+At the introductory meeting management and both project
+leaders participated and the documents were discussed.
+The consultants gave a short introduction into software
+process improvement in general and - due to the
+organization's earlier stated interest in the US marked specifically
+into CMM-based improvement2.
+The overall objectives as stated by management gave the
+initiative a long-term perspective. To establish a short-term
+perspective as well, these were refined on that meeting.
+Whereas management was most attracted by a quantitative
+profile of the organization with regard to CMM level 2 and
+general project and quality management practices, the
+project leaders were most interested in concrete project
+planning and estimation techniques. Also at the meeting
+expectations concerning the effort could be clarified and
+adjusted. Management had hoped that getting the practices
+in place would only take some weeks and had a hard time
+understandingthat this would take at least a year.
+After the meeting, the need and conditions for and the
+benefits of process improvement were clear for
+management and project leaders. They were therefore well
+equipped to inform the other employees why such a project
+was relevant for all of them. The improvement plan was
+refined and contained now a goal description based on the
+CMM level 2 processes, and a concise schedule for an
+appraisal and the resulting establishment and enactment of
+the actual improvement activities during the 10 weeks
+period. The plan also included a proposal for the
+establishment of a small software engineering process
+group (SEPG) to define, monitor and track the course of the
+project. This group was formally approved and from the
+on consisted of the project leader and the two consultants.
+A first SEPG meeting was held directly after the
+introductory meeting to prepare an orientation meeting for
+all employees.
+At that meeting all employees were informed about the
+project, management communicated the objectives and
+their origin and introduced the consultants who gave a
+presentation on software development, its problems and
+possible solutions.
+The developers could identify themselves with many of the
+In the context of this article it is assumed that the reader is
+familiar with the basic concepts of the Capability
+Maturity Model (CMM).
+629
+problems described. There was a consensus among the
+developers that something should be done to improve the
+work practices and they were looking forward to the
+initiative to be implemented. The whole initiating phase
+took a total of one week.
+3.2 The Diagnosing phase
+In the diagnosing phase a tailored CMM-inspired approach
+[ 5 ] was chosen to perform a development process specific
+appraisal and a more general organizational analysis. The
+two project leaders filled in a questionnaire especially
+designed for CMM level 2 assessments and 6 people were
+interviewed before and after the questionnaire sessions, in
+all 7 out of 11 employees involved in R & D tasks were
+directly involved in these activities. In addition, documents
+were reviewed and observations were made.
+The questionnaires, which were filled in while the
+consultants were present for necessary clarifications,
+delivered the basic material for the requested, quantified
+profiles. The answers from the questionnaires were then
+supplemented and substantiated by the interview results.
+Concerning the interviews it is important to know that we
+asked the employees what they experienced as problems
+and not what a model like the CMM defined as a potential
+problem area. This approach uncovered problems, which
+were outside the direct scope of the CMM, but invaluable
+for a professional, improvement-oriented organization. An
+example here was the meeting culture. Many meetings
+were hold, but resulting information was not communicated
+to all relevant persons. There was a lack of structure and
+documentation rules. Other results were the lack of an
+overall life cycle model, of project estimation routines and
+of code documentation. It has to be mentioned that during
+the interviews the employees did not only describe the
+status quo, but also made significant proposals for
+improvement. Finally, the interviews had the effect that the
+consultants and employees got to know each other, which
+facilitated the further cooperation.
+The document reviews either delivered further evidence or
+uncovered other problems. An example was that both
+questionnaires and interviews postulated that detailed time
+schedules were produced as part of the planning. The
+documents showed however that no data was kept after
+revision of plans about the old plans and the reasons for the
+change. Another example was the above-mentioned
+meeting culture. The document review revealed that no
+minutes of the decisions were taken.
+The general organizational analysis unveiled as described
+above a project-oriented organization in which a creative,
+dynamic, energetic and at times hectic atmosphere
+prevailed. Project groups emerged frequently on an ad-hoc
+basis and were determined by the situations.
+The company can be characterized as a simple structure
+where the directors determine the overall scope and frame,
+take the strategic business and product related decisions,
+negotiate deadlines with account officers and the project
+leaders, and control and co-ordinate that commitments and
+contracts are kept. They expect that everyone takes
+responsibility, can see the company's aim and works for a
+common interest. They decide what has to be done, but not
+how it has to be done. The management style is
+management-by-walking. The project leaders keep
+overview over the technical tasks and achievements and the
+developers have a relatively large liberty and right of selfdetermination.
+They have technical responsibility and
+decisions concerning detailed technical problems as well as
+the purchase of tools are taken autonomously bythem
+They show commitment and motivation and often work
+overtime.
+An open office landscape mirrors the organization's wish
+for an open and relaxing atmosphere where the employee
+can develop a feeling of community and security, and
+which supports internal communication and in a natural
+way a co-ordination mechanism of mutual adjustment.
+Finally, to support this culture, the organization employs to
+a great extent young, newly graduated staff with an
+education both in information systems or computer science,
+who have no 'bad' habits and who are open for
+innovations.
+The initial assessment with interviews and questionnaires
+itself took one week, while writing the full report based on
+additional collection of evidence through the documents
+reviews and observations took another 2 weeks.
+The assessment report [6] concluded that NP was a typical
+level 1 organization with relative strengths in project
+tracking and oversight and in project planning, and some
+control over requirement management. Weaknesses were
+found for configuration management and quality assurance.
+This however was partly related to the fact that the
+organization only worked on the first version of its product
+and had not reached the test phase yet. Besides the CMM
+related findings, the report contained the identified
+problems from outside the model and a list of
+recommendations for both areas as well as a slightly
+refined plan for action.
+Finally, the outcome of the investigation was presented to
+the organization on two meetings. Initially, the report was
+exposed to management in a 2 hours session and after they
+had accepted and approved the document, the results were
+introduced to all employees. On that meeting first the
+overall maturity profile was shown. Then, the most acute
+and concrete problems, whose solution was judged by the
+SEPG to be a precondition for any CMM-related
+improvements and whose settlement was considered to
+have a direct effect on the organization, were presented.
+All improvement proposals were without further
+prioritization discussed by placing them in a concrete life630
+cycle model. The spiral model was used for this purpose
+and showed to be most appropriate for the organization's
+situation.
+This approach illustrated that fast progress was possible
+and made the relationship between the individual findings
+and recommendations visible. It supported a holistic
+understanding of the situation and the necessary actions,
+and provided an overall structure for all development and
+improvement activities.
+Although three weeks without any action seem to be a long
+time, the consultants - as they were present every day in the
+organization - could keep the momentum going. This was
+manifested in the next two phases.
+3.3 The Establishing Phase
+The transition between this phase and the preceding one
+was somehow blurred. The presentation of the diagnosis
+results went, as described above, beyond a mere account of
+possible improvements: it contained the distinction between
+acute problems and principle - process-centered - problems
+and utilized a particular model to explain their relationship
+and their effect. These were both used again during the
+performance of the three main tasks the SEPG worked
+upon in this phase, namely a further refinement of the
+improvement proposals, a prioritization of the proposals
+and the development and documentation of the final plan
+for action.
+The leading principle for the subsequent processing of the
+improvement proposals was to avoid too much bureaucracy
+in the form of extensive documentation and of numerous
+inspections, reviews and audits, but to still keep in the
+range of the CMM.
+The governing parameters for the prioritization were to
+delimit extra economical resources and to delimit the
+additional workload for the employees. Through placement
+in the now known life cycle model for the product
+development it had become clear which improvement
+proposals fitted best to which development activities. Thus,
+due to the fact that the next actual life cycle activity in the
+development project was testing the first version of the
+product, quality assurance which had been judged weak got
+the highest priority together with the actual introduction of
+the life cycle model. As a result the CMM-related, processcentered
+improvements and those problem-centered
+improvements, which fitted into the life cycle, were
+planned such that they followed the organization's life
+cycle for (the) product development.
+As a result of this phase a report including a detailed
+improvement and action plan was produced and delivered
+at the end of the 10 weeks period. The establishment phase
+took a total of six weeks. Many of the subtasks were
+performed in accordance with the IDEAL model. Yet,
+explicit reviews of the organization's vision and business
+plan were judged to be not necessary as these had been
+discussed only a few weeks earlier. In addition, the report
+did not comprise a concrete metrics program. This wa
+considered too early given the fact that the organization
+first should establish some basic processes. Instead a
+proposal for the establishment of routines to gather both
+qualitative and quantitative knowledge was included. In
+contrast to the IDEAL model where a distinction between
+problem-centered and process-centered improvement is
+first introduced for the acting phase, such a differentiation
+took already place here and was helpful in constituting the
+improvement plan.
+The work tasks in this phase were also influenced by the
+fact that the SEPG and the participants of the meeting
+where the diagnosis results were presented judged two of
+the acute problems as so important that they immediately
+after the meeting founded two technical working groups
+with the approval of management to solve these problems.
+This concerned the lack of meeting structure and meeting
+guidelines and the lack of code documentation routines.
+Thus no proper prioritization and long-term plans for these
+activities were developed.
+As a consequence an unforeseen, direct transition from the
+diagnosis phase to the acting phase to deal with these issues
+took place and in parallel work was performed in both
+phases.
+3.4 The Acting Phase
+The first activity in the acting phase, which can also be
+considered as an establishing activity was the founding of
+the two working groups (TWGs - Technical Working
+Groups in terms of the model) which should work with two
+of the acute problem areas.
+In accordance with the organization's work routines, all
+meeting participants, thus all employees of the R & D
+department were in line with their own preferences
+assigned to one of the two temporary project groups. The
+SEPG members scheduled dates for first group meetings
+and appointed one person as responsible for the preparation
+of that meeting. The SEPG members also participated in
+the first meeting of each group. The 'meeting' group
+needed two more sessions to develop a solution, whereas
+the 'code documentation' group only met once more.
+Finally, on a common meeting the two groups informed
+each other and accepted the prepared proposals. The whole
+process took one week and the remaining time was used to
+pilot and to implement the new routines. No special action
+had to be taken for these tasks as all employees had been
+involved in the definition process.
+At the end of the period two new groups, a 'life cycle'
+group and a 'quality assurance and test' group, were
+established who documented their work in two short
+reports. However at the end of the IO-week period none of
+the routines, and thus no process-centered and CMMrelated
+improvement had been implemented. This has
+631
+however happened afterwards and a life cycle model,
+quality assurance, configuration management, project
+planning and measurement routines are now in use [7].
+3.5 The Leveraging Phase
+A distinct leveraging phase in the sense of the IDEAL
+model did not take place as part of the first 10weeks
+period. Learning happened of course during the whole
+project and the lessons learned were already collected
+during each phase.
+After the original project period however, the two process
+improvement specialists evaluated the whole process and
+produced an additional report [8]. The report stated that the
+only improvement, which really had been institutionalized
+were the meeting performance rules as all meetings now
+had an agenda and minutes. In the beginning everyone
+followed the code documentation guidelines, but after a
+while some employees stopped using them. According to
+one project leader this was due to time pressure and lack of
+control. In general, management liked things as little
+bureaucratic as possible, whereas the developers
+themselves would have liked a little more formalism.
+Nevertheless both groups considered the project a success
+and the lessons learned, together with a refined action plan
+have been used to continue the improvement effort of the
+organization and to introduce the new, above mentioned
+processes and procedures. More then a year after the initial
+project, the two process improvement specialists are still
+full-time employed by the company and work there as
+process improvement specialists.
+4. DISCUSSION AND CONCLUSION
+In the preceding sections we have presented a successful
+software process improvement endeavor. To perform the
+project activities the IDEAL model has been applied and
+adjusted. The IDEAL model guide [4] itself recommends
+tailoring the approach to fit the organization's resources,
+their visions and their business objectives. In the following
+we want to revisit the case and discuss in more detail which
+adjustments were made, which criteria guided that process
+and in which environment this took place. In doing so, we
+want to emphasize what lessons other, especially small
+organizations can learn from the case.
+The first lesson for small organizations, which wish to
+perform improvement activities, is that it makes sense to
+use a structured model to organize the process. The second
+lesson is that is makes sense to adjust the model to the
+particular conditions of the organization; and the third
+lesson is that it makes sense to perform the improvement
+activities as a project with clearly assigned and documented
+roles, responsibilities and resources.
+The IDEAL model stresses these features. It is suitable for
+tailoring and the case demonstrates how such tailoring can
+look like in a concrete situation.
+Resource assignment was taken seriously at NP and was
+performed according to the organization's objectives and
+capabilities and thus was no major problem. Two process
+improvement specialists were hired full-time, one project
+leader was assigned half time to the SEPG and all
+developers were granted time to participate in the project.
+Resources were scarce in terms of time, the organization
+wished first results in a short time period, and thus the
+whole first improvement cycle was determined to be 10
+weeks. For the actual implementation of some of the
+improvement proposals, resources were more critical.
+Therefore, they were planned in such a way to causeas
+little additional work for staff as possible.
+Instead of the organization's vision and business objectives,
+more concrete structural and cultural elements were the
+shaping forces. Structurally, the fact that the organization
+was comparably small with a relatively flat hierarchical
+configuration and short communication ways, and
+culturally that it was open, energetic, dynamic, fast
+reacting, action-oriented enterprise geared towards fast
+results played a major role.
+In this respect two adjustments were most significant. The
+IDEAL model proposes to first distinguish between
+problem-centered - easily identifiable, fast fixable, short
+term effective - and process-centered - key process area
+related, long-term effective - issues in the acting phase. In
+contrast at NP this distinction was already introduced at the
+end of the diagnosing phase. It was used to present all
+findings in a meaningful way and to rapidly prepare potent
+actions.
+This lead to the second adjustment. For the problemcentered
+issues, no separate establishing phase other tha
+forming the TWGs was necessary and the establishing
+phase for the process-centered issues was run in parallel to
+the acting phase of the problem-centered issues.
+Concerning the use of the model within the individual
+phases, the tasks' and subtasks' lists were taken as
+guidelines and checklists to secure that all important
+questions had been taken into account rather than
+procedures which had to be followed sequentially and full
+as the IDEAL document recommends for a perfect course
+of activities.
+As mentioned earlier, due to the short time interval between
+the initiating phase and the establishing phase, some of the
+review tasks of the latter phase were judged unnecessary by
+the improvement specialists. Another example can the
+found in the initiating phase itself where a separate
+Management Steering Group was found dispensable as the
+required information was exchanged through the daily
+contact between management and all projects, and most
+wanted meetings could easily be arranged without an
+additional organizational structure. The model's request for
+education in this phase was also adjusted. As the employee
+632
+were well educated with university degrees, only two
+theoretical lectures to familiarize them with the basic
+concepts of software process improvement were needed.
+This reinforces that the project took place in an
+environment characterized by openness and a high level of
+education, which was well suited for innovation, change
+and improvement [9]. Beyond the adjustment of general
+models, Kautz [ l o ] points out the significance of factors
+like management support and commitment, project
+planning and organization, education and training,
+assessment, monitoring and evaluation, staff involvement,
+support and knowledge transfer by external consultants,
+usability and validity of the introduced changes and cultural
+feasibility for process improvement in software
+organizations.
+Taking these factors adequately into account, is another
+lesson to be learned by small organizations.
+Many of the factors can be found in the organization
+independently from the IDEAL model; some of them like
+management commitment and teamwork were
+strengthened; others like project planning and staff
+involvement were made explicit and thus supported by the
+model; whereas yet others would not specifically be
+fostered by the model. IDEAL, for example, recommends
+to assess the climate for software process improvement and
+suggests as a consequence to develop strategies to reduce
+barriers, to manage resistance, and to increase the
+organization's capacity for change, but leaves open how
+this could be done.
+This brings the discussion finally to the wider context of
+the IDEAL model as part of an organizational change
+strategy. Borum [lo], f. ex., distinguishes between a
+technical-rational and a humanistic change strategy and
+describes their main dimensions.
+In the technical-rational strategy, the objective of change is
+effectiveness and efficiency and organizations are seen as
+production systems. To achieve the aim, the change agents,
+namely management and analysts, apply re-design a
+rationalization methods which are often imposed on
+production units to accomplish better output in quantitative
+terms.
+In contrast, in the humanistic strategy, the aim is to adjust
+the work milieu and to adopt novelties and innovation in
+organizations, which are seen as hierarchical, diverse, but
+nevertheless open, social systems. The change agents,
+primarily management and process consultants, appl
+reflection and learning processes and modify interaction
+and communication channels. The targets are groups,
+which, to accept changes in behavior, norms and artifacts,
+are informed, involved and trained.
+The IDEAL model can definitely be used within both
+strategies. Due to the characteristics of the organization, in
+the case of NP, the application of the humanistic change
+strategy seemed most adequate. One might speculate
+whether embedding the IDEAL model in a less fitting
+strategy would have lead to the same positive results.
+However, applied in the right context with the appropriate
+adjustments, it showed to be apt and fairly flexible for the
+organization of a software process improvement endeavor
+in a small enterprise; it supported the project and provided
+a framework for a smooth performance of all respective
+activities.
+As such it provided further insights about software process
+improvement in small organizations and might serve as an
+inspiration for other companies.
+REFERENCES
+Brodman, J. D., D. L. Johnson (1994). What Small
+Businesses and Small Organizations say about the
+CMM. In Proceedings of the 16 ' International
+Conference on Software Engineering, IEEE Computer
+Society, pp. 331-340, May 1994.
+Kautz, K. (1999). Making Sense of Measurements for
+Small Organizations. IEEE Software, Vol. 16, No.2,
+pp. 14-20.
+Argyris, C., D. A. Schoen (1991). Participator
+Action Research and Action Science Compared. In
+Whyte, W. F. (ed.), Participatory Action Research.
+Sage, Newbury Park, Ca., USA.
+McFeeley, B. (1996). IDEALSM: A User's Guide for
+Software Process Improvement. Handbook CMU/SEI96-HB-001.
+Software Engineering Institute, Carnegie
+Mellon University, Pittsburgh, PE, USA.
+5. Iversen, J., J. Johansen, P.A. Nielsen, and J. Pries-Heje
+(1998). Combining Quantitative and Qualitative
+Assessment Methods in Software Process Improvement.
+In Baets (ed.), Proceedings of the 6th European
+Conference on Information Systems (ECIS), Aix-enProvence,
+France, pp. 451-466, June 4-6, 1998.
+6. Westergaard Hansen, H. , K. Thaysen (1998a). NP Assessment
+Process Report (in Danish). University of
+Aalborg, Institute for Electronic Systems, Department
+of Computer Science, Denmark.
+7. Westergaard Hansen, H., K. Thaysen (1998b). Process
+Improvement in a Small Danish Software Company (in
+Danish). MSC Thesis, University of Aalborg, Institute
+for Electronic Systems, Department of Computer
+Science, Denmark.
+8. Kautz, K., K. Thaysen (2000). Knowledge, learning and
+IT Support in a Small Software Company, in
+Proceedings of BPRC CONFERENCE on 'Knowledge
+Management: Concepts and Controversies' 10-11,
+February, 2000: University of Warwick, Coventry, UK.
+9. Rogers, E. M. (1983). Diffusion of Innovations (3rd
+edition). The Free Press, New York.
+10. Kautz, K. (1999). Software Process Improvement in
+very Small Enterprises: Does it pay off? In Journal of
+the Software Process - Improvement and Practice,
+Special Issue on Organizational Change with Software
+Process Improvement, Vol. 5.
+11.Borum, F. (1995). Strategies for Organizational Change
+(in Danish). CBS Publishing Company. Copenhagen,
+Denmark.
+633

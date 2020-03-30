@@ -1,0 +1,424 @@
+Interfacing Three Complementary Technologies:
+Strategic Planning, Process Modeling, and System Dynamics
+W. L. McCoy
+Systems Research and Technology Department
+Naval Surface Warfare Center Dahlgren Division
+Dahlgren, VA 22448-5100
+ABSTRACT
+This concept paper explores the utility and feasibility of
+interfacing three complementary technologies: (1)
+strategic planning, (2) process modeling, and (3) system
+dynamics to assist with the engineering of complex
+computer-based systems. Interfxing these technologies
+appears especially appropriate and timely. The
+Govemment Performance and Results Act of 1993 strives
+to make federal agencies operate more like businesses by
+requiring strategic plans and conducting performance
+audits. Process modeling technology aimed at providing
+assistance for the Integrated Product and Process
+Development (IPPD) approach for system development is
+being developed. In today's environment of perpetual
+change, a means of effectively predicting the impact of
+such changes on system development would be valuable.
+System dynamics modeling provides promise in this
+area. Since the product of strategic planning can be
+viewed as improved business and operational processes
+that will likely undergo major changes in response to
+events occurring in today'senvironment, there appears to
+be a natural synergy between application of these three
+technologies. This paper addresses exploitation of this
+natural synergy and hypothesizes that such exploitation
+would facilitate the development and operation of
+complex systems over the entire life cycle.
+INTRODUCTION
+To improve the acquisition and development of complex
+systems prevalent in the Department of Defense (DoD),
+the Integrated Product and Process Development
+approach [l] has been mandated. Reference 1 defines
+IPPD as “A management process that integrates all
+activities fiom product concept through productiodfield
+support, using multifunctional teams, to simultaneously
+optimize the product and its manufacturing v d
+sustainment processes to meet cost and performance
+objectives.” Key tenets of IPPD include Customer
+Focus, Concurrent Development of Product and
+Processes, Early and Continuous Life Cycle Planning,
+Multidiscliplinary teams, and Seamless Management
+Tools. The technologies of strategic planning, process
+modeling, and system dynamics, when interfxed
+appropriately, would appear to offa tremendous
+advantages. Interfacing these technologies is especially
+appropriate and timely for a number of reasons as will be
+discussed later. The Government Performance and
+Results Act of 1993 [2] encourages federal agencies to
+operate more like businesses by requiring strategic plans
+and conducting performance audits. A current research
+effort [3] in support of technology to assist with complex
+systems development is developing advanced process
+modeling technologies with the goal of effectively
+operationalizing the mandated Integrated Product and
+Process Development (IPPD) approach. In today's
+environment of perpetual change, a means of effectively
+predicting the impact of changes on system development
+in order that appropriate revised actions can be crafted
+and pursued would be very valuable. System dynamics
+modeling provides promise in this area. The product of
+strategic planning exercises, when done effectively, can
+be viewed as improved business processes. Such
+processes will likely undergo major changes in response
+to unplanned events occurring in today's environment.
+Thus there appears to be a natural synergy between these
+three technologies. Exploitation of this natural synergy
+should facilitate system development and operation over
+the entire life cycle.
+STRATEGIC PLANNING
+In the context of this paper, the term strategic planning is
+used in a broad sense to include initiatives to evolve the
+enterprise to make it more effective, as well as the life
+cycle planning associated with the development of
+complex computer-based systems. Strategic planning
+addresses deriving and evolving the mission of the
+enterprise, enumeration of goals and objectives,
+identification of strategic actions, and programmatics
+such as schedule, cost, and enterprise resources.
+Products that support strategic planning are typically
+billed as decision support tools. They typically o&
+soilware and techniques that guide users through
+exercises needed for making decisions. They typically
+0-7803-4778-1/98 $10.00 0 1998 IEEE
+2620
+support analyses conceming market attractiveness,
+competitive position, and strategic drivers in selected
+markets; strategic actions required to achieve
+organizational goals; and investment strategies to
+implement those strategic actions. Some products use
+advanced decision support techniques such as the
+Analytic Hierarchy Process (AHP) to assist with
+quantifying the various alternatives needed to make
+decisions [5].
+In the acquisition and development of complex systems,
+the term “life cycle planning” is often used in lieu of
+strategic planning [11. However, the goals of developing
+strategic actions and devising an investment strategy fop
+achieving those actions are quite similar.
+PROCESS MODELING
+The acceptance by DoD of the tenets of IPPD validates
+the need to use process modeling technology for the
+acquisition and development of complex systems. Since
+the processes to be employed are major determiners of
+important systems attributes (including cost, quality,
+and schedule), technologies that allow the development
+and optimization of efficient and cost-effective processes
+should be in great demand. Process modeling is
+Concerned with deriving an efficient set of activities
+(processes) required to accomplish an objective. It spans
+the areas of process definition and analysis, predictive
+process simulation, process execution, and design
+process management. In the future, process modeling
+will play an even greater role in the acquisition and
+developmentof complex systems and contribute directly
+to the success or failure of the effort.
+The feasibility and utility of using process modeling to
+operationalize the IPPD approach is being explored. One
+such effort [3] has produced an architecture for a product
+with the following attributes: Web-enabled, form based
+templates for process definition; Innovative integrated
+product team (IPT) metrics (e.g. IPT Influence, IPT
+schedule vulnerability); Platform-independent,
+architecture-neutral Java/HTML implementation;
+Interface to selected simulation engines and desktop
+tools, and Visualization of intra-IPT and inter-IPT
+interactions.
+SYSTEM DYNAMICS
+System dynamics has been defined as a rigorous method
+for studying problems in system behavior using the
+principles of feedback, dynamics, and simulation. It
+examines systems as a whole as opposed to breaking
+them up into smaller pieces. It can be viewed as a
+means of quantitatively assessing the impact of changes
+on current development plans. The sources of such
+2621
+change may be external or intemal and include resource
+constraints, schedule compression or extensions, new
+technology innovations, and the like.
+System dynamics modeling has been described as having
+the following characteristics: (1) uses computer
+simulation models to understand and improve such
+systems; (2) builds qualitative knowledge and numerical
+information; (3) employs methods and insights from
+feedback control engineering and other scientific
+disciplines to assess and improve the quality of models;
+and (4) seeks improved ways to translate scientificresults
+into implemented improvements. Though system
+dynamics has its roots in socioeconomic systems having
+been applied broadly over the past three decades
+in such a r m as environmental change, economic
+development, social unrest, urban decay, psychology and
+physiology, it appears that the engineering of complex
+systems may be another area which may benefit from this
+technology. Some explorations into applying system
+dynamics modeling to the acquisition and development
+of complex Navy systems have been performed and the
+results to date appear promising [4].
+INTERFACING THE TECHNOLOGIES
+In the natural order of things, strategic planning would
+be performed first to derive a set of strategic actions (and
+priorities) for meeting some goal. Process modeling
+would then be pursued to derive an optimized set of
+processes or activities to implement the strategic plan.
+When important factors change, system dynamics
+modeling should be performed to assess the impact of
+such changes. If significant impacts are observed, then
+strategic planning should be revisited, followed by
+process modeling, and so on. Since the world is very
+dynamic and the rate of change appears to be ever
+increasing, very seldom is a planned activity of any
+significance completed without having to revisit the
+planning process. From an initial look, it appears that
+the three technologies have little in common and
+interfacing (or integrating) them would perhaps not be
+worthwhile. Since all three technologies are either
+explicitly called out or ir&medby the IPPD approach
+[11, a closer look is warranted.
+One way to further explore interfacing these technologies
+is to examine in more detail the input required by and
+output produced by each technology, and attempt to
+automate the exchange of such information. When
+performing strategic planning, one is very much
+concerned with goals, available alternatives, judgments,
+and current enterpriseperformance. The major result is a
+set of prioritized strategic actions to be performed to
+accomplish the overall goals. For process modeling, the
+basic inputs are objectives, strategic actions, available
+resources, and constraints. The result of process
+modeling is a set of optimized processes that when
+visually portrayed should facilitate communication,
+understanding and execution of the activities required to
+accomplish the goals. In system dynamics modeling,
+the input parameters describing changes that will af€&
+the outcome of the system under development are
+expressed typically as input to a simulation model. The
+output would be the impact of changes expressed
+possibly as cost deltas, schedule extensions, resource
+changes, and system performance. Table 1 identifies the
+basic information that could be used by the various
+technologies. It is observed that there is significant
+commonality.
+Technology
+Strategic Planning
+Process Modeling
+System Dynamics
+Input
+Goals
+Altematives
+Judgments
+Performance feedback
+Mission
+Objectives
+Strategic Actions
+Resources
+Models
+- Organization
+- Development
+Changes considered
+output
+Mission
+Needs Assessments
+Objectives
+Strategic Actions
+Outcome measures
+Optimized Processes (models) with
+- role, person, goal, resource
+Graphical Process depictions
+Process Metics
+Impacts (measures)
+-cost
+-schedule
+-performance, ..
+Table 1: Interfacing Technologies Model
+Upon closer scrutiny, one will observe that the results of
+strategic planning can be viewed as input useh1 for
+processing modeling. With this as the case, then
+strategic planning can result in graphical optimized
+processes with metics and hence the resulting plan can be
+optimized and made more efficient and effective. In
+addition, planning in the acquisition and development
+world deals with cost, schedules and other resources
+needed using sophisticated estimation techniques. Hence
+it should be more closely aligned with the actual
+activities required to develop a system. Some of the
+system dynamics models, as appropriate, could be built
+fiom the actual processes to be employed in system
+development using metics from actual development
+activity or derived from similar efforts (perhaps using casebased
+reasoning technology). The results of system
+dynamics modeling could assist with the identification of
+new goals, objectives, and altematives needed to drive
+revised planning efforts.
+The above observations inspired a return to the basic
+issues with respect to the scope and use of the respective
+technologies and generated the following questions:
+1. What is the natural scope of strategic planning? Or
+more precisely, should strategic planning include
+sophisticated cost, schedule, and resources estimation
+techniques?
+2 . Where do metics fit in? Should metrics be
+employed across the entire spectrum of the three
+technologies?
+3 . Should system dynamics modeling be a part of
+strategic planning for performing sensitivity analysis on
+parameters likely to change?
+4. Is case-based reasoning a technology which could be
+employed as a part of the other three technologies?
+5 . How do these technologies fit into the overall
+systems engineering support environment?
+To some developers, these technologies are seen as
+activities that contribute very little value to the overall
+effort but consume significant resources. They
+hypothesize that resources could be better utilized in the
+actual development of the products. After all, a document
+containing plans and process descriptions does not
+provide functionality. Perhaps, a reason for this view is
+the lack of sufficiently p o w d and robust tools that
+2622
+provide the help desired. Currently, these fictions are
+done manually (perhaps using a word processor,
+spreadsheet, and presentation graphics tools) mainly
+because the payback to effort ratio for existing support
+tools is viewed as being too low. For the new crop d
+internet-based products currently under development along
+with a repository to capture and maintain enterprise
+information, it is envisioned that the drawbacks will soon
+disappear. The challenge to this technology is to provide
+the proper mix of capabilities, and at the same time make
+use easy and effective. Issues that afFect these criteria
+include cost of ownership, learning curve, visualization
+capabilities, and accessibility of tools.
+The realization and general acceptance that product
+attributes are a direct reflection of the processes used to
+develop them has inspired to the following initiatives: (1)
+more emphasis is now being placed on documenting, a
+priori, the planned acquisition and development
+processes, (2) strict adherence to those documented
+processes during actual development, and (3)
+configuration management of documented processes as
+needs arise during the actual development. In the end, the
+updated process description will provide an accurate
+portrayal of the activities and steps performed to build the
+product. In this context, one may also view strategic
+planning and system dynamics as processes. Thus
+activities that support strategic planning and system
+dynamics would be modeled as processes. Such process
+documentation could be used by independent verification
+and validation teams along with other testing techniques
+to make assessments of the quality of the end product.
+A generic solution to interfacing these technologies is
+desirable. Care should be exercised to avoid
+implementation solutions that would apply only to
+specific incarnations of the technologies.
+APPLICATIONS
+Numerous applications in both the DoD and commercial
+world could exploit this synergy. Key IPPD tenets d
+customer focus, concurrent development of products and
+processes, early and continuous life cycle planning,
+multidisciplinary teamwork, and seamless management
+tools support this exploitation. Judicious application d
+the technologies should contribute to the effectiveness
+and efficiency with which systems are developed,
+acquired, operated, and maintained. These outcomes are
+possible because of the many potential benefits of these
+technologies including: (1) logically derived, complete
+and consistent strategic plans based on effective
+application of decision support technology, (2) common
+understanding of the processes to be employed since they
+were derived fiom systematic and consistent definition,
+communication and documentation of processes, and (3)
+effective assessment of the impact of changes on system
+development plans and processes. The ability to capture
+this information in a repository and to reuse it “as is” or
+modified as appropriate should contribute significantly to
+the effectiveness of these technologies. SuccessfiA
+application of the technologies should result in higher
+quality systems developed with fewer resources and
+shorter development cycles.
+These technologies can be employed in many other
+contexts regardless of whether conformance to the IPPD
+approach is required. The following potential
+applications are identified establishment and
+maintenance of plans and processes for softwax
+development and life cycle support; business process
+reengineering in various markets such as
+telecommunications, entertainment, manufacturing,
+insurance, and banking industries; improving
+organization-wide processes for contracting, procurement,
+waiver regulation, logistics, purchasing, and payment;
+analysis and redesign of health care processes with
+internetiinkmet-enabled information systems; and even
+definition and analysis of procedures and policies iix
+conducting research and development initiatives.
+To enhance the effmtiveness of these technologies,
+integration with other technologies would appear
+appropriate. For the engineering of complex systems,
+integration into the systems engineering environment
+(SEE) containing other tools for systems development
+would appear especially appropriate. Such integration
+would advance implementation of the IPPD approach by
+providing computerized support for increased automation
+of development and operational processes along the
+existing computer support for product development. ff
+accomplished appropriately, such technology could be
+used to support process management, guide process
+execution, and support automation of major portions d
+the process. In this context, the concept of a processcentered
+systems engineering environment could be
+realized. Such an environment will allow process
+specifications to influence and potentially control the
+activities associated with the development of major
+portions of complex systems.
+SUMMARY
+In today's environment of constant change, it would be
+advantageous to be able to cooperatively, iteratively and
+synergistically (1) devise realistic and practical strategic
+plans, (2) develop optimized processes to carry out those
+plans, and (3) assess the impact of intemal and external
+factors (budget, schedule, technology, etc.) that could
+a f k t those strategic plans and optimized processes. It
+appears that interfacing effective technologies for strategic
+planning, process modeling and system dynamics would
+provide a significant capability in this direction and
+would offer major advances and support for the IPPD
+approach.
+2623
+This investigation hopefully provides motivation for the
+marriage of these important technologies. Such a
+marriage could potentially make it easier, faster, and better
+to perform the three functions since data fiom any one
+activity could flow to the others, thus contributing to the
+efficiency with which these activities are performed. Such
+could represent a significant contribution to the ability of
+the DoD and the commercial sector to more effectively
+acquire and implement complex systems and at the same
+time satisfy required planning and development mandates.
+This interfaced technology could be used by planners,
+managers, process engineers, and systems engineers in
+DoD and the commercial sector to more effectively
+perform their respective functions.
+REFERENCES
+[l] Office of the Under Secretary of Defense (Acquisition
+and Technology), “DoD Guide to Integrated Product and
+Process Development (Version 1.0),” February 5 , 1996.
+[2] Phillip Blackerby, “Strategic Planning, An Overview
+for complying with GPRA (P.L. 103-62),”
+http://www.perfstrat.comlarticleslovervie.whtm, 1993.
+[3] &ad M. Madni, W. L. McCoy, Carla M. Madni,
+“Process Support for IPPD-Enabled Systems
+Engineering,” Proceedings 1998 IEEE Conference on
+Systems, Man, and Cybernetics, October 1998.
+[4] CD-ROM, “IPT Learning Campus,” Bellwether
+Learning Center, A Division of Dynamic Systems, Inc.,
+http:lwww.dynsys.com, 1998.
+[ 5 ] Karl M. Kapp, “AliahTHINK! Multicriteria-based
+Decision Support Software,” APICS - The P e r f o m c e
+Advantage, Volume 8, Number 4, April 1998,
+http://lionhrlpub.com/apics/apics-4-98Iswr.html.
+2624

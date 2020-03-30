@@ -1,0 +1,989 @@
+2014 6th International Workshop on Empirical Software Engineering in Practice
+A Cross-Project Evaluation of Text-based Fault-prone Module Prediction
+Osamu Mizuno, Yukinao Hirata
+Graduate School of Science and Technology, Kyoto Institute of Technology, Kyoto, Japan
+E-mail: o-mizuno@kit.ac.jp
+Abstract-In the software development, defects affect quality
+and cost in an adverse way. Therefore, various studies have
+been proposed defect prediction techniques. Most of current
+defect prediction approaches use past project data for building
+prediction models. That is, these approaches are difficult to
+apply new development projects without past data. In this
+study, we focus on the cross project prediction that can predict
+faults of target projects by using other projects. We use 28
+versions of 8 projects to conduct experiments of the cross
+project prediction and intra-project prediction using the faultprone
+filtering technique. Fault-prone filtering is a method
+that predicts faults using tokens from source code modules.
+Additionally, we try to find an appropriate prediction model
+in the fault-prone filtering, since there are several ways to
+calculate probabilities. From the results of experiments, we
+show that using tokens extracted from all parts of modules is
+the best way to predict faults and using tokens extracted from
+code part of modules shows better precision. We also show that
+the results of the cross project predictions have better recall
+than the results of the intra-project predictions.
+I. Introduction
+In software development defects affect quality and cost
+in an adverse way. Therefore, various studies have been
+proposed the defect prediction techniques. Most of current
+studies that predict defects use past project data for building
+a prediction model. These prediction models can capture
+characteristics of projects. However, if there is no data about
+past projects, it is difficult to use these approaches. That
+is, these approaches are difficult to apply new development
+projects. There are studies [1]-[4] for solving such a problem.
+These studies have been aimed to predict defects in
+a project using other project data. We call such types of
+prediction using other project as the cross project prediction.
+The predictive ability of the cross project prediction depends
+on characteristics between training project and target project
+(i.e. similar characteristics lead good result). For this reason,
+the study [5] has been conducted to perform clustering on
+software projects in order to identify groups of software
+projects with similar characteristic. Rahman et al. reported
+that cross-project prediction performance is no worse than
+within-project performance, and substantially better than
+random prediction [6].
+These studies often use basic software metrics like the
+line of code (LOC), cyclomatic complexity, CK object
+oriented metrics [7] and Code Churn [8]. However, we use a
+method called fault-prone filtering based on text filtering for
+predicting defects in this study. This approach uses tokens
+978-1-4799-6666-0/14 $31.00 © 2014 IEEE
+DOI 10.1109/IWESEP.2014.9
+43
+extracted from modules as a metric for prediction. We can
+extract these tokens from kind of part in modules (e.g. code
+and comment). In addition, there are no steady way of
+selecting filter. Therefore, this approach needs to select a
+kind of tokens and a filter that we use to predict as well
+as other approaches select metrics and learning algorithms.
+In addition, the ability of our approach depend on tokens
+contained in modules. Hence, if we conduct fault-prone
+filtering in cross project prediction situation, it is a legitimate
+question whether we can predict faults.
+We conduct experiments using 28 versions (8 projects)
+and investigate related to the following question:
+• Can we conduct the cross project prediction using faultprone
+filtering?
+Tokens are most important in the fault-prone filtering.
+Our approach needs tokens that are contained in both
+training and target projects to conduct cross project
+prediction.
+Main findings of this study is summarized as follow:
+• Intra-project prediction show better precision than cross
+project prediction. In contrast, recall is better in cross
+project prediction.
+The rest of this paper is structured as follows: In Section
+II, we describe fault-prone filtering. In Section III, we
+explain target projects and evaluation measures. In Section
+IV, we describe experiments and show results of predictions
+related to the cross project prediction. In Section V, we
+describe related works. Conclusions are given in Section VI.
+II. Fault-prone filtering
+A. Basic Idea
+The basic idea of fault-prone filtering [9] is inspired by the
+spam mail filtering. In the spam e-mail filtering, the spam
+filter first trains both spam and ham e-mail messages from
+the training data set. Then, an incoming e-mail is classified
+into either ham or spam by the spam filter.
+This framework is based on the fact that spam e-mail
+usually includes particular patterns of words or sentences.
+From the viewpoint of source code, a similar situation
+usually occurs in faulty software modules. That is, similar
+faults may occur in similar contexts. We assumed that faulty
+software modules have similar patterns of words or sentences
+as spam e-mail messages have. To obtain such features, we
+adopted the spam filter in fault-prone module prediction.
+Intuitively speaking, we try to introduce a new metric
+as a fault-prone predictor. The metric is “frequency of
+particular words”. In detail, we do not treat a single word,
+but use combinations of words for the prediction. Thus, the
+frequency of a certain length of words is the only metric
+used in our approach.
+We then try to apply a spam filter to identify fault-prone
+modules. We named this approach as “fault-prone filtering”.
+That is, a learner first trains both faulty and non-faulty
+modules. Then, a new module can be classified into either
+fault-prone or not-fault-prone using a classifier.
+B. Extraction of Tokens
+We conduct experiments using the fault-prone filtering in
+this study. In these experiments, we use tokens extracted
+from specific parts of modules (e.g. code and comment).
+We explain the specific parts of modules and how to extract
+tokens from each part in this section.
+1) Definition of Comment Lines: In order to investigate
+the ability of fault-prone prediction, we distinguish the
+contents of source code modules into two classes. Code lines
+describe a list of operations that developers would like to
+realize on computers. Comment lines include descriptions
+of code lines, usage of methods or modules. Code lines are
+written in a specific programming language, but comment
+lines are written in a free form.
+Original implementation of fault-prone filtering did not
+distinguish the comment lines and code lines. The source
+code module is passed into text filter without any modification.
+However, since code lines and comment lines have
+different roles in source code modules, we need to consider
+such difference in the fault-prone filtering.
+For example, comments are usually placed near the difficult
+codes. Therefore, learning the contents of comment lines
+may be useful to identify the bug-related part in modules.
+Actually, previous research [10] shows that the prediction
+using tokens in comments is better than the prediction of
+tokens in code.
+In this study, we treat a java class file as a software
+module. Developers can write comments anywhere in the
+module. Those comments are classified into three types by
+the written form in Java [11]. In this study, we defined the
+following comment classes:
+• T CEOL : End-Of-Line Comments (e.g. //)
+• T CBLK : Block Comments, Single-Line Comments,
+Trailing Comments (e.g. /* .. */)
+• T CDOC : Documentation Comments (e.g. /** ... */)
+2) Structure of Line: Copied and pasted source code,
+which is called “code clone”, affects to software quality.
+There are several studies [12], [13] that detect faults using
+code clone. These studies use structure of code clone to
+detect faulty code. Code clones are parts of structure in
+module. In contrast, we use all of structure in modules to
+44
+predict faults because all structures in a module affect to the
+trend of faults of the module.
+Next, we explain how to extract structure from modules.
+In order to extract structure, we apply following steps to
+modules.
+Step 1 Remove all types of comments, '{' and '}'.
+Step 2 Replace identifiers include numbers, strings with
+double quotes and character with single quotes into
+I, S and C, separately.
+Step 3 Remove all white spaces and tabs.
+Applying by these steps, we get structure of modules. In this
+study, we use each lines as tokens for fault-prone filtering.
+We define a class that consist of these tokens as T CLINE .
+3) Tokenization: In this study, we define 8 kinds of
+token class extracted from the source code: T CALL, T CCODE ,
+T CEOL, T CCODE+EOL, T CCOM, T CBLK , T CDOC and T CLINE .
+Here, T CCODE token class includes tokens extracted from
+code except comments in modules. T CALL token class includes
+T CCODE and T CCOM token classes. That is, T CALL
+token class uses all part of a module. In similar way,
+T CCODE+EOL token class includes T CCODE and T CEOL token
+classes. The reason that we use this combination is T CEOL
+shows that better prediction result in previous study [14].
+We conduct to tokenize above all token classes in the same
+way except T CLINE token class (Tokenization of T CLINE
+class already explained in section II-B2). We tokenize contents
+into identifiers, numbers, escape sequence, keywords,
+operators in Java language.
+III. Target Projects and Evaluation Measures
+A. Target Projects
+In this study, we use 8 projects, Apache Ant, Eclipse,
+jEdit, Apache Lucene, Apache POI, Apache Velocity,
+Apache Xalan and Apache Xerces, for our experiments.
+In order to conduct our experiments, we need to collect
+faulty information of modules in each project. We adopt
+faulty data in the PROMISE [15] repository. There are
+about one hundred data about faults. In our approach, we
+need information about modules and modules themselves.
+Therefore, we use data that contain module names in order
+to satisfy our requirement. Consequently, we select 8
+projects described above. All of the projects but Eclipse are
+donated by Jureczko [5], [16] and Eclipse are donated by
+Zimmermann [17].
+These data sets contain the number of faults for each
+module. However, our approach determines existence or nonexistence
+of faults. Therefore, we define a faulty module as
+a module that contains one or more faults and if a module
+does not contain any faults, we define the module as a nonfaulty
+module. We show the number of faulty modules and
+non-faulty modules for each version in Table I. As shown
+in the Table I, we use some versions for each project. The
+number of modules in this table is fewer than the number of
+Table II
+Classification result matrix
+Actual
+non-faulty
+faulty
+Classified
+non-fault-prone
+True negative (TN)
+False negative (FN)
+fault-prone
+False positive (FP)
+True positive (TP)
+modules in the data set because we only use data about
+modules that are contained in each release version. This
+happens, if the data sets include data about modules that
+were made between releases.
+B. Evaluation Measures
+Table II shows a classification result matrix. True negative
+(TN) shows the number of modules that are classified as
+non-fault-prone, and are actually non-faulty. False positive
+(FP) shows the number of modules that are classified as
+fault-prone, but are actually non-faulty. On the contrary,
+false negative (FN) shows the number of modules that are
+classified as non-fault-prone, but are actually faulty. Finally,
+true positive (TP) shows the number of modules that are
+classified as fault-prone which are actually faulty.
+In order to evaluate the results, we prepare three measures:
+recall, precision, and accuracy. Recall is the ratio of modules
+correctly classified as fault-prone to the number of entire
+faulty modules. Recall is defined by Equation (1).
+Precision is the ratio of modules correctly classified as
+fault-prone to the number of entire modules classified faultprone.
+Precision is defined by Equation (2).
+Recall =
+T P
+T P + F N
+Precision =
+T P
+T P + F P
+Accuracy is the ratio of correctly classified modules to
+the entire modules. Accuracy is defined by Equation (3).
+Accuracy =
+T P + T N
+T N + T P + F P + F N
+Since recall and precision are in the trade-off, F1-measure
+is used to combine recall and precision. F1-measure is
+defined by Equation (4).
+F1 =
+2 × Recall × Precision
+Recall + Precision
+In this definition, recall and precision are evenly weighted.
+In addition, we introduce an evaluation measure related to
+precision. Precision defined by Equation (2) is affected by
+ratio of faulty modules (see Table I). For example, if ratio
+of faulty modules of the target version is high, precision
+also tends to be high in general. In order to make a new
+evaluation measure that eliminate the effect of ratio of faulty
+(1)
+(2)
+(3)
+(4)
+45
+modules, first, we define the ratio of faulty using T N, T P, F P
+and F N as follows:
+T P + F N
+Fr = (5)
+T N + T P + F P + F N
+Next, we define a new evaluation measure through Equation
+(6) using Precision and Fr. This measure reduces the impact
+of ratio of faulty modules.
+PFr = Precision − Fr
+IV. Cross Project Prediction
+(6)
+In this section, we conduct the cross project predictions
+using fault-prone filtering. In cross project prediction, we use
+one or more projects as training data to predict other projects.
+We need at least one version of target project in intra-project
+prediction. Hence, we can only apply intra-project prediction
+to the versions developed after the second version. However,
+we need no older versions of a target project in cross project
+prediction. Therefore, if we have only one version of a target
+project, we can apply the cross project prediction to the
+project.
+A. Ex. 1: Prediction Using A Single Project
+We consider that cross project prediction is more difficult
+task than intra-project prediction. In this experiment, we
+conduct simple condition cross project prediction. That is,
+a single project is used as training data, in order to investigate
+whether fault-prone filtering works in cross project
+prediction.
+1) Experimental Method: In Ex. 1, we conduct the cross
+project prediction using single project as training data. In
+particular, we use all of versions as training data in a project,
+and predict the other projects. For example, when we use
+Ant project as training data, the other projects, Eclipse,
+jEdit, Lucene, POI, Velocity, Xalan and Xerces, are target
+data. That is, training and target pairs are (All of Ant
+versions, Ec20), . . . , (All of Ant versions, Ec30), (All of
+Ant versions, Je32), . . . , (All of Ant versions, Xerces1.6). In
+this experiment, we use T CALL token class extracted from
+modules.
+2) Results and Discussions: We show the results of
+prediction in Table III. In this table, if the value of PFr
+is equal to 0 or fewer, that is, if the values of precision
+are better than the value of prediction by random prediction,
+we indicate by ' '. The sign '−' means that we do not
+conduct the combination of prediction because training and
+target data are the same in these combinations. We find
+that most projects work well as training data. The results
+in Table III show that some projects (POI and Velocity) are
+not appropriate for predicting other projects. Therefore, we
+excluded these two projects from further experiments.
+Table IV shows the average evaluation measures of results
+in each project. From these results, Eclipse is the best project
+for predicting the other projects. These results are caused by
+faulty
+non-faulty
+ratio of faulty
+abbrev
+faulty
+non-faulty
+ratio of faulty
+Table III
+Combinations of training and targets with good prediction
+Ec*
+Je*
+training
+Lu* Po*
+Ve*
+Xa*
+Xe*
+Table I
+Target versions
+22.6 %
+11.0 %
+26.3 %
+22.4 %
+14.5 %
+10.8 %
+14.8 %
+34.6 %
+25.6 %
+26.3 %
+13.5 %
+2.3 %
+48.9 %
+61.1 %
+61.5 %
+Po15
+Po20
+Po25
+Po30
+Ve14
+Ve15
+Ve16
+Xa24
+Xa25
+Xa26
+Xe21
+Xe13
+Xe14
+project
+POI1.5
+POI2.0
+POI2.5
+POI3.0
+Velocity1.4
+Velocity1.5
+Velocity1.6
+Xalan2.4
+Xalan2.5
+Xalan2.6
+Xerces1.2
+Xerces1.3
+Xerces1.4
+141
+37
+247
+281
+147
+142
+78
+110
+387
+411
+71
+69
+210
+94
+272
+132
+157
+48
+72
+151
+566
+375
+464
+368
+383
+118
+60.0 %
+12.0 %
+65.2 %
+64.2 %
+75.4 %
+66.4 %
+34.1 %
+16.3 %
+50.8 %
+47.0 %
+16.2 %
+15.3 %
+64.0 %
+target
+An14
+An15
+An16
+An17
+Ec20
+Ec21
+Ec30
+Je32
+Je40
+Je41
+Je42
+Je43
+Lu20
+Lu22
+Lu24
+Po15
+Po20
+Po25
+Po30
+Ve14
+Ve15
+Ve16
+Xa24
+Xa25
+Xa26
+Xe12
+Xe13
+Xe14
+An*
+-
+-
+abbrev
+An14
+An15
+An16
+An17
+Ec20
+Ec21
+Ec30
+Je32
+Je40
+Je41
+Je42
+Je43
+Lu20
+Lu22
+Lu24
+-
+project
+Ant1.4
+Ant1.5
+Ant1.6
+Ant1.7
+Eclipse2.0
+Eclipse2.1
+Eclipse3.0
+jEdit3.2
+jEdit4.0
+jEdit4.1
+jEdit4.2
+jEdit4.3
+Lucene2.0
+Lucene2.2
+Lucene2.4
+-
+-
+-
+-
+40
+32
+92
+166
+975
+854
+1568
+90
+75
+79
+48
+11
+91
+143
+203
+137
+260
+258
+575
+5754
+7034
+9025
+170
+218
+221
+307
+476
+95
+91
+127
+-
+-
+-
+-
+-
+F1
+0.356
+0.447
+0.258
+0.231
+0.305
+0.285
+-
+Table
+IV
+Average results using a single project in the cross project prediction
+Ant
+Eclipse
+jEdit
+Lucene
+Xalan
+Xerces
+Accuracy
+0.651
+0.621
+0.636
+0.628
+0.671
+0.636
+Recall
+0.323
+0.529
+0.201
+0.233
+0.251
+0.307
+Precision
+0.598
+0.555
+0.647
+0.425
+0.596
+0.615
+the number of modules in Eclipse project. Eclipse is more
+than ten times larger than the other projects in the viewpoint
+of the number of modules. Eclipse can adjust and predict
+various projects because of the enough number of modules.
+46
+Table V
+Average results using single project and all projects
+Eclipse
+All Projects
+Accuracy
+0.621
+0.625
+Recall
+0.529
+0.595
+Precision
+0.555
+0.504
+F1
+0.447
+0.471
+B. Ex. 2: Prediction Using All Other Project
+In this experiment, we investigate three things in cross
+project prediction. 1) do the results of prediction using all
+projects show better than the results using a single project,
+2) trends of results using some kinds of token classes, 3)
+comparison of the results of intra-project prediction and
+cross project prediction.
+1) Experimental Method: In this experiment, we predict
+a target project using all the other training projects. That is,
+when we select a version as target data, we use all versions
+for training except versions that belong to the target project.
+For example, when we use Ant as a target project, training
+and target pairs are (All versions except Ant's, An14), (All
+versions except Ant's, An15), (All versions except Ant's,
+An16) and (All versions except Ant's, An17). We predict all
+versions based on above rule about selecting training data. In
+addition, we conduct the prediction using T CALL, T CCODE ,
+T CCOM , T CEOL, T CBLK , T CDOC , T CCODE+EOL and T CLINE
+token classes.
+2) Results and Discussions: Table V shows the comparison
+of the results using a single project (Eclipse) and all
+projects except the target project (this experiment). From this
+table, we find that the results are improved in the values of
+recall and F1. Therefore, we concluded that combining all
+projects improves the results.
+We show the result of the evaluation measures for each
+token class in Figure 1. From the viewpoint of F1 value,
+T CALL, T CCOM , T CBLK
+and T CDOC
+show better results
+in cross project prediction. However, as shown in Table
+VI, T CCOM , T CBLK and T CDOC show low average PFr.
+Therefore, predictions using T CCOM , T CBLK and T CDOC
+ALL CODE EOL CEOO+DLE LINE COM BLK DOC
+Accuracy
+ALL CODE EOL CEOO+DLE LINE COM BLK DOC
+Recall
+01
+.
+08
+.
+60
+.
+04
+.
+02
+.
+00
+.
+10
+.
+08
+.
+06
+.
+04
+.
+02
+.
+00
+.
+10
+.
+80
+.
+60
+.
+04
+.
+02
+.
+00
+.
+01
+.
+80
+.
+60
+.
+40
+.
+20
+.
+00
+.
+ALL CODE EOL CEOO+DLE LINE COM BLK DOC
+Precision
+ALL CODE EOL CEOODLEF1LINE COM BLK DOC
++
+Figure 1. Comparison of results using different tokens in cross project
+prediction
+are impractical. By comparing T CALL, T CCODE , T CEOL,
+T CCODE+EOL and T CLINE , obviously, T CALL shows better
+F1 value than T CCODE , T CEOL, T CCODE+EOL and T CLINE in
+cross project prediction. As a result, using T CALL token class
+is the best way of prediction in the cross project prediction.
+However, if we need better precision, we can use T CCODE ,
+T CCODE+EOL or T CLINE .
+Table VIII shows comparison of intra-project and cross
+project prediction results. Results of intra-project prediction
+show better precision than results of cross project prediction.
+In contrast, the results of cross project prediction show better
+recall. Such trend is also shown in the reference [2].
+Table VII shows the number of kinds of tokens extracted
+from T CALL. The row of “All Projects” in Table VII related
+to the cross project prediction. Therefore, tokens are used
+for predicting faults in two or more projects. Other rows
+like “Ant Project” are related to the intra-project prediction.
+Therefore, tokens are used for predicting faults in two or
+more versions. From Table VII, we find that kinds of tokens
+are used in the cross project prediction is low (see row of
+“All Projects”). However, we can predict faults by these
+tokens (see Figure 1 and Table VIII). Therefore, we can
+consider that tokens used in several projects are important
+for predicting faults. In other words, these common
+tokens between several projects characterize either faulty
+and non-faulty modules beyond projects. From this result,
+tokens (structures) extracted from T CALL, T CCODE , T CEOL,
+T CCODE+EOL and T CLINE are potentially related to generic
+fault-proneness.
+Table VII
+Kinds of tokens extracted from TCALL
+Table VIII
+Comparison of Intra- and Cross-project prediction
+extracted
+from
+All Projects
+extracted
+from
+Ant Project
+Eclipse Project
+jEdit Project
+Lucene Project
+POI Project
+Velocity Project
+Xalan Project
+Xerces Project
+Training
+An14+An15+An16
+All except An*
+Ec20+Ec21
+All except Ec*
+Je32+Je40+Je41+Je42
+All except Je*
+Lu20+Lu22
+All except Lu*
+Xa24+Xa25
+All except Xa*
+Xe12+Xe13
+All except Xe*
+in one
+project
+401,903
+in one
+version
+14,447
+114,922
+9,229
+5,385
+2,778
+2,517
+10,430
+2,040
+Target
+An17
+An17
+Ec30
+Ec30
+Je43
+Je43
+Lu24
+Lu24
+Xa26
+Xa26
+Xe14
+Xe14
+in two or
+more projects
+28,227
+in two or
+more versions
+18,796
+201,746
+24,796
+9,688
+17,287
+8,777
+34,282
+19,110
+Accuracy
+0.725
+0.667
+0.841
+0.826
+0.764
+0.620
+0.591
+0.630
+0.649
+0.728
+0.409
+0.488
+sum
+430,130
+sum
+33,243
+316,668
+34,025
+15,073
+20,065
+11,294
+44,712
+211,50
+used in
+prediction
+6.6 %
+used in
+prediction
+56.5 %
+63.7 %
+72.9 %
+64.3 %
+86.2 %
+77.7 %
+76.7 %
+90.4 %
+Recall
+0.693
+0.777
+0.381
+0.411
+0.545
+0.636
+0.433
+0.478
+0.275
+0.752
+0.095
+0.324
+Precision
+0.429
+0.381
+0.457
+0.411
+0.052
+0.037
+0.815
+0.858
+0.926
+0.694
+0.833
+0.723
+F1
+0.530
+0.511
+0.416
+0.411
+0.094
+0.070
+0.566
+0.614
+0.424
+0.722
+0.171
+0.447
+47
+V. Related Works
+In this section, we describe related works that conducted
+cross project prediction.
+Turhan et al. [2] conducted cross-company and withincompany
+defect predictions using 10 project data from 8
+different companies. They showed that cross-company predictions
+increase probability of detection (pd) and decrease
+probability of false (p f ). In order to improve p f value,
+they proposed an approach that selects training data using
+k-nearest neighbor. However, the results of within-company
+is better than the results of cross-company with k-nearest
+neighbor. Therefore, they concluded that if there are no
+within-company data, we can use cross-company prediction
+with k-nearest neighbor and start to collect within-company
+data. After a few hundred examples are available, it can be
+switched to use within-company data to predict faults.
+Zimmermann et al. [1] conducted 622 cross project prediction
+and showed that only 21 prediction (3.4%) satisfy their
+criteria (accuracy, recall and precision are greater than 0.75).
+They investigate the relation between factors for predicting
+and the results and conclude that projects in the same domain
+do not work to build accurate prediction models.
+He et al. [4] showed that the results of cross project
+prediction using suitable training data are better than the results
+of intra-project prediction. They proposed an approach
+that selects training data properly. They showed that their
+approach can find proper training data set for 24 out of 34
+Table VI
+Average PFr values in cross project prediction
+average PFr
+TCALL
+0.152
+TCCODE
+0.216
+TCEOL
+0.168
+TCCODE+EOL
+0.205
+TCLINE
+0.204
+TCCOM
+0.078
+TCBLK
+0.048
+TCDOC
+0.072
+versions.
+Watanabe et al. conducted inter project prediction using
+the projects of the same domain (text editor) but different
+languages (Java and C++) [3]. They proposed an approach
+called metrics compensation that normalizes metrics between
+different data sets based on average value of each
+metric. They showed that the results of inter project prediction
+are improved by their approach.
+VI. Conclusions
+From the results of cross project prediction using kinds of
+tokens, T CALL, T CCODE , T CEOL, T CCODE+EOL and T CLINE
+can use in fault-prone filtering. Especially, T CALL show
+the best result in cross project prediction. From the results
+of prediction using T CLINE , we can say that structures of
+modules relate to faulty. From the results of cross prediction,
+there are tokens and structures related to fault-proneness
+potentially.
+This work was supported by JSPS KAKENHI Grant
+Number 24500038.
+Acknowledgment
+References
+[1] T. Zimmermann, N. Nagappan, H. Gall, E. Giger, and B. Murphy,
+“Cross-project defect prediction: a large scale experiment
+on data vs. domain vs. process,” in Proceedings of the the 7th
+joint meeting of the European software engineering conference
+and the ACM SIGSOFT symposium on The foundations
+of software engineering, 2009, pp. 91-100.
+[2] B. Turhan, T. Menzies, A. B. Bener, and J. Di Stefano, “On
+the relative value of cross-company and within-company data
+for defect prediction,” Empirical Softw. Engg., vol. 14, pp.
+540-578, October 2009.
+[3] S. Watanabe, H. Kaiya, and K. Kaijiri, “Adapting a fault prediction
+model to allow inter languagereuse,” in Proceedings
+of the 4th international workshop on Predictor models in
+software engineering, 2008, pp. 19-24.
+[4] Z. He, F. Shu, Y. Yang, M. Li, and Q. Wang, “An investigation
+on the feasibility of cross-project defect prediction,”
+Automated Software Engineering, pp. 1-33, 2011.
+[5] M. Jureczko and L. Madeyski, “Towards identifying software
+project clusters with regard to defect prediction,” in Proceedings
+of the 6th International Conference on Predictive Models
+in Software Engineering, 2010, pp. 1-10.
+[6] F. Rahman, D. Posnett, and P. Devanbu, “Recalling
+the ”imprecision” of cross-project defect prediction,”
+in Proceedings of the ACM SIGSOFT 20th International
+Symposium on the Foundations of Software Engineering,
+2012, pp. 61:1-61:11.
+48
+[7] S. R. Chidamber and C. F. Kemerer, “A metrics suite for
+object oriented design,” IEEE Trans. on Software Engineering,
+vol. 20, no. 6, pp. 476-493, 1994.
+[8] N. Nagappan and T. Ball, “Use of relative code churn
+measures to predict system defect density,” in Proc. of 27th
+International Conference on Software Engineering, 2005, pp.
+284-292.
+[9] O. Mizuno and T. Kikuno, “Training on errors experiment to
+detect fault-prone software modules by spam filter,” in Proc.
+of 6th joint meeting of the European software engineering
+conference and the ACM SIGSOFT symposium on the foundations
+of software engineering, 2007, pp. 405-414.
+[10] O. Mizuno and Y. Hirata, “Fault-prone module prediction
+using contents of comment lines,” in Proc. of International
+Workshop on Empirical Software Engineering in Practice
+2010 (IWESEP2010), 12 2010, pp. 39-44, NAIST, Nara,
+Japan.
+[11] S. Microsystems, “5-comments,” http://java.sun.com/docs/
+codeconv/html/CodeConventions.doc4.html, Accessed Feb 3,
+2012.
+[12] K. Sawa, Y. Higo, and S. Kusumoto, “Proposal and evaluation
+of an approach to find bugs using difference information of
+code clone detection tools,” Technical report of IEICE. SS,
+vol. 108, no. 173, pp. 67-72, 2008-07-24, (In Japanese).
+[13] S. Morisaki, N. Yoshida, Y. Higo, S. Kusumoto, K. Inoue,
+K. Sasaki, K. Murakami, and K. Matsui, “Empirical evaluation
+of similar defect detection by code clone search,” The
+IEICE Trans. on information and systems (Japanese edition),
+vol. 91, no. 10, pp. 2466-2477, 2008-10-01, (In Japanese).
+[14] Y. Hirata and O. Mizuno, “Investigating effects of tokens
+on detecting fault-prone modules by text filtering,” in Proc.
+of 22nd International Symposium on Software Reliability
+Engineering (ISSRE2011), Supplemental proceedings, no. 3-2,
+11 2011, hiroshima, Japan.
+[15] G. Boetticher, T. Menzies, and T. Ostrand, PROMISE
+Repository of empirical software engineering data repository,
+http://promisedata.org/, West Virginia University, Department
+of Computer Science, 2007. [Online]. Available: http:
+//promisedata.org/
+[16] M. Jureczko and D. Spinellis, “Using object-oriented design
+metrics to predict software defects,” in Models and Methodology
+of System Dependability. Proc. of RELCOMEX 2010:
+Fifth International Conference on Dependability of Computer
+Systems DepCoS, ser. Monographs of System Dependability,
+Wrocław, Poland, 2010, pp. 69-81.
+[17] T. Zimmermann, R. Premraj, and A. Zeller, “Predicting defects
+for eclipse,” in Proc. of the Third International Workshop
+on Predictor Models in Software Engineering, May 2007,
+p. 9.

@@ -1,0 +1,5 @@
+Linking Software Strategy through and Business Development Measurement
+
+The GQM+ Strategies approach extends the goal/question/metric paradigm for measuring the success or failure of goals and strategies, adding enterprise-wide support for determining action on the basis of measurement results. An organization can thus integrate its measurement program across all levels.
+
+GQM, Metrics/Measurement, Software engineering, Goal/question/metric paradigm 

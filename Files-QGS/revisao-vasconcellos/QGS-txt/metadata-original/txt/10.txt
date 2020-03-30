@@ -1,0 +1,7 @@
+Business-oriented software process improvement based on CMMI using QFD
+
+Abstract: Software Process Improvement (SPI) has become the key to the survival of many software development organizations. As a follow-up of a previous paper on SPI for the CMM using Quality Function Deployment (QFD), a new SPI framework integrating QFD with the CMMI is developed. Similar to the earlier SPI framework for the CMM, the proposed SPI framework based on the CMMI using QFD aims to achieve three objectives: (1) to map process requirements, including business requirements, to the CMMI with the help of QFD; (2) to develop a method based on QFD for the integration and prioritization of requirements from multiple perspectives (groups); and (3) to be able to prioritize software process improvement actions based on process requirements. Process requirements from multiples groups of stakeholders (perspectives), including business goals,
+are integrated and prioritized. SPI actions are linked to these process requirements using QFD. Thus, the priorities of actions reflect the priorities of process requirements. By executing the actions with the highest priorities, the highest satisfaction level of process requirements can be achieved. One unique feature of the framework for the CMMI Continuous representation is that the priority values of these actions can be compared across PAs, even when the PAs attempt to reach different capability levels.
+
+Keywords: Software Process Improvement, CMMI, Quality Function Deployment, Prioritization, Relationship matrix, Process requirements
+

@@ -1,0 +1,5 @@
+The use of cross-company fault data for the software fault prediction problem
+
+We investigated how to use cross-company (CC) data in software fault prediction and in predicting the fault labels of software modules when there are not enough fault data. This paper involves case studies of NASA projects that can be accessed from the PROMISE repository. Case studies show that CC data help build high-performance fault predictors in the absence of fault labels and remarkable results are achieved. We suggest that companies use CC data if they do not have any historical fault data when they decide to build their fault prediction models.
+
+Metrics values, defect prediction, cross-company data

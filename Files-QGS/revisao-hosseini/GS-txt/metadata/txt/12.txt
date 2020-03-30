@@ -1,0 +1,5 @@
+Software Risk Management: Principles and Practices
+
+The emerging discipline of software risk management is described. It is defined as an attempt to formalize the risk-oriented correlates of success into a readily applicable set of principles and practices. Its objectives are to identify, address, and eliminate risk items before they become either threats to successful software operation or major sources of software rework. The basic concepts are set forth, and the major steps and techniques involved in software risk management are explained. Suggestions for implementing risk management are provided.
+
+Software Engineering, Software Risk Management, Software Rework, DP Management, Software Engineering

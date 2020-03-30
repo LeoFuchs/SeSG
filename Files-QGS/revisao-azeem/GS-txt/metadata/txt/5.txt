@@ -1,0 +1,5 @@
+Bad-smell Prediction from Software Design Model Using Machine Learning Techniques
+
+Bad-smell prediction significantly impacts on software quality. It is beneficial if bad-smell prediction can be performed as early as possible in the development life cycle. We present methodology for predicting bad-smells from software design model. We collect 7 data sets from the previous literatures which offer 27 design model metrics and 7 bad-smells. They are learnt and tested to predict bad-smells using seven machine learning algorithms. We use cross-validation for assessing the performance and for preventing over-fitting. Statistical significance tests are used to evaluate and compare the prediction performance. We conclude that our methodology have proximity to actual values.
+
+Bad-smell, Software Design Model, Random Forest, Design Diagram Metrics, Prediction models, Machine Learners

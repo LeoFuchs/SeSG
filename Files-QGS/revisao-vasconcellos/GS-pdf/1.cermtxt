@@ -1,0 +1,1107 @@
+A BUSINESS GOAL-BASED APPROACH TO ACHIEVING
+SYSTEMS ENGINEERING CAPABILITY MATURITY
+Richard B. Waina, P.E., Ph.D., Multi-Dimensional Maturiv, Celina, Texas
+Using organization strategic objectives,
+business goals, and current significant problems to
+structure and prioritize process improvement
+programs enlists support from the people most
+affected by the improvements, as opposed to
+resistance to “just another initiative.” This is
+because they see work being done to solve their
+immediate problems. This approach is implemented
+using five key questions:
+0
+MOTIVE - Why change? What are the
+critical business issues driving process
+improvement?
+MODEL - Which reference model best
+maps to the organization practices?
+METHOD - How you can quickly and
+effectively identify improvement
+opportunities?
+MANAGING CHANGE - What factors
+impact the effectiveness of introduced
+changes?
+MEASURES - What are critical factors
+in setting up a measurement program?
+The General Change Model
+Change drivers are the catalyst for change.
+They push us out of our comfort zone and reveal an
+opportunity, need, discomfort, or pain that must be
+addressed. They may be problems with the way
+things are. Or they may be opportunities that, for
+the sake of the organization'sfuture survival, cannot
+be ignored. They must be defined, understood, and
+provide a compelling business case for the
+organization. They must enable organization
+members to believe that what they want is more
+important than what they already have, and that
+upsetting the status quo is preferable to no action.
+The change drivers help an organization
+understand and define an organizational response to
+the critical question of “Why change?” Typical
+change drivers might be declining market share,
+reduced profits, increasing personnel turnover, or
+new technologies which threaten existing products.
+0-7803-7034-1/01/$10.00 02001 IEEE.
+4.B.2-1
+Or an organization may just have a feeling that
+things need to improve in order for them to remain
+competitive. The change model involves an
+understanding of the present state, a vision of the
+desired state, and a process for transitioning from
+the present to the future.
+Change
+Drivers
+11
+Figure 1. The General Change Model
+MOTIVE - What Are The Critical
+Business Issues Driving Process
+Improvement?
+Top Down - Setting Direction Based on
+Strategic Objectives
+Strategic objectives are the critical “market
+drivers,” those factors which ultimately determine
+organizational success or failure. Business leaders
+determine critical business drivers and associated
+strategic objectives to answer the question, “What
+do we want to achieve as an organization?” Typical
+strategic objectives are market sharehime to market,
+revenue growthlprofit growth, and company image
+as a reliable, cost-effective, value-adding supplier.
+Business purposes focus on activities that the
+organization performs to achieve the strategic
+objectives. Purposes supporting the strategic
+objectives can be derived by addressing operational
+issues such as predictability (cost, schedule,
+capability, quality), amount of rework, customer
+satisfaction, cycle time, and employee
+satisfactiodreduced turnover. Department leaders
+identify business purposes and goals which support
+the strategic objectives. Key questions to ask at this
+point are “What do you want the process
+improvementprogram to accomplish? How will
+you determine if it has been successful?”
+Process goals supportingthe business
+purposes can then be derived which address more
+precisely defined issues. Example goals are
+understanding and controlling customer
+requirements, developingrealistic plans,,accurately
+tracking progress in order to take corrective action
+when there are deviations from plans, collecting
+historical data, and minimizing defects in
+deliverables. Technical and process leaders
+document process goals that support the business
+purposes. These are reviewed and approved by the
+appropriate business and department leaders.
+Key indicators to help determine whether the
+process goals are being accomplished can then be
+derived. Typical measures include planned vs.
+actual (xxx),defect rate, amount of rework
+(quantity or cost), and productivity measurements.
+Technical and process leaders determine key
+indicators that measure progress against the goals.
+These are reviewed and approved by the
+appropriate business and department leaders.
+Table 1 provides some examples of how
+process goals and key indicators can be related to
+business purposes and strategic objectives.
+Strategic Objectives I
+Profit growth
+Market share,
+time to market
+Table 1. Relating Process Goals and Kev Indicators to Strategic Objectives
+Business PurposG
+~
+Process Goals
+Reduce cost
+Increase predictability
+(cost, schedule,
+capability, quality)
+Reduce cycle time
+~ Develop realistic plans
+I
+Track progress, take
+corrective action
+Collect historical data
+Reduce rework
+Minimize defects
+Key Indicators
+Productivity
+Expenditurerates
+Planned vs. actual cost,
+effort, schedule
+Amount of rework
+Elapsed time
+Defect rate
+Bottom Up - Settinn Direction Based on
+Organization ''Pains'9
+Alternatively, or in concert with the top-down
+approach, an organization should determine its most
+significant problems - where its greatest “pains”
+are. This can be done a number of different ways.
+Typically, technical leaders and process owners
+meet with users to identi@ significant problems
+which impact operations and/or business results.
+Leaders and users then brainstorm possible
+remedies to address the pains. Process owners
+identify related process changes based on the
+proposed remedies. These proposed changes then
+serve as the basis of action plans to address the
+identified pains. Pains can also be identified using
+one of the reduced-scope assessment methods,
+which will be discussed later.
+Integrating the TwoApproaches to Develop a
+Vision of the Desired State
+By consideringthe change drivers in concert
+with the organization strategic objectives and
+“pains” one can develop a vision of the desired
+state, what the organization should look like and
+how it should behave after the desired changes are
+achieved.
+4.B.2-2
+1 d - n .
+\.
+. I
+~
+Figure 2. Envisioning the Desired State
+For example, a small industry-leading
+company doing web-site development was
+experiencing rapid growth, and as a result had
+several problems:
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+Schedules and budgets, not based on
+realistic estimates, were routinely
+exceeded.
+Schedule, cost, and design/code readiness
+could not be predicted.
+Resources were poorly utilized.
+Testing was inadequate.
+There was a high incidence of software
+defects.
+Product functionality and quality were
+sometimes compromised to meet
+schedule.
+There was no objective basis for judging
+product quality.
+The company wanted to address these
+problems through a series of initiatives to improve:
+product/delivery standards,
+time-to-market,
+communications,
+internal training,
+resource utilization.
+Combining a detailed list of “pains” with
+organization strategic initiatives enabled the
+organization to envision a desired state:
+Processes are documented, usable and
+consistent.
+Schedules and budgets are based on
+historical performance and are realistic.
+0
+0
+Expected results for cost, schedule,
+functionality and product quality are
+usually achieved.
+Disciplined processes are followed
+consistently because all participants
+understand their value.
+Broad-scale, active involvement across
+the organization in improvement
+activities.
+Roles and responsibilities are clear.
+This process provided the organization with
+some clear direction to help it determine an
+appropriate model and assessmentmethod to use,
+and some things to consider in developing a change
+methodology and appropriate measures to put in
+place.
+MODEL - Which Reference Model Best
+Maps To The Organization Practices?
+There are at least three reasons to use a
+reference model in structuring a process
+improvement program. A model provides:
+. 0
+0
+a language and constructs with which to
+communicate about process issues,
+a standard of comparison and benchmark
+to evaluate process “goodness,”
+process improvement investment
+guidance.
+A model can also serve as a source of ideas for
+good practices. There are many improvement or
+process models available which are intended to
+address an organization's critical issues. Selection
+of the most appropriate model to support the
+organization's strategic objectives and business
+purpose is important. Two key issues in selecting a
+model are its domain and its architecture.
+Model Domains
+The domain of a model refers to the system
+whose order and effectiveness are to be improved.
+There are numerous models crafted to focus on the
+critical aspects of various domains, including
+software, system engineering, system acquisition,
+people issues, software integrity, etc. Example
+models are the:
+4.B.2-3
+0
+0
+0
+Software~MM@,
+Systems EngineeringCMM@,
+Integrated CMM (CMMISM)
+People CMM@,
+System Acquisition CMM@
+Model Architecture
+The architecture of a model refers to its
+underlying structure and the relationship of maturity
+levels and process areas. A staged model (Figure 3)
+has specific Process Areas (PA's) that are
+associated with distinct maturity levels. For
+example, in the SoftwareCMM, Requirements
+Management is a Maturity Level 2 PA, while the
+Peer Reviews PA is Level 3. These PA's are often
+referred to as Key Process Areas to emphasize the
+fact that the model is not comprehensive, but
+focuses on a few critical issues.
+Figure 3. Staged Architecture
+In contrast to the staged architecture, a
+continuous model (Figure 4) has Capability Levels
+within PA's. In the Systems Engineering CMM, for
+example, each of the Process Areas, such as Derive
+and Allocate Requirements or Integrate
+the System, has within it the Capability Levels of
+Not Performed (Level 0),
+Performed Informally (Level 1)'
+Planned and Tracked (Level 2)'
+Well Defined (Level 3),
+0
+Quantitatively Controlled (Level 4), and
+Continuously Improving (Level 5).
+5
+4
+3
+2
+1
+0
+W Level 4
+rnLevel 3
+U Level 2
+BLevel1
+I
+I
+PA1 PA2 PA3 PA4 PA5 PA6
+Figure 4. Continuous Architecture
+The Integrated CMM (CMMISMi)s structured
+so that its content can be represented in either a
+staged or a continuous version.
+The continuous architecture has the advantage
+of providing a fairly well defined improvement path
+for a specific PA. However, if you have a large
+number of process areas, it becomes more difficult
+to provide guidance to an organization which is
+attemptingto rationally allocate limited
+improvement resources across the PA's. Do you
+focus on a few, or try to maintain uniformity of
+maturity levels across PA's, or use some hybrid
+approach?This question needs to be answered in
+the context of the organization's business goals and
+objectives.
+The advantage of the staged architecture is that
+the organizational improvement path is well defined
+in terms of which PA's need attention first.
+(However, there may be valid business reasons to
+modifLthat recommended path.) The Maturity
+Level 2 PA's focus on getting documented
+processes in place at the project level. Maturity
+Level 3 provides a framework of standard processes
+for leveraging best practices across the
+organization. Maturity Levels 4 and 5 focus on
+detailed process and product metrics for control and
+improvement.
+Choosing a Model
+So how does all the above relate to selecting a
+reference model? First of all, you need to define
+the domain. What are the critical issues and areas
+you want to address? What are the Process Areas
+important to that domain? Don't try to be 100%
+correct in your model. If the model addresses 6080%
+of the organization's critical issues you've
+done fairly well.
+4.B.2-4
+Next, which model architecture best fits your
+objectives? The architecture will probably be pretty
+well determined by which model you choose, unless
+you are developing a custom model or using the
+CMMISMwhich allows you to choose the
+architecture. If you need a pretty well defined
+roadmap, try to use a model with the staged
+architecture. If you're more interested in seeing
+how your processes look across the board, or
+focusing on just a few processes, use a model with a
+continuous architecture.
+But most importantly, don't get hung up with
+the Levels. Your main goal should be to improve
+processes, so select and use a model which maps
+well to your critical processes, and use it to help
+you determine where your organization may have
+some improvement opportunities.
+METHOD - How You Can Quickly And
+Effectively Identify Improvement
+Opportunities?
+After selecting a model it's necessary to decide
+how the organization will assess its conformance to
+the model parameters, in order to quickly and
+effectively identify improvement opportunities.
+There are various assessment methods available,
+ranging from less costly techniques such as a selfassessment,
+Interim ProfileSMand mini-assessment
+to a full-blown CBA-IPI (CMM-Based Appraisal
+for Internal Process Improvement), SCESM
+(Software Capability Evaluation), or SCAMPISM
+(Standard CMMI Assessment Method for Process
+Improvement).
+Key issues to consider in choosing an
+assessment method are assessment objectives and
+desired outputs, accuracy of the results, cost to
+prepare for and conduct the assessment, and extent
+of organization disruption.
+Assessment Objectives and Outputs
+Assessment Objectives
+Any assessment has at least two objectives:
+Gather accurate data in an efficient,
+minimally disruptive way.
+Help to identify and prioritize
+improvement opportunities.
+These objectives can be achieved in a number
+4.B.2-5
+of different ways, with varying degrees of cost and
+accuracy. Sometimes a third objective is
+appropriate:
+Signal to the organization that a new way
+of life is beginning.
+This third objective is particularly applicable
+when the organization wants to institute a change in
+its culture, its customary way of doing things. In
+this case disruption is good.
+Assessment Outputs
+Most assessments have two major categories
+of outputs: findings and recommendations.
+Findings
+Provide an accurate picture of processes,
+using the Capability Maturity Model@(or
+other reference model) as a framework.
+Recommendations
+Provide guidance on process improvement
+activities appropriate to the current state
+of the organization's process.
+Provide a framework and catalyst for
+action.
+Build ownership of results.
+Develop organizational commitment and
+energy.
+Sustain sponsorship and establish
+commitment.
+Facilitate continued process improvement.
+Assessment Methods
+A CMM self-assessment is used to educate
+the organization on the model and to begin to
+identify areas for improvement. The procedure can
+be administered in about one-half day and provides
+scores by Process Area Goal, based on the
+understanding of the participants involved. It is
+based on a detailed survey that is administered by
+the deploying organization. Accuracy tends to be
+low. As the organization becomes more familiar
+with the CMM@and undergoes more intensive
+assessments, accuracy generally increases. Cost
+and organization disruption are fairly low.
+A Mentored Self-Assessment (MSA) requires
+a trained and experienced MSA Leader from
+outside the organization. He provides CMM
+training and administers a CMM Self-Assessment
+in a group setting with selected organization
+members. The purpose of the mentored selfassessment
+is to ensure that an organization
+understands the meaning and intent of the CMM,
+and to provide an independent validation of the selfassessment
+results. Accuracy tends to be fair, with
+the cost and organization disruption being low.
+Interim ProfileSMis a Maturity Questionnaire
+(MQ) based technique [13. After initial logistics and
+setup, the MQ is administered to a majority of
+project/organization members. The data are
+collected, analyzed, and summarized into a set of
+initial project profiles which are reviewed by
+project members. An organization profile is then
+created and distributed, and feedback on the process
+obtained. An Interim Profile is used to check the
+status of progress improvement efforts between
+assessments. It is not recommended as an initial
+assessment. Accuracy, cost and disruption are
+similar to an MSA.
+A CMM mini-assessment is a reduced-scale
+modification of the CBA-IPI where two (or more)
+trained and experienced assessors from outside the
+organization review the documented processes and
+implementation evidence and conduct several group
+interviews. The purpose of the mini-assessment is
+to provide an independent verification of self assessment
+results and to provide suggestions for
+improvements based on an independent review.
+Accuracy is fairly good for mini-assessments. Cost
+of assessment preparation and conduct and
+organization disruption are moderate.
+A CMM Based Appraisal for Internal
+Process Improvement (CBA-IPQSMis conducted
+according to an SEI-defined process [2]. Because of
+the considerable cost associated with formal
+assessments, they must be scheduled to provide
+maximum benefit to the organization. The normal
+output of a CBA-IPI is a findings briefing which
+includes KPA strengths and weaknesses, and
+GoaVKPAMaturity Level satisfaction. Accuracy is
+generally good; preparation and conduct cost and
+organization disruption tend to be fairly high. The
+disruption can work to the organization's advantage
+by communicating that this is a significant event in
+the life of the organization, and the start of a new
+way of doing business.
+A Software Capability Evaluation (SCE)SM
+is similar to a CBA-IPI, except that all the team
+members come from outside the organization being
+evaluated [3]. A SCE typically costs about the
+same as a CBA-IPI of similar scope. It is often
+used by government agencies or other entities
+desiring to assess the risk of using some
+organization to develop software.
+SCAMPISM(Standard CMMISMAssessment
+Method for Process Improvement) is a part of the
+Integrated CMM Product Suite [4]. The method
+helps an organization gain insight into its process
+capability or organizational maturity by identifying
+strengths and weaknesses of its current processes
+relative to one or more of the CMMI models,
+including the Integrated Capability Maturity Model
+for Systems Engineering and Software Engineering
+(CMMI-SE/SW)
+Assessment Considerations
+There are at least three major factors to
+consider in choosing an assessment method:
+Accuracy of the assessment - How well
+will the assessment method identify
+improvement opportunities? Are there
+major opportunities it might miss?
+-Cost - This includes both preparation
+costs, including team selection, training
+and preparation, if any, and organization
+preparation, and the costs of actually
+conducting the assessment.
+Organization disruption - How much will
+the assessment impact normal
+organization operations, and can this
+impact be used to communicate important
+issues to the organization?
+Table 3 provides a summary comparison of
+the accuracy, cost and organization disruption of
+various assessment methods.
+4.B.2-6
+Table 3. Assessment Comparison*
+Assess't
+* Values are the author's estimates.
+**
+Moderate
+MANAGING CHANGE - What Factors
+Impact The Effectiveness Of Introduced
+Changes?
+Success and Failure Factors
+Watts Humphrey describes six basic principles
+which are critical to the success of process
+improvement [5]:
+0
+0
+0
+0
+0
+Major changes to the software process
+must start at the top.
+Ultimately, everyone must be involved.
+Effective change requires a goal and
+knowledge of the current process.
+Change is continuous.
+Software process changes will not be
+retained without conscious effort and
+periodic reinforcement.
+0 Software process improvement requires
+investment.
+The implementation of process changes using
+these principles can result in an environment in
+which developers can produce high quality code (or
+other product) effectively and efficiently.
+4.B.2-7
+0
+0
+0
+0
+0
+0
+Conversely, Hefner [ 6 ] identifies the top ten
+reasons process improvement programs fail:
+Failures in strafegy:
+Failing to define reasonable goals and
+plans?
+Failing to tie the improvement goals to
+business objectives.
+Having inadequate resources and
+unrealistic expectations.
+Failures in planning:
+Starting improvement efforts without an
+assessment (andor without CMM
+knowledge).
+Running improvement efforts like another
+Level 1 project, with no requirements, no
+plan, no tracking against plan, no
+configuration management, no quality
+assurance, etc.
+Over-focussing on a common solution “Let's
+write a new standard development
+process.”
+Failures in execution:
+Ignoring middle management - Middle
+managers stand to lose the most, and are
+the most effective in resisting change.
+Confusing institutionalization with
+standardization - A strong culture does not
+imply everybody does it the same way.
+Defining process changes too early Improvement
+is not simply about doing
+things differently; it requires a change in
+the culture to sustain the improvements.
+Trying a do-it-yourself approach - SEPG
+skills are different than software
+development and management skills.
+Cultural Issues
+The organization culture has a major (perhaps
+over-riding) impact on the success of a process
+improvement program. What is culture? It is a
+pattern of shared basic assumptions [7]:
+that a group learned as it solved problems,
+that has worked well enough to be
+considered valid, and
+is reinforced as the correct way to
+perceive, think, and feel in relation to
+resolving problems.
+Humphrey suggests that many current software
+problems stem from the pervasive culture of
+software organizations [SI.This culture has
+developed over many years and has been largely
+responsible for the poor performance of these
+organizations. This “hacker” culture glorifies rapid
+coding, is schedule driven, and objects to planning.
+Commitments are generally missed, while quality is
+unmeasured and unmanaged.
+Organization culture has three layers:
+communications (the visible aspects), expectations
+(the desired results), and assumptions (the
+subconscious aspects) [9].Cultural change involves
+rethinking those basic assumptions, deciding some
+assumptions are no longer valid, and learning a new
+pattern of shared basic assumptions.
+To achieve success, one must focus attention
+on the visible aspects of process improvement. But
+it is also necessary to pay attention to the invisible
+aspects of culture change. Start with understanding
+the assumptions, and improve by changing
+expectations and communication. Keep yourself
+and others motivated to change.
+In order to achieve successful change, the
+existing culture must be recognized and dealt with.
+Existing culture tends to reinforce itself. For a
+change to stick, expectations must be:
+expressed - “Here's what we expect.”
+demonstrated - “Here's what we do.”
+reinforced - “Here's what we reward.”
+believed - “Here's why this works for us.”
+Cultural change, enhanced by a transformed
+leadership and appropriate tools and enablers, will
+enhance the formal process change process. Absent
+that foundation, portrayed in Figure 5 , the formal
+process change is likely to flounder.
+0
+0
+0
+0
+0
+4.B.2-8
+Figure 5. The Foundation for Process
+Improvement
+Transition Strategies
+Transition strategies are used to facilitate the
+introduction of process changes. They address eight
+key organizational issues and possible points of
+resistance to be dealt with throughout the entire
+change process [lo].
+Team structure - Establish the team and
+its structure to plan, implement and
+sustain the change: sponsor, leadership
+team, change team, change coach, and
+transition team.
+Leadership - Establish the sponsorship
+development activity and learning
+organization environment for achieving
+and sustaining the desired change.
+Education and training - Establish the
+education and training to provide
+stakeholders the knowledge and skills of
+methods, tools and processes integral to
+the change initiative.
+Measures - Establish the business value,
+process, and readiness measures that
+should be tracked and monitored to enable
+learning and measure progress, as well as
+results. (See Measures section of
+Guidebook.)
+Business and technolow integration Determine
+the desired changes in business
+performance and integrate the technologydriven
+changes that will support it, such as
+systems life cycle, project management, or
+new tools.
+Performance management - Identify the
+desired behaviors and performance results
+for the change; establish the reinforcement
+mechanisms for each behavior (positive
+and negative) to institutionalize the
+change.
+Relationship management - Determine
+how the change will impact your customer
+or supplier and establish a win-win
+business relationship for working
+together.
+Communications - Establish
+communications for the change within all
+levels of the organization.
+Implementing Change Methodology (ICM)
+The Implementing Change Methodology
+framework, developed by Implementation
+Management Associates, incorporates the eight
+transition strategies in three phases [l 11:
+0
+0
+Develop a Shared Understanding Describe
+the change, build the team
+structure, assess the organization's
+readiness, and complete project startup
+Develop Kev Strategies - Determine
+scope, develop transition management
+structure and process, and prepare a
+phased implementation with the enabling
+strategies, processes, and associated
+training
+Align the Organization - Apply the
+transition plan, evaluate progress and
+results, align the organizational
+components, sustain continued
+improvement, and create added
+organizational capacity for future changes.
+Critical Elementsf o r Cultural Change and
+Process Improvement
+Sponsorship, is, of course, one of the most
+critical elements in successful process
+improvement. Without serious top management
+involvement and support long term successful
+process improvement is doomed. Senior
+management understanding is the first critical
+element in a series of steps towards successful
+process improvement, including senior management
+commitment, organization assessment, process
+documentation, improvement implementation, and a
+focus on project management discipline [121.
+Change agents are those individuals who
+serve as catalysts to bring about organization
+change. They should be respected opinion leaders
+who can influence others to implement change.
+Some basic principles for change agents include:
+get a sponsor with appropriate budget and spending
+authority; do “real work;” be a missionary; rather
+than tackle an entire process area, do one thing
+better, faster, cheaper than people did it before;
+advertise, advertise, advertise - make certain that
+every victory makes the evening news [131.
+The Software Engineering Process Group,
+as the focal point for process improvement,
+provides guidance and leadership to the
+organization [14, 151. Composed of line
+practitioners who have varied skills, the group is at
+the center of the collaborative effort of everyone in
+the organization who is involved with software
+engineering process improvement. Group size is
+usually equal to 1-3% of the development staff.
+Because the process group is generally small, it
+relies upon support of the support of a management
+steering committee and various technical working
+groups to address specific process issues.
+Process Action Teams (PAT'S)are a good
+choice for actually defining and implementing
+specific process improvements [161. Getting PAT'S
+up to speed quickly is easier with a defined process.
+One such process is documented in ETVX (Entry,
+Task, Verification, exit) format, which is also used
+by the team to document the model of the process
+they are working on. In addition to assorted
+templates and guidelines for both project outputs
+and for project planning and status reporting, each
+step in the process has entry and exit criteria, roles,
+measures, standards and tools [171.
+MEASURES - How Do You Set Up A
+Measurement Program?
+Measurement Basics
+The final step in process improvement (and the
+first step in the next cycle) is to determine the
+impact on the organization of the changes that have
+been implemented. This implies some set of
+measures which can be compared against a baseline
+in order to determine quantitatively how successful
+the process improvement program has been. To be
+4.B.2-9
+effective, software measurement should be
+integrated with an overall strategy for software
+process improvement.
+There are three questions to consider in setting
+up a measurement program:
+0
+0
+0
+0
+0
+0
+Are the measures relevant?
+How will you know if your critical
+parameters have improved?
+How do those measures relate to the Key
+Process Areas?
+Will moving up maturity levels achieve
+improved effectiveness?
+Are the measures significant?
+Is the CMM maturity level consistent with
+measured improvements in business and
+quality?
+Does the organization prepare with rigor
+for an assessment but afterwards give less
+than that effort to sustain and improve?
+The appearance of process maturity is not
+a substitute for having process maturity there's
+more to the CMM than an
+assessment!
+Are the measures objective?
+“Think of the organizational measurement
+system as the dials and indicators in an
+airplane cockpit. For the complex task of
+navigating and flying an airplane, pilots
+need detailed information about many
+aspects of the flight: fuel, air speed,
+altitude, bearing, destination and other
+indicators that summarize the current and
+predicted environment.”[ 181
+“Now consider what this analogy would
+be like if it included a multitude of tiny
+gremlins controlling wing flaps, fuel flow,
+and so on of a plane being buffeted by
+winds and generally struggling against
+nature, but with the gremlins always
+controlling information flow back into the
+cockpit instruments, for fear that the pilot
+might find gremlin replacements.”[ 191
+Answering these three questions can help
+organizations select the most appropriate measures
+and set up a measurement program to guide the
+implementation of the process improvement
+program. Capers Jones suggests that the best way
+to decide what to measure is to find out what
+industry leaders measure, and then measure the
+same things [20]. He recommends a large number
+of metrics in three categories: Quality Measures,
+Productivity and Schedule Measures, and Business
+and Corporate Measures.
+On the other hand, lower maturity
+organizations should not try to do too much. A few
+metrics should be selected which will be useful for
+project management and applied them across the
+board. As experience and confidence are gained,
+more metrics can be added. Those which don't add
+significant value should be removed. For example,
+if the business goals are based on functionality,
+cost, time to market, and quality, project and
+process issues that relate to achieving those goals
+should be identified. Process performance can then
+be quantified by measuring attributes of products
+produced by the processes as well as by measuring
+process attributes directly [213.
+The Goal-Question-Measures (GQM
+Approach
+The Goal-Question-Measures approach is very
+useful in determining what measures to collect. In
+goal-driven measurement, the primary question is
+not “What metrics should I use?” but “What do I
+want to know or learn?” Because the answers
+depend on the organization's goals, no fixed set of
+measures is universally appropriate. The goaldriven
+measurement process is based on three
+precepts:
+Measurement goals are derived from
+business goals. The goal-driven process
+begins with identifying business goals and
+breaking them down into manageable subgoals.
+The primary mechanisms for translating
+goals into issues, questions, and measures
+are the mental models that you have for
+the processes you use. These mental
+models gain substance and evolve as you
+begin to make them explicit. They are the
+engines that generate the insights that
+guide you to useful measures and actions.
+GQM translates informal goals into
+executable measurement structures. The
+4.B.2-10
+process ends with a plan for implementing
+well-defined measures and indicators that
+support the goals. Along the way, it
+maintains traceability back to the goals, so
+that those who collect and process
+measurement data do not lose sight of the
+objectives.
+More detail can be found in “Goal-Driven
+Software Measurement - A Guidebook” [22]
+Setting UpA Metrics Program
+A metrics program (a metric is defined as a
+combination of two or more measurements) should
+be set up in three phases [23]. The approach and the
+metrics should be customized to meet the needs of
+your organization.
+0
+0
+0
+0
+0
+0
+0
+PLANNING:
+Define information needs.
+Define metrics and analysis methods.
+Define selected measures.
+Define the process of collecting
+measurement data.
+MEASUREMENT IMPLEMENTATION:
+Collect the measurement data.
+Analyze the measurement data to derive
+metrics.
+Manage the measurement data and
+metrics.
+Report the metrics.
+MEASUREMENT PROGRAM
+EVALUATION:
+Review the usability of the selected
+metrics.
+Measurement Dangers
+There are two main uses of measurements:
+information and motivation [19]. Each use has a set
+of problems associated with it. Further, mixing the
+two uses can have negative effects. Additionally,
+informational measures can be intentionally or
+inadvertently subverted into motivational measures.
+Informational measures are used to provide
+process/product insight and a basis for decisionmaking.
+They should not affect behavior.
+Informational measures have two kinds of problems
+[19]:
+Unclear meaning. Numbers may not be
+clearly understood, due to not realizing
+the implicit model between the numbers
+and the reality [24]; e.g., what is the
+meaning in the real world of the Technical
+Complexity Factor in the Function Point
+Method? How does this impact project
+effort?
+Inauuropriate operations. Not all numbers
+can be meaningfully averaged or
+otherwise combined or manipulated; e.g.,
+a 2000 LOC program probably will take
+something other than twice as along as a
+1000 LOC program to complete.
+Motivational measures are used to promote
+greater effort in pursuit of organizational goals.
+They should affect behavior. The main problem
+with motivational measures is that they can become
+dvsfunctional; i.e., they can motivate undesired
+behaviors. “Dysfunction occurs when the validity of
+information ... is compromised by the unintended
+reactions of those being measured.” “The major
+problem for most incentive systems is ... bias
+intentionally introduced by those being measured.”
+~ 9 1
+Some examples of dysfunctional measures are:
+Standardized tests (coaching and
+preparation skews results)
+Production targets (“storming” ignores
+quality and equipment maintenance)
+Sales commissions (overselling, not
+providing value to the customer)
+Stock value (quick cuts, short-term
+changes)
+“Kills” (Vietnam deaths
+ncouragedhnflated)
+Piecemeal pay (can lead to quality
+problems)
+Planned vs. actual (re-baselined cost,
+schedule)
+Defects (overhnderstated, misdiagnosed)
+Maturity levels (do processes add business
+value?)
+4.B.2-11
+.
+I S 0 9000 certification (more than just
+documented standards?)
+Possible dysfunction in the measurement
+program should be considered and dealt withxp
+front, in the planning stage. Some ways to prevent
+dysfunction include [251:
+Don't have the measures take the place of
+the underlying goals.
+Workers should be internally motivated;
+measurement should provide them with
+self-assessment information.
+Reinforce, don't enforce, human behavior.
+Watch out for opportunistic behaviors.
+Set solid objectives and plans.
+Make measurement part of the process.
+Understand benefits and limitations.
+Focus on cultural issues.
+Create a safe environment for collecting
+and reporting data.
+Be ready to change.
+Have a complementary suite of measures.
+Conclusion
+Any process improvement program should be
+driven by and related to some set of business or
+over-arching organizational needs. By considering
+change drivers in concert with the organization
+strategic objectives and “pains” one can develop a
+vision of the desired state, what the organization
+should look like and how it should behave after the
+desired changes are achieved. An appropriate
+reference model is then chosen and used in an
+assessment to identify improvement opportunities.
+Based on the assessment findings an action plan is
+developed and implemented which addresses both
+specific process changes and organization cultural
+issues. Finally, an appropriate set of measures is
+defined and implemented to help measure the
+effects of the various changes.
+For more information contact the author at
+dick.waina@-,mdmaturitv.com or visit
+www.mdmaturitv.com.
+4.B.2-12
+References
+[l] Whitney, Rosalyn, et. al, March 1994, “Interim
+Profile: Development and Trial of a Method to
+Rapidly Measure Software Engineering Maturity
+Status,” CMU/SEI-TR-94-4, Pittsburgh, Carnegie
+Mellon University
+[2] Dunaway, Donna and Steve Masters, April
+1996, “CMMSM-BasedAppraisal for Internal
+Process Improvement (CBA IPI): Method
+Description,”CMU/SE1-96-TR-O0P7,ittsburgh,
+Carnegie Mellon University
+[3] Dedolph, F. Michael, et.al., June 1994,
+“Software Capability Evaluation Version 2.0
+Method Description,”CMU/SEI-TR-94-6,
+Pittsburgh, Carnegie Mellon University
+[4] CMMI Product Development Team, October
+2000, “SCAMPISM,V1.O Standard CMMISM
+Assessment Method for Process Improvement:
+Method Description,” Version 1.O, CMU/SEI2000-TR-009,
+Pittsburgh, Carnegie Mellon
+University
+[5] Humphrey, Watts, 1989, Managing The
+Software Process, Addison-Wesley, p. 19ff.
+[6] Hefner, Rick, March 1999, “The Top Ten
+Reasons Improvement Efforts Fail,” SEI SEPG
+Conference*
+[7] Caputo, Kim, March 1997, “Level 3 Culture is
+More Than Just the Artifacts,” SEI SEPG
+Conference
+[SI Humphrey, Watts, March 1999, “Changing the
+Software Culture,” SEI SEPG Conference
+[9] Caputo, Kim, March 1999, “Facilitating CMM
+Culture Change,” SEI SEPG Conference
+[101 Waina, Richard and William Phifer, March
+2000, “Purpose-Driven Process Improvement,” SEI
+SEPG Conference
+[113 Implementation Management Associates,
+1996, “Accelerating Change” training course,
+www.imaworldwide.com
+[I21 Davis, Darryl, March 2000, “On the Cart and
+the Horse: Putting Process Improvement Activities
+in the Right Order,” SEI SEPG Conference
+[131 Ferguson, Robert, March 1998, “The Guerrilla
+Warfare Approach to Process Improvement,” SEI
+SEPG Conference
+[14] Wigle, Gary B., March 1999, “The SEPG
+From Level 1 to Level 5,” SEI SEPG Conference
+[151Rifkin, Stan and Priscilla Fowler, September
+1990, “Software Engineering Process Group
+Guide,” CMU/SEI-90-TR-24, Pittsburgh, Carnegie
+Mellon University
+[161Eagen, Bob, 1999 March 1999, “Where the
+Rubber Meets the Road: Getting it Done with
+Process Action Teams” SEI SEPG Conference
+[171Waina, Richard, May 200 1, “A Process Action
+Team Process That Works,” Air Force Software
+Technology Conference, Salt Lake City
+[181Kaplan, Robert and David Norton, Jan-Feb
+1992, “The Balanced Scorecard - Measures That
+Drive Performance,” Harvard Business Review
+[I91 Austin, Robert, 1996, Measuring and
+Managing Performance in Organizations, New
+York, Dorset House Publishing
+[20] Jones, Capers, Feb 2001, “Software
+Measurement Programs and Industry Leadership,”
+Crosstalk, pp. 4-7
+[21] Florac, William, et. al, April 1997, “Practical
+Software Measurement: Measuring for Process
+Management and Improvement,” CMU/SEI-97-HB003,
+Pittsburgh, Carnegie Mellon University
+[22] Park, Robert et. al., August 1996, “GoalDriven
+Software Measurement-A Guidebook,”
+CMU/SEI-96-HB-002, Pittsburgh, Carnegie Mellon
+University
+[23] Timothy K. Perkins, February 200 1, “The
+Nine-Step Metrics Program,” Crosstalk, pp. 16-18
+[24] Zuse, Hort, 1998, A Framework of Software
+Measurement, New York, Walter de Gruyter, p. 42
+[25] Dekkers, Carol, April 1999, “Secrets of Highly
+Successful Measurement Programs,” Cutter IT
+Journal, pp. 29-35
+0
+* SEI Software Engineering Process
+Group Conference (annual) Proceedings,
+Pittsburgh, Carnegie Mellon University.
+Capability Maturity Model and CMM are
+registered in the U.S. Patent and
+Trademark Office. CMMI, CMM
+Integration, Interim Profile, SCAMPI, and
+SCE are service marks of Carnegie
+. Mellon University.
+4.B.2-13

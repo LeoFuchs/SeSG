@@ -1,0 +1,6 @@
+Linking Software Process Improvement to Business Strategies: Experiences from Industry
+
+The major bottleneck to the success of an SPI initiative is the lack of business orientation in the way the program is run. The post-assessment phase or how to translate assessment results into adequate improvement actions is being overdocumented compared to the assessment phase. In this article experiences and lessons learnt from two industry sources in the defense and telecommunication areas are covered. Improvement strategies based on ensuring a continuous link between the program and the business goals of the organization is advocated (e.g. the ami approach).
+
+ami, measurement-based improvement, business orientation CMM
+

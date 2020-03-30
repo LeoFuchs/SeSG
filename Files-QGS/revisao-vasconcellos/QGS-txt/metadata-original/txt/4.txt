@@ -1,0 +1,6 @@
+Strategic Alignment of Software Process Improvement Programs Using QFD
+
+Abstract: Software process improvement programs increase the competitiveness of software development organizations. But a critical success factor in this context is the proper alignment between the strategy of such programs and the organization’s business strategy. In this paper, we discuss how Quality Function Deployment can be used as a technique to align strategic goals and software process within an organization, presenting results of its application in a small company in Brazil
+
+Keywords: Software process improvement, strategic planning, strategic alignment, CMMI.
+

@@ -1,0 +1,762 @@
+Business Objectives as Drivers for Process Improvement:
+Practices and Experiences at Thales Naval
+The Netherlands (TNNL)
+Jos J.M. Trienekens1,2, Rob J. Kusters1,3, Ben Rendering4, and Kees Stokla4
+1Eindhoven University of Technology, Den Dolech 2, 5600 MB Eindhoven, The Netherlands
+{J.J.M.Trienekens, R.J.Kusters}@tm.tue.nl
+2KEMA, Utrechtseweg 310, Arnhem, The Netherlands
+3Open University, Valkenburgerweg 177, Heerlen, The Netherlands
+4Thales NNL, Zuidelijke Havenweg 40, 7554 RR Hengelo, The Netherlands
+{ben.rendering, kees.stokla)@nl.thalesgroup.com
+Abstract. Over the last decade many organizations are increasingly concerned
+with the improvement of their hardware/software development processes. The
+Capability Maturity Model (CMM) and ISO9001 are well-known approaches
+that are applied in these initiatives. One of the major bottlenecks to the success
+of process improvement is the lack of business orientation. This paper reports
+on a process improvement initiative at Thales Naval Netherlands (TNNL). It
+presents an approach that has been followed to ensure a link between process
+improvement and business strategy. Main factors in this process improvement
+approach are goal decomposition and the implementation of goal-oriented
+measurement on three organizational levels, i.e. the business, the process and
+the team level.
+Keywords: process improvement, goal decomposition, measurement
+1 Introduction
+Thales Naval Netherlands (TNNL) creates high-tech defence solutions for naval and
+ground based environments. This paper addresses a process improvement initiative in
+the business unit Radar & Sensors (R&S) that started in 2002. This business unit has
+an extensive expertise in the fields of radar, infrared, weapon control, display
+technology and communications equipment.
+In 2001 a pre-assessment of the quality management system for the overall
+hardware/software production creation process, on the basis of the new ISO9001:2000
+standard, showed that the current quality system didn't meet the new ISO
+requirements. Shortcomings were identified from different ISO9001:2000 viewpoints,
+respectively:
+• Restricted business orientation of quality management and business process
+improvement.
+• Lack of control loops.
+• No feedback mechanism for continuous improvement (closing the control loops).
+J. Desel, B. Pernici, and M. Weske (Eds.): BPM 2004, LNCS 3080, pp. 33-48, 2004.
+© Springer-Verlag Berlin Heidelberg 2004
+34
+J.J.M. Trienekens et al.
+Confronted with the new ISO-requirements and the actual shortcomings, the
+organization decided for a redesign of its quality management approaches and
+business improvement programs. The two main approaches at TNNL, that had been
+applied already for a period of 10 years, were respectively: ISO9001, as developed by
+the International Organization for Standardization [5], and the Capability Maturity
+Model (CMM) as developed by the Software Engineering Institute [9]. ISO9001 is
+related to business processes and specifies the minimal requirements for a quality
+system. This standard has been applied at TNNL to develop a quality management
+system for the overall hardware/software production creation process. CMM
+addresses explicitly concepts for continuous software process improvement. CMM
+has been applied at TNNL in particular in software development departments. One
+department in the R&S business unit reached the CMM level 3 (out of five levels, of
+that level one is the lowest and level five is the highest). This means that a reasonable
+level of maturity has been reached in the development process in terms of the
+formality and the structuredness of processes. Processes on level 3 are characterized
+as 'defined'. Both approaches, ISO9001 and CMM, can be considered to have
+complementary philosophies regarding quality and process management [9].
+However, integration or combination of the two approaches is not easy because of the
+differences in business orientation, i.e. business processes in general versus software
+development processes. The kernel focus for integration or combination of the two
+approaches is the concept of continuous improvement. Regarding improvement
+ISO9001 can be considered to have an open 'loop control'. This means that the
+actions of a business system are independent of the control system output, i.e. there is
+no explicit feedback mechanism used for the tuning of actions and the continuous
+improvement of them. 'Closed loop control', as addressed in the CMM, is based on
+the application of metrics to modify actions on the basis of the control system output
+[4]. It was decided at TNNL to adopt the concept of 'closed loop control' and to
+elaborate this concept in the context of ISO9001:2000. The 'closed loop' concept, i.e.
+its explicit feedback mechanism, implies the application of business process
+measurement. Regarding measurement an approach that has been used already for a
+number of years in software development environments is Goal Question Metric
+(GQM) [6] [7]. GQM supports answering questions such as: how can be decided what
+needs to be measured, when should this be measured and where in the product
+creation process? In this way an ad-hoc and unsystematic application of metrics and
+the collection of irrelevant data is avoided. In order to get grip on the measurement
+problem two important assumptions are respectively (a) a metrics program should not
+be 'metrics based' but 'goal based' and (b) the definition of goals and measures need
+to be tailored to the individual organization. In particular the latter assumption was of
+interest at TNNL to link business improvement to the business strategy [1], [8].
+Taking into account, both the identified shortcomings of the TNNL quality
+management system, and the need for measurement-based continuous improvement, a
+new process improvement initiative was launched. This initiative is aimed at ensuring
+a link between business strategy and the product creation process. Main issues in this
+initiative are respectively goal decomposition, continuous improvement and the
+development of goal-oriented measurement.
+The structure of the paper is as follows. Section 2 introduces respectively: the
+business processes at TNNL, the identified problems and the directions for solution as
+Business Objectives as Drivers for Process Improvement
+35
+formulated by the TNNL management. Section 3 presents a framework that acts as a
+basis of reference for the improvement initiative. Section 4 elaborates the framework
+and addresses goal decomposition and the development of goal-oriented measurement
+in the process improvement initiative. Examples from practice clarify the approach
+that has been followed. Section 5 contains conclusions and directions for future work.
+2
+Business Processes at TNNL, Practices, Problems, and
+Solutions
+In the product creation process at TNNL two main primary process chains can be
+distinguished. Chain 1 reflects development of new and derivative products. Chain 2
+describes the development of repeat products. In Chain 1 the processes, in particular
+requirements analysis and design, are strongly driven by specific customer
+requirements. In Chain 1 the processes are driven by the characteristics of existing
+product components. Both process chains are facilitated by a number of supporting
+process areas. For these areas, departments have been set up to support operational
+teams in the product creation process. Examples are a Configuration Management, a
+Data Management, and a Human Resource department. Furthermore outsourcing is
+supported explicitly. Because the main focus in the improvement initiative was on the
+two primary process chains, these are presented below.
+2.1 Processes in Practice: The Chains
+Chain 1. The most important chain 1 processes are depicted in Figure 1. We can
+distinguish Proposal & Contracting, System Requirements Analysis & Design,
+Product Development - Integration - Verification & Validation, System Integration Verification
+& Validation, and Warranty. Each of these processes will be described.
+Proposal &
+contracting
+Requirements
+analysis
+& design
+Prod. Dev.
+Integration
+Verif & Valid
+System
+Integration
+Verif &Valid
+Warranty
+Fig. 1. Chain 1: development of new and derivative products
+Proposal and Contracting (P&C). This process consists of activities such as the
+intake of a request, i.e. the translation of requirements into a proposal, the tuning with
+the product portfolio, the response to the customer, and negotiation tasks.
+System Requirement Analysis and System Design (SRA/SD). In the analysis part of
+this process the customer requirements are translated into a system concept that is the
+basis for a complete system requirements specification. The system concept is
+validated with the various stakeholders in the development process. In this process
+also a feasibility estimate is established. The system design part of the SRA/SD
+36
+J.J.M. Trienekens et al.
+process refines the system concept, based on the availability of building blocks and
+well-founded make or buy decisions.
+Product Development, Integration, Verification and Validation (PDIVV). This process
+realises the system according to the agreed specifications, assigns the work to be done
+to the production department or subcontractors and delivers the system components.
+System Integration, Verification and Validation (SIVV). In this process the
+components are integrated. The final product is verified and validated against the
+original customer and system requirements.
+Warranty. Regarding the warranty period of a product, activities are specified for
+system acceptation, receiving customer complaints on product failure, investigating
+defects and repairing defects.
+Chain 2. The chain 2 processes describe the product creation activities of repeat
+products (see Figure 2). The Proposal, Contracting, and Warranty processes in this
+Chain are identical to those in Chain 1 and need no further introduction. The
+remaining processes are described below.
+Proposal
+Contracting
+Engineering
+Integration &
+Verification.
+Warranty
+Production
+Fig. 2. Chain 2: development of repeat products
+Engineering, Integration & Verification, Production. In these processes activities are
+carried out such as the determination of changes that have to be made to an existing
+product and of the validation of these changes. If reengineering is required of some
+parts of a product several sub processes or activities of chain 1 (mainly from the
+processes SRA/SD, PDIVV, SIVV) can be applied.
+2.2 Problems and Directions for Improvement
+In 2001 an independent quality assessment at TNNL based on the ISO9001:2000
+standard was carried out. In this assessment the two primary process chains have been
+investigated together with the facilitating areas. ISO9001:2000 in particular
+emphasizes, in comparison with the previous ISO9001 standard:
+• Business processes should be the basis for quality management. In particular
+those processes should be addressed in a quality management system, that are of
+critical importance for the business system as a whole,
+Business Objectives as Drivers for Process Improvement
+37
+• A quality management system explicitly focussed on continuous improvement, as
+opposed to the more static view of the previous standard,
+• This continuous improvement should be (visibly) based on formal measurement,
+• Management should be explicitly involved in the design and implementation of
+the quality management system.
+The assessment results were summarized in three major problems that will be
+addressed below. For each of the problems the TNNL management defined a
+direction for improvement. The result is depicted below.
+Table 1. Problems and associated improvement actions
+Problem:
+There is a lack of insight in the
+critical parts of business
+processes. This is in particular
+caused by the absence of a
+clear link between primary
+processes and the business
+strategy.
+Continuous improvement, i.e.
+the specification, execution and
+control of improvement
+activities, is insufficiently
+addressed. In fact the emphasis
+in the current quality
+management system is on the
+specification of procedures for
+operational processes.
+Developing and implementing
+an improvement initiative is a
+process of organizational
+change. Until now the
+employees have not been
+involved sufficiently in the
+process of quality management
+Improvement action:
+The management at TNNL decided to introduce goal
+decomposition starting at the level of business
+strategy down to the level of primary processes and
+operational teams. In the improvement initiative only
+those processes, and their interrelations, will be
+addressed that contribute explicitly to the business
+strategy, see [1].
+It has been decided that feedback and control loops
+will be developed and implemented to establish
+continuous improvement. These continuous
+improvement loops will be based on quantitative
+measurement. Implementation of continuous
+improvement into the business processes will be
+supported by the application of intranet-based tools,
+e.g. regarding the definition of metrics, the collection
+and analysis of data, and the definition of
+improvement activities, see [2].
+The management decided to carefully plan and
+control the new improvement initiative. The entire
+organization should understand the importance of
+continuous improvement. Therefore awareness on the
+importance of process improvement should be raised
+and operational teams should play a central role in the
+determination of their own improvement goals, which
+have to be derived from business and process
+improvement goals, see [10].
+2.3
+A Framework for the Improvement Initiative
+Starting from the defined directions for improvement a framework has been
+developed to support the improvement initiative, see Figure 3. In this pyramid three
+management levels are recognized to link the improvement initiative to the business
+system, respectively the strategic, the tactical, and the operational level [1].
+The Strategic Plan is positioned in the strategic top layer of the pyramid and acts as
+a basis for both a Process Management System (PMS) and a Quality Management
+System (QMS). In this plan management issues are addressed such as:
+38
+•
+•
+•
+J.J.M. Trienekens et al.
+The long-term vision of the management,
+The mission statement, and
+Organisational development issues.
+l
+a
+ration
+e
+p
+O
+Tactical QCuaolcitkypPitlan
+Organizational Goals
+Process goals
+Team Goals
+QMS
+W
+h
+a
+t
+PMS
+Checklists / Guidelines /
+Templates / Best Practices
+H
+ow
+ic
+trateg
+S
+Strategic
+Plan
+W
+hy
+Chain 1
+Chain 2
+Fig. 3. A framework for the improvement initiative.
+The PMS secures the product creation process. On the tactical level the product
+creation processes are described according to the two process chains (chain 1 for new
+products and chain 2 for repeat products). The processes are described by means of a
+format with guidelines regarding respectively: the description of the stakeholders of a
+process (such as the customer, the supplier, the owner), the process flow aspects (such
+as input, activities, output), and the performance of a process (such as process goals,
+improvement actions and metrics). For all processes a general description and detailed
+information (e.g. action lists) are available. On the operational level also supporting
+information is available such as checklists, templates, guidelines and best practices.
+The QMS supports in particular the continuous (quality) improvement of the
+product creation process. Continuous quality improvement is based on goal
+decomposition, i.e. from business goals on the strategic level to process improvement
+and team improvement goals on the operational level. Regarding quality management,
+the Quality Plan and the so-called 'cockpit' are important concepts.
+The Quality Plan, on the tactical level of the framework, forms a basis for the
+determination of improvement goals. The Quality Plan starts from the business
+strategy and specifies respectively the actual vision on continuous improvement, the
+short-term improvement goals and the accompanying improvement actions. The
+progress of the improvement program is monitored on the basis of performance
+indicators in the so-called management cockpit. The cockpit will be addressed in
+detail in section 4. Cockpit review by the management team takes place monthly. The
+Quality Plan is subject to management review at least twice a year.
+Business Objectives as Drivers for Process Improvement
+39
+3 Towards Goal-Oriented Improvement
+The pyramid framework acts as a reference for the development and implementation
+of the improvement initiative. To develop the improvement initiative three important
+principles were taken from results of recent research in the domain of business improvement,
+respectively:
+• Goal decomposition; business goals should be derived from overall business
+strategy. Based on these business goals operational process and team improvement
+goals have to be defined [1], [3], [8]. Both for business goals and for
+process improvement and team improvement goals, improvement actions have to
+be defined.
+• Metric-based improvement. Management and control of improvement actions
+should be based on measurement. For each business goal, process improvement
+goal and team improvement goal a (set of) metric(s) has to be defined to be able
+to quantitatively control the effectiveness of improvement actions [11], [13].
+• The decomposition of business goals into process improvement goals and team
+improvement goals, and the definition of metrics should be based on the needs
+and the requirements of the operational teams, that can be considered to be the
+main the stake-holders in the primary business processes [10], [12].
+In accordance with these principles the improvement initiative was reformulated as
+a goal-oriented improvement initiative.
+3.1 Goal-Oriented Improvement in the Business Model of TNNL
+Starting from the pyramid framework the goal orientation in the improvement
+initiative has been elaborated into a high-level business model, see Figure 4.
+In this business model the PMS is depicted as a horizontal dimension that reflects
+the transformation of materials and sub-products into products via process chains. It is
+aimed at maintaining operational control. The vertical dimension addresses the QMS,
+and is aimed at continuous improvement of the operational business processes. As
+stated before, in the horizontal PMS the operational processes and their interfaces are
+specified, authorities and responsibilities are defined, business rules e.g. for delivery
+on time are specified, etc. In the vertical dimension the improvement of processes,
+sub-processes and teams has to be managed (the QMS).
+In order to link the business strategy (the vision and the mission statements of the
+management) to the product creation process, the business strategy is refined in terms
+of business goals and associated sub-goals. Subsequently process improvement and
+team improvement goals are derived. Based on this goal decomposition, improvement
+actions are defined both on the business level, the process level and the team level. To
+plan and control continuous improvement in the business model the plan-do-check-act
+cycle concept is implemented on the different levels of the goal hierarchy. For the
+sake of clarity of Figure 4 the plan-do-check-act cycle is only drawn in this figure on
+the lower level of the model. Of course the feedback mechanisms should also include
+feedback on the quality of the improvement goals itself. The lower layer teams should
+also report feedback about the quality of the higher-level process improvement goals,
+40
+J.J.M. Trienekens et al.
+and the lower level processes should also report on the quality of the higher-level
+business goals.
+To control the effectiveness of the improvement actions their efficiency and
+adequacy has to be measured. On the strategic level the business strategy is defined.
+On the tactical level business goals and performance indicators are defined which are
+derived from the business strategy. For each business goal one or more metrics are
+defined. Subsequently the business goals are decomposed into process improvement
+and team improvement goals. Also for these process improvement and team
+improvement goals, metrics are to be defined.
+Stakeholders
+TNNL
+BU
+PMS
+Process 1
+Process 2
+Process 3
+Business strategy
+QMS
+Business goals
+PI's
+Sub-goals + metrics
+Process and
+team +metrics
+improvement goals
+Act
+Check
+Improve
+action
+Improve
+action
+Plan
+Do
+Fig. 4. Goal orientation in the improvement initiative
+The decomposition of business strategy and business goals into process and team
+improvement goals, and the definition of accompanying metrics is not a
+straightforward, formal or deterministic process. Consensus building and intersubjective
+decision-making is central. Therefore relevant stakeholders have to be
+involved in this process of goal decomposition, improvement action definition and
+metric determination. Stakeholders are parties that play a direct or indirect role in the
+product creation process. They can be both operational teams that develop the
+products, external customers, internal customers who use the output or deliver the
+input to a process. To organise this stakeholder involvement, workshops, brainstorm
+meetings and training sessions have to be planned carefully.
+In the following section the development of this goal oriented improvement
+concept at TNNL will be presented. Here, concepts of goal decomposition and
+measurement play a central role. Regarding the involvement of stakeholders, we will
+focus on the operational teams that execute the actual process improvement goal
+decomposition, the team improvement goal definition and the metrics determination.
+Business Objectives as Drivers for Process Improvement
+41
+4
+Development of Goal Oriented Business Improvement at TNNL
+This section presents the approach that was followed and the (intermediate) results
+that were reached. Three phases can be recognized:
+• A phase where top management defines the strategy, the business goals, business
+sub-goals, the performance indicators and the metrics, see the upper layers of
+Quality Management in Figure 4.
+• A second phase in that the process improvement goals and the accompanying
+metrics are defined, see the lower layer of Quality Management in Figure 4, and
+• A third phase in that the team improvement goals and metrics are defined (see
+also the lower layer of Quality Management in Figure 4).
+In section 4.1 for the first phase only the results of the management discussions and
+the decisions that were made are reported. In fact this was a 'black box' strategic
+management process where only the outcome can be presented. Section 4.2 reports on
+a procedure that has been developed for process improvement definition and gives
+some examples of process improvement goals and metrics that have been defined. In
+section 4.3 the process of the definition of team improvement goals and metrics is
+described. This process is also clarified with practical examples.
+4.1 Phase 1: Business Strategy, Objectives, and Performance Indicators
+The high level management has defined five strategic objectives in the Management
+Handbook. These statements are based on the strategic objectives of TNNL and are
+taken as starting points for the development of the improvement initiative within the
+particular business unit R&S/JRS. The strategic objectives are respectively:
+• Adequate profitability
+• Delivering customer-oriented solutions
+• Being the employer of choice
+• Developing both existing and new markets
+• Adequate and efficient knowledge- and technology management
+These rather abstract objectives have been elaborated to make them more
+applicable on the tactical level or business level, see Table 2.
+Table 2. Strategic objectives and their interpretation at the business level
+Objective
+Adequate profitability
+Delivering customeroriented
+solutions
+Being the employer of
+choice
+Developing existing and
+new markets
+Adequate and efficient
+knowledge- and
+technology management
+Interpretation
+To be reached via an efficient and effective executed creation process
+Emphasis on meeting customer expectations and requirements (e.g.
+based on adaptability of products)
+Central is the stimulation, motivation, and improvement of the
+competencies of employees
+To be reached via maintenance and improvement of relations with
+internal and external customers
+Maintenance and development of all competencies regarding product
+development, including requirements determination, analysis and design
+and verification and validation, as well as various management and
+support competencies.
+42
+J.J.M. Trienekens et al.
+In order to measure whether or not these strategic objectives are met management has
+identified five performance indicator areas (PIA's). See also Table 3.
+Table 3. The performance indicator areas at the business level
+Efficient and effective executed creation process
+Customer-oriented solutions
+Employees
+Customer satisfaction
+Knowledge base
+These five performance indicator areas are displayed in a so-called management
+cockpit that acts as a control mechanism to keep track of the improvement results.
+The management cockpit will be addressed further in the following of this section.
+Strategic objectives and associated performance indicator areas act as guidelines.
+Using these, associated business goals and metrics can be derived. For each PIA a
+number of business goals can be defined, see Table 4.
+Table 4. Business goals per PIA
+Efficient and effective product creation process
+Decrease the costs of adapting product or building blocks to customer requirements
+Improve the quality of the order intake forecast
+Improve customer confidence in critical process interfaces
+Improve reliability of product delivery
+Improve budget discipline
+Customer-oriented solutions
+Improve customer requirements specification regarding the match with TNNL
+product characteristics
+Decrease the costs to adapt product or building blocks to the customer requirements
+Employees
+Satisfied employee
+Improve the allocation potential of employees
+Improve the motivation of employees
+Customer satisfaction
+Satisfied internal customer
+Satisfied external customer
+Knowledge base
+Establish a critical level of knowledge
+Improve the added value of the knowledge base
+Spent sufficient effort into the organization's level of knowledge
+The metrics can be used to decide whether or not specific business goals are reached,
+and subsequently what the score is of a particular PIA in the management cockpit at
+the strategic level. A distinction is made between hard and soft metrics, or
+Business Objectives as Drivers for Process Improvement
+43
+quantitative and qualitative measures. A hard metric gives formal figures (e.g. illness
+rate, due date performance and spending rate). Soft metrics express confidence or
+satisfaction (e.g. confidence that goods will be delivered in time, confidence that the
+quality of baselines in the product creation process are adequate, customer satisfaction
+and employer satisfaction). Usually both types of metric are required to provide
+sufficient information. We give in table 5 some examples of metrics for the PIA's
+Efficient and Effective Product Creation Process, Customer-oriented Solutions, and
+Employees.
+Table 5. Examples of goals and metrics
+Example 1
+Performance indicator area: Efficient and Effective Product Creation Process.
+•
+•
+•
+•
+•
+•
+•
+Business goal: reliability of product delivery.
+Metric: in-time delivery with respect to operation planning.
+Norm 80%.
+• Business goal: customer confidence in critical process interfaces.
+• Metric: appreciation score of the key stakeholders in the process, measurement
+based on questionnaire.
+• Norm: >7.
+Example 2
+Performance indicator area: Customer-oriented Solutions.
+• Business goal: customer requirements specification (CRS) match with TNNL
+product characteristics.
+• Metric: number of adjustments of CRS required with respect to existing product
+portfolio characteristics.
+• Norm: < 1.25*(reference data from experience base)/time.
+Example 3
+Performance indicator area: Employees.
+Business goal: motivated employees.
+Metric-1: staff turnover, norm: 5 %.
+Metric-2: Average number of overtime hours per employee.
+Norm: < x-hours per person.
+Based on the application of the metrics, periodically the PIA-scores are being
+generated per performance indicator area (PIA) and shown in the management
+cockpit, as depicted in figure 5.
+Based on the PIA-scores that are presented in the management cockpit the
+management can evaluate their strategic objectives. Subsequently the business goals
+act as starting points for improvements that have to be carried out on the process and
+the team level. In the next section the decomposition of the business goals into
+process improvement goals and the determination of accompanying metrics is
+presented.
+44
+J.J.M. Trienekens et al.
+4.2 Phase 2: Decomposition of Business Goals into Process Improvement Goals
+and Definition of Metrics
+Starting from the business goals the areas in the product creation process have to be
+identified where specific (parts of the) processes should be improved. These
+improvements are then defined as process improvement goals. Each goal at the
+process level has to be provided with one or more metrics.
+Management Cockpit
+Resulting financial data:
+Profit, order intake and turnover
+Effectiveness
+Efficiency
+Customer
+orientation
+Staff
+Customer
+satisfaction
+Knowledge
+base
+Fig. 5. The management cockpit
+The decomposition of the business goals into process improvement goals for the
+operational teams on the one hand and facilitating departments on the other hand is
+performed in the following steps:
+1. Per process of the product creation process a small team of stakeholders in the
+process is formed.
+2. Each team makes an inventory of the improvement needs of the process and
+translates these needs into process improvement goals.
+3. The process improvement goals are linked with one or more business goals.
+Goals that cannot be linked with any business goal are rejected.
+4. The remaining process improvement goals are subdivided into three classes:
+a. Process improvement goals that can be assigned to operational teams,
+which execute the process.
+b. Process improvement goals on the interface between processes.
+c. Process improvement goals to be assigned to the departments, which
+facilitate the operational teams.
+In the following paragraphs we will give some examples of the determination of
+process improvement goals. Because we restrict ourselves in this paper for the sake of
+clarity to the operational processes as stated in section 1, we will address in these
+examples only process improvement goals of the processes themselves and process
+Business Objectives as Drivers for Process Improvement
+45
+improvement goals at the interface of processes. The process of that we will focus on
+in this example is the Product Development, Integration, Verification and Validation
+(PDIVV) process, see Figure 1 in section 2.1.
+The PDIVV Process and its Stakeholders. The PDIVV process is a process in
+chain-1 that produces the system according to the agreed specifications, assigns the
+work to be done to the production department or subcontractors and delivers the
+system components, see section 1. The PDIVV process has interfaces with the
+processes SRA/SD and SIVV, which are considered as the most important
+stakeholders, together with the PDIVV-employees. The output of the SRA/SD
+process, and the input of PDIVV, is a validated and complete system requirements
+specification that is based on the availability of building blocks within TNNL. The
+output of PDIVV, and the input for SIVV, is a produced system and/or components
+that have to be integrated into a final product in the SIVV process. The final product
+is verified and validated against the original customer and system requirements. In the
+following table 6 we give examples of process improvement goals with respect to
+respectively the operational teams, the SRA/SD interface and the SIVV interface.
+Table 6. Examples of process improvement goals
+Process improvement goals with respect to the operational teams executing the process.
+Process improvement goal: executing the work in accordance with the project plan.
+• Related business improvement goal: efficient and effective product creation
+process (see 4.1).
+• Metric: procentual time delay (t-real - t-plan)/t-real).
+Process improvement goal: constructive feedback on personal performance.
+• Related business improvement goal: improve the motivation of employees (see
+4.1)
+• Metric: questionnaire to determine a score for employee satisfaction regarding
+their interaction with Resource Management.
+Process improvement goals with respect to the SRA/SD (interface at the input side)
+Process improvement goal: improve the stability of the system requirements
+specification.
+• Related business improvement goal: improve reliability of product delivery
+(see 4.1)
+• Metric: changes over a period of time in (#requirements to work on)/
+(#requirements total).
+Process improvement goals with respect to the SIVV (interface at the output side)
+Process improvement goal: improve satisfaction of the SIVV employees on the
+quality of the output by increasing frequency of reviews.
+• Related business improvement goal: satisfied (internal) customer (see 4.1).
+• Metric: (effort/time needed to react to complaints from SIVV)/(effort/time
+needed for the development of the output).
+4.3 Phase 3: The Decomposition of Process Improvement Goals into Team
+Goals and the Definition of Metrics
+The decomposition of the strategic objectives via the business goals into process
+improvement goals and the definition of accompanying metrics form the basis for
+46
+J.J.M. Trienekens et al.
+actual business improvement. The improvement goals have to be embedded in the
+daily work of the operational teams. This section reports on the way workshops are
+carried out to determine team goals and metrics. The team improvement goals and
+metrics are registered in the QMS and serve there as a basis of reference for the dayto-day
+work of the various operational teams.
+Workshop Objectives. The implementation of process improvement goals into the
+work of operational teams was supported by workshops. The objectives of the
+workshops for individual teams were to define its own set of team improvement
+goals, on the basis of on the one hand the process improvement goals, and on the
+other hand the teams own particular project objectives and the individual experiences
+of each team member. Team improvement goals can be related to one or more process
+improvement goals; just like process improvement goals can be related to one or more
+business goals.
+Workshop Design. The workshops are being designed carefully in accordance with
+the size of the teams, which varies between 6 and 25 persons. The approach is to
+reach agreement on team improvement goals via dialog and mutual understanding.
+For a workshop relevant process improvement goals are pre-selected and act as a
+basis of reference during the whole workshop. The starting questions of a workshop
+are respectively:
+• 'How do we contribute to the process improvement goals of the department',
+• 'How do we measure team contribution', and
+• 'What are individual roles in that'?
+Subgroups of three to five persons are formed to discuss process improvement and
+team goals, both in parallel and sequential. They are provided with predefined
+templates that are based on the 'cockpit' and with the Goal Question Metric paradigm
+[7]. Team members can participate in more than one (sequentially) operating
+subgroup. Several iterations are used to derive team improvement goals and metrics
+from process improvement goals. The group's outcomes are reviewed each iteration
+by other subgroups. Finally, based on consensus building, the most suitable team
+goals and metrics are selected, and an action plan is proposed. Based on the iterations,
+the review mechanisms and the changing groups, maximum use of the variety of a
+team is reached, creating a large cohesion within the operational team.
+Workshop Evolution. Over a period of eighteen months, monthly follow-up sessions
+are organized. In these sessions experiences are collected regarding the fit of the
+process improvement goals with the team improvement goals and the application of
+the team improvement goals and the metrics in practice.
+Preliminary Workshop Results. Some examples of the results of the workshops are:
+• Explicit team improvement goal definition provides teams with a clear focus on
+the major topics of their work
+• Increased awareness of the teams on the impact of their work on the business as a
+whole. It provided teams with a "helicopter view" on their daily work.
+• Clear contribution to the "team spirit" of the employees.
+Business Objectives as Drivers for Process Improvement
+47
+•
+•
+Redesign of particular activities in the team, e.g. improving the efficiency of the
+work
+Follow-up workshops showed that specific important improvement topics could
+be kept on the agenda and didn't tend to disappear due to the day-to-day worries.
+Some Examples of Metrics. In Table 7 two examples are given of the determination
+of team improvement goals, metrics and norms, on the basis of the process
+improvement goals as defined in section 4.2. For each of the examples a brief
+experience issue is given.
+Table 7. Examples of team improvement goals
+Process improvement goal: improve satisfaction of the SIVV employees on the quality of
+the output by increasing frequency of reviews, see section 4.2.
+• Team improvement goal: improve the quality of the specification.
+• Metric: objectiveness of the specification
+• Norms:
+o
+o
+>95% of the specification is described in quantitative terms
+>95% of the essential specification is under control (determined on
+the basis of consensus of the team members)
+o >80% of non-essential requirements is under control (determined on
+the basis of consensus of the team members)
+Experience issue: the distinction between essential and non-essential specifications
+supported the team members in getting a clear focus on main and side aspects of the
+specification.
+• Team improvement goal: improve communication with (internal) SIVV
+customers.
+• Metric: level of (internal) satisfaction, based on among others a number of
+contacts with internal customers and formal response given to questions.
+• Norm: >6 (on a scale of 1 to 10)
+Experience issue: the whole team was involved in the 'rating' and the team as a whole
+became aware of the number of contacts with the internal customers and the 'quality' of
+those contacts.
+5
+Conclusions
+A pre-assessment on the basis of the ISO9001:2000 standard at TNNL showed
+shortcomings regarding quality management and continuous improvement. To
+improve the situation the management decided to set up an improvement initiative.
+Regarding the structure of this improvement initiative, a framework for goal-oriented
+quality improvement has been defined. Based on this framework, three directions for
+solving the problems have been defined, i.e. goal decomposition, metrification and
+stakeholder involvement. Regarding improvement three levels of improvement
+actions have been elaborated, respectively the business level, the process
+improvement level and the team improvement level. On each of these levels
+appropriate stakeholders played a role in the determination of metrics, e.g. top
+management, project or process leaders, and operational team members. Appropriate
+48
+J.J.M. Trienekens et al.
+defined metrics, related to the improvement actions of a particular level, are used to
+determine the effectiveness of the improvement actions on a continuous basis. On the
+team level the team improvement goal definition and the determination of metrics is
+performed in workshops that are organized on a regular basis. Finally the evaluation
+of the improvement goals and the application of the metrics, e.g. the collection and
+the analysis of data, are supported by web-based intranet tools.
+Acknowledgements. We would like to thank Sabine Te Braak of TNNL who has
+been helpful in the review process and the development of the figures in this paper.
+References
+1. Debou, C., Kuntzmann-Combelles, A.: Linking Software Process Improvement to
+Business Strategies: Experiences from industry, Software Process: Improvement and
+Practice 5 (2000) 55-64.
+2. Balla, K. Bemelmans, Th., Kusters, R.J., and Trienekens, J.J.M.: QMIM: Quality through
+Managed Improvement and Measurement: towards a phased development and
+implementation of a quality management system for a software company, Software
+Quality Journal 9 (2001) 177-193.
+3. Cattaneo, F., Fuggetta, A., and Sciutto, D.: Pursuing Coherence in Software Process
+Assessment and Improvement, Software Process Improvement and Practice 6 (2001) 3-22.
+4. Dawson, D. and O'Neill, B: Simple Metrics for Improving Software process Performance
+and Capability: A Case Study, Software Quality Journal 11 (2003) 243-258.
+5. International Organization for Standardization, http://www.iso.ch/iso/en/iso900014000/iso9000/iso9000index.html.
+6. Latum F. van, Solingen R. van, Oivo M., Hoisl B., Rombach D., and Ruhe G.: Adopting
+GQM-based measurement in an industrial environment', IEEE Software (1998) 78-86.
+7. Mellis W.: Software quality management in turbulent times: are there alternatives to
+process oriented software quality management, Software Quality Journal (2000) 277-295.
+8. Neiger D., and Churilov L.: Structuring Business Objectives: A Business Process
+Modeling Perspective, in: Proceedings of the international conference BPM2003, Aalst W.
+van der, Hofstede A. ter, and Weske M. (Eds.), Eindhoven, The Netherlands, June 2003.
+9. Paulk M.C.: How ISO9001 Compares With The CMM, IEEE Software (1995) 74-83.
+10. Solingen R. van, Berghout E., Kusters R.J., Trienekens J.J.M.: From process improvement to
+people improvement, Information and Software Technology 42, (2000) 965-971.
+11. Solingen R. van, Berghout E.: The Goal/Question/Metric Method, McGraw-Hill, 1999.
+12. Stelzer D. and Mellis W.: Success Factors of Organizational Change in Software Process
+Improvement, Software Process: Improvement and Practice 4 (1998) 227-250.
+13. Trienekens, J.J.M., Kusters R.J., Solingen R.: Product Focused Software Process
+Improvement: Concepts and Experiences from Industry, Software Quality Journal 9 (2001)
+269-281.

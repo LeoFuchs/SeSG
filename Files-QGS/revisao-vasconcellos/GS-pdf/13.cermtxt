@@ -1,0 +1,763 @@
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT
+OF SOFTWARE PROCESS IMPROVEMENT PROGRAMS
+André Luiz Becker, Jorge Luis Nicolas Audy and Rafael Prikladnicki
+Information Technology College, Pontifical Catholic University of RGS
+Av. Ipiranga, 6681, Porto Alegre,Brazil
+Keywords:
+Software process improvement, strategic alignment, strategic planning.
+Abstract:
+The alignment between the strategy of a software process improvement program and the organizations'
+business strategies has been mentioned as a critical factor of success. However, the main software process
+reference models do not explicitly guide the companies towards defining processes which meet their strategic
+goals. Based on this context, the purpose of this paper is to present a process for the strategic alignment of
+software process improvement programs. Preliminary results indicate benefits beyond the demands of a
+software process reference model itself, which include the planning and execution of a software process
+improvement program taking into account the organization's strategic goals in a more systematic way.
+1
+INTRODUCTION
+The modern software development organizations are
+inserted in a dynamic and competitive market. In this
+context, the Software Engineering area approaches
+the improvement of a software development process,
+by means of planning and execution of improvement
+programs, as the agent responsible for increasing the
+competitiveness of these companies (Dybå, 2005).
+Considering the substantial investment required
+by such programs, the organizations tend to seek
+explicit reasons to put these initiatives into practice.
+One way to identify these reasons is defining the
+strategy of an improvement program based on the
+organization's business strategic goals.
+However, in the main software process reference
+models existing in the industry today, such as SWCMM
+and CMMI, such goals are not easily related to
+the software development processes to be implemented
+by an organization (Debou, 1999; Liu, 2005; Peterson,
+1995). As a consequence, organizations carry out
+improvement programs without identifying what the
+maturity of their processes can deliver concerning their
+business strategic goals (Liu, 2005).
+Therefore, this paper presents a research carried
+out intending to propose a strategic alignment
+process for software process improvement (SPI)
+programs based on organizations' strategic planning.
+The proposed process was applied to a company
+through a case study. From such study, an evaluation
+and a review of the process were performed.
+In the sequence of the paper, section 2 presents the
+theoretical review. In section 3, the research
+methodology is described. Section 4 describes the
+proposed process and section 5 describes its application
+to a company. Section 6 presents the evaluation of the
+proposed process, and Section 7 a discussion based on
+the results found. Section 8 concludes the paper.
+2
+THEORETICAL REVIEW
+An organization's success depends more and more on
+information systems as a competitive advantage.
+Nevertheless, the purchase of such information
+systems is complex, in view that the software projects
+frequently fail either in schedule, cost or quality.
+According to (Pitterman, 2000; Yamamura, 1999),
+a software development process improvement has
+been rising the quality of the information systems
+produced, reducing the costs and the effort spent in
+the projects, while increasing the productivity of the
+activities performed. In this sense, the improvement
+of processes quality is one of the main purposes of the
+software manufacturers, which can result in
+improvements in the final product as well. Generally,
+companies structure process improvement programs
+based on pre-established software process reference
+66
+Luiz Becker A., Luis Nicolas Audy J. and Prikladnicki R. (2008).
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT OF SOFTWARE PROCESS IMPROVEMENT PROGRAMS.
+In Proceedings of the Tenth International Conference on Enterprise Information Systems - ISAS, pages 66-73
+DOI: 10.5220/0001690600660073
+Copyright c SciTePress
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT OF SOFTWARE PROCESS IMPROVEMENT
+PROGRAMS
+models, such as SW-CMM (Paulk, 1993) and CMMI
+(Chrissis, 2003). They are used as process definition
+guidelines through levels that assist the companies in
+the evolution of their processes.
+These software process reference models
+establish software engineering best practices for the
+companies to use as basis in the definition of their
+processes. Nonetheless, such models do not
+explicitly guide the companies towards defining
+processes which meet their strategic goals (Liu,
+2005). As a consequence, companies develop their
+processes using these guidelines, but with no
+guaranty that these processes will be focused on the
+companies' business strategic goals.
+However, the alignment between the strategy of a
+process improvement program and the organizations'
+business strategies has been mentioned as a critical
+factor of success of software process improvement
+programs (Biro, 1999; Brodman, 1995; Grady, 1997;
+Humphrey, 1989; Pulford, 1996; Zahran, 1998). Such
+alignment shall guarantee that the processes
+institutionalized by an organization are guided
+towards the strategic goals, instead of only
+approaching the software engineering best practices
+established in the software process reference models.
+According to (McCoy, 1998), the process
+improvement may result in processes that, when
+institutionalized, intend to meet the goals defined in a
+strategic planning (SP). This same author states that
+competitive advantages can be attained when the
+synergy between SP and process improvement
+becomes properly compatible.
+When the SP is started, it is focused on the goals
+established for the organization and on the current
+diagnosis. As a result, feasible purposes and
+strategies are defined to meet such goals. Regarding
+process improvement, the basic inputs are purposes,
+strategic actions and resources. The result is a set of
+optimized processes which, when institutionalized,
+facilitate the performance of necessary activities to
+meet the organization's goals.
+In that sense, in order to define processes that
+meet the strategic goals of the organizations, an
+improvement program shall be aligned with the
+business strategy. Considering the existing
+relationship between improvement programs and
+strategic planning, this paper presents a research
+which specifically approaches the strategic alignment
+of software process improvement programs.
+3
+RESEARCH METHODOLOGY
+This is a research applied to the area of information
+systems. Since the theme is an emerging area, the
+use of an exploratory and qualitative research was
+defined. Regarding the research method, a case
+study was conducted, adopted as proposed by (Yin,
+2003). The research was organized in three stages:
+theoretical review, development and evaluation.
+The first stage started with the study of existing
+literature. The review comprised software quality
+literature, software process improvement, strategic
+planning and strategic alignment. During the
+development stage, a strategic alignment process of
+software process improvement programs (called AEMPS)
+was defined and a supporting tool was
+developed. The evaluation stage was intended to
+check the suitability of the AE-MPS process by
+carrying out a case study.
+With the purpose to systemize the task of
+collecting and analyzing data originated in the case
+study and, consequently, increase reliability, a
+protocol for the development and formalization of the
+study was defined and used. For the data collection, a
+triangulation process was used: structured interview,
+with open and closed questions, direct observation
+and documentation (Yin, 2003).
+The structured interviews were applied through two
+research instruments. The first was a questionnaire
+exploring the analysis of the company situation in a
+moment prior to the application of the AE-MPS
+process. The second was a questionnaire to evaluate the
+suitability of the proposed process regarding its
+purpose, efficiency of the supporting tool and the
+company situation after the use of AE-MPS.
+With the structured interviews, a content analysis
+through category identification was performed. The
+document review allowed the corroboration and
+appreciation of the evidences arising from the interviews,
+providing further details regarding the answers from the
+interviewees. The observations delivered additional
+information about the application of the AE-MPS process.
+Based on the qualitative analysis of the data, an
+evaluation of the AE-MPS process was performed.
+Furthermore, a review of the proposed process was
+carried out. In the following section, the structure of
+the AE-MPS process is presented.
+4
+AE-MPS PROCESS
+The proposed process is intended to align the strategy
+of a software process improvement program based on
+67
+ICEIS 2008 - International Conference on Enterprise Information Systems
+the organizations' strategic planning. As a result of
+the application of such process, the most important
+elements of a software process reference model for
+the organization can be identified.
+The Quality Function Deployment (QFD) technique
+proposes the planning of goal-oriented actions in order to
+maximize the quality of a product (Akao, 1990).
+Approaching an organization's software development
+processes as a product, such technique is applied so that
+the process definitions are oriented towards the
+organization's goals as defined in the strategic planning.
+Such process proposes the involvement of
+professionals from an organization's strategic, tactical
+and operating perspectives. Therefore, in order to
+establish the most important elements of a software
+process reference model, the current problems with the
+software development process and its respective causes,
+as well as the strategic planning, are taken into account.
+The QDF technique uses a number of matrices, which
+collect, analyze and manage goals as an end product.
+However, 95% of the QFD applications apply only the
+first matrix, called House of Quality (Cox, 1992).
+Basically, such matrix relates “what” - goals on a high
+abstraction level to “how” - actions on low level (Zaijun,
+2005). Then, a crossover between rows versus columns is
+established and the impact analysis of each one of the
+relationships is determined in accordance with Table 1.
+Table 1: Relationship Levels.
+7
+High
+Medium
+Low
+None
+Value
+9
+3
+1
+0
+Symbol
+N/A
+While filling in the House of Quality matrices, a
+value representing the priority of each one of the
+defined elements shall be established. The higher the
+value attributed to an element, the higher will its
+priority be over the others. Furthermore, the use of
+different-value scales is allowed to prioritize each
+group of elements (a group of elements may be
+defined in the rows or in the columns of the matrix).
+At the end, these values are adjusted considering
+the impact between the elements defined in the matrix.
+Thus, each low-level action ("how") is prioritized
+taking in account its relation with high-level goals
+("what"). In the AE-MPS process, three matrices are
+proposed based on the House of Quality matrix.
+68
+4.1
+Strategic Goals Vs. Tactical Goals
+Matrix
+In order to use this matrix (Figure 1), the strategic and
+tactical goals with the process improvement program shall
+be defined. Furthermore, the relationship impact between
+such goals should be analyzed. For such activities, the
+strategic planning should be used as an input artifact.
+Figure 1: Strategic Goals Vs. Tactical Goals Matrix.
+An initial priority value for each strategic and
+tactical goal is established. Thus, the adjusted
+priority of the tactical goal is defined with the
+application of the following expression:
+k
+TAj = TIj * ∑ EIi * R (Ei, Tj)
+i = 1
+(1)
+where,
+TAj is the adjusted priority of the tactical goal j;
+TIj is the initial priority of the tactical goal j;
+EIi is the priority of the strategic goal i;
+R (Ei, Tj) is the value representing the relationship
+between the strategic goal i and the tactical goal j;
+k is the quantity of strategic goals.
+4.2
+Tactical Goals Vs. Causes of
+Problems Matrix
+For the use of this matrix (Figure 2), the organization's
+software development process needs to be analyzed
+and all the existing problems and their respective
+causes need to be identified. Therefore, it is necessary
+to fill in the matrix and analyze the relationship impact
+between the tactical goals and the causes of problems.
+Figure 2: Tactical Goals Vs. Causes of Problems Matrix.
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT OF SOFTWARE PROCESS IMPROVEMENT
+PROGRAMS
+The initial priority of each process cause of problems
+should be established. Concerning the initial priority of the
+tactical goals, it is originated in the result from Strategic
+Goals Vs. Tactical Goals matrix. Thus, a new adjustment
+in the priority of the tactical goals can be performed:
+k
+TA2j = TAj * ∑ CIi * R (Ci, Tj) * F
+i = 1
+(2)
+where,
+TA2j is the adjusted priority 2 of the tactical goal j;
+TAj is the adjusted priority of the tactical goal j;
+CIi is the priority of the process cause of problems i;
+R (Ci, Tj) is the value representing the relationship between
+the process cause of problem i and the tactical goal j;
+F is the importance factor of the process cause of problems;
+k is the quantity of process cause of problems.
+4.3
+Tactical Goals Vs. Processes Matrix
+The relationship impact analysis between the tactical goals
+and the elements of a software process reference model is
+established in this matrix (Figure 3). The elements of a
+model that should be filled out in the matrix are the
+software engineering best practices related specifically to a
+level of maturity. In the matrix, they are called Processes.
+Figure 3: Tactical Goals Vs. Processes Matrix.
+After that, the priority of each element of the software
+process reference model can be determined from their
+relationships with the tactical goals. The following
+expression is considered:
+k
+PIj = ∑ TA2i * R (Ti, Pj)
+i = 1
+(3)
+where,
+PIj is the initial priority of the process j;
+TA2i is the adjusted priority 2 of the tactical goal i;
+R (Ti, Pj) is the value representing the relationship
+between the tactical goal i and the process j;
+k is the quantity of tactical goals.
+Next, the current situation and the use frequency
+of each element of the software process reference
+model in the company are analyzed. An importance
+factor for the use frequency should be also
+established. Such factor can vary between 0.1 and 1.0,
+where: 0.1 - the smallest value, and 1.0 - the highest
+value, and establishes the importance of the use
+frequency in changing the priority of an element of
+the software process reference model. With such data,
+an improvement rate is established for these elements:
+Tj = SAj * (Fj * FIj)
+where,
+Tj is the improvement rate of process j;
+SAj is the current situation of process j;
+Fj is the use frequency of process j;
+FIj is the importance factor of the use frequency.
+At the end, the priority of the elements of the software
+process reference model is adjusted considering the
+improvement rate and the implementation difficulty. The
+expression used for such adjustment is the following:
+PAj = (PIi * Tj) * DIj
+where,
+PAj is the adjusted priority of process j;
+PIj is the initial priority of the process j;
+Tj is the improvement rate of process j;
+DIj is the implementation difficulty of process j.
+The application of these matrices allows the
+establishment of the importance percentages of the
+software process reference model elements for the
+organization. Next, the proposed process is illustrated
+with the data obtained from the case study.
+(4)
+(5)
+5
+AE-MPS IN PRACTICE
+To evaluate the proposed process, a case study was
+carried out in a small Brazilian software development
+company. Such company develops corporate portals
+and web solutions related to information and
+knowledge management, focusing especially on
+increasing the productivity of its customers. The
+company has been active in the market for 10 years
+now, employing nearly seventy professionals allocated
+in two Brazilian capitals (Sao Paulo and Porto Alegre).
+The company is improving its processes using the
+software process reference model MR-MPS (Montoni,
+2007; Weber, 2005). This model was developed in the
+context of a nationwide initiative for Brazil aiming to
+make small companies more competitive in local and
+global markets. The initiative has been executed since
+December 2003 and the main goal is to disseminate
+software process improvements aligned to Brazilian
+software industry realities.
+69
+ICEIS 2008 - International Conference on Enterprise Information Systems
+The seven MR-MPS maturity levels are: A
+(Optimizing), B (Quantitatively Managed), C
+(Defined), D (Largely Defined), E (Partially Defined),
+F (Managed) and G (Partially Managed). The level G
+is the most immature level, and level A is the most
+mature one. The MR-MPS maturity levels are based
+on the CMMI staged representation maturity levels.
+The MR-MPS levels F, C, B and A correspond
+respectively to CMMI levels 2, 3, 4 and 5. The MRMPS
+level G is an intermediary level between CMMI
+levels 1 and 2, and the MR-MPS levels E and D are two
+intermediary levels between CMMI levels 2 and 3. The
+company wants to implement the level F, approaching
+the following processes: Project Management,
+Requirements Management, Acquisition, Configuration
+Management, Quality Assurance and Measurement.
+5.1
+Strategic Goals Vs. Tactical Goals
+Matrix
+In order to fill in this matrix, four strategic goals
+with the improvement of processes were defined
+from the strategic planning: increase profit, increase
+customer satisfaction, improve product quality, and
+prospect and produce larger projects.
+For each one of the strategic goals, the strategic
+planning was analyzed again, and related tactical
+goals were defined. From that, the Strategic Goals
+Vs. Tactical Goals Matrix can be filled in and the
+relationships can be analyzed. In Figure 4, the
+matrix developed in the case study is presented.
+A value to represent the priority of each strategic
+and tactical goal was established. Considering the
+relationship between strategic and tactical goals the
+priority of the tactical goals was adjusted as per
+expression 1.
+5.2
+Tactical Goals Vs. Causes of
+Problems Matrix
+The current problems with the software development
+process of the organization and its respective causes
+were identified. With such information, this matrix
+was filled in and the relationship between the
+tactical goals and the causes of problems were
+analyzed. In Figure 5, a concise view of the matrix
+developed in the case study is presented.
+Subsequently, a value to represent the priority of
+each cause of process problems was established.
+Furthermore, the value 1 was established for the
+importance factor of the causes of process problems
+for the new adjustment of the tactical goals, in a
+range from 0.1 - the smallest importance, to 1 - the
+highest importance. From expression 2, the tactical
+goals had their priority adjusted again.
+5.3
+Tactical Goals Vs. Processes Matrix
+In order to establish the partial priority of the
+elements referent to level F of the MR-MPS model,
+this matrix was filled in and the relationship level
+between the tactical goals and these elements was
+analyzed. Therefore, expression 3 was applied, and
+the process partial priority of the MR-MPS model
+was established. In Figure 6, this matrix is presented.
+In the sequence, the current situation of each
+element of the MR-MPS model was analyzed (Table
+2). The following levels to characterize this current
+situation were used: T - Totally Satisfied; L Largely
+Satisfied; P - Partially Satisfied; and N Not
+Satisfied (ISO/IEC 15504-2, 2003).
+Table 2: Current Situation of MR-MPS Processes.
+MR-MPS Processes
+Project Management
+Requirements Management
+Acquisition
+Configuration Management
+Quality Assurance
+Measurement
+Current
+Situation
+P
+P
+P
+N
+N
+P
+Value
+0.66
+0.66
+0.66
+1
+1
+0.66
+70
+Figure 4: Strategic Goals Vs. Tactical Goals Matrix developed in the case study.
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT OF SOFTWARE PROCESS IMPROVEMENT
+PROGRAMS
+Figure 5: Tactical Goals Vs. Causes of Problems Matrix developed in the case study.
+Then, the use frequency of each MR-MPS element was
+determined in a range with four values: no use; little use;
+reasonable use; and much use. It was also established the
+value of 0.5 as an importance factor of this use frequency,
+ranging from 0.1 to 1.0, where: 0.1 - smallest importance;
+and 1.0 - highest importance. With that, the improvement
+rate of the MR-MPS processes was established from
+expression 4.
+Table 3: Frequency of the MR-MPS Processes.
+MR-MPS Processes
+Project Management
+Requirements Management
+Acquisition
+Configuration
+Management
+Quality Assurance
+Measurement
+Use Frequency
+Much use
+Much use
+Little use
+Much use
+Reasonable use
+Reasonable use
+Then, the implementation difficulty of each MRMPS
+element in the organization was established. A
+range with four values was used: no difficulty; little
+difficulty; reasonable difficulty; and much difficulty.
+Table 4: Implementation Difficulty of MR-MPS Processes.
+MR-MPS Processes
+Project Management
+Requirements
+Management
+Acquisition
+Configuration
+Management
+Quality Assurance
+Measurement
+Implementation
+Difficulty
+Little difficulty
+Reasonable
+difficulty
+Much difficulty
+Reasonable
+difficulty
+Much difficulty
+Reasonable
+difficulty
+After that, the priority of the MR-MPS elements was
+adjusted from expression 5. At the end, each MR-MPS
+element had its final priority established. Therefore,
+the importance percentage of each MR-MPS element
+for the organization could be identified.
+Value
+1
+1
+0.33
+1
+0.66
+0.66
+Value
+0.75
+0.5
+0.25
+0.5
+0.25
+0.5
+Figure 6: Tactical Goals Vs. Processes Matrix developed
+in the case study.
+Based on these importance percentages, the
+organization defined process improvements from
+Requirements Management and Project Management.
+After these processes are defined, a professional team
+was trained and four pilot projects were started. An
+evaluation of the AE-MPS process, based on the
+results from the case study, is described next.
+6
+PROCESS EVALUATION
+Based on the qualitative analysis of the data, we evaluate
+the suitability of the AE-MPS process in aligning the
+strategy of a software process improvement program and
+the organization's strategic planning. The evaluation for
+each one of the proposed matrices is reported, as well as
+the involvement of different hierarchical levels.
+71
+ICEIS 2008 - International Conference on Enterprise Information Systems
+6.1
+Strategic Goals Vs. Tactical Goals
+Matrix
+According to most of the people involved with the use
+of the AE-MPS within the organization, the use of the
+proposed process successfully allowed the software
+process improvement program strategy to be aligned
+with the organization's business strategy.
+Considering the importance of goals defined for
+an software process improvement program (Liu,
+2005), the use of this matrix guaranteed them to be
+established, prioritized and related to the current
+problems and elements of the MR-MPS model.
+Moreover, the AE-MPS process proposed the analysis
+of the current situation of the strategic goals by means
+of metrics, clarifying the quantitative expectations of
+the company with the improvement program.
+6.2
+Tactical Goals Vs. Causes of
+Problems Matrix
+Unanimously, the ones involved in the use of the AEMPS
+affirmed that this process assisted a lot in the
+analysis of the current problems with the organization's
+software development process and their respective causes.
+Since it was the first time that this type of analysis was
+carried out in the organization, those involved outlined the
+importance of a consolidation of the current problems and
+their causes on organizational level.
+As a weak point, it was found that a few problems
+with the software development process were
+mentioned in individual interviews; however they
+were not consolidated during the matrix filling-in
+activity. On the other hand, the team work allowed the
+identification of two new problems which were not
+mentioned in any individual interview.
+Furthermore, the ones involved mentioned that
+they were not aware of the existing convergence
+between the organization's causes of problems and
+the tactical goals. With the use of this matrix, such
+relationship can be quantified and the current
+process problems in the strategic alignment of the
+improvement program can be considered.
+6.3
+Tactical Goals Vs. Processes Matrix
+According to those involved in the application of the
+proposed process, the main advantage of this matrix was
+allowing the identification of the MR-MPS model
+elements, which shall be prioritized by the organization.
+As per the attained answers, the MR-MPS model elements
+prioritized by means of the AE-MPS process application
+are indeed the most important for the organization.
+72
+Considering that this prioritization is based on the
+organization's goals with the process improvement
+program and on the current problems with the software
+development process, it was guaranteed that the prioritized
+MR-MPS elements represent the organization's needs as a
+whole and not in personal views.
+Those involved outlined that the application of the
+proposed process made it easier for the organization's
+strategic goals with the improvement program to be
+met. In addition, the senior management's satisfaction
+with this initiative was guaranteed.
+6.4
+Involvement of Different
+Hierarchical Levels
+According to those involved, the AE-MPS process
+delivers a higher involvement of the organization's
+strategic, tactical and operating levels with the
+improvement program. However, they mentioned that
+the main difficulties in the application of this process are
+the number of people required and the reduced
+availability of those involved in the performed activities.
+Concerning the number of people required, it was
+found that such difficulty, at the same time, establishes an
+advantage for the proposed process, which is involving
+every organizational level. The AE-MPS process is
+intended to guarantee the associates' participation in the
+process improvement program, intending to involve the
+highest number of people possible (Niazi, 2003).
+7
+DISCUSSION
+The main contribution of this research was proposing
+a process that assists in the definition of the strategy
+of an improvement program based on the
+organizations' strategic goals. The intention of the
+AE-MPS process is that the process improvements in
+an improvement program meet, in a more systematic
+way, the organization's strategic goals and not only
+the demands of a software process reference model.
+In addition, the most important element identification
+of a software process reference model for an
+organization allows the first efforts in an improvement
+program to be spent on these elements identified by the
+AE-MPS. Considering that these elements were
+prioritized from a consolidation of the organization's
+needs, the probability of effective results right from the
+beginning of improvement programs is increased.
+Regarding the definition of strategic goals for a
+software process improvement program, it was found that
+they facilitate the monitoring of such initiatives. Such
+goals involve the senior management and allow assessing
+whether an improvement program is being successful.
+AN APPROACH TO SUPPORT THE STRATEGIC ALIGNMENT OF SOFTWARE PROCESS IMPROVEMENT
+PROGRAMS
+The AE-MPS process also considers the current
+problems with the software development process of
+the organization and their respective causes.
+According to (Hierholzer, 1998), it is essential that a
+process improvement program approaches the
+existing problems in the software development
+process and proposes solutions. It was found that the
+resolution of such problems produces commitment
+and interest from those who perform the processes.
+8
+FINAL CONSIDERATIONS
+In this paper, a process for the strategic alignment of
+software process improvement programs based on the
+strategic planning was proposed. That contributes for
+the systematization of how to maximize the results of
+these programs based on the organization's goals and
+the current problems with the software development
+process, either by using models such as CMMI or
+SPICE, or their derivatives, such as in this study.
+Since only a case study was carried out, the
+generalization of the attained results is restricted.
+However, this is a typical situation in qualitative
+researches of exploratory nature. As a future work,
+this process shall be applied to other companies,
+extending the possibility of result generalization.
+The results attained from this research point
+towards the importance of having approaches
+allowing the identification of the organizations'
+strategic goals and, from those, the priorities in a
+software process reference model. Therefore, the
+improvement programs can be directed towards the
+company's strategy and seeking better results.
+REFERENCES
+Akao, Y., 1990. The book, QFD: Integrating customer
+requirements into product design. Portland,
+Productivity Press.
+Biro, M., Tully, C., 1999. The Software Process in the Context of
+Business Goals and Performance. In Better Software Practice
+for Business Benefit: Principles and Experience. CS Press.
+Brodman, J.G., Johnson, D.L., 1995. Return on Investment (ROI)
+from Software Process Improvement as Measured by US
+Industry. In Software Process Improvement and Practice.
+Chrissis, M. B., Konrad, M., Shrum, S., 2003. The book,
+CMMI: Guidelines for Process Integration and
+Product Improvement. Addison-Wesley.
+Cox, C. A., 1992. Keys to success in quality function
+deployment. In APICS-The Performance Advantage.
+McCoy, W. L., 1998. Interfacing Three Complementary
+Technologies: Strategic Planning, Process Modeling,
+and System Dynamics. In IEEE International
+Conference on Systems, Man, and Cybernetics.
+Debou, C., Courtel, D., Lambert, H.-B., Fuchs, N., Haux,
+M, 1999. Alcatel's Experience with Process
+Improvement. In Better Software Practice for Business
+Benefit: Principles and Experience. CS Press.
+Dybå, T., 2005. An Empirical Investigation of the Key
+Factors for Success in Software Process Improvement. In
+IEEE Trans. Software Eng., v. 31, n. 5, 2005, pp.410-424.
+Grady, R.B., 1997. The book, Successful Software Process
+Improvement. Upper Saddle River, New Jersey: Prentice-Hall.
+Hierholzer, A., Herzwurm, G., Schlang, H., 1998.
+Applying QFD for Software Process Improvement at
+SAP AG. In Proceedings of the World Innovation and
+Strategy Conference in Sydney, Australia.
+Humphrey, W.S., 1989. The book, Managing the Software
+Process. Addison-Wesley.
+ISO/IEC 15504-2, 2003. Information Technology - Process
+Assessment - Part 2 - Performing an Assessment. In
+International Organization for Standardization and
+International Electrotechnical Commission. Genebra, ISO.
+Liu, X., Sun, Y., Kane, G., Kyoya, Y., Noguchi, K., 2005. QFD
+Application in Software Process Management and
+Improvement Based on CMM. In ACM SIGSOFT Software
+Engineering. SESSION: Software Quality (WOSQ).
+Montoni, M., Santos, G., Rocha, A. R., Weber, K. C., Araújo.
+E. R., 2007. MPS Model and TABA Workstation:
+Implementing Software Process Improvement Initiatives
+in Small Settings. In WoSQapos;07: ICSE Workshops
+2007. Volume, Issue, 20-26 May 2007 Page(s): 4 - 4
+Niazi, M., Wilson, D., Zowghi, D., 2003. A model for the
+implementation of software process improvement: A
+pilot study. In Journal of Systems and Software, ACM.
+Paulk, M.., Curtis, B., Chrissis, M., Weber, C. V., 1993. Capability
+Maturity Model for Software, Version 1.1. Technical Report.
+Peterson, B., 1995. Transitioning the CMM into practice.
+In Proceedings of the European Conference on
+Software Process Improvement, Barcelona, Spain.
+Pitterman, B., 2000. Telcordia Technologies: The journey
+to high maturity. In IEEE Software.
+Pulford, K, Kuntzmann-Combelles, A., Shirlaw, and S., 1996. The
+book, A Quantitative Approach to Software Management. The
+AMI Handbook. Wokingham, England: Addison-Wesley.
+Weber, K., Araújo, E., Rocha, A., Machado, C., Scalet, D.,
+Salviano, C. F., 2005. Brazilian Software Process Reference
+Model and Assessment Method. In Proceedings of 20th Int.
+Symp. on Computer and Info. Sciences, pp. 402-411, 2005.
+Yamamura, G., 1999. Software process satisfied
+employees. In IEEE Software.
+Yin, R., 2003. The book, Case Study Research: Design
+and Methods. Sage Publications Inc.
+Zahran, S., 1998. The book, Software Process
+Improvement: Practical Guidelines for Business
+Success. Harlow, England: Addison-Wesley.
+Zaijun, H., 2005. Value-Centric Process Improvement for
+Small Organizations by Using QFD and CMMI. In
+Proceedings of the First International Research
+Workshop for Process Improvement in Small Settings.
+73

@@ -1,0 +1,353 @@
+Software Quality Journal 6, (1997) 89-98
+SPI: 'I can't get no satisfaction' - directing
+process improvement to meet business
+needs
+S U S A N R E I B L E I N 1 and A N DY S Y M O N S 2
+1CAP Gemini UK PLC, 1 Avenue Road, Aston, Birmingham B6 4DU, UK.
+2ORIGIN International Projects & Services, P.O. Box 6347, 5600 HJ Eindhoven, The Netherlands.
+Received January 1997
+IT managers commonly complain of lack of resources for Software Process Improvement (SPI) projects. The
+authors postulate that this comes from lack of understanding by the company board of the benefit of SPI, and
+perhaps a lack of understanding by IT managers of the needs of the company board? So how can IT managers
+obtain satisfaction? A shortcoming of the ISO-9001 and the Capability Maturity Model (CMM) approaches
+to process improvement (in software production) is the lack of explicit connection to the business goals of the
+organization in question. In the eyes of business management, therefore, these models appear to represent an
+'idealized' view of the world. A negative assessment against such a model is insufficient, in itself, to justify significant
+expenditure on an improvement plan. While a standardized model is invaluable as a common reference
+for measurement and comparison, the initiation of a meaningful improvement plan requires investment
+of money and allocation of resources; and that can only take place if current business goals, not an 'ideal'
+model, are the motivating force. The draft SPICE method has recognized this need. It proposes the comparison
+of an assessed capability profile with a target capability profile. However the current draft standard (version
+2.0) contains little guidance on how to arrive at such a target capability profile. This paper describes a method
+for drawing up such a target capability profile. To preserve clarity, we have placed the description of our method
+in the context of a SPICE assessment and process improvement, but the method would also be suitable for use
+with ISO, CMM, ITIL or other process models.1 In all cases an improvement plan can be set up which is visibly
+geared to the business goals.
+Keywords: business process improvement (BPI), continuous process improvement, software quality, software
+process improvement (SPI), IT strategy determination
+1. Introduction and context
+IT managers have been working for many years now to achieve improvements in the processes
+employed by their organizations. While many improvements have been made, and there are tales
+of successful projects, there are many more tales of unsuccessful projects - as often as not accompanied
+by the IT manager's plaintiff wail: 'can't get people, can't get resources, can't get money for
+process improvement ... the management is not interested'. Why not? If we are improving the business
+then the management should be very interested. (Of course, if we are not, then we should
+stop.) One of the conclusions of the Quantum study [2] was that measurements of software process
+1 ITIL does not actually include a (published) process model; it is better described as a collection of best practices from
+which a process model can be derived; the implicit list of key processes is sufficient for our purposes [1].
+0963-9314 © 1997 Chapman & Hall
+90
+Reiblein and Symons
+improvement are not made because the meaning of the measurements is not clearly understood. It
+has previously been pointed out by Hinley and Reiblein [3] that the definition of key performance
+indicators (KPIs) can be used to direct process improvement in a way which is meaningful to the
+company board. This paper suggests a mechanism for using KPIs to target a process improvement
+programme to the actions which will yield the greatest benefit for the business. The method proposed
+is compatible with the Balanced Scorecard approach of Kaplan and Norton [4, 5] for determining
+objectives, but our method provides a mechanism for selecting the objectives which can be
+addressed by a process improvement programme to give the most benefit to the business in the
+shortest time.
+So let us assume that the apparent lack of interest is actually a lack of understanding of what SPI
+can achieve for the business, and what improvements can be expected. In other words, we need a
+better means of communication between the management and those controlling the SPI-process.
+We need to understand each other's language. We need to agree on goals and measurements of the
+attainment of goals. If the company board can see the effects of SPI in terms of what it means for
+the business, then adequate resources will be allocated.
+The process improvement cycle (for any process) can be represented as a specific form of the
+Deming cycle [6] as represented by Vlasveld [7] and reproduced with permission in Fig.1.
+Set
+required
+profile
+Assessment
+Improvement
+plan
+Capability
+determination
+Process
+Model
+Management
+of
+change
+Fig. 1. The process improvement cycle
+This principle can be applied to various processes. It is only the process model which is specific,
+the other parts are generic. Thus a complete method can be assembled by inserting a relevant
+process model. This is the 'plug-and-play' principle described by Vlasveld [7].
+The 'established' (software) process improvement methods generally cover a subset of the blocks
+shown in the figure. For example, ISO9001 [8] is a process model which does not say much about
+assessment. TickIT [9] is an assessment method based on ISO9001. CMM [10] is also a process
+model and various assessment methods have been developed around it.
+SPI: 'I can't get no satisfaction' - directing process improvement to meet business needs
+91
+SPICE [11] can be viewed as the next generation of process improvement methods in that it contains
+a process model (for software development), an assessment method, a method for capability
+determination, and a guide for improvement planning, i.e. contents for most of the blocks in the
+figure. In the method for capability determination SPICE proposes that the assessed profile be
+compared with the profile required by the business. A 'gap analysis' focuses attention on the most
+important areas for improvement. What SPICE does not give is a guide to how to arrive at the
+required profile.
+Whatever method is used, a programme to introduce process improvement in any business organization
+will only be acceptable if it is demonstrably linked to the business goals of the organization.
+We therefore believe that the method used to establish the required profile is essential for convincing
+management of the importance of a software improvement programme, setting priorities in
+conjunction with management and developing a realistic plan consistent with available budgets.
+2. Overview of the method
+We hereunder introduce the main concepts and elements of the method.
+2.1 Quality profiles
+The method focuses on the establishment and use of quality profiles to arrive at a process improvement
+plan. A profile is defined as a (graphical) representation of the quality of the set of processes
+under consideration, as illustrated in Fig. 2. For the purposes of this description, we have chosen
+a simpler representation of a quality profile than that used by SPICE, but the SPICE profile would
+do even better.
+Fig. 2. Process profiles
+We distinguish the following profiles:
+c actual quality profile (result of an assessment);
+c process importance profile (long term goal);
+c target quality profile (for the coming planning period, associated with a budget).
+The distinction between the last two types of profile is not made by SPICE, but is important in a
+business context. No matter how noble the ideal (to reach the required quality immediately), it will
+usually not be feasible in the next planning period due to limitations on resources and cash, and due
+92
+Reiblein and Symons
+to organizational inertia. On the other hand, it is important to keep the long-term aims in mind
+when making the short-term plan.
+2.2 The steps
+The ordering of the method is:
+1. Establish importance profile
+2. Establish the current profile
+3. First gap analysis
+4. Budgeting
+5. Planning
+Of course, the cycle then continues with the carrying out of the plan, the re-assessment of its results
+(at the end of the planning period) and the loop is closed with the repetition of this method for the
+next planning period.
+3. Establishing the importance profile
+The steps in establishing the importance profile are:
+1. Identify the business drivers
+2. Identify the key processes
+3. Weighting the business drivers
+4. Formulate a contribution factor matrix
+5. Calculate importance profile
+3.1 Identifying the business drivers
+Many organizations have realized that directing efforts to achieving their mission is not a simple
+operation. Organizations after enthusiastically launching a new corporate mission only discover
+later that they have merely made cosmetic adjustments to 'business as usual'.
+The reasons given for this failure are varied but often excuses are given such as organizational
+inertia, lack of motivation, culture and size of operation. All these are probably true but perhaps
+the reason why some organizations achieve their mission and others do not is that the achievers
+know how to achieve their goals and they focus on them. This means changing managers and staff
+motivators to align with business goals.
+The main issue is that there needs to be a translation from business mission to quantifiable business
+goals and objectives. This process rarely happens and managers are left with a plethora of projects
+which would improve the processes/service/product but with no objective mechanism to decide
+how to ration scarce resources into having most impact on the business goals.
+Ideally the organization would as a matter of course cascade the company objectives to each individual,
+but this rarely happens. The IT manager, often divorced from the company's main product
+has to translate the company mission into specific objectives. This situation occurred in an organization
+which had not only changed its mission, but if it did not change and achieve the organizational
+objectives (even in the short term) would cease to exist.
+SPI: 'I can't get no satisfaction' - directing process improvement to meet business needs
+93
+In this situation the IT manager drew together his production services management team who
+were called upon to determine what they saw as the main business drivers for the organization. The
+organization had not been derelict in communicating mission statements, company policy and policy
+for change statements but in many instances this was far too detached from operational life to
+provide any real direction.
+The production services management team who were owners of a variety of processes derived
+from these statements and their interpretation of what they meant a ranked list of key business drivers
+and associated measures for recognition of achievement. This list was presented to their senior
+management for agreement. The ranked list of drivers caused much debate within the senior management,
+such was the confusion and multiple interpretations, even within the senior management
+team, of the communications that had been sent out. Once senior management realized that action
+was to be taken on the drivers the list and the rankings were revised several times.
+This list was to be used to direct activity, the problem was then to decide where to place the effort.
+3.2 Identifying the key processes
+Although many organizations have an extensive list of 'improvement' projects which could be carried
+out to improve the effectiveness of the organization, the list is often compiled by submissions
+by the more vigorous managers rather than the most needy cases. Some organizations do not always
+recognize all of the processes which are carried out and in fact the ones which are not recognized
+are the ones where little effort has been expended on them.
+Identifying the processes which are carried out by the organization is a first step to organizational
+improvement. This comprehensive list provides a broad base for management's attention.
+Creating a process model for the area concerned would be the ideal way of identifying the entire
+processes carried out by the organization but this would take a long time to develop. A standard
+model is useful to act as a basis. In the example case the production services team had worked with
+the ITIL model to develop their processes and it was this list of high level processes which were
+used to identify the potential areas for improvement.
+Fig. 3. The process contribution matrix
+Having identified the business drivers and the key processes, we can draw a matrix as illustrated
+in Fig. 3 with the drivers on the vertical axis and the processes on the horizontal axis. In the following
+steps we will fill in the business driver ranking column and the process contribution cells.
+94
+3.3 Weighting the business drivers
+Reiblein and Symons
+Although the business drivers will generally remain constant for a period of time, the relative priority
+of the drivers will vary over time as external and internal factors effect business development. At the
+beginning of each process improvement cycle the weighting of the business drivers should be revisited.
+The business drivers are weighted for the period for which the improvement programme is to be drawn
+up (e.g. 1 year). Which drivers are the most important in this period? The drivers are weighted on a scale
+of 0 to 5 with 0 as not important at all (at the moment) and 5 representing the highest priority.
+The intention is to achieve a fairly even spread of weightings, i.e. a roughly equal number of drivers
+weighted at factor 0, 1, 2, 3, 4 and 5. Weighting every driver with a factor 5 achieves no prioritization.
+The method used by the authors is to first rank the drivers, i.e. number them in order of
+priority, then divide them into six weight groups corresponding to the priority. For example if there
+were 12 business drivers, then there would be two in each weight group. Weighting 5 is allocated to
+each of the drivers in the first group, 4 to second group and so on to 0 in the last group.
+An alternative is to calculate a (non-integer) weighting factor from the driver ranking by normalizing
+the driver rankings to a linear scale with the formula
+weight = (N-rank)*5/(N-1)
+Where N is the number of drivers and the drivers are ranked from 1 to N with 1 as the highest priority.
+3.4 Formulating the process contribution
+The only reason a process should be carried out in an organization is that it should contribute to meeting
+the organizational objective. If a process does not contribute it should be stopped. Using this logic,
+it should be possible to assess the contribution of each process to the key drivers for the organization.
+Each process is likely to contribute to several organizational goals. However, the total contribution of
+all processes to each goal must be absolute (i.e. 100%). If this is not the case there is a process which is
+missing and should be identified.
+The contribution matrix is formulated by assessing the contribution of each process to each business
+driver one by one. The authors' method is to draw up a first draft by holding a workshop attended by
+involved process owners (generally the first management level). The draft is then verified by the senior
+management (directors) who determined the business drivers in the first place.2
+3.5 Calculating the importance profile
+The final objective is to arrive at the importance profile, which is the representation of how important
+the key processes are to the business. Once the previous steps have been carried out, drawing
+up the importance profile is reduced to a matter of calculation. For each process a weighted average
+of contributions is calculated as:
+process importance rating = AVG(contribution/100 * ranking factor)
+The yielded rating for each process is on a scale of 0 to 5 where 0 means the process is unimportant
+(i.e. not required at all) and 5 means that this process is most important and has to be performed
+at the highest level in order to meet the business goals.
+The natural reaction is to concentrate effort of the organization on those processes which are important.
+This may result in the organization placing effort where there is little opportunity for improvement.
+A separate exercise is required to establish the current competence to meet the organizational goal.
+2 In the authors' experience this process can in itself reveal a variety of misinterpretations which could lead to misdirection
+of effort and expenditure!
+SPI: 'I can't get no satisfaction' - directing process improvement to meet business needs
+95
+4. Establishing the current profile
+Using any established assessment method such as ISO [12, 8], SEI-CMM [13, 14] or SPICE [11] one
+can establish the current capability of each process. The process of carrying out the assessments is
+well addressed by the references and not elaborated here. The only assumption is that the resulting
+assessment will be on a scale of 0 to 5. This is exactly true for SPICE and sometimes true for CMMbased
+methods. Other methods may require an extra step to express the results on a scale of 0 to 5.
+When an assessment has been carried out, most processes will be found wanting in some form.
+A natural instinct is to want to improve the process in every instance; however, unless there are
+unlimited resources some sort of rationing has to take place. The question for most organizations
+is how to make rational judgements in rationing key resources. This question is addressed by the
+remainder of this paper.
+5. Selecting projects for improvement
+For senior managers/directors, the practical use of the information gathered above is to select from
+a list of candidate projects those which are to get the green light for the coming period.
+5.1 First gap analysis
+The purpose of gap analysis is to establish where the current performance falls short of the performance
+corresponding to the importance of the process. Of course if all processes have a performance
+matching that required, then no action is required. If processes are performed in excess of
+the requirements, then there may be scope for cost reductions! That scenario is not, however, discussed
+further here. In most real-life IT cases most, if not all, processes are performed below the
+requirement. The method suggested by SPICE is to compare the importance profile with the actual
+profile by overlaying the graphical representations of each in a manner illustrated in simplified
+form in Fig. 2.
+If the gap is to be represented in numerical form then the SPICE method implies a subtraction,
+e.g. a process with an importance rating of 5 and an assessed rating of 3 would yield a gap of 2. The
+answer is always on a scale of 0 to 5. The authors actually used a division of the importance rating
+by the assessment rating to give a ratio in the range zero to infinity. In the previous example of a
+process with an importance rating of 5 and an assessed rating of 3 the ratio is 5/3 or 1.6666. This
+method gives a relatively high priority for improvement to lower-rated processes. Whereas a
+process with importance 5 assessed at 3 has a ratio of 1.6666, a process with importance 3 assessed
+at 1 will have a ratio of 3.0000 although the 'gap' in both cases is 2. Any process assessed at zero
+will yield a priority of infinity unless its importance was zero.
+This method is in practice only useful if a candidate project which improves only one specific
+process is under consideration. In the authors' experience, the practical situation is that there is a
+range of candidate projects, each of which will have an impact in varying degrees on several of the
+processes. This makes the problem of selection more difficult.
+5.2 'Bang for buck' selection
+We now have an overview of process weaknesses and an indication of priorities for improvement
+by process.
+96
+Reiblein and Symons
+Given infinite money and resources, we could now go ahead and carry out all the activities needed
+to bring the performance of the processes up to the required level. Extremely well-run organizations
+who measure a small shortfall and have a generous budget may be able to proceed with all
+necessary actions immediately. It may also be the case that some processes are considered so critical
+for the business (required level 5) that the improvement activities will be initiated regardless of
+the cost, as a matter of survival.
+For the rest of us, and the rest of the processes, it will be necessary to select a subset of the activities
+to carry out in the next planning period. What we want is the most improvement in the shortest
+time and/or for the least cost: the biggest bang for our buck.
+We define the bang for the buck, or process improvement benefit of a project as the ratio of the
+cost of the project of its total contribution to the business. The total contribution to the business of
+a project is calculated as the sum of the contributions the project makes to each of the processes
+weighted by the already calculated importance ratings. This calculation is illustrated in Fig. 4.
+Fig. 4. The project benefit matrix
+The matrix is used as follows:
+c The 'importance rating' row is copied from the previous matrix (Fig. 3).
+c For each candidate project the 'project contribution' row is completed by the project proposer
+with the amount of improvement that the project will deliver, on the same scale of 0 to 5,
+as expected to be yielded by the selected assessment method. (Project proposer note that the
+assessment method will judge project success!)
+c The 'benefit' column is completed for each project by successively multiplying the 'project
+contribution' figure for each process with that process importance rating and summing.
+c The 'cost' column is completed with the expected cost of the proposed project using the company's
+usual method for project estimation.
+c The cost-benefit column is completed with a figure corresponding to the benefit divided by
+the cost.
+The highest figures in the cost-benefit column represent the projects which provide the biggest
+contribution to the business drivers (as defined by the process described in Section 3) for the least
+cost. This column can therefore be used to rank the candidate projects in the order of their greatest
+cost-benefit ratio.
+SPI: 'I can't get no satisfaction' - directing process improvement to meet business needs
+97
+5.3 Creating a process improvement programme
+Creating a process improvement programme now consists of giving 'green lights' to projects from the list
+created in the previous section, in the ranked order, until all the available budget has been allocated.
+Once the projects have been selected, then the total expected process improvement from the
+programme can be calculated by adding the improvement contributions for each process of the projects
+selected.3
+Note that if at any time during the execution of the improvement programme the relative importance
+of the business drivers changes significantly, then the calculations described in this paper
+should be repeated to verify the appropriateness of the selected projects or if necessary re-select
+projects and re-plan the programme.
+6. Summary
+This paper has addressed the problems IT managers have in gaining appreciation and the allocation
+of resources by the company board. We postulated that this may well be due to poor communication
+between the company board, thinking in terms of business goals, and the quality improvement
+personnel carrying out improvements at the operational level. These improvements may not
+be wrong, but the focus will be clearer and the efforts more appreciated when the business improvement
+achieved is clear.
+The paper therefore presented a method for the establishment of a process improvement profile
+which is compatible with the SPICE method. The method starts with business goals and should
+therefore be directly connected to the company board's way of thinking. It also connects directly to
+the SPICE method, so that there is no conflict or re-invention of wheels for companies employing
+SPICE. With minor modifications, the method could be connected to CMM or other similar assessment
+methods.
+References
+1. CCTA The Government Centre for Information Systems, ITIL - the Information Technology Infrastructure
+Library. HMSO, London, 1989-96 (several volumes).
+2. C. Miller, The Quantum Study, Software Quality Management II (Computational Mechanics Publications,
+Boston, MA 1995) pp. 475-487.
+3. D.S. Hinley and S. Reiblein, A goal-oriented approach for managing software process change, Software
+Quality Management III, Vol 1.
+4. R.S. Kaplan and D.P. Norton, Putting the balanced scorecard to work, Harvard Business Review,
+January 1993.
+5. R.S. Kaplan and D.P. Norton, Linking the balanced scorecard to strategy, Harvard Business Review,
+January 1996.
+6. W.E. Deming, Out of the crisis: Quality, Productivity and Competitive Position (Cambridge University Press,
+1986).
+7. G-J. Vlasveld, IMPRESS: to plug and improve, Software Quality Management IV, Vol. 2 (SGES
+Publications, 1995) pp. 53-57.
+8. International Organisation for Standardisation (ISO), Guidelines for Auditing Quality Systems, Geneva,
+Switzerland, 1994. Parts 1-3, ISO 1011-1:1990(E), ISO 1011-2:1991(E), ISO 1011-3:1991(E).
+3 Strictly speaking, this statement is only true if the projects have been defined in such a way that their contributions to
+improvement are independent of each other. This may not always be the case.
+98
+Reiblein and Symons
+9. TickIT Project Office, Guide to Software Quality Management System Construction and Certification,
+Department of Trade and Industry/British Computer Society 28 February 1992.
+10. W.S. Humphrey, Managing the Software Process (Addison-Wesley 1989).
+11. International Organisation for Standardisation (ISO), SPICE - Software Process Improvement and
+Capability Determination. Study report ISO/IES JTC1/SC7, Parts 1-9.
+12. International Organisation for Standardisation (ISO), Model for quality assurance in design, development,
+installation and servicing, Geneva, Switzerland, 1994. ISO 9001:1994(E).
+13. AMI USER GROUP, SEI Process Assessment, AMI (Application of Metrics in Industry) Report, South
+Bank University, London.
+14. Software Engineering Institute (SEI) The Capability Maturity Model (CMM), Carnegie-Mellon University,
+Pittsburgh, USA, 1993. CMU/SEI-93-TR-24 and -25.

@@ -1,0 +1,679 @@
+Software Process Improvement: Supporting the Linking
+of the Software and the Business Strategies
+Adriano Bessa Albuquerque1, Ana Regina Rocha2, and Andreia Cavalcanti Lima1
+1 University of Fortaleza, Washington Soares Avenue,
+1321 - Bl J Sl 30 - 60.811-341 - Fortaleza, Brazil
+2 COPPE/UFRJ - Federal University of Rio de Janeiro,
+P.O. BOX 68511 - ZIP21945-970 - Rio de Janeiro, Brazil
+adriano.ba@terra.com.br, darocha@cos.ufrj.br,
+andreia@bnb.gov.br
+Abstract. The market is becoming more and more competitive, a lot of products
+and services depend of the software product and the software is one of the
+most important assets, which influence the organizations' businesses. Considering
+this context, we can observe that the companies must to deal with the software,
+developing or acquiring, carefully. One of the perspectives that can help
+to take advantage of the software, supporting effectively the business, is to invest
+on the organization's software processes. This paper presents an approach
+to evaluate and improve the processes assets of the software organizations,
+based on internationally well-known standards and process models. This approach
+is supported by automated tools from the TABA Workstation and is part
+of a wider improvement strategy constituted of three layers (organizational
+layer, process execution layer and external entity layer). Moreover, this paper
+presents the experience of use and their results.
+Keywords: Software Quality, Software Process Improvement, Business Strategy.
+1 Introduction
+Nowadays, the world's software industry increases because the software became part
+of many products and activities. According to Nollen [1], the Indian software industry
+reached about $23.4 billion in sales revenue in the Indian fiscal year 2004-05. The
+Chinese software industry was $26.5 billion in 2004. And the worldwide software
+industry size was $1,045 billion in 2004.
+Moreover, the software is becoming one of the most important assets to the organizations,
+because their products depend more and more of the software's services and
+their characteristics.
+Prahalad et al. [2], emphasized that in all businesses, from the consolidated ones to
+the volatile, the information technology is a critical source of competitive opportunities
+and risks. They also said that the software products are determining the nature of
+the experiences that the clients, employees, partners and investors have with the company,
+their products, services and operations.
+F. Bomarius et al. (Eds.): PROFES 2009, LNBIP 32, pp. 347-361, 2009.
+© Springer-Verlag Berlin Heidelberg 2009
+348
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+Reed [3] highlighted that 40% of the world population will suffer with the consequences,
+if some globally used systems fail.
+In face of a context where the software product is a very important strategical
+component to the organizations, and knowing that the software process can influence
+positively the quality of this product, we defined an approach to evaluate and improve
+the organizations' process assets, integrated to TABA Workstation, where the business
+objectives and the product quality objectives are strongly considered to the planning
+and actions of the improvement cycle.
+This paper presents this approach and the results of a real experience of use in a
+software organization of Rio de Janeiro.
+Following this introduction, section 2 presents some relevant consideration related to
+organizational strategic planning. Section 3 presents some knowledge about software
+process improvement. Section 4 presents the proposed process. Section 5 presents the
+results of the experience of use and section 6 concludes the paper.
+2 Business Strategy
+On this competitive market, defining an adequate strategy is fundamental, because,
+the strategy can be seen as a headlight pointing out the direction of the investments.
+Without this, the initiatives can do not obtain the expected outcomes.
+Moreover, as the software is an essential part of the products and services of the
+companies, the developer and the consumer should define specially strategies to acquire
+and develop their software products. Today, the matter “software” and their
+related actions must be introduced carefully on the strategic planning of any company.
+Strategy is the choice of the market segment and clients that the business unities intends
+to serve, identifying the critical internal processes where the units should reach
+the excellence to accomplish their value proposition to the clients of the targetsegments
+and selecting the individual and organizational capabilities to achieve the
+internal, of clients and financial objectives [4].
+Wright, Kroll and Parnell [5] said that the strategy should be established with the
+participation of the high managers to obtain results in harmony with the organization's
+mission and objectives. At the same manner, Thompson Jr. and Strickland III [6] understand
+the strategy as the plan defined by the administration to reinforce the position
+of the organization on the market, promote the clients' satisfaction and achieve the
+performance objectives.
+One of the most used approaches that deal with the strategic management is the
+Balanced ScoreCard (BSC), which is a methodology to facilitate the organizations to
+align their management processes and to focus all the organization on the strategy's
+implementation at long term.
+This methodology has four operational perspectives, which are listed bellow. The
+objectives and measures of the scorecard of each perspective derive from the organization's
+vision and strategy.
+• Financial Perspective: indicates if the implementation and execution of the
+strategy is contributing to improve the company's tangible outcomes. This
+perspective aims to evaluate the financial and economic outcomes of the business,
+considering the strategic objectives.
+Software Process Improvement
+349
+• Customer Perspective: indicates how to create values to the organization's
+clients, how to comply a demand satisfactorily and to identify the reasons
+which the clients want to obtain the products and services.
+• Internal Process Perspective: analyzes the organization's internal processes,
+including the identification of the resources and capabilities that the company
+needs to raise their level of quality. The organizations should focus on the
+critical internal operations that permit to satisfy the clients and stockholders
+needs. According to Kaplan and Norton [17] the organizations should identify
+and measure their essential competences and the critical technologies necessaries
+to guarantee their permanence as the leader of the market, from the
+complete value chain of the internal processes which includes three main
+processes: Innovation, Operation and Pos-Sale Services.
+• Innovation and Learning Perspective: ponders the organization's cultural
+attitudes related to development and retention of talents and the creation and
+systematization of the knowledge inside the organization [4]. This perspective
+permits the organization to guarantee its capability of renewing at long term.
+However, nowadays, others models similar to BSC have emerged. Maisel [7] defined
+the Balanced Scorecard model, with the same name of the model created by
+Kaplan and Norton. This model consists of four perspectives (financial, client, commercial
+process and human resource) to measure the business. Mc Nair et al. [8] defined
+an approach called Performance Pyramid, which defined as its basic principle,
+the focus on the clients, linked with the organization's strategy. Adams and Roberts [9]
+defined the EP2M - Effective Progress and Performance Measurement, where they
+highlighted that the implementation of the strategy is not sufficient, but the organization
+should develop a culture to prepare the company to the changes, that are constants
+and to permit to make decisions in a rapid way. In 2005, Kim and Mauborgne [10]
+studying more than 150 strategic movements, created the Blue Ocean Strategy. This
+strategy tries to guide the organizations to the innovation and to markets not yet explored.
+The focus of this strategy is not the competition but rather the creation of new
+markets, aggregating values and reducing costs.
+3 Software Process Improvement
+The success of an Improvement Program depends of some factors that must be considered
+adequately. For example: (i) providing sufficient resources [11]; (ii) customizing
+the Improvement Program to the organization's characteristics [11]; (iii) adjust the
+improvement objectives to the business strategy objectives [12]; (iv) considering other
+type of factors besides only technical factors [11]; (v) investing in the human resources
+qualification [13]; (vi) obtain the engagement of all collaborators [11]; (vii) provide
+support of knowledge management approaches [11].
+In the face of the complexity of some technical, cultural and environmental aspects
+related to software process improvement, standards and models were created or
+evolved aiming to guide the organizations to define and improve their processes [14]
+[15] [16] [17]. Besides, some effective approaches were already defined.
+350
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+Komi-Sirviö [18] presented the approach Pr2imer, where the actual situation is
+analyzed, an ideal state and their indicators are defined, pilot projects are performed
+and according to the results, the improvements are institutionalized.
+Birk et al. [19] defined an interesting improvement process approach, which the
+main characteristic is to be guided to the organization's specific software quality requirements.
+Birk and Pfhal [20] presented and approach based on system perspective,
+emphasizing the business objectives, the product objectives and the process objectives.
+Caivano [21] defined a continuous process improvement approach using Statistical
+Process Control. Martins and Da Silva [22] defined the approach SPI - ProPAM,
+which is supported by the alignment between the processes and the projects management.
+This alignment is defined as the degree which the projects' plan and goals
+support and are supported by the processes' practices. Salo and Abrahamsson [23]
+presented an approach focused on knowledge management, which the objective is to
+provide, systematically, knowledge and experience mechanisms to help the project
+teams to define processes more adequate and to improve the engagement of the
+teams, including the software process group.
+4 Process “Evaluation and Improvement of the Process Assets”
+This reality, described above, motivated the following research assumption: how
+would be possible to define and implement on TABA Workstation an strategy able to
+guide the definition and execution of software process to improve the organizational
+standard processes using data from the projects.
+This approach had to have the following requirements: (i) it must be part of a major
+strategy (Strategy in Layers to Define, Evaluate and Improve Software Processes);
+(ii) it must be integrated to the TABA Workstation; (iii) it must be guided by the
+business objectives; (iv) it must be guided by the product quality objectives; and (v) it
+must be executed on a real situation. The approach was defined and was called
+“Evaluation and Improvement of Process Assets”. It encompasses four subprocesses:
+(1) Identifying improvement opportunities; (2) Planning and implementing improvements;
+(3) Identifying preventive actions; and (4) Concluding the improvement cycle.
+Subprocess: Identifying Improvement Opportunities
+The purpose of this subprocess is to identify the improvements to be implemented on
+the process assets aiming to satisfy the organization's vertical and/or horizontal improvement
+objectives. It encompasses the following activities which are made up of
+tasks:
+1.
+Characterize the improvement cycle: the purpose of this activity is to
+characterize the actual improvement cycle of the organization. The process
+group, the high managers and the consultants (if exist) should to hold a
+meeting to identify important information to support this characterization.
+a. Identify vertical improvements: objectives related to reach
+some level on maturity models should be identified.
+b. Identify horizontal improvements: objectives related to the
+processes' performance or their suitability to the organization's
+needs should be identified.
+2.
+3.
+Software Process Improvement
+351
+c. Identify business objectives: the business objectives to support
+the selection of the organization's critical processes and the prioritization
+of the improvements should be identified. If the organization
+has already defined these objectives, it should review
+them.
+d. Identify product quality objectives: product quality objectives
+to support the selection of the organization's critical processes,
+and the prioritization of the improvements should be identified.
+If the organization has already defined these objectives, it should
+review them. Before this definition, the process group should
+hold a meeting with the organization's collaborators to know
+their perception about the quality of the products. Besides, the
+organization could hold a meeting with the clients, a Forum of
+clients, to know the perceptions of them about its products and
+services.
+e. Identify and select the organization's critical processes: the
+processes considered critical to the organization should be identified.
+As the problems of these processes are more relevant than
+others, these processes must be handled on this improvement
+cycle.
+f. Select projects: the organization's projects, whose data should
+be analyzed on the actual improvement cycle to identify problems
+and improvement needs, are selected.
+g. Plan the process: the execution of the process “Evaluation and
+Improvement of the Process Assets” is planned to the actual improvement
+cycle. On the planning, the activities and respective
+dates and resources should be defined. If some activity is not
+relevant to the actual cycle, it can be put out of the plan.
+Analyze processes to implement vertical improvements: the purpose of
+this activity is to identify what are the improvements to be implemented
+on the organization's processes aiming to get a new level on maturity
+models, like: CMMI and MPS.BR.
+a. Identify changes to the processes: the processes should be analyzed,
+comparing them with the expected results of the models,
+to identify the changes to be implemented on the processes. The
+Gap Analysis technique [24] or the Compliance of Factors technique
+[25] can be utilized.
+Analyze data to implement horizontal improvements: the purpose of
+this activity is to analyze data from the processes executed on selected
+projects, to identify problems that are making difficult achieve the business
+and product quality objectives. This activity is performed by the
+process group and consultants, if exist.
+a.
+Analyze the results of the adequacy evaluations: the results of
+the adequacy evaluations, which are always executed at the end
+of an activity, should be analyzed. The analysis should try to
+identify pattern of problems related to the training adequacy,
+352
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+support tool adequacy, template adequacy, activity's description
+adequacy and the activity's relevance.
+b. Analyze data from post mortem analysis: data from the projects'
+post mortem analysis should be analyzed.
+c. Analyze results of the monitoring processes indicators: results
+of the monitoring processes indicators should be analyzed.
+d. Select others data sources to be analyzed: if necessary, others
+data sources can be selected, to improve the contextualization of
+the analysis. The following data source can be selected: (i) processes
+adherence evaluation; (ii) work products adherence evaluation;
+(iii) lessons learned; (iv) guidelines; (v) processes changes;
+(vi) processes changes demands and (vii) results of the official
+assessment MPS.BR or SCAMPI.
+e. Analyze others data sources: if others data sources were selected
+on the anterior task, they should be analyzed.
+f. Evaluate problems: all the found problems should be evaluated.
+Optionally, the Matrix to Analyze Problems can be filled
+out to each process, aiming to confirm or refute the evidences.
+This matrix is based on the method to support qualitative analysis,
+called Content Analysis [26]. This technique tries to identify,
+mainly, the frequency and intensity of some information on
+the documents.
+g. List the identified problems: The problems identified during
+the analysis should be registered.
+4. Identify problems to be held: the purpose of this activity is to identify
+the problems to be handled on the actual improvement cycle to achieve
+the vertical and/or horizontal improvement objectives. The tasks of this
+activity should be performed by all the process group's participants and if
+necessary, with the helping of the high managers.
+a. Present problems: the collaborators which executed the activities
+“Analyze processes to implement vertical improvements” and
+“Analyze data to implement horizontal improvements” should
+present to the others members of the process group, the results obtained
+from their work, helping the process group to select the
+problems to be handled on this actual improvement cycle.
+b. Select problems to be handled: the meeting's participants
+should select the problems to be handled, considering, mainly,
+the business objectives and product quality objectives.
+5. Identify the causes of the problems: the purpose of this activity is to
+analyze the problems with the collaborators which performed any processes'
+activities, to find out the problems' root causes and to identify
+improvement opportunities to solve the identified problems.
+a.
+Analyze problems: the identified problems are analyzed to identify
+the root causes. In a meeting, predefined cause and effect diagrams
+to each problem are presented, supporting the discussion
+Software Process Improvement
+353
+between the participants and helping them to elaborate final versions
+of the diagrams. Other approach that can be executed to improve the
+understanding of the problems is to try to define the relationships between
+the causes using the Matrix to Discover Relationships or Influence
+Diagrams.
+b. Suggest improvements: On the same meeting held to identify
+the root causes, the process group should capture improvement
+opportunities, which must come from the final version of the
+cause and effect diagrams.
+6. Identify improvement opportunities to be implemented: the purpose of
+this activity is to present the results of the anterior activity to all members
+of the process group, supporting them on the selection of the improvement
+opportunities that must be implemented on the actual improvement cycle.
+If convenient, the high managers can participate on the execution of this
+activity.
+a. Analyze and prioritize the improvement opportunities: the
+analysis of the improvement opportunities should be performed
+using, firstly, the approach SWOT Analysis, to deepen the
+knowledge of the opportunities. Then, the level of prioritization
+must be defined using the most appropriate approach, considering,
+especially, the complexity of the improvements and the
+characteristics of the process group.
+b. Select the improvement opportunities to be implemented: After
+the prioritization of the improvement opportunities, the meeting's
+participants should define the improvements which will be
+implemented on the actual improvement cycle.
+c. Work out the improvement report: a member of the process
+group or the consultant, if exists, should work out a report containing
+the obtained results from this subprocess.
+Subprocess: Planning and Implementing Improvements
+The purpose of this subprocess is to plan the implementation of the selected improvement
+opportunities, and to implement and institutionalize them on the organization.
+It encompasses the following activities which are made up of tasks:
+1.
+Change the process assets: the purpose of this activity is to define and
+execute an action plan to implement the required modifications on the
+process assets. If exist high risky improvements to the organization, the
+action plan must consider the performance of pilot projects to evaluate
+them, before their institutionalization.
+a.
+b.
+c.
+Define the action plan: the process group should define an action
+plan to guide the implementation of the improvement opportunities.
+Execute the action plan: the collaborators of the organization
+should execute the actions defined on the action plan.
+Manage the action plan: the process group should manage the
+execution of the actions defined on the action plan.
+354
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+2. Perform the pilot project: the purpose of this activity is to perform one
+or more pilot Project to evaluate the high risky improvement opportunities,
+before their institutionalization. If they are not risky, the process
+group can do not execute this activity. All the tasks of this activity are performed
+by the process group.
+a. Plan the pilot project: the pilot projects should be planned,
+identifying the objectives, the assumptions and the data that must
+be collected.
+b. Execute the pilot project: the planned pilot project should
+be executed aiming to evaluate the effects derived from the
+modifications.
+c. Analyze the results of the pilot projects: the results obtained
+from the pilot project execution should be analyzed to decide if
+the improvement opportunities will be institutionalized. The
+analysis must verify if the effects are consistent with the assumptions
+defined on the planning.
+3. Implement the improvement opportunities: the purpose of this activity
+is to implement the new process assets and institutionalize the
+improvements. All the tasks of this activity are performed by the process
+group.
+a. Plan the implementation of the improvement opportunities:
+the implementation of the improvement opportunities should be
+planned. When the improvement can not be implemented on the
+organization, like the creation of a new template, it will be required
+a new configuration of the TABA Workstation.
+b. Perform the implementation of the improvement opportunities:
+the new process assets are institutionalized on the organization in
+accordance to the planning and are incorporated on the Organizational
+Asset Library.
+c. Training the team on the modified process: the trainings required
+to guarantee the adequacy of the modified processes' execution
+are carried out and the implemented improvements are
+communicated to the stakeholders. These trainings can be carried
+out formally, inside the organization, by the members of the process
+group or by the consultants or can be performed more informally,
+with the support of a mentor. Besides, the implemented
+improvements should be published on the organization, informing,
+mainly, the objectives, the origin and the expected outcomes.
+Subprocess: Identifying Preventive Actions
+The purpose of this subprocess is to analyze historical data of the organization's processes
+and define preventive actions aiming to eliminate or reduce the probability of
+the occurrence of imminent problems. This subprocess can be executed whenever the
+organization considers convenient. It is not dependent of the execution of others subprocesses.
+It encompasses the following activities which are made up of tasks:
+Software Process Improvement
+355
+1.
+Analyze data focusing in preventive actions: the purpose of this activity
+is to analyze organizational historical data to identify possible preventive
+actions.
+a. Select processes: the processes, whose data will be analyzed,
+should be selected.
+b. Identify imminent problems: the relevant imminent problems
+of the selected processes should be identified. These problems
+should be identified from the risks which occurred on the organization's
+projects and from the audit reports. Besides, the results
+of the monitoring process indicators can be used too.
+2. Establish preventive actions: the purpose of this activity is to establish
+preventive action to reduce the chances of the imminent problems to become
+a real problem.
+a.
+b.
+c.
+d.
+Define preventive actions: imminent problems should be analyzed
+by the process group to define preventive actions, which
+must be registered, along with the related problems, on the Matrix
+of Preventive Actions. The stakeholders can help on the
+identification of the preventive actions.
+Define preventive actions plan: a plan including the preventive
+actions, the respective responsible person, the beginning and final
+date should be defined by the process group.
+Execute preventive action plan: the preventive actions should
+be executed in accordance to the preventive actions plan.
+Manage preventive action plan: the preventive actions should
+be managed by the process group.
+Subprocess: Concluding the Improvement Cycle
+This subprocess has two purposes: the first is to identify, analyze and register the
+lessons learned during the execution of the processes to permit their reuse. The second
+aims to collaborate with the consultancy companies (external entities), to support
+the improvement of their process assets. It encompasses the following activities which
+are made up of tasks:
+1.
+2.
+Register lessons learned: the purpose of this activity is to identify the
+lessons learned during the execution of this approach (“Evaluation and
+Improvement of the Process Assets”). All the tasks of this activity are performed
+by the process group.
+a. Identify lessons learned: relevant lessons learned during the
+execution of the approach should be identified.
+b. Store lessons learned: the identified lessons learned should be
+analyzed to choose those that must be stored on the organizational
+repository.
+Communicate results to the consultancy company: the purpose of this
+activity is to send the results obtained on the actual improvement cycle
+and on the official assessments (CMMI, MPS.BR) to the consultancy
+company to collaborate with its process assets. The improvement report or
+only a part of it should be sent, including pertinent information.
+356
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+a.
+Send the report: if pertinent to the organization, the process
+group should send, to the consultancy company, the improvement
+report or just a part of it. The results of the CMMI and
+MPS.BR assessments are also important to be sent.
+5 The Experience of Use
+We executed The Process “Evaluation and Improvement of the Process Assets” on the
+Software Engineering Laboratory (SEL) of COPPE, specifically on the Quality Sector,
+to evaluate its adequacy. This sector had implemented processes of MPS.BR level
+E and soon would be assessed in this maturity model.
+The Quality Sector team was composed of a doctor professor, a laboratory coordinator,
+three project manager, one technical coordinator, one quality assurance analyst,
+one measurement analyst, two responsible for managing the configuration, one responsible
+to managing the reuse, analysts and programmers. The process group was
+composed of the laboratory coordinator and three project managers.
+The laboratory's activities included three families of projects: (i) projects related to
+the development of the TABA Workstation; (ii) projects related to the development of
+CORE-KM, a knowledge management environment and (iii) projects to develop tools
+related to Master and Ph.D. thesis. All the projects used the software development
+process and the others processes (Measurement, Configuration Management etc.).
+Nowadays, the laboratory has implemented the following processes: Project Management,
+Requirement Management, Quality Assurance, Measurement, Configuration
+Management, Organizational Process Definition, Reuse Management, Human Resource
+Management and Evaluation and Improvement of Organizational Process.
+When this experience was carried out, there were three concluded projects and five
+were still in process. The three concluded projects were related to the CORE-KM.
+They were developed to an external client and one project manager and one analyst
+participated of it. The quality assurance analyst has audited the products and the adherence
+of the processes, measures were collected and the activities of the Configuration
+Management were executed.
+As the concluded projects had used the tool AvalPro, one of the tools of TABA
+Workstation, we had data from the adequacy evaluations and post mortem analysis.
+We had also the quality assurance reports and the measures collected during the execution
+of the processes.
+The use of the process was restricted to the subprocess 1: Identifying improvement
+opportunities and subprocess 4: Concluding the improvement cycle. The process
+group decided do not execute neither the subprocess 2: Planning and implementing
+improvements nor the subprocess 3: Identifying preventive actions. The subprocess
+2 was not executed because none of the modifications were implemented before
+the moment of the assessment. And the subprocess 3 was not executed because it was
+not obligatory.
+It is important to highlight that one of the authors of this paper participated on this
+experience as consultant.
+Software Process Improvement
+357
+5.1 Execution of the Subprocess 1: Identifying Improvement Opportunities
+Activity: Characterize the improvement cycle
+Three members of the process group participated in the execution of this activity.
+A meeting with the process group was held, where the improvement cycle was
+characterized.
+On the meeting, they defined the following horizontal improvement objective:
+“analyze the results obtained form the execution of the processes, aiming to convert
+the processes of level E (MPS.BR) more mature and adequate to the reality of the
+Quality Sector of the SEL, examining, mainly, the processes where the measures
+present greater deviation from the expected performance.”.
+On this moment, the group does not defined none vertical improvement objective,
+because all the processes of level E (MPS.BR) had already been implemented.
+The process group defined the following business objectives: (i) increase the confidence
+of the clients on the quality of the products and on meeting the delivery deadline;
+(ii) create an experimentation environment to high maturity processes.
+Moreover, they defined three product quality objectives: (i) Reliability: the products,
+when installed on the clients' environment, must have a high level of reliability,
+with a high time between failures, which must be quantitatively defined to each project
+in accordance to its characteristics. (ii) Maintainability: the products must be easy
+to maintain and evolve; (iii) Usability: the products must be easy to use, without any
+need to carry out training when the software is evolved.
+The Project Management and Measurement were defined as critical processes, using
+as the main criterion the level of relationship between the processes and the business
+objectives. A third process (Quality Assurance), also related to business objectives,
+was not considered critical because they did not perceived problems on it. The
+process Measurement, although considered critical to achieve the second business
+objective, was excluded from the improvement cycle, because did not exist sufficient
+data to analyze its adequacy and performance. So, on this improvement cycle, only
+the Project Management was considered as critical.
+Finally, the process group select three concluded projects related to CORE-KM.
+After the characterization, a member of the group worked out the Process Execution
+Plan. The next executed activity was “Analyze data to implement horizontal improvements”.
+Activity: Analyze data to implement horizontal improvements
+A member of the process group and the consultant identified tendencies of problems,
+analyzing data of the selected projects and processes. The analysis included data from
+the adequacy evaluation, post mortem analysis and process monitoring indicators of
+the three selected projects. The data were obtained from TABA Workstation, using
+the tools AvalPro and Metrics. At the end of the activity, the report “Tendencies of
+problems” was worked out.
+Activity: Identify problems to be held
+The member of the process group and the consultant, who had analyzed the data,
+presented the report “Tendencies of problems” to all the participants of the process
+group. On this meeting, the problems were analyzed again. They also decided to perform
+a causal analysis on the problem “The timeline estimative precision is far from
+358
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+the expected”, because it was considered important to the organization and it was
+extremely related to one of the business objective.
+They observed that some problems were already being solved. Besides, they decided
+to handle some problems only on the next improvement cycle. Moreover, they
+established that two improvement opportunities should be handled on the actual cycle:
+(i) improve the template used on the activity Data and Communication Management
+and (ii) begin to use other support tool on the process Configuration Management,
+replacing the Bugzilla.
+Activity: Identify the causes of the problems
+This activity was performed in a meeting held with the participants of the three projects.
+During the meeting, the consultant presented a predefined cause and effect diagram to
+the problem described on the anterior activity. At the end, were produced: (i) the final
+version of the cause and effect diagram and (ii) a set of improvement opportunities.
+Activity: Identify improvement opportunities to be implemented
+This activity was executed in a meeting where the process group analyzing the results
+obtained on the anterior activities, prioritized and selected the improvement opportunities
+that should be implemented.
+Firstly, a SWOT Analysis was performed in all the improvements, aiming to identify
+the barriers and the facilitators to the implementation. Then, the group decided
+that it was not necessary to define the level of prioritization of the improvement opportunities
+related to TABA Workstation and that they will be inserted automatically
+on the improvement report. On the same meeting, the group defined the level of prioritization
+of the others improvements: (i) develop the knowledge about the performance
+of the processes (quantitative models of process), (ii) improve the template used
+on the activity Data and Communication Management and (iii) begin to use other
+support tool on the process Configuration Management, replacing the Bugzilla.
+To define the prioritization we used the Matrix to Prioritization (Table 1), where
+each participant of the meeting evaluated the improvements, considering the criteria
+of the matrix. When we defined the criteria of the matrix we tried to link the improvements
+to the business objectives and product quality objectives.
+Table 1. Criteria used to prioritize the improvements
+Criteria Description
+Seriousness Seriousness of the problem.
+Importance to the Importance of the improvement implementation to
+organization's business the organization's business objectives.
+objectives
+Impact on the quality of the Impact of the improvement implementation on the
+software products quality of the organization's software products.
+Impact on the productivity Impact of the improvement implementation on the
+of the team productivity of the teams.
+Impact on the satisfaction of Impact of the improvement implementation on the
+the team satisfaction of the teams.
+Impact on the satisfaction of Impact of the improvement implementation on the
+the clients satisfaction of the clients.
+Software Process Improvement
+359
+After this, when the result of the prioritization was analyzed, we observed that they
+were very similar. So we used the Delphi technique [27] as a new approach to support
+the meeting of the consensus.
+On this same meeting, the improvement opportunities were analyzed considering
+others criteria to choose the improvements that must be implemented, considering the
+short, medium and long term. The following criteria were used: (i) Effort: estimative
+in Men/Hour to implement the improvement; (ii) Resource Availability: availability
+of resources (financial, human and technological) to implement the improvement;
+(iii)Time: time to implement the improvement and (iv) Operational simplicity: simplicity
+to implement the improvement.
+As the result of this activity's execution, was decided the following prioritization:
+(1) begin to use other support tool on the process Configuration Management, replacing
+the Bugzilla; (2) develop the knowledge about the performance of the processes
+(quantitative models of process) and (3) improve the template used on the activity
+Data and Communication Management. Finally, all the improvement opportunities
+were selected to be implemented on the actual improvement cycle.
+5.2 Execution of the Subprocess 4: Concluding the Improvement Cycle
+Some lessons learned were captured and registered during the execution of the approach:
+(i) The discussions between the members of the process group, occurred when
+the cycle is being characterized, is very important, because the objectives become
+more coherent with the organization; (ii) The definition of the critical process helps
+the data analysis to become more focused; (iii) The orientation of the decision must
+be always based on the business objectives and the product quality objectives, because
+the software is one of the most important asset of the companies; (iv) Structured
+data can speed the analysis up; (v) The predefined cause and effect diagrams helps the
+participants to remember others possible causes; (vi) The Delphi technique permits
+the decisions to be in accordance to the organization's needs and to the point of view
+of the majority of the members; (vii) All the points which were already defined, can
+be always improved in a new improvement cycle.
+At the end, the members of the process group worked out the Improvement Report
+to be sent to the Consultancy (external entity).
+5 Conclusion
+Analyzing critically the experience of use in the Quality Sector of the SEL, we could
+observe, considering the execution of the subprocesses 1and 4, that the process was
+adequate. In spite of the subprocesses 2 and 3 were not executed, the process seemed
+feasible and useful, because the main subprocesses were performed.
+The process group executed the approach easily. However, on the last activity of
+the subprocess 1, as the technique used was not adequate, we began to utilize the
+Delphi technique. Besides, the tools supported adequately the process, for example,
+the AvalPro. We could also observe that the definition of the business objectives and
+the product quality objectives were fundamental to the approach, because the it was
+360
+A.B. Albuquerque, A.R. Rocha, and A.C. Lima
+executed on behalf of the company. As we could see on the Balanced Scorecard
+(BSC), the software process has to become a real perspective. So, all the organizations
+must define and execute their software process to support the achievement of the
+defined organizational strategy.
+After the analysis of the experience we could identify the following limitations of the
+approach: (i) The qualitative analysis is not well structured; (ii) There is not a tool to
+support the activities related to the preventive actions and (iv) There are not tasks responsible
+to evaluate the effectiveness of the implemented improvement opportunities.
+Other challenge is to define and implement an approach to software process improvement
+adequate to companies that invest on innovations and have their strategies
+focused on the creation of new markets. So, others experiences of use must be carried
+out. Probably, formal and planned use cases to verify in other context the adequacy of
+the approach.
+References
+1. Nollen, S.: Software Industry Performance in India and China. In: Amar, K., Nayak, J.,
+Jomon, M.G. (eds.) INDIA in the Emerging Global Order, ch. 4. Tata McGraw-Hill Publishing,
+New York (2008)
+2. Prahalad, C.K., et al.: The new meaning of quality in the information age, pp. 109-118.
+Harvard Business, Boston (1999)
+3. Reed, K.: Software engineering - a new millenium? IEEE Software (July-August 2000)
+4. Kaplan, R.S., Norton, D.: The Balanced Scorecard: indicators that drive the performance.
+Harvard Business Review (January/Febuary 2000)
+5. Wright, P., Kroll, M.J., Parnell, J.: Strategic Administration. Atlas, São Paulo (2000)
+6. Thompson Jr., A.A., Strickland III, A.J.: Dtrategic Planning. Pioneira, São Paulo (2000)
+7. Maisel, L.S.: Performance Measurement Practices: A Long Way from Strategy Management.
+The Balanced Scorecard Report (May - June 2001)
+8. Nair, C.J., Lynch, R.L., Cross, K.F.: Do Financial and Nonfinancial Performance Measures
+Have to Agree? Management Accounting 72(5), 28-35 (1990)
+9. Adams, C., Roberts, P.: You Are What You Measure. Manufacturing Europe, 504-507
+(1993)
+10. Kim, W.C., Mauborgne, R.: Blue Ocean Strategy. Campus, São Paulo (1995)
+11. Dyba, T.: Factors of Software Process Improvement Success in Small Organizations: An
+Empirical Study in the Scandinavian Context. In: Proceedings of the ESEC/FSE 2003,
+Helsinki, pp. 148-157 (2003)
+12. Hefner, R., Tauser, J.: Things They Never Taught You in CMM School. In: Proceedings of
+the 26th Annual NASA Goddard Software Engineering Workshop, November 2001,
+pp. 27-29 (2001)
+13. Cater-Steel, A.P.: Low-rigour, Rapid Software Process Assessments for Small Software
+Development Firms. In: Proceedings of the 15th Australian Software Engineering Conference
+(ASWEC 2004), Melbourne, April 2004, pp. 368-377 (2004)
+14. SOFTEX: Brazilian Software Process Improvement - General Guide version 1.2
+15. CMU/SEI: CMMI for Development version 1.2., CMU/SEI-2006-TR-008 (2006)
+16. ISO/IEC: ISO/IEC PDAM 12207: Information Technology - Amendment 2 to ISO/IEC
+12207 (2004)
+17. ISO/IEC: ISO/IEC 15504-4: Information Technology - Process Assessment, Part 4: Guidance
+on use for Process Improvement and Process Capability Determination (2004)
+Software Process Improvement
+361
+18. Komi-Sirvio, S.: Development and Evaluation of Software Process Improvement Methods.
+In: Espoo 2004, p. 535. VTT Publications (2004)
+19. Birk, A., et al.: PROFES: A Product Driven Process Improvement Methodology. In: Proceedings
+of European Conference on Software Process Improvement (SPI 1998), Monaco,
+December 1998, 9 p. (1998)
+20. Birk, A., Pfahl, D.: A System Perspective on Software Process Improvement, IESE-Report
+No. 047.02/E Version 1.0 (2002)
+21. Caivano, D.: Continuous Software Process Improvement through Statistical Process Control.
+In: Proceedings of the Ninth European Conference on Software Maintenance and Reengineering
+(CSMR 2005), Manchester, March 2005, pp. 288-293 (2005)
+22. Martins, V.M., Da Silva, A.R.: ProPAM: SPI based on Process and Project Alignment.
+In: Proceedings of the IRMA International Conference, Vancouver (May 2007)
+23. Salo, O., Abrahamson, P.: Integrating Agile Software Development and Software Process
+Improvement: a Longitudinal Case Study. In: Proceedings of the 4th International Symposium
+on Empirical Software Engineering (ISESE 2005), Noosa Heads, November 2005,
+pp. 193-202 (2005)
+24. Stalhane, T.: Root Cause Analysis and Gap Analysis - A Tale of Two Methods.
+In: Dingsøyr, T. (ed.) EuroSPI 2004. LNCS, vol. 3281, pp. 150-160. Springer, Heidelberg
+(2004)
+25. Alloui, I., et al.: Advanced Services for Process Evolution: Monitoring and Decision Support.
+In: Conradi, R. (ed.) EWSPT 2000. LNCS, vol. 1780, pp. 21-37. Springer, Heidelberg
+(2000)
+26. Bardin, L.: Content Analysis, Lisboa. Edições 70 (1977)
+27. Boehm, B., et al.: Software cost estimation with COCOMO II. Prentice-Hall, Englewood
+Cliffs (2000)

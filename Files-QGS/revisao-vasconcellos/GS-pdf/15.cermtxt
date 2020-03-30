@@ -1,0 +1,697 @@
+2011 Joint Conference of the 21st International Workshop on Software Measurement and the 6th International Conference
+on Software Process and Product Measurement
+Application of GQM+Strategies® in the Japanese Space Industry
+Tatsuya Kaneko, Masafumi Katahira,
+Yuko Miyamoto
+Japan Aerospace Exploration Agency
+2-1-1 Sengen, Tsukuba, Ibaraki, 305-8505 Japan
+kaneko.tatsuya@jaxa.jp
+Abstract- Aligning organizational goals and activities is of great
+importance for large organizations in order to improve their
+performance and achieve top-level business goals. Through
+alignment, organizational sub-units can optimize and explicitly
+highlight their contributions towards the achievement of toplevel
+business goals. GQM+Strategies1 provides a systematic,
+measurement-based approach for explicitly linking goals and
+contributions on different organizational levels. This paper
+presents results and experiences from applying the
+GQM+Strategies approach at the Japan Aerospace Exploration
+Agency.
+Keywords-component; Measurement-based business IT
+alignment; Goal-oriented measurement; GQM+Strategies;
+Software process improvement; Aerospace
+I.
+INTRODUCTION
+Aligning organizational goals and activities is of great
+importance for large organizations, as aligned organizations
+are able to achieve higher performance by improving their
+effectiveness and efficiency [1]. This accounts particularly
+for publicly funded governmental organizations like the
+Japan Aerospace Exploration Agency (JAXA), which have
+to provide a high level of accountability for their
+organizational goals, activities, and resource usage.
+The specialized organizational units within JAXA are
+organized hierarchically into departments working to achieve
+JAXA's top-level goals. JAXA's development departments
+develop spacecraft in collaboration with suppliers and run
+space missions. JAXA's research departments contribute to
+JAXA's top-level goals by performing research on new
+technologies and transferring them into application. By
+focusing on alignment, the contributions of specific
+departments can be made transparent and associated resource
+usage can be improved.
+The department that this paper focuses on is JAXA's
+Engineering Digital Innovation Center (JEDI), which is
+JAXA's software research department. It is tasked with
+improving the quality of software processes and products.
+This is realized via research on software techniques and
+technologies and subsequent introduction of these into
+JAXA's development departments. Sub-units (research
+groups) of this department focus, for example, on software
+1 GQM+Strategies® is registered trademark No. 302008021763 at the
+German Patent and Trade Mark Office; international registration number
+IR992843.
+978-0-7695-4565-3/11 $26.00 © 2011 IEEE
+DOI 10.1109/IWSM-MENSURA.2011.22
+221
+Martin Kowalczyk
+Fraunhofer IESE
+67663 Kaiserslautern, Germany
+martin.kowalczyk@iese.fraunhofer.de
+process improvement (SPI), software process assessment
+(SPA), and independent verification and validation (IV&V)
+(see Figure 1). Each department and its associated research
+group define their own goals, and thus it is challenging not
+only to refine and operationalize these goals, but also to
+secure their alignment with the top-level goals of JAXA.
+l
+e
+XA l-ev
+JA top
+s
+la itazon lev
+n
+Iren iragn le
+t
+o
+up le
+o v
+rG le
+ilr
+e
+p
+p
+u
+S
+Research
+department
+SPI group
+SPA group
+IV&V group
+Research department
+JAXA toplevel
+Development
+department
+Supplier
+development
+department
+Development
+department
+Figure 1. Target organization for aligning goals and activities
+In order to address this challenge, we applied the
+GQM+Strategies approach at JAXA. The GQM+Strategies
+approach helps to clarify and harmonize goals and strategies
+across different levels of an organization. Furthermore, the
+approach facilitates monitoring the success of organizational
+goals and strategies [2][3]. The application of the approach
+did not only address the research department, but also the
+goals and activities of development departments and
+suppliers [5]. This paper focuses on the GQM+Strategies
+application within the software process improvement (SPI)
+group of JAXA's Engineering Digital Innovation Center
+(JEDI). There were two major goals for the application of the
+approach within the SPI group: (1) Clarify and align
+explicitly the contributions of group-level goals to top-level
+organizational goals. (2) Design measurement models for
+controlling goal achievement. Existing (lower-level)
+measurement models should be reused and integrated where
+appropriate.
+This paper presents the results and experiences from this
+application of GQM+Strategies and is organized as follows:
+Section two briefly discusses related work. Section three
+describes the steps of the application at JAXA. Section four
+presents an overview of the results, and section five
+summarizes JAXA's lessons learned and improvement
+suggestions for the GQM+Strategies approach.
+II.
+RELATED WORK
+In the area of software measurement, several approaches
+have been developed in the last years, such as the goaloriented
+GQM approach [4], which provides capabilities for
+guiding data selection and analysis in software projects in a
+systematic way. GQM provides support for measurement by
+developing software-related goals (e.g., for productivity or
+quality) and generating questions that refine those goals as
+well as specifying the measures that need to be taken to
+answer the questions. GQM and other software measurement
+approaches were mainly developed and are usually applied
+for measuring at the project level. These approaches do not
+focus on explicitly addressing an organization's business
+perspective nor the associated goals and their alignment.
+Complementary to these developments in software
+measurement, several initiatives have also appeared in the
+area of corporate and IT governance. Approaches focusing
+on IT governance, such as CobiT [6], Val IT [7] or ITIL [8],
+mainly address traditional or service-oriented IT scenarios by
+either providing predefined sets of goals and attributes for IT
+infrastructure issues (i.e., CobiT) or by focusing on the
+description of “what should be done” and not on “how it can
+be done” (i.e., Val IT, ITIL). These approaches are therefore
+not suitable for addressing the specific alignment challenges
+at JAXA.
+Among the measurement-based corporate governance
+approaches, the most prominent one is the Balanced
+Scorecard (BSC) [9], which provides a high-level framework
+for defining high-level goals and measures for different
+organizational perspectives (these are typically “Financial”,
+“Customer”, “Innovation and Learning”, and “Internal
+Business Processes”). Although general multi-level
+implementations of BSCs exist, the approach has a major
+weakness in explicitly addressing technical goals (i.e., goals
+from the software domain) and aligning them with the
+overall organizational goals, as documented by Becker and
+Bostelman [10]. They see two major causes of misalignment:
+(1) project data that does not address organizational goals
+and (2) organizational goals that are not operationalized
+through processes and metrics at the project level.
+The GQM+Strategies approach is an extension of the
+traditional GQM approach and addresses these issues by
+providing a method that guides the user in systematically
+defining goals and strategies on all relevant levels of an
+organization, as well as linking them explicitly. Additionally,
+the approach provides suitable measurement models. It is
+important to note that GQM+Strategies uses the notions of
+goals and strategies on all the levels of an organization to
+describe anticipated states in the future and the courses of
+actions needed to achieve these aspired states. Furthermore,
+in contrast to the BSC, the approach systematically captures
+context factors and assumptions about defined goals and
+strategies and thus enriches the GQM+Strategies model
+222
+(called GQM+Strategies grid) with information about the
+rationales related to each goal and strategy. This information
+is particularly useful for reasoning and decision making
+during the analysis of measurement results. The
+GQM+Strategies grid integrates all the elements described
+above. Therefore, the approach does not only help to
+harmonize goals, strategies, and measurement, by providing
+traceable connections between associated goals, strategies,
+and measurement models, but also provides a measurement
+system for the effective control of goal achievement and the
+success of strategies [2]. Figure 2 gives an overview of the
+basic GQM+Strategies concept.
+GQM+Strategies
+Top-level
+business
+goals
+Strategies
+l
+e
+v
+e
+ltssepo
+ACssounmtepxtito/n
+n
+i
+s
+u
+B
+n
+o
+ti
+a
+z
+i
+lraong lleev
+a
+n
+trI
+e
+n
+Linkage
+Context/
+Assumption
+l
+e
+v
+e
+l
+p
+u
+o
+r
+G
+Linkages
+Context/
+Assumption
+Measurement program
+Results
+orgIanntiezrantaioln's
+goals
+Internal
+organization's
+strategies
+Results
+GGQoaMl
+Group goals
+Group
+strategies
+GQM
+GQM
+Question
+Question
+Interpretation Model
+Metri
+Metri
+Metri
+Figure 2. Basic concept of GQM+Strategies
+III.
+GQM+STRATEGIES APPLICATION AT JAXA
+The GQM+Strategies application at JAXA was performed
+together with measurement experts from the Fraunhofer
+Institute for Experimental Software Engineering (IESE).
+Modeling a GQM+Strategies grid can be either performed
+top-down or bottom-up. It usually makes sense to obtain
+some initial knowledge about top-level goals and strategies;
+therefore, we used JAXA's “2025 Vision” [11]
+documentation as a starting point. The application of the
+GQM+Strategies approach at JAXA was performed using the
+following steps (see also Figure 3):
+1. Enhancing the understanding of the GQM+Strategies
+approach
+2. Defining the scope of the GQM+Strategies
+application
+3. Gathering the existing assets
+4. Defining the top-level business goals
+5. Defining the strategies
+6. Iteratively defining the goals and strategies until
+coverage of the scope is achieved
+7. Defining the GQM measurement models (or
+mapping the existing GQM models)
+8. Visualizing the GQM+Strategies grid and the GQM
+measurement models
+1.Enhancing the
+understanding of the
+GQM+Strategies
+approach
+2.Defining the scope of
+the GQM+Strategies
+application
+3.Gathering the
+existing assets
+4.Defining the toplevel
+business goals
+5.Defining the
+strategies
+6.Iteratively defining
+the goals and strategies
+until coverage of the
+scope is achieved
+7.Defining the GQM
+measurement models
+(or mapping the
+existing GQM models)
+8.Visualizing the
+GQM+Strategies grid
+and the GQM
+measurement models
+Figure 3. Steps of GQM+Strategies application at JAXA
+A. Enhancing the understanding of the GQM+Strategies
+approach
+In order to create an understanding of the concepts and
+benefits of aligning goals and activities, training was
+performed in the form of a guided tutorial on the
+GQM+Strategies approach. It was essential for the engineers
+who later on applied the GQM+Strategies approach.
+Managers from the software research department also
+participated in the tutorial session as they are responsible for
+the goals and strategies of their group. Management
+commitment and their participation in the tutorial session
+motivated the engineers to apply GQM+Strategies for their
+group and thus was an essential facilitator.
+B. Defining the scope of the GQM+Strategies application
+In order to define the scope of GQM+Strategies, it is
+important to consider the main purpose of the respective
+organization. Covering every activity of the organization was
+not feasible because of time and budget limitations. Thus, the
+focus was placed on the most important organizational units
+and activities.
+JAXA's mission is to explore space. For this purpose it is
+essential to develop high-quality spacecraft that are capable
+of contributing to the space exploration mission. In this
+context, the supporting research departments play an
+important role. They do not only perform research on new
+technologies and transfer these into application in the
+development departments, but they are also dedicated to
+continuously improving the quality of JAXA's products and
+services. Thus, the scope of JAXA's GQM+Strategies
+application was not only limited to JAXA's development
+departments, but particularly included JAXA's software
+research department as well as JAXA's Engineering Digital
+Innovation Center (JEDI) and its sub-groups. The work at
+JEDI specifically focuses on researching and improving
+technologies for JAXA's software development departments.
+As JAXA collaborates with suppliers in spacecraft
+development, these were also included in the application
+scope. However they will not be discussed in detail in this
+paper.
+223
+C. Gathering the existing assets
+The benefit of gathering existing assets is the potential of
+possibly reusing some of those assets. Typical assets are
+goals, strategies, and GQM models. Additionally, analyzing
+existing assets also helps to identify missing assets and thus
+existing gaps. JAXA's software development standard was
+identified as an asset because measurement activities are
+defined in it. Furthermore, JAXA's documented “2025
+Vision” [11] was used as another asset. By gathering and
+reusing existing measurement assets, it was possible to
+reduce the effort during the application of GQM+Strategies.
+D. Defining the top-level business goals
+In order to clarify the contribution of the activities of
+internal organizations to top-level business goals, it was
+necessary to include the top-level business goals. Often these
+goals are either success goals (e.g., deliver high-quality
+products to customer, increase profits, etc.), growth goals
+(expand existing projects set, evolve existing market, etc.), or
+maintenance goals (maintain employee satisfaction, keep risk
+level controlled, etc.).
+JAXA's top-level business goals are officially published
+in JAXA's “2025 Vision” [11]. Based on the “2025 Vision”,
+the focus was put on goals covering “improve contribution to
+space exploration”, “improve user satisfaction”, and
+“improve tax payer satisfaction”.
+E. Defining the strategies
+In order to achieve the top-level business goals, suitable
+strategies need to be defined. JAXA's top-level strategies are
+also officially published. A set of the published strategies
+was selected. Additionally, some strategies were developed
+for achieving top-level business goals using brain-storming.
+The brain-storming sessions turned out to be an effective
+way to develop a variety of ideas for suitable strategies.
+F. Iteratively defining the goals and strategies until
+coverage of the scope is achieved
+In order to achieve alignment from top-level business
+goals to internal organizational goals and activities, it is
+necessary to identify potential lower-level organizational
+goals that help to achieve the chosen higher-level
+organizational strategies. Subsequently, lower-level
+organizational strategies are defined to achieve the goals of
+lower-level units. The iterative definition of lower-level
+goals and strategies is performed until the defined scope is
+covered.
+The organizations that were in the scope of JAXA's
+application were the JAXA development department, the
+software research departments, and the suppliers. The
+iterations performed with the members of JEDI focused on
+the SPI group; for them, the approach was applied iteratively
+starting from JAXA's top-level business goals to JEDI's
+activities and furthermore to the project level within the SPI
+group.
+G. Defining the GQM measurement models (or mapping
+the existing GQM models)
+Defining the GQM models for each selected
+GQM+Strategies goals is important for analyzing and
+evaluating goals and strategies. If there are already GQM
+models that were identified during the “gathering assets”
+steps, it may be possible to reuse the existing GQM models,
+which reduces modeling effort. In the case of the application
+at JAXA, several existing measurement models could be
+reused by mapping them to respective goals within the
+GQM+Strategies grid. But new measurement models were
+also developed, particularly for the goals related to the SPI
+group.
+H. Visualizing the GQM+Strategies grid and the GQM
+measurement models
+Visualizing the alignment of top-level business goals
+with the relevant department- and group-level goals in the
+grid enhanced understanding, communication, and
+discussion while applying GQM+Strategies.
+Visualizing the GQM+Strategies grid was not only
+performed at the end of GQM+Strategies application, but also
+during each step of the application. Visualizations of
+intermediate modeling results of the grid were used during
+each iteration for communication, discussion, and continuous
+evolvement of the model.
+IV.
+RESULT OF THE GQM+STRATEGIES APPLICATION
+The objectives of the GQM+Strategies application in the
+context of JAXA were defined as follows:
+(1) Clarify and align explicitly the contributions of
+group-level goals to top-level organizational goals.
+(2) Design an associated measurement system, reusing
+(lower-level) existing measurement models where
+appropriate.
+In order to achieve the first objective, aligning top-level
+business goals and strategies with goals from the relevant
+organizations, as defined in the application scope, was
+necessary. The lower-level goals and activities at the
+department and group levels were defined based on higherlevel
+organizational goals. Therefore, the resulting
+GQM+Strategies grid structure is similar to JAXA's
+organizational hierarchy.
+In order to achieve the second objective, GQM models
+were mapped or defined and linked to corresponding
+GQM+Strategies goals. In summary, JAXA's top-level
+business goals and JAXA's goals from lower levels of the
+organization were defined and linked creating the
+GQM+Strategies grid. Then measurement models were
+associated with the defined goals in order to make them
+controllable.
+Top-level goals
+Legend symbol
+Goal
+Strategy
+First
+level
+Second
+level
+Operational
+level
+JAXA project and Supplier project
+JAXA
+Supplier
+JEDI
+Supplier
+Hierarchic organization
+Figure 4. GQM+Strategies grid
+A.
+GQM+Strategies grid
+Figure 4 shows the resulting GQM+Strategies grid. In this
+grid, top-level business goals and strategies were refined to
+projects, JEDI, and suppliers. The following top-level
+business goals
+published vision:
+(G1) Improve contribution to space exploration
+(G2) Improve user satisfaction
+(G3) Improve tax payer satisfaction
+were selected based on the officially
+224
+The first top-level business goal (G1) is a reasonable goal
+for a space agency. It defines JAXA's existence and is
+therefore of great significance. The first top-level business
+goal is refined into the following top-level strategies:
+(S1) Improve mission success
+(S2) Improve mission achievement efficiency
+The first strategy (S1) is obvious for the space
+exploration goal. However, resources (e.g., budget, human
+resources, physical constraints) need to be considered. Hence,
+the contribution of lower-level activities is assessed using
+these two perspectives.
+The second top-level business goal (G2) “User
+satisfaction” was linked to the first strategy “mission
+success”. Mission success is achieved when JAXA is able to
+provide enough service and data to the respective users. A
+user is a person who uses JAXA's systems and services.
+The third top-level business goal (G3) “Tax payer
+satisfaction” was linked to the second strategy (S2) “Mission
+achievement efficiency”. The main reason for this is the fact
+that JAXA is a publicly funded organization and therefore
+resource efficiency is required in order to achieve efficient
+usage of tax payer money for space explanation.
+The left side of Figure 4 shows the linkage of top-level
+business goals, JEDI goals, and supplier goals. It provides
+JEDI's and the suppliers' contribution to the top-level
+business goals. The detailed linkage of top-level business
+goals, JEDI goals, and strategies is described in a later
+section.
+The right side of Figure 4 shows the alignment of toplevel
+business goals, JAXA project goals, and supplier
+project goals.
+B. GQM+Strategies grid details from the SPI Group
+perspective
+The top-level business goal and strategy “Improve
+mission success” was refined into four unique lower-level
+goals. The goal that is most relevant for JEDI is the goal
+“Improve technology for JAXA development” (see Figure 5).
+Dissemination of new effective technologies is important for
+JAXA and mission success and, in consequence, the toplevel
+business goals “User-satisfaction” and “Contribution to
+space exploration” are supported directly. At the JAXA
+research department level (JEDI level), the dissemination
+and effectiveness of technological improvement is monitored
+based on aggregated measures, which are composed from the
+results of the different JEDI research groups. Thus, JEDI
+shows its overall contribution to top-level business goals. In
+order to achieve the JEDI goals, a software-specific strategy
+“Improve software development” was defined.
+This strategy was then further refined to the group level.
+In our case, we focused on the SPI group and its goals and
+strategies. At the SPI group level, the goal “Defect
+reduction” was refined based on the department-level
+strategy “Improve software development” (JEDI-level
+strategy). Then this goal was refined into two strategies. The
+actual technological improvement performed and the
+dissemination as well as the effectiveness of the results are
+measured. Aggregation provides transparency of the
+contribution of each group without imposing supervision of
+every group activity. At the same time, the measured data
+provides valuable information to group leaders about the
+success of technology improvement activities.
+Based on these strategies, the GQM+Strategies grid
+wasfurther refined on the operational SPI group level.
+Software process assessment is performed as one of this
+group's operational activities to achieve the SPI group-level
+goal “Reduce number of defects introduced to contractor
+software product”. This operational activity was aligned with
+the SPI group-level strategy within the grid. Additionally, an
+explicit alignment from the top-level business goals to the
+operational-level goals was achieved, as a consistent and
+traceable link within the grid was refined.
+In order to evaluate the achievement of the goals, GQM
+models need to be defined or predefined GQM models need
+to be mapped to respective goals in the GQM+Strategies grid.
+Such a mapping allows for reusing GQM models. Thus,
+measurement models are not only used to evaluate the
+achievement of the mapped goals, but also to evaluate the
+contribution to top-level business goals. Figure 6 shows one
+of the defined GQM models, which allows evaluating the
+achievement of the SPI group's operational-level goal. The
+measurement goal is to evaluate the performance of process
+assessment activities at contractors. To evaluate the
+performance of process assessment, a question that deals
+with the “Degree of JAXA SW process assessment
+dissemination” was defined. In order to answer this question,
+“Number of assessed contractors / number of all contractors”
+was defined as a metric.
+225
+Figure 5. Group-level and operational-level GQM+Strategies grid
+GQM Goal Object Purpose Quality Focus Viewpoint Context
+aPsrosceessssment aPsrosceessssment Characterize Dissemination JSAPXIAJEDI JPEroDjeI cStPI
+Questions
+Q1: What is degree of disseminationof JAXASW-processassessment?
+Q1.1:What is the numberof JAXAcontractors where processassessment is performed?
+Q1.2:What is the total numberof JAXAcontractors where processassessment could/should
+be applied?
+Metrics
+Dissemination
+#assessment
+performed
+#all contractors
+Decision criteria
+Dissemination X (threshold e.g. 90%)
+(#assessmentperformed)/(#all contractors)
+Numberof contractors where assessmentis performed
+numberof JAXAcontractors where assessmentcould / should
+be performed
+Q1
+Q1.1
+Q1.2
+Figure 6. GQM model
+V.
+DISCUSSION AND CONCLUSIONS
+For the specific application of the GQM+Strategies
+approach at JAXA described in this paper, two main goals
+were defined. The first goal aimed at clarifying and explicitly
+aligning the contributions of group-level goals to top-level
+business goals. The second goal aimed at designing
+measurement models for controlling goal achievement.
+Existing (lower-level) measurement models should be reused
+and integrated where appropriate.
+Applying the GQM+Strategies approach delivered a
+measurement program that included multiple organizations
+(i.e., development departments, research departments, and
+suppliers). For some goals, it was also possible to reuse
+measurement models that already existed at JAXA. Thus, we
+were able to achieve the second goal.
+Furthermore, following the described steps during the
+modeling of the GQM+Strategies grid, we were able to link
+different activities of the SPI group to JAXA's top-level
+business goals and its overall vision. Thus we could clarify
+how the goals of lower-level groups contribute towards toplevel
+business goals. Consequently, we were also able to
+achieve the first goal by applying the GQM+Strategies
+approach. In addition, the GQM+Strategies grid made the
+relationship between top-level business goals and
+measurement programs transparent, including those of
+suppliers. This experience of using the GQM+Strategies
+approach at JAXA shows that the approach helps to clarify
+the relationship between activities of different organizational
+units on different levels of the organization, as well as to
+explicitly show the contributions of those activities to the
+achievement of top-level business goals.
+From this application of GQM+Strategies the lessons
+learned were derived: Involvement of personnel from the
+involved organizational units is essential for discussing,
+modeling, and verifying the models. This is particularly true
+for making sure that lower-level organizations goals fit to
+higher-level organizational strategies and vice versa.
+In order to reduce the development effort of the
+GQM+Strategies grid, it is important to reuse previously
+developed GQM+Strategies components as well as GQM
+measurement models. Therefore, it is also beneficial to
+analyze the developed GQM+Strategies grid in order to
+identify patterns that could be reused in the future.
+Additionally the following, GQM+Strategies
+improvement potentials were identified: At this stage of
+226
+development, the GQM+Strategies grid visualizations do not
+show the current status of goal achievement by means of an
+analysis of the collected data. This feature is needed in order
+to enhance understanding and discussion and to improve and
+refine existing strategies.
+Currently, the GQM+Strategies grid does not address the
+priorities of different goals and strategies. Priorities could be
+set by considering the importance and contribution to higherlevel
+organizational goals, as well as passing those down to
+lower-level goals. In the event of changes in resource
+availability or in the business environment, organizations
+need to adapt their goals and strategies, including lower-level
+goals and strategies. Providing the contribution and priority
+of those goals and strategies will enhance the process of
+decision making.
+At this moment, there is no support for systematically
+evaluating and quantifying the effects that the application of
+the approach has. Currently it is only possible to make
+qualitative statements about perceived benefits or to analyze
+the collected measurement data with respect to goal
+achievement. An evaluation framework is currently under
+development, and a systematic evaluation of the application
+at JAXA is planned. Nevertheless, it can be concluded from
+JAXA's perspective that GQM+Strategies supported the
+alignment and measurement of goals from different
+organizational units, within JAXA's organizational hierarchy.
+REFERENCES
+[1] R. Kathuria, M.P. Joshi, S.J. Porth, “Organizational alignment and
+performance: past, present and future”, Management Decision, 2007.
+[2] V. Basili, J. Heidrich, M. Lindvall, J. Münch, M. Regardie, and A.
+Trendowicz, “GQM+Strategies - Aligning Business Strategies with
+Software Measurement”, in proceedings of 1st ISESE, IEEE
+Computer Society, 2007.
+[3] V. Basili, J. Heidrich, M. Lindvall, J. Münch, M. Regardie, C.
+Seaman, and A. Tren-dowicz, “Determining the Impact of Business
+Strategies Using Principles from Goal-oriented Measurement”, in
+proceedings of 9th BI Conference, Vienna, Austria, 2009.
+[4] V. Basili, “Software Modeling and Measurement: The Goal Question
+Metric Paradigm,” Computer Science Technical Report Series, CSTR-2956
+(UMIACS-TR-92-96), University of Maryland, College
+Park, Md., 1992.
+[5] M. Kowalczyk, J. Münch, M. Katahira, T. Kaneko, Y. Miyamoto and
+Y. Koishi, “Aligning Software-related Strategies in MultiOrganizational
+Settings“, in proceedings of the International
+Conference on Software Process and Product Measurement
+(IWSM/MetriKon/Mensura 2010), Stuttgart, Germany, November 1012,
+2010.
+[6] ISACA, “Control Objectives for Information and related Technology
+(COBIT)”, Retrieved 04/12/2010, from www.isaca.org.
+[7] ISACA, “The Val IT Framework 2.0”, IT Governance Institute, 2008.
+[8] Office of Government Commerce (OGC) “The IT Infrastructure
+Library (ITIL) Service Delivery”, The Stationary Office London,
+2002.
+[9] R. Kaplan and D. Norton, “The Balanced Scorecard - Measures That
+Drive Performance”,Harvard Business Review, 1992.
+[10] S. A. Becker and M. L. Bostelman, “Aligning Strategic and Project
+Measurement Systems”, IEEE Software, Vol. 16, No. 3, 1999.
+[11] Japan Aerospace Exploration Agency (JAXA), “JAXA Vision 2025”,
+Retrieved 04/08/2011, from http://www.jaxa.jp/about/2025/pdf/jaxa_
+vision_e.pdf

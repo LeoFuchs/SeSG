@@ -1,0 +1,2159 @@
+Empir Software Eng (2016) 21:2072-2106
+DOI 10.1007/s10664-015-9400-x
+Studying just-in-time defect prediction using
+cross-project models
+Yasutaka Kamei1 · Takafumi Fukushima1 ·
+Shane McIntosh2 · Kazuhiro Yamashita1 ·
+Naoyasu Ubayashi1 · Ahmed E. Hassan3
+Published online: 14 September 2015
+© Springer Science+Business Media New York 2015
+Abstract Unlike traditional defect prediction models that identify defect-prone modules,
+Just-In-Time (JIT) defect prediction models identify defect-inducing changes. As such,
+JIT defect models can provide earlier feedback for developers, while design decisions are
+still fresh in their minds. Unfortunately, similar to traditional defect models, JIT models
+require a large amount of training data, which is not available when projects are in initial
+development phases. To address this limitation in traditional defect prediction, prior work
+has proposed cross-project models, i.e., models learned from other projects with sufficient
+history. However, cross-project models have not yet been explored in the context of JIT prediction.
+Therefore, in this study, we empirically evaluate the performance of JIT models in a
+cross-project context. Through an empirical study on 11 open source projects, we find that
+Communicated by: Sunghun Kim and Martin Pinzger
+Shane McIntosh
+shane.mcintosh@mcgill.ca
+Yasutaka Kamei
+kamei@ait.kyushu-u.ac.jp
+Takafumi Fukushima
+f.taka@posl.ait.kyushu-u.ac.jp
+Kazuhiro Yamashita
+yamashita@posl.ait.kyushu-u.ac.jp
+Naoyasu Ubayashi
+ubayashi@ait.kyushu-u.ac.jp
+Ahmed E. Hassan
+ahmed@cs.queensu.ca
+1
+2
+3
+Principles of Software Languages Group (POSL), Kyushu University, Fukuoka-shi,
+Fukuoka, 819-0395, Japan
+Department of Electrical and Computer Engineering, McGill University, Montre´al, QC, H3A OG4, Canada
+Software Analysis and Intelligence Lab (SAIL), Queen's University, Kingston, ON, K7L 3N6, Canada
+Empir Software Eng (2016) 21:2072-2106
+2073
+while JIT models rarely perform well in a cross-project context, their performance tends
+to improve when using approaches that: (1) select models trained using other projects that
+are similar to the testing project, (2) combine the data of several other projects to produce
+a larger pool of training data, and (3) combine the models of several other projects to produce
+an ensemble model. Our findings empirically confirm that JIT models learned using
+other projects are a viable solution for projects with limited historical data. However, JIT
+models tend to perform best in a cross-project context when the data used to learn them are
+carefully selected.
+Keywords Empirical study · Defect prediction · Just-in-time prediction
+1 Introduction
+Software Quality Assurance (SQA) activities, such as code inspection and unit testing are
+standard practices for improving the quality of a software system prior to its official release.
+However, software teams have limited testing resources, and must wisely allocate them to
+minimize the risk of incurring post-release defects. For this reason, a plethora of software
+engineering research is focused on prioritizing SQA activities (Li et al. 2006; Shihab 2012).
+For example, defect prediction techniques are often used to prioritize modules (i.e., files or
+packages) based on their likelihood of containing post-release defects (Basili et al. 1996; Li
+et al. 2006). Using these techniques, practitioners can allocate limited SQA resources to the
+most defect-prone modules.
+However, recent work shows that traditional defect prediction models often make recommendations
+at a granularity that is too coarse to be applied in practice (Kamei et al. 2010;
+Shihab et al. 2012; Kamei et al. 2013). For example, since the largest files or packages are
+often the most defect-prone (Koru et al. 2009), they are often suggested by traditional defect
+models for further inspection. Yet, carefully inspecting large files or packages is not practical
+for two reasons: (1) the design decisions made when the code was initially produced
+may be difficult for a developer to recall or recover, and (2) it may not be clear which developer
+should perform the inspection tasks, since many developers often work on the same
+files or packages (Kim et al. 2008).
+To address these limitations in traditional defect prediction, prior work has proposed
+change-level defect prediction models, i.e., models that predict the code changes that are
+likely to introduce defects (Mockus and Weiss 2000; Kim et al. 2008, 2013; Shihab et al.
+2012; S´ liwerski et al. 2005). The advantages of change-level predictions are that: (1) the
+predictions are made at a fine granularity, since often impact only a small region of the
+code, and (2) the predictions can be easily assigned, since each change has an author who
+can perform the inspection while design decisions are still fresh in their mind. Changelevel
+defect prediction has been successfully adopted by industrial software teams at Avaya
+(Mockus and Weiss 2000), BlackBerry (Shihab et al. 2012), and Cisco (Tan et al. 2015).
+We refer to change-level defect prediction as “Just-In-Time (JIT) defect prediction” (Kamei
+et al. 2013).
+Despite the advantages of JIT defect models, like all prediction models, they require a
+large amount of historical data in order to train a model that will perform well (Zimmermann
+et al. 2009). However, in practice, training data may not be available for projects in the initial
+development phases, or for legacy systems that have not archived historical data. To overcome
+the limited availability of training data, prior work has proposed cross-project defect
+2074
+Empir Software Eng (2016) 21:2072-2106
+prediction models, i.e., models trained using historical data from other projects (Turhan
+et al. 2009).
+While studies have shown that cross-project defect prediction models can perform well
+at the file-level (Bettenburg et al. 2012; Menzies et al. 2013), cross-project JIT models
+remain largely unexplored. We, therefore, set out to empirically study the performance of
+JIT models in a cross-project context using data from 11 open source projects. We find that
+the within-project performance of a JIT model does not indicate how well it will perform in
+a cross-project context (Section 4). Hence, we set out to study three approaches to optimize
+the performance of JIT models in a cross-project context. We structure our study along the
+following three research questions:
+(RQ1)
+(RQ2)
+(RQ3)
+Do JIT models selected using project similarity perform well in a crossproject
+context? (Model selection)
+Defect prediction models assume that the distributions of the metrics in the training
+and testing datasets are similar (Turhan et al. 2009). Since the distribution of metrics
+can vary among projects, this assumption may be violated in a cross-project
+context. In such cases, we would expect that the performance of cross-project models
+would suffer. On the other hand, we expect that models trained using data from
+similar projects will have strong cross-project performance.
+Do JIT models built using a pool of data from several projects perform well
+in a cross-project context? (Data merging)
+A model that was fit using data from only one project may be overfit, i.e., too
+closely related to the training data to apply to other datasets. Conversely, sampling
+from a more diverse pool of changes from several other projects may provide a
+more robust model fit that will apply better in a cross-project context. Hence, we
+want to investigate whether the cross-project performance of JIT models improve
+when we train them using changes from a variety of other projects.
+Do ensembles of JIT models built from several projects perform well in a
+cross-project context? (Ensembles of models)
+Since ensemble classification techniques have recently proven useful in other areas
+of software engineering (Kocaguneli et al. 2012), we suspect that they may also
+improve the cross-project performance of JIT models. Ensemble techniques that
+leverage multiple datasets cover a large variety of project characteristics, and hence
+may provide a more general JIT model for cross-project prediction, i.e., not only
+those of one project.
+Through an empirical study on 11 open source projects, we find that the most similar
+projects yield JIT models that are among the 3 top-performing cross-project models for 6 of
+the 11 studied systems (RQ1). Although, while similarity helps to select the top-performing
+models, these models tend to under-perform with respect to within-project performance.
+On the other hand, combining data from (RQ2) and models trained using (RQ3) several
+other projects tends to yield JIT models that have strong cross-project performance, which
+is indistinguishable from within-project performance. However, when we use similarity to
+filter away dissimilar project data, it rarely improves model performance. This suggests that
+additional training data is a more important factor for cross-project JIT models than project
+similarity is.
+This paper is an extended version of our earlier work (Fukushima et al. 2014). We extend
+our previous work by:
+Empir Software Eng (2016) 21:2072-2106
+2075
+-
+Studying
+domain-aware similarity techniques (RQ1) to combat limitations in our
+threshold-dependent, domain-agnostic similarity approach.
+Studying context-aware rank transformation as a means of using data from several
+projects simultaneously (RQ2).
+Grounding the cross-project performance of JIT models by normalizing them by the
+performance of the corresponding within-project JIT model.
+1.1 Paper Organization
+The rest of the paper is organized as follows. Section 2 surveys related work. Section 3
+describes the setting of our empirical study. Section 4 describes a preliminary study of
+the relationship between the within-project and cross-project performance of JIT models,
+while Section 5 presents the results of our empirical study with respect to our three research
+questions. Section 6 discusses the broader implications of our findings. Section 7 discloses
+the threats to the validity of our findings. Finally, Section 8 draws conclusions.
+2 Background and Related Work
+In this section, we describe the related work with respect to JIT and cross-project defect
+prediction.
+2.1 Just-in-time Defect Prediction
+A traditional defect model classifies each module as either defective or not using module
+metrics (e.g., SLOC and McCabe's Cyclomatic complexity) as predictor variables. On the
+other hand, JIT models use change metrics (e.g., # modified files) to explain the status of a
+change (i.e., defect-inducing or not).
+Prior work suggests that JIT prediction is a more practical alternative to traditional defect
+prediction. For example, Mockus and Weiss (2000) predict defect-inducing changes in a
+large-scale telecommunication system. Kim et al. (2008) add change features, such as the
+terms in added and deleted deltas, modified file and directory names, change logs, source
+code, change metadata and complexity metrics to classify changes as being defect-inducing
+or not. Kamei et al. (2013) also perform a large-scale study on the effectiveness of JIT defect
+prediction, reporting that the addition of a variety of factors extracted from commits and bug
+reports helps to effectively predict defect-inducing changes. In addition, the authors show
+that using their technique, careful inspection of 20 % of the changes could prevent up to 35
+% of the defect-inducing changes from impacting users.
+The prior work not only establishes that JIT defect prediction is a more practical alternative
+to traditional defect prediction, but also that it is viable, yielding actionable results.
+However, defect models must be trained using a large corpus of data in order to perform
+well (Zimmermann et al. 2009). Since new projects and legacy ones may not have enough
+historical data available to train effective JIT models, we set out to study JIT models in a
+cross-project context.
+2.1.1 Building JIT models
+Various techniques are used to build defect models, such as logistic regression and random
+forest. Many prior studies focus on the evaluation of prediction performance for additional
+2076
+Empir Software Eng (2016) 21:2072-2106
+modeling techniques (Hall et al. 2012), such as linear discriminant analysis, decision trees,
+Naive Bayes and Support Vector Machines (SVM).
+Random forest In this paper, we train our JIT models using the random forest algorithm,
+since compared to conventional modeling techniques (e.g., logistic regression and decision
+trees), random forest produces robust, highly accurate, stable models that are especially
+resilient to noisy data (Jiang et al. 2008). Furthermore, our prior studies have shown that
+random forest tends to outperform other modeling techniques for defect prediction (Kamei
+et al. 2010).
+Random forest is a classification (or regression) technique that builds a large number of
+decision trees at training time (Breiman 2001). Each node in the decision tree is split using
+a random subset of all of the attributes. Performing this random split ensures that all of the
+trees have a low correlation between them (Breiman 2001).
+First, the dataset is split into training and testing corpora. Typically, 90 % of the dataset
+is allocated to the training corpus, which is used to build the forest. The remaining 10 % of
+the dataset is allocated to the testing or Out Of Bag (OOB) corpus, which is used to test the
+prediction accuracy of the forest. Since there are many decision trees that may each report
+different outcomes, each sample in the OOB corpus is pushed down all of the trees in the
+forest and the final class of the sample is decided by aggregating the votes from all of the
+trees.
+2.2 Cross-project Defect Prediction
+Cross-project defect prediction is also a well-studied research area. Several studies have
+explored traditional defect prediction using cross-project models (Menzies et al. 2013;
+Minku and Yao 2014; Nam et al. 2013; Turhan et al. 2009; Zhang et al. 2014; Zimmermann
+et al. 2009).
+Briand et al. (2002) train a defect prediction model using data from one Java system,
+and test it using data from another Java system, reporting lower prediction performance
+for the cross-project context than the within-project one. On the other hand, Turhan et al.
+(2009) find that cross-project prediction models can actually outperform models built
+using within-project data. However, Turhan et al. (2011) also find that adding mixed
+project data to an existing prediction model yields only minor improvements to prediction
+performance.
+Zimmermann et al. (2009) study cross-project defect prediction models using 28 datasets
+collected from 12 open source and industrial projects. They find that of the 622 cross-project
+combinations, only 21 produce acceptable results.
+Rahman et al. (2012) evaluate the prediction performance of cross-project models by
+taking into account the cost of software quality assurance effort. They show that using such a
+perspective, the performance of cross-project models is comparable to that of within-project
+models. He et al. (2012) show that cross-project models outperform within-project models
+if it is possible to pick the best cross-project models among all available models to predict
+testing projects.
+Menzies et al (2011, 2013) comparatively evaluate local (within-project) vs. global
+(cross-project) lessons learned for defect prediction. They report that a strong prediction
+model can be built from projects that are included in the cluster that is nearest to the testing
+data. Furthermore, Nam et al. (2013) use the transfer learning approach (TCA) to make
+feature distributions in training and testing projects similar. They also propose a novel
+Empir Software Eng (2016) 21:2072-2106
+2077
+transfer learning approach, TCA+, by extending TCA. They report that TCA+ significantly
+improves cross-project prediction performance in eight open source projects.
+Recent work has shown that cross-project models can achieve performance similar to that
+of within-project models. Zhang et al. (2014) proposes a context-aware rank transformation
+method to preprocess predictors and address the variations in their distributions. Using 1,398
+open source projects, they produce a “universal” defect prediction model that achieves performance
+that rivals within-project models. Minku and Yao (2014) investigate how to make
+best use of cross-project data in the domain of software effort estimation. Through use of a
+proposed framework to map metrics from one context to another, their cross-project effort
+estimation models achieve performance similar to within-project ones.
+Similar to prior work, we find that cross-project models that use a combination of
+ensemble and similarity techniques can outperform within-project models. Furthermore,
+while prior studies have empirically evaluated cross-project prediction performance using
+traditional models, our study focuses on cross-project prediction using JIT models.
+3 Experimental Setting
+3.1 Studied Systems
+In order to address our research questions, we conduct an empirical study using data from
+11 open source projects, of which 6 projects (Bugzilla, Columba, Eclipse JDT, Mozilla,
+Eclipse Platform, PostgreSQL) are provided by Kamei et al. (2013) and 5 well-known and
+long-lived projects (Gimp, Maven-2, Perl, Ruby on Rails, Rhino) needed to be collected.
+We study projects from various domains in order to combat potential bias in our results.
+Table 1 provides an overview of the studied datasets.
+3.2 Change Measures
+Our previous study of JIT defect prediction uses 14 metrics from 5 categories derived from
+the Version Control System (VCS) of a project to predict defect-inducing changes (Kamei
+et al. 2013). Table 2 provides a brief description of each metric and the rationale behind
+Table 1 Summary of project
+data. Parenthesized values show
+the percentage of defect-inducing
+changes
+Project name
+Bugzilla (BUG)
+Columba (COL)
+Gimp (GIP)
+Eclipse JDT (JDT)
+Maven-2 (MAV)
+Mozilla (MOZ)
+Perl (PER)
+Eclipse Platform (PLA)
+PostgreSQL (POS)
+Ruby on Rails (RUB)
+Rhino (RHI)
+Median
+Period
+08/1998 - 12/2006
+11/2002 - 07/2006
+01/1997 - 06/2013
+05/2001 - 12/2007
+09/2003 - 05/2012
+01/2000 - 12/2006
+12/1987 - 06/2013
+05/2001 - 12/2007
+07/1996 - 05/2010
+11/2004 - 06/2013
+04/1999 - 02/2013
+# of changes
+4,620 (37 %)
+4,455 (31 %)
+32,875 (36 %)
+35,386 (14 %)
+5,399 (10 %)
+98,275 ( 5 %)
+50,485 (24 %)
+64,250 (15 %)
+20,431 (25 %)
+32,866 (19 %)
+2,955 (44 %)
+32,866(24 %)
+)
+5
+0
+0
+2
+l
+l
+a
+,
+s
+tireo .) ood ndB
+0 g a
+tlreaekdoW iltitrffaaceeecaebbopoydhhngT ttiiiirrffsseeeaecehhnbuonoddwmm .ti()ssssssscaeedkounybu2000mMW tiiiifrrfreeeeeecunhobghhhodddmm ttiilltracecaeaceeaehnhhhghhngw ti(fssscecaaeceeoukndudd200MW lilifrssssaceaeeeaonunbhodumm ttlf-rfssseeeaceedop .tll(f)eaaeaaagpnpodu2006Nm ttrrrseaaeeeeaccgnhdom ttlitrfsececeeudodoyn ..lt;'r)sssaeaa2001bon2009HAm itlrrssceaeeeaceuhnduvom titirffrsaceeceoddodoogn .tl;lr(sseeaeaaa0o208udogppnNM littrrrrsceeeaeonuubgodomm ..tltr)(fsaeceeuo0029K itttffrsseaaceeeadxgnhh titillttrfrseceeeecanooddukyohn tilitlittfeeceaannnuonpywmm .;ttlrsaeaaa010u2huhounndoPm
+R T th in T o o S lik (D R a m L d C m th (G
+.
+)
+5
+0
+0
+s 2
+e
+g y
+n rr
+a e
+ch P
+2078
+EmpirSoftwareEng(2016)21:2072-2106
+e
+r
+u
+t
+a
+e
+f
+s
+e
+l
+i
+f
+d
+e
+i
+f
+i
+d
+o
+)
+3
+1
+0
+2
+.
+l
+a
+t
+e
+i
+e
+m
+a
+e
+g
+n
+a
+h
+c
+m
+u
+S
+2
+e .
+l
+b m
+a i
+T D
+d
+e
+i
+f
+i
+d
+o
+d
+e
+i
+f
+i
+d
+o
+K m m m
+( f s f f
+rsseaeu itiifeonn reobum tsseybum reobum itirrseceo reobum
+m D N s N d N
+y
+fo e p
+o
+r
+ry am S D F n
+t
+a N N N N E
+m
+liteaano iitfssssseaaeodygngnhynubymmm illttrrf-reeeeeceekyobodpnom ttiitifrrssaeaaceehodygnhyndomm .illttrrf-reeeeeceekyobodpnom tiilfrrsscaeaeeaeuohnggnnhyomm .ttlf-reeceeedbpooynk ititrrrseeaaeehhghngnhypoowm ,ttlf-rseeeceeecaedbpooynkbu illltlltrrreaeeeecaaachvpovondkdw ttrfrrrsssecaeeecaeacboungdhngom ,litfrrseeceeaeeenoodohdddhomm .illiittfrrseeaeeececkydondoudm ,illttfrseceeeeeeenoododdhm .ttfrfcaceaeeeechnohdh ,iltllilrfrreaeeeaeeahgohkym .itittrfeaccaeeecghnodgnuhdm ttiitfrrrsseecaeaaaeadngnhxnowm ,liiiltitrreaeaeeaeanpndnonmm tiiitrfrrreacaeeaeaaeeeyndonhwm .lilrrrrseeeaokyom
+R C a C a C li C li a la T th hT igh T a F m th re
+eg eg
+an an
+ch ch
+e e
+h
+th t
+d
+edd ltee
+d e
+a d
+t
+e e e re o
+fsceood fsceood fsceood liffeebo trreehon tiffeecdx
+in in in a h a
+L L L in W is
+X
+A D T I
+L L L F
+e
+z
+i
+S
+e
+s
+o
+p
+r
+u
+P
+d
+e
+i
+f
+i e
+d il
+o f
+m h
+f c
+a
+o e
+n s
+o s
+tiu rco
+ib a
+tr e
+s d
+i o
+D c
+n
+o
+i
+s
+u
+f
+f
+i
+D
+.
+e
+l
+i
+f
+h
+c
+a
+e
+s
+s
+EmpirSoftwareEng(2016)21:2072-2106
+2079
+.
+s
+e
+g
+n
+a
+h
+c
+.
+)
+9 s
+0 a
+tlreaedokRW ililtrrsseeceepvuoyouhdoybFm ltitrrfsseceeaeceepoonvdnodm ..tttl()seaauoo2010mM ttitrrrsececeaecenhongobunM ttlfrrsseeceaeeacdohnodnghm ..tlr()seeaav2000G ltiirrrffsaeeeeaeghhpdoddoTm ,tilittilfrseeeecehhghhoyxpm .tl;r'(ssseaaao2010n20bADHm irrrraeeeecegoxpnPmm itliitfrsscaeceenyngduh iillititfrfececeaohodoknodungd .i()sssaceukndo2000MW liirrrsseeeeeeceeaeoxpvnudpDm trfseecaeuonhhngbm tlreeaeeebhddvopym .ttrrfreeceecaehuobnhng ttteccnox
+e
+j
+o
+r
+p
+s
+s s
+r o
+e r
+p a c
+, t
+is lo t n s e in
+liteaano ,tltliltrrrfeeaeeeeaecehghhokydENDVm ,litifrrsssecaeeceeeaeebududovbydndyvm iitttittffrsseaeceeadnnnondgnoughhdn .ltisseygndo ..,tilttr(rreeeeeeecehohhonEAGwm ,ttlill)rseaceaeeegnhhokym lilittrfeceecebnoduddw ,ttllilrrreeaeeeeahhghokyCNUm ,tiitlrfrssececeecaeaeeedoundbuvdop lltllitirrrsecaeaaacaeondvhkypnvoum illrrrrssseceeeeeeeeeandpdvxoop .titltrfceaeeecdoundoyk ttltiitliirfffssaeaeeeeeehhpoovdnoddhnm itllitlttirfsssseececeaceehnonkyoondudm illiliittrfrrsseeeaceeaaeceebhouhhwwmm .titltssseeeeennhypovmm ttlliittitrrfrssssaaeeaeeaeehpovhhubywmm iilliltitfrrssacaeaeeeechybdngdokyonoud .tfcee ,ititrssseeaaceecaceeeohgnnhdhnnnobud
+R T in fo c T th a T d w M li A re b d D m d v
+a
+h
+t
+o
+n
+o
+d
+t
+a
+h
+t
+s
+t
+c
+e
+j
+o
+r
+p
+d
+e
+r
+u
+s
+a
+e
+m
+e
+b
+t
+o
+n
+n
+a
+c
+e
+c
+n e
+e r
+i a
+r
+ep m tfw
+x te o
+e s s
+r y e
+e s h
+p b t
+leo su m
+v a ro
+e n f
+D o
+s
+c
+i
+∗ec tre
+n m
+e
+i e
+r s
+e e
+p h
+x T
+E ∗
+t
+a
+h
+t
+s se
+re il
+p f
+lo d
+e ie
+v f
+e i
+d d
+f o
+o m
+r e
+n eb th
+o
+iti um ed
+n n g
+if n
+e eh ah
+D T c
+e V
+m E
+) a D
+d N N
+e
+u
+n
+i
+t
+n
+o
+c
+(
+2
+e .
+l
+b m
+a i
+T D
+∗
+y
+r
+o
+t
+s
+i
+H
+n
+e
+e
+w e
+lteab achgn ilfse iecen
+itrenv trren iequ iifedd cen reexp
+item tceuh fnuo eohm ireepx lrepo
+e r t e e
+reaeavg ltsaand enubm tsengo lreevop tceendv
+h e eh ah e e
+T th T c D R
+P
+E C P X
+G U X E
+A N E R
+P
+X
+E
+S
+2080
+Empir Software Eng (2016) 21:2072-2106
+using it in JIT models. We remove 6 of these metrics in the History and Experience categories
+because these metrics are project-specific, and hence cannot be measured from the
+software projects that do not have change histories (e.g., a new development project). We
+briefly describe each surviving metric below.
+3.2.1 Identify Defect-Inducing Changes
+To know whether or not a change introduces a defect, we used the SZZ algorithm (S´ liwerski
+et al. 2005). This algorithm identifies when a bug was injected into the code and who
+injected it using a VCS. We discuss the noise introduced by the heuristic nature of the SZZ
+algorithm in Section 7.2.
+3.2.2 Diffusion
+We expect that the diffusion dimension can be leveraged to determine the likelihood of a
+change being defect-inducing. We use four diffusion metrics in our JIT models, as listed in
+Table 2.
+Prior work has shown that a highly distributed change can be more complex and harder
+to understand (Mockus and Weiss 2000; Hassan 2009). For example, Mockus and Weiss
+(2000) have shown that the number of changed subsystems is related to defect-proneness.
+Hassan (2009) has shown that change entropy is a more powerful predictors of the incidence
+of defects than the number of prior defects or changes. In our study, similar to Hassan
+(2009), we normalize the change entropy by the maximum entropy log2n to account for
+differences in the number of files n across changes.
+For each change, we count the number of distinct names of modified: (1) subsystems
+(NS, i.e., root directories), (2) directories (ND) and (3) files (NF). To illustrate, if
+a change modifies a file with the path: org.eclipse.jdt.core/jdom/org/eclipse/jdt/core/dom/
+Node.java, then the subsystem is org.eclipse.jdt.core, the directory is org.eclipse.jdt.core/
+jdom/org/eclipse/jdt/core/dom and the file name is org.eclipse.jdt.core/jdom/org/eclipse/jdt/
+core/dom/Node.java.
+3.2.3 Size
+3.2.4 Purpose
+In addition to the diffusion of a change, prior work shows that the size of a change is a strong
+indicator of its defect-proneness (Moser et al. 2008; Nagappan and Ball 2005). Hence, we
+use the size dimension to identify defect-inducing changes. We use the lines added (LA),
+lines deleted (LD), and lines total (LT) metrics to measure change size as shown in Table 2.
+We normalize LT by dividing it by NF (relative LT), similarly to Kamei et al. (2013). These
+metrics can be extracted directly from a VCS.
+A change that fixes a defect is more likely to introduce another defect (Guo et al. 2010;
+Purushothaman and Perry 2005). The intuition being that the defect-prone modules of the
+past tend to remain defect-prone in the future (Graves et al. 2000).
+To determine whether or not a change fixes a defect, we scan VCS commit messages
+that accompany changes for keywords like “bug”, “fix”, “defect” or “patch”, and for defect
+identification numbers. A similar approach to determine defect-fixing changes was used in
+other work (Kim et al. 2008; Kamei et al. 2013).
+2081
+Empir Software Eng (2016) 21:2072-2106
+3.3 Data Preparation
+3.3.1 Minimizing Collinearity
+To combat the threat of multicollinearity in our models, we remove highly correlated metrics
+(Spearman ρ > 0.8). We manually remove the highly correlated factors, avoiding the
+use of automatic techniques, such as stepwise variable selection because they may remove
+fundamental metrics (e.g., NF), in favour of a non-fundamental ones (e.g., NS) if the metrics
+are highly correlated. Since the fundamentality of a metric is somewhat subjective, we
+discuss below each metrics that we discarded.
+We found that NS and ND are highly correlated (ρ = 0.84). To address this, we exclude
+ND and include NS in our prediction models. We also found that LA and LD are highly
+correlated (ρ = 0.89). Nagappan and Ball (2005) reported that relative churn metrics perform
+better than absolute metrics when predicting defect density. Therefore, we adopt their
+normalization approach, i.e., LA and LD are divided by LT. In short, the NS, NF, Entropy,
+relative churn (i.e., (LA+LD)/LT), relative LT (= LT/NF) and FIX metrics survive our correlation
+analysis (Table 3). Tables 4 and 5 provide descriptive statistics of the six studied
+metrics.
+3.3.2 Handling Class Imbalance
+Our datasets are imbalanced, i.e., the number of defect-inducing changes represents only a
+small proportion of all changes. This imbalance may cause the performance of the prediction
+models to degrade if it is not handled properly (Kamei et al. 2007). Taking this into account,
+we use a re-sampling approach for our training data. We reduce the number of majority
+class instances (i.e., non-defect-inducing changes in the training data) by deleting instances
+randomly such that the majority class drops to the same level as the minority class (i.e.,
+defect-inducing changes). Note that re-sampling is only performed on the training data the
+testing data is not modified.
+3.4 Evaluating Model Performance
+To evaluate model prediction performance, precision, recall and F-measure are often
+used (Kim et al. 2008; Nam et al. 2013). However, as Lessmann et al. (2008) point out,
+these criteria depend on the threshold that is used for classification. Choosing a different
+threshold may lead to different results.
+To evaluate model prediction performance in a threshold-insensitive manner, we use the
+Area Under the Curve (AUC) of the Receiver Operating Characteristic (ROC) plot. Figure 1
+Table 3 The median of
+Spearman correlation values
+among dataset
+NF
+Entropy Relative churn Relative LT Fix
+NS
+NF
+Entropy
+Relative churn
+Relative LT
+0.21 0.11
+−
+−
+0.72
+−
+0.03
+0.17
+0.40
+−
+−0.05
+−0.02
+0.16
+0.18
+−0.04
+−0.14
+0.01
+0.08
+0.22
+2082
+Table 4 Descriptive statistics of the studied metrics (1/2)
+Empir Software Eng (2016) 21:2072-2106
+Entropy
+Relative churn
+Relative LT
+BUG
+COL
+GIP
+JDT
+MAV
+MOZ
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+NS
+1.000
+1.000
+1.000
+1.170
+1.000
+4.000
+1.000
+1.000
+1.000
+1.034
+1.000
+6.000
+0.000
+1.000
+2.000
+1.873
+2.000
+39.000
+1.000
+1.000
+1.000
+1.011
+1.000
+4.000
+0.000
+1.000
+1.000
+1.691
+1.000
+32.000
+1.000
+1.000
+1.000
+1.199
+1.000
+30.000
+NF
+1.000
+1.000
+1.000
+2.288
+2.000
+63.000
+1.000
+1.000
+2.000
+6.195
+4.000
+1297.000
+0.000
+2.000
+2.000
+6.737
+5.000
+2730.000
+1.000
+1.000
+1.000
+3.874
+2.000
+1645.000
+0.000
+1.000
+1.000
+4.386
+3.000
+732.000
+1.000
+1.000
+1.000
+3.705
+3.000
+2817.000
+0.000
+0.000
+0.000
+0.229
+0.551
+1.000
+0.000
+0.000
+0.000
+0.277
+0.667
+1.000
+0.000
+0.021
+0.625
+0.513
+0.863
+1.000
+0.000
+0.000
+0.000
+0.269
+0.670
+1.000
+0.000
+0.000
+0.000
+0.314
+0.753
+1.000
+0.000
+0.000
+0.000
+0.307
+0.722
+1.000
+0.000
+0.006
+0.017
+0.103
+0.057
+21.000
+0.000
+0.007
+0.093
+0.430
+0.384
+8.667
+0.000
+0.001
+0.007
+0.276
+0.035
+2877.000
+0.000
+0.011
+0.039
+0.167
+0.125
+264.000
+0.000
+0.013
+0.052
+0.399
+0.175
+295.767
+0.000
+0.004
+0.016
+0.136
+0.064
+170.733
+0.000
+210.000
+455.000
+591.400
+799.200
+2751.000
+0.000
+38.000
+77.000
+114.200
+150.000
+1371.000
+0.000
+787.000
+2524.000
+5385.000
+7422.000
+74172.000
+0.000
+105.000
+238.100
+437.700
+496.000
+7140.000
+0.000
+51.000
+156.300
+313.700
+376.900
+3994.000
+0.000
+170.000
+521.000
+970.600
+1269.000
+38980.000
+Fix
+−
+0.860
+−
+−
+0.328
+−
+−
+0.165
+−
+−
+0.305
+−
+−
+0.150
+−
+−
+0.640
+−
+shows an example ROC curve, which plots the false positive rate (i.e., the proportion of
+changes that are incorrectly classified as defect-inducing) on the x-axis and true positive
+rate (i.e., the proportion of defect-inducing changes that are classified as such) on the yaxis
+over all possible classification thresholds. The range of AUC is [0,1], where a larger
+Empir Software Eng (2016) 21:2072-2106
+Table 5 Descriptive statistics of the studied metrics (2/2)
+PER
+PLA
+POS
+RUB
+RHI
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+Minimum
+1st Quartile
+Median
+Mean
+3rd Quatile
+Maximum
+NS
+0.000
+1.000
+1.000
+1.851
+2.000
+183.000
+1.000
+1.000
+1.000
+1.058
+1.000
+18.000
+1.000
+1.000
+1.000
+1.301
+1.000
+11.000
+0.000
+1.000
+1.000
+1.126
+1.000
+10.000
+1.000
+1.000
+1.000
+1.305
+2.000
+12.000
+NF
+0.000
+1.000
+1.000
+3.350
+2.000
+974.000
+1.000
+1.000
+1.000
+3.763
+2.000
+1569.000
+1.000
+1.000
+1.000
+4.461
+3.000
+990.000
+0.000
+1.000
+1.000
+2.778
+3.000
+547.000
+1.000
+1.000
+2.000
+3.575
+3.000
+434.000
+0.000
+0.000
+0.000
+0.271
+0.669
+1.000
+0.000
+0.000
+0.000
+0.274
+0.678
+1.000
+0.000
+0.000
+0.000
+0.282
+0.689
+1.000
+0.000
+0.000
+0.000
+0.369
+0.813
+1.000
+0.000
+0.000
+0.047
+0.402
+0.872
+1.000
+0.000
+0.001
+0.005
+0.079
+0.023
+196.438
+0.000
+0.007
+0.040
+0.230
+0.152
+289.000
+0.000
+0.009
+0.026
+0.101
+0.075
+62.567
+0.000
+0.004
+0.016
+0.358
+0.060
+1397.385
+0.000
+0.005
+0.019
+0.266
+0.064
+431.012
+Entropy
+Relative churn
+Relative LT
+AUC indicates better prediction performance. If the prediction accuracy is higher, the ROC
+curve becomes more convex in the upper left and the value of the AUC approaches 1. Any
+prediction model achieving an AUC above 0.5 is more effective than random guessing.
+4 Preliminary Study of Within-project Performance
+Models that perform well on data within the project have established a strong link between
+predictors and defect-proneness within that project. We suspect that properties of the
+relationship may still hold if the model is tested on another project.
+0.000
+318.000
+1196.000
+2772.000
+3379.000
+92171.000
+0.000
+62.000
+169.000
+354.700
+410.000
+8744.000
+0.000
+254.000
+567.000
+853.300
+1136.200
+11326.000
+0.000
+60.000
+231.000
+486.700
+626.000
+13060.000
+0.000
+217.800
+764.000
+1134.300
+1749.100
+6565.000
+2083
+Fix
+−
+0.201
+−
+−
+0.400
+−
+−
+0.437
+−
+−
+0.192
+−
+−
+0.431
+−
+2084
+Empir Software Eng (2016) 21:2072-2106
+iitvse .60
+o
+P
+rueT .04
+0
+.
+1
+8
+.
+0
+2
+.
+0
+0
+.
+0
+AUC=0.8
+AUC=0.5
+0.0
+0.2
+0.4
+0.6
+False Positive
+0.8
+1.0
+Fig. 1 An example of ROC curve in the case of AUC=0.8 and AUC=0.5
+4.1 Approach
+We test all JIT cross-project model combinations available with our 11 datasets (i.e., 110
+combinations = 11 × 10). We build JIT models using the historical data from one project
+for training and test the prediction performance using the historical data from each other
+project.
+To measure within-project performance, we select one project as the training dataset,
+perform tenfold cross-validation using data from the same project and then calculate the
+AUC values. The tenfold cross-validation process randomly divides one dataset into ten
+folds of equal sizes. The first nine folds are used to train the model, and the last fold is used
+to test it. This process is repeated ten times, using a different fold for testing each time. The
+prediction performance results of each fold are then aggregated. We refer to this aggregated
+value of within-project model performance as within-project AUC.
+We validate whether or not datasets that have strong within-project prediction performance
+also perform well in a cross-project context. To measure the cross-project model
+performance, we test each within-project model using the data of all of the other projects.
+We use all of the data of each project to build the within-project model. We perform ten
+combinations of cross-project prediction (11 projects - 1 for training). Finally, we compare
+within-project and cross-project AUC values.
+4.2 Results
+Table 6 shows the AUC values that we obtained. Each row shows the projects that we
+used for testing and each column shows the projects that we used for training. Diagonal
+values (gray-colored cells) show the within-project AUC values. For example, the COLCOL
+cell is the AUC value of the tenfold cross-validation in the Columba project. Other
+cells show the cross-project prediction results. For example, the cell shown in boldface
+Empir Software Eng (2016) 21:2072-2106
+2085
+Table 6 Summary of AUC values for within-project prediction and cross-project prediction
+shows the performance of the JIT model learned using Bugzilla project data and tested using
+Columba project data.
+Figure 2 shows the cross-project performance (non-gray cells in Table 6) normalized by
+the performance of the within-project model using beanplots (Kampstra 2008). Beanplots
+are boxplots in which the vertical curves summarize the distribution of the dataset. The solid
+horizontal lines indicate the median value.
+The beanplots are sorted in descending order along the X-axis according to the AUC
+value of within-project prediction. If there were truly a relationship between good withinproject
+and cross-project prediction, one would expect that the beanplots should also
+descend in value from left to right. Since no such pattern emerges, it seems that there is
+no relationship between the within-project and cross-project performance of a JIT model.
+We validate our observation statistically using Spearman correlation tests. We calculate the
+Spearman correlation between the rank of the AUC value of within-project prediction and
+the median of the AUC values of cross-project prediction. The resulting value is ρ = 0.036
+(p = 0.924).
+0
+UC 10
+A
+tce 90
+j
+o
+rP 08
+n
+i
+h
+itW 70
+f
+o
+ge 60
+a
+t
+n
+rce 50
+e
+P
+0
+4
+MAV
+RHI
+MOZ
+GIP
+POS
+PLA
+COL
+BUG
+JDT
+PER
+RUB
+Fig. 2 Cross-project performance of models trained on each project. Projects are sorted by within-project
+performance along the x-axis. Y-axis shows the cross-project performance (non-gray cells in Table 6)
+normalized by the performance of the within-project model
+2086
+5 Empirical Study Results
+Empir Software Eng (2016) 21:2072-2106
+In this section, we present the results of our empirical study with respect to our three
+research questions.
+5.1 (RQ1) Do JIT Models Selected Using Project Similarity Perform well in a
+Cross-project Context?
+We explore domain-agnostic (RQ1-1) and domain-aware (RQ1-2) types of similarity
+between the studied projects. Domain-agnostic similarity is measured using predictor metric
+values, whereas domain-aware similarity is measured using project details. We discuss
+our results with respect to each style of similarity below.
+5.1.1 (RQ1-1) approach
+We first validate whether or not we obtain better prediction performance when we use the
+models trained using a project that has similar domain-agnostic characteristics with a testing
+project. Figure 3 provides an overview of our approach to calculate the domain-agnostic
+similarity between two projects. We describe each step below:
+1.
+2.
+We calculate the Spearman correlation between a dependent variable and each predictor
+variable in the training dataset (Step 1 of Fig. 3).
+We select the three predictor variables (q1, q2 and q3) that have the highest Spearman
+correlation values (the gray shaded variables in Step 2 of Fig. 3). We perform this
+Fig. 3 The five steps in the technique for calculating the domain-agnostic similarity between two projects
+Empir Software Eng (2016) 21:2072-2106
+2087
+3.
+4.
+5.
+step because we would like to focus on the metrics that have strong relationships with
+defect-inducing changes.
+We then select the same three predictor variables (r 1, r 2 and r 3) from testing dataset
+(the grey shaded variables in Step 3 of Fig. 3).
+We calculate the Spearman correlation between q1 and q2 (Q1), q2 and q3 (Q2), and
+q3 and q1 (Q3) to obtain a three-dimensional vector (Q1, Q2, Q3). We repeat these
+steps using the r 1, r 2 and r 3 to obtain another vector (R1, R2, R3) for testing dataset.
+Finally, we obtain our similarity measure by calculating the Euclidean distance between
+(Q1, Q2, Q3) and (R1, R2, R3).
+In RQ1-1, we select the prediction model of the most similar project with a testing
+project. In a prediction scenario, we will not know the value of the dependent variable, since
+it is what we aim to predict. Hence, our similarity metric does not rely on the dependent
+variable of the testing dataset.
+5.1.2 (RQ1-1) results
+Figure 4 shows the percentage of within-project performance that the model for the most
+similar project achieves in a cross-project context. We achieve a minimum of 88 % of the
+within-project performance by selecting similar cross-project models. These results suggest
+that our domain-agnostic similarity metric helps to identify stable JIT models with strong
+cross-project prediction performance from a list of candidates.
+To further analyze how well our domain-agnostic similarity approach is working, we
+check the relationship between similarity ranks and actual ranks. While the similarity ranks
+are measured by ordering projects using our domain-agnostic similarity metric, the actual
+ranks are measured by ordering projects according to the AUC of cross-project prediction
+(normalized by within-project AUC). When we use our domain-agnostic similarity metric
+for model selection, the actual top-ranked project (i.e., the cross-project model that performs
+the best for this project) is chosen for 3 of the 11 studied projects (Columba, Gimp and
+Platform), the second ranked project is chosen for 1 studied project (Mozilla) and the third
+ranked project is chosen for 2 studied projects (Bugzilla and Perl). Altogether, 8 projects
+perform better than the sixth (median) rank. This result suggests that our domain-agnostic
+similarity metric helps to select top-performing JIT models for cross-project prediction.
+On the other hand, while our domain-agnostic results are promising, there are many
+thresholds that must be carefully selected. A threshold analysis reveals that the models
+Fig. 4 [RQ1-1] Effect of
+selecting training data by degree
+of domain-agnostic similarity
+C
+AU 10
+tc 1
+e
+j
+roP 00
+n 1
+i
+h
+it
+fW 90
+o
+e
+tag 80
+n
+e
+c
+re 0
+P 7
+2088
+Empir Software Eng (2016) 21:2072-2106
+selected by our domain-agnostic similarity perform best when a small number of predictor
+variables (4 or fewer) are used. When we use too many variables (i.e., more than 4) in
+the domain-agnostic similarity calculation, the models identified as highly similar tend to
+perform worse.
+5.1.3 (RQ1-2) approach
+In addition to the threshold-sensitivity of our domain-agnostic similarity metric, one would
+also require access to the data of all other projects in order to calculate it. This may not be
+practical in a cross-company context due to privacy concerns of the companies involved.
+To avoid such limitations, we set out to study privacy-preserving means of selecting similar
+projects.
+Previous work has also explored the use of similarity to select models that will likely
+perform well in a cross-project context. For example, Zimmermann et al. (2009) propose
+the following project-based metrics (i.e., context factors) to calculate similarity:
+Company (Mozilla Corp/Eclipse/Apache foundation/Others): the organization responsible
+for developing a system.
+Intended audience (End user/Developer): whether a system is built for interaction with
+end users (e.g., Mozilla) or built for development professionals (e.g., Ruby on Rails).
+User interface (Graphical/Toolkit/Non-interactive): The type of system. For example,
+Gimp has a GUI, while Maven-2 is a toolkit and Perl is non-interactive.
+Product uses database (Yes/No): whether or not a system persists data using a database.
+Programming language (Java/JavaScript/C/C++/Perl/Ruby): programming language
+used in the system development. We identify the programming language using Linguist.1
+Similar to other work (McIntosh et al. 2014), if there are more than 10 % of files that are
+written in a programing language, then that programming languages is considered used
+in the system development.
+We refer to this style of similarity as “domain-aware”, since it focuses on characteristics
+of software projects, rather than the data that is produced. In RQ1-2, we study whether these
+domain-aware characteristics can also help to select JIT models that will perform well in a
+cross-project context.
+Due to differences in our experimental settings, we could not adopt all of the domainaware
+metrics of Zimmermann et al. (2009). For example, we do not use “open source
+or not” and “global development or not”, since we only study open source projects with
+globally distributed development teams.
+We calculate the Euclidean distance between each project using the domain-aware
+project characteristics described above. A categorical variable (e.g., company) is transformed
+into dummy variables (e.g. if the variable has n categories, it is transformed into
+n − 1 dummy variables). For example, the company column is transformed into Mozilla
+(Yes:1 or No:0), Eclipse (Yes:1 or No:0) and Apache (Yes:1 or No:0). If a project is an
+Eclipse subproject like JDT, each column is 0, 1, 0. If a project is in others line, then each
+1https://github.com/github/linguist
+Empir Software Eng (2016) 21:2072-2106
+2089
+column is 0, 0, 0. Similar to RQ1-1, we use our domain-aware similarity score to select the
+model with the project that is most similar to the testing project.
+5.1.4 (RQ1-2) results
+Figure 5 shows the result of the impact of metrics for calculating project similarity. For
+comparison, we also show the beanplot of the domain-agnostic similarity metric from Fig. 4.
+The results indicate that, although the beanplot of domain-aware similarity covers a
+broader range than the domain-agnostic one, its median values is higher. Similar to our
+domain-agnostic approach, we analyze the relationship between similarity ranks and actual
+ranks. The actual top-ranked project (i.e., the project whose model performs the best) is
+chosen for 3 of the 11 studied projects (Maven-2, Platform and Rhino), the second ranked
+project is chosen for 2 studied projects (Columba and Eclipse JDT) and the third ranked
+project is chosen for 1 studied project (Ruby on Rails). Altogether, the model selected by
+our domain-aware similarity metric is in the top 3 ranks according to actual model performance
+in 6 of the 11 studied projects, and above the sixth (median) rank in 7 of the 11
+studied projects. This result suggests that the domain-aware metrics also help to select JIT
+models that tend to perform well in a cross-project context.
+5.2 (RQ2)Do JIT Models Built Using a Pool of Data from Several Projects
+Perform well in a Cross-project Context?
+A model that was fit using data from only one project may be overfit, i.e., too specialized for
+the project from which the model was fit that it would not apply to other projects. It would
+be useful to use the data of several projects from the entire set of diverse projects to build a
+JIT model, since such diversity would likely improve the robustness of the model (Turhan
+et al. 2009; Zhang et al. 2014).
+We evaluate three approaches that leverage the entire pool of training datasets (RQ2-1,
+RQ2-2 and RQ2-3). First, we simply merge the datasets of all of the other projects into a
+C
+tcAU 101
+e
+j
+o
+rP 00
+n 1
+i
+h
+it
+fW 90
+o
+e
+tag 80
+n
+e
+c
+r
+eP 07
+Domain agnostic
+Domain aware
+Fig. 5 The impact of metrics for calculating domain-aware similarity
+2090
+Empir Software Eng (2016) 21:2072-2106
+single pool of data, and use it to train a single model (RQ2-1). Next, we train a model using
+a dataset assembled by drawing more instances from similar projects (RQ2-2). Finally, we
+transform the data of each project using a rank transformation as proposed by Zhang et al.
+(2014) for cross-project models (RQ2-3).
+5.2.1 (RQ2-1) approach
+In RQ2-1, we set aside one project for testing and merge the datasets of the other projects
+together to make one large training dataset. Next, we train one model using the merged
+training dataset. Finally, we test the model using the dataset we left out of the merge
+operation.
+5.2.2 (RQ2-1) Results
+Figure 6 shows the results of our simple merging technique. The models trained using these
+large datasets yields strong cross-project performance ranging between 85 %-96 % of the
+within-project AUC. These results suggest that even a simple approach to combine the data
+of multiple projects yields JIT models that perform well in a cross-project context.
+5.2.3 (RQ2-2) approach
+While JIT models trained using a combined pool of data from the other studied projects
+yields models that perform nearly as well as within-project ones, our result from RQ1 suggests
+that datasets from similar projects may prove more useful than others. Therefore, we
+set out to evaluate two approaches to apply the similarity concept to our merging of training
+datasets:
+1.
+2.
+For each testing dataset, we use our metrics from RQ1 to select similar datasets to be
+merged into a larger training dataset. We select the top n most similar projects for the
+training dataset.
+As a threshold-independent alternative to the above approach, we randomly sample
+(10−1(0r−1)) × 100 % of the changes from each training dataset, where r is the project
+rank based on our similarity metric. For example, 100 % of changes are picked up from
+the most similar project, while 90 % of changes are picked up from the second most
+similar project, and so on.
+Fig. 6 [RQ2-1] The result of a
+dataset merging approach
+C
+U 0
+tcA 11
+e
+j
+roP 00
+1
+n
+i
+h
+it 0
+fW 9
+o
+e
+tag 08
+n
+e
+c
+re 0
+P 7
+0
+C 11
+U
+A
+t
+c
+jroe 00
+P 1
+n
+iit
+h
+foW 90
+e
+g
+a
+t
+n
+rce 80
+e
+P
+0
+7
+0
+C 11
+U
+A
+t
+c
+jroe 00
+P 1
+n
+iit
+h
+foW 90
+e
+g
+a
+t
+n
+rce 80
+e
+P
+0
+7
+Simple Merge
+Similarity Merge (3)
+Similarity Merge (5)
+Weighted Similarity Merge
+(a) Domain-agnostic
+Empir Software Eng (2016) 21:2072-2106
+2091
+Simple Merge
+Similarity Merge (3)
+Similarity Merge (5)
+Weighted Similarity Merge
+(b) Domain-aware
+Fig. 7 [RQ2-2] The results of our dataset merging approaches that leverage project similarity
+5.2.4 (RQ2-2) results
+Figure 7 shows the results of applying our similarity-inspired approaches to merging training
+datasets. Similarity Merge (3) and Similarity Merge (5) show the results of using a
+threshold of 3 and 5 projects respectively, while Weighted Similarity Merge shows the result
+of a weighing approach. To reduce clutter, we only show the Similarity Merge with threshold
+values of 3 and 5. However, we provide online access to the figure showing all of the
+possible threshold values, i.e., between 2 and 10.2
+When focusing on domain-agnostic similarity, Fig. 7a shows that Similarity Merge (3)
+slightly outperforms the other RQ2 models (i.e., Simple Merge, Similarity Merge (3),
+Similarity Merge (5) and Weighted Similarity Merge) in terms of the median value. However,
+the range of the beanplot in Similarity Merge (3) is slightly broader than the other
+three approaches. We check the difference of the median values among the four models
+2http://posl.ait.kyushu-u.ac.jp/Disclosure/emse jit.html
+2092
+Empir Software Eng (2016) 21:2072-2106
+using Tukey's HSD, which is a single-step multiple comparison procedure and statistical
+test (Coolidge 2012). The test results indicate that the difference between the four result sets
+are not statistically significant (p = 0.941).
+Similarly, when we focus on domain-aware similarity, Fig. 7b shows that Similarity
+Merge (5) is the strongest performer. Indeed, the Similarity Merge (5) models even outperform
+the within-project models of Columba, Mozilla, PostgreSQL and Ruby on Rails
+(> 100% in Fig. 7b). On the other hand, the performance of the Weighted Similarity
+Merge models appear lower due to its poor performance on the Rhino project where it only
+achieved 71 % of the within-project AUC. Table 6 shows that the Rhino project is our second
+strongest within-project performer, with an AUC of 0.81. Hence, the poor performance
+of our Weighted Similarity Merge model is likely inflated due to Rhino's high within-project
+performance.
+Our findings suggests that a simple merging approach as was used in RQ2-1 would
+likely suffice for future work. The benefit of training models using all of the projects tend
+to outweigh the benefits of narrowing the training dataset down to a smaller set of similar
+projects.
+5.2.5 (RQ2-3) approach
+RQ2-1 and RQ2-2 have shown that larger pools of training data tend to produce more accurate
+cross-project prediction models. This complements recent findings that “universal”
+defect prediction models may be an attainable goal (Zhang et al. 2014). However, in order to
+build a versatile “universal” defect model, Zhang et al. (2014) propose context-aware rank
+transformation of predictor variables. Hence, we suspect that applying such transformations
+to our pool of training datasets may improve the performance of JIT cross-project models.
+We briefly explain how we build a universal defect prediction model (details in (Zhang
+et al. 2014)). The main idea of the universal model is to cluster projects based on the similarity
+of the distributions of each predictor and to derive rank transformations using quantiles
+of predictors for a cluster.
+Figure 8 shows the steps that we followed to build a universal model. Each project is
+classified into one group based on context factors that have similar distributions of software
+metrics. Then, for each metric, we compare the distribution of the metric between groups.
+If there are few differences (i.e., similar projects) between two groups using statistical tests
+(i.e., Mann-Whitney U test, Bonferroni correction and Cohen's standards), we merge them
+into one cluster. This step is conducted for each metric. Therefore, two groups may be in
+the same cluster according to one metric, but different clusters according to another. Then,
+in each cluster, we transform the raw metrics value to the k × 10 % quantiles to make
+the distributions fit on the same scale across projects. For example, given a metric with
+values 11, 22, 33, 44, 55, 66, 77, 88 and 99 in one cluster, a new raw value of 25 would be
+transformed to the 3rd quantile, since 25 ≥ 22 (i.e., the 2nd quantile), 25 < 33 (i.e., the 3rd
+quantile).
+After the above steps, the metrics are transformed such that they range between 1 and
+10. Finally, we set aside the data of one project for testing, and use the remaining data to
+train a “universal” prediction model.
+Empir Software Eng (2016) 21:2072-2106
+2093
+Fig. 8 Steps to train a universal defect prediction model
+We adopt the same context factors as Zhang et al (2013, 2014). We briefly outline these
+factors.
+Programming language (Java/JavaScript/C/C++/Perl/Ruby): programming language
+used in the system development. We identify the programming language using Linguist.3
+We choose the most frequently used programming language in the system (i.e.,
+the programming language with the largest number of files).
+Issue Tracking (True/False): whether or not a project uses an issue tracking system.
+Total Lines of Code (least, less, more, most): total lines of code of source code in the
+system. Based on the first, second and third quartiles, we separate the set of projects into
+four groups (i.e., least, less, more and most).
+Total Number of Files (least, less, more, most): total number of files in the system.
+Based on the first, second and third quartiles, we separate the set of projects into four
+groups (i.e., least, less, more and most).
+Total Number of Commits (least, less, more, most): total number of commits in the system.
+Based on the first, second and third quartiles, we separate the set of projects into
+four groups (i.e., least, less, more and most).
+Total Number of Developers (least, less, more, most): total number of unique developers
+in the system. Based on the first, second and third quartiles, we separate the set of projects
+into four groups (i.e., least, less, more and most).
+We exclude the issue tracking context factor, since all of the studied projects use an issue
+tracking system.
+5.2.6 (RQ2-3) results
+Figure 9 shows the performance of universal JIT defect prediction models. The results show
+that the universal model achieves 56 %-84 % of the AUC of the within-project models. This
+is well below the results that we observed in the prior sections.
+Our sample of 11 projects is similar in size to prior work on cross-project prediction,
+which focuses on samples of 8-12 projects (Nam et al. 2013; Zimmermann et al. 2009).
+However, this sample size may not be large enough to build a reliable universal defect
+prediction model. Indeed, Zhang et al. (2014) used 1,398 projects (937 SourceForge projects
+3https://github.com/github/linguist
+2094
+Fig. 9 [RQ2-3] The results of
+“universal” defect prediction
+(Zhang et al. 2014) in a JIT
+cross-project context
+0
+0
+C 1
+U
+A
+jtce 09
+o
+r
+P
+iithn 80
+W
+f
+o 0
+e 7
+g
+a
+t
+n
+e
+c 0
+re 6
+P
+Empir Software Eng (2016) 21:2072-2106
+and 461 GoogleCode projects) initially collected by Mockus (2009) to build a universal
+defect prediction model at the file-level. Future work is needed to evaluate the performance
+of such universal modeling in the context of JIT prediction using a large sample of projects.
+5.3 (RQ3)Do Ensembles of JIT Models Built from Several Projects Perform well
+in a Cross-project Context?
+In RQ2, we leveraged our collection of training datasets by training a single model using
+a pool of their collective data. Alternatively, in RQ3, we combine our training projects
+by training a model on each project individually (Mısırlı AT et al. 2011; Thomas et al.
+2013). Then, each change in the testing project is passed through each of the project-specific
+models. Thus, for each change in the testing project, we receive several “votes”, one from
+each of the project-specific models. We evaluate an approach that treats the votes of each of
+the project-specific models in training datasets equally (RQ3-1), and an approach that gives
+more weight to the votes of models trained using similar projects (RQ3-2).
+5.3.1 (RQ3-1) approach
+In RQ3-1, we build separate prediction models using each training dataset. To calculate the
+likelihood of a change being defect-inducing, we push the change through each model, and
+take the mean of the predicted probabilities.
+We illustrate the voting method using an example in the case of Mozilla below. First,
+we select the 10 models of the other (non-Mozilla) projects. Given a change from Mozilla
+project, we obtain 10 predicted probabilities from the 10 models. Finally, we calculate the
+mean of the 10 probabilities.
+5.3.2 (RQ3-1) results
+Figure 10 shows that the simple voting approach that we propose performs well, achieving
+85 %-99 % of the within-project AUC values. Indeed, in Mozilla, the voting approach
+performs almost as well as the within-project model (99 %).
+Empir Software Eng (2016) 21:2072-2106
+Fig. 10 [RQ3-1] The results of
+our simple voting approach
+2095
+C
+U 0
+tA 11
+c
+e
+j
+o
+rP 00
+in 1
+h
+it
+foW 09
+e
+g
+a
+tn 0
+e 8
+c
+r
+e
+P
+0
+7
+5.3.3 (RQ3-2) approach
+Similar to RQ2-1 and RQ2-2, we suspect that applying similarity heuristics to our voting
+approaches may improve the performance of our ensemble models. We again evaluate two
+approaches to apply similarity to our JIT models:
+1.
+2.
+For each testing dataset, we use our similarity metrics to select n training datasets, and
+then build prediction models for each selected training dataset. Then, we push a change
+through each prediction model and then take the mean of the predicted probabilities.
+We evaluate a threshold-independent approach that provides more weight to the votes
+of the models of similar projects. Similar to RQ2, we use 10−1(0r−1) × 100 % to calculate
+the weight of a project's vote, where r is the project rank based on our similarity metric.
+For example, the vote of the most similar project is given full (100 %) weight, while
+the vote of the second most similar project is given a weight of 90 %, and so on.
+5.3.4 (RQ3-2) results
+Figure 11 shows the results of applying our similarity-driven voting approaches. Again, to
+reduce clutter, we only show the Similarity Voting with threshold values of 3 and 5, and
+provide online access to the figure showing all possible threshold values between 2 and 10.4
+We find that models trained using either of our similarity metrics do not tend to outperform
+the simple voting approach of RQ3-1. Tukey's HSD test results indicate that the
+difference between the result sets are not statistically significant in either of the cases
+(pagnostic = 0.765, paware = 0.661). Hence, we the simple voting approach will likely
+suffice for future work.
+4http://posl.ait.kyushu-u.ac.jp/Disclosure/emse jit.html
+2096
+AUC 110
+t
+c
+e
+j
+ro 0
+P 10
+n
+iit
+h
+fW 0
+o 9
+e
+g
+a
+t
+n
+rce 80
+e
+P
+0
+7
+AUC 110
+t
+c
+e
+j
+ro 0
+P 10
+n
+iit
+h
+fW 0
+o 9
+e
+g
+a
+t
+n
+rce 80
+e
+P
+0
+7
+Empir Software Eng (2016) 21:2072-2106
+Simple Voting
+Similarity Voting (3)
+Similarity Voting (5)
+Weighted Similarity Voting
+(a) Domain-agnostic
+Simple Voting
+Similarity Voting (3)
+Similarity Voting (5)
+Weighted Similarity Voting
+(b) Domain-aware
+Fig. 11 The result of similarity-driven voting approaches
+6 Discussion
+6.1 Summary of Results
+Below, we use statistical tests to provide yes/no answers for our research questions.
+(Section 4) The within-project performance of a JIT model is not a strong indicator of its
+performance in a cross-project context.
+We calculate the Spearman correlation between the rank of the AUC value of withinproject
+prediction and the median of the AUC values of cross-project prediction. The
+value of Spearman correlation is ρ = 0.036 (p = 0.924).
+(RQ1) Do JIT models selected using project similarity perform well in a cross-project
+context?
+The answer is no. Within-project JIT models significantly outperform domain-aware
+similarity techniques (p = 0.005).5 Prediction performance was not improved by
+selecting datasets for training that are highly similar to the testing dataset.
+Empir Software Eng (2016) 21:2072-2106
+2097
+(RQ2) Do JIT models built using a pool of data from several projects perform well in a
+cross-project context?
+We find no evidence of a difference in the performance of within- and cross-project
+models in RQ2. We find no statistically significant difference in the performance of
+within-project JIT models and similarity merge (5) using domain-aware similarity (p =
+0.967).5 Several datasets can be used in tandem to produce more accurate cross-project
+JIT models by sampling from a larger pool of training data.
+(RQ3) Do ensembles of JIT models built from several projects perform well in a crossproject
+context?
+We find no evidence of a difference in the performance of within- and cross-project
+models in RQ3. We find no statistically significant difference in the performance of
+within-project JIT models and weighted similarity voting using domain-aware similarity
+(p = 0.825).5 Combining the predictions of several models could contribute to building
+more accurate cross-project JIT models.
+6.2 Practical Guidelines
+We propose the following guidelines to assist in future work:
+Guideline 1: Future work should not use the within-project performance of a JIT
+model as a indicator of its performance in a cross-project context.
+The value of Spearman correlation is ρ = 0.036 (Please see Section 6.1). In addition,
+even if we build the cross-project JIT models using the top project (i.e., MAV)
+and the bottom project (i.e., RUB) in Fig. 2, we obtain the models of similar prediction
+performance.
+Guideline 2: Future work should not use similarity to filter away dissimilar project
+data or models.
+Our domain-agnostic and domain-aware similarity select JIT models that tend to perform
+better than the median cross-project performance. However, within-project JIT models
+outperform similarity-selected cross-project models to a statistically significant degree.
+Guideline 3: Future work should consider data and models from other projects in
+tandem with one another to produce more accurate cross-project JIT models.
+In practical settings, a simple merge approach (RQ2-1) might be the best choice that we
+evaluated in our experiments. We illustrate the advantages of the simple merge approach
+using the following example: Alice is a manager and Bob is a developer of a new system.
+Alice wants to use JIT models to promote risk awareness, but the system has not
+accrued sufficient historical data to train such models. She decides to use a cross-project
+approach. If Alice adopts the simple merge approach, she only needs to build one prediction
+model. On the other hand, if she adopts the voting method, she needs to build
+several prediction models (i.e., one model for every selected dataset). Thus, the simple
+merge approach may require less effort in the building phrase.
+5We choose domain-aware similarity techniques, similarity merge (5) using domain-aware similarity and
+weighted similarity voting using domain-aware similarity, which show the best median value in each RQ,
+and within-project JIT models as ideal models. We check the difference of the median values among the four
+models using Tukey's HSD. If we find that there is not statistically significant difference between withinand
+one cross-project JIT models, we find no evidence of a difference in the performance of within- and
+cross-project models in those cases (i.e., the cross-project model perform well).
+2098
+Empir Software Eng (2016) 21:2072-2106
+Table 7 Summary of precision values for within-project prediction and cross-project prediction
+6.3 Additional Analysis
+6.3.1 Do other performance metrics provide different results?
+To avoid the impact of the threshold that is used for classification, we used AUC. However,
+there are several studies that use threshold-dependent performance metrics (e.g., precision,
+recall and F-measure) (Kim et al. 2008; Kamei et al. 2013). To better understand the
+prediction performance we obtained, we also show the results using threshold-dependent
+metrics.
+The JIT models that we train using Random forest produce a risk probability for each
+change, i.e., a value between 0 and 1. We use a threshold value of 0.5, which means that if
+a change has a risk probability greater than 0.5, the change is classified as defect-inducing,
+otherwise it is classified as clean. Tables 7, 8 and 9 show precision, recall and F-measure of
+our JIT models, similar to the AUC of Table 6.
+In addition to AUC, within-project JIT models also outperform cross-project JIT models
+in terms of f-measure, precision and recall. While the median of the f-measures of crossproject
+models (0.419) is higher than that of random guessing (0.324), the median of the fmeasures
+of within-project models is still higher than cross-project models (0.521). Similar
+observations hold for precision and recall.
+Table 8 Summary of recall values for within-project prediction and cross-project prediction
+Empir Software Eng (2016) 21:2072-2106
+2099
+Table 9 Summary of F-measure values for within-project prediction and cross-project prediction
+6.3.2 Does a sampling approach provide different results?
+Similar to Kamei et al. (2007), Menzies et al. (2008), we use a re-sampling approach for
+our training data to deal with the imbalance of defect-inducing and clean classes in our
+dataset. On the other hand, Turhan (2012) points out that such sampling approaches make
+the distributions of the training and testing sets incongruent. Therefore, we reevaluate our
+experiment from Section 4 without re-sampling the training dataset. Table 10, Tables 11, 12
+and 13 show AUC, precision, recall and F-measure of our JIT models.
+We find that there are negligible differences between the models that are trained with
+and without re-sampling the training data in terms of AUC. The median AUC values for
+cross-project prediction are 0.71 with re-sampling and 0.69 without.
+On the other hand, re-sampling tends to provides better model performance in terms of
+f-measure and recall. We find that cross-project f-measure values are 0.42 with re-sampling
+and 0.25 without. Recall values show a similar trend to the f-measure values. We also found
+that re-sampling tends to decrease the prediction performance in terms of precision. These
+results are consistent with the results of our previous work (Kamei et al. 2007).
+7 Threats to Validity
+In this section, we discuss the threats to the validity of our empirical study.
+Table 10 Summary of AUC values for models using the training data without re-sampling
+2100
+Empir Software Eng (2016) 21:2072-2106
+Table 11 Summary of precision values for models using the training data without re-sampling
+7.1 Construct Validity
+We estimate within-project prediction performance using tenfold cross validation. However,
+tenfold cross validation may not be representative of the actual cross-version model performance.
+In reality, training data is always younger than the testing data. When using tenfold
+cross validation, folds are constructed randomly, which may produce folds that use older
+changes for training than testing. While tenfold cross-validation is a popular performance
+estimation technique (Kim et al. 2008; Moser et al. 2008), other performance estimation
+techniques (e.g., using training and testing data based on releases) may yield different
+results.
+Although we study eight metrics spanning three categories, there are likely other features
+of defect-inducing changes that we did not measure. For example, we suspect that the type
+of a change (e.g., refactoring (Moser et al. 2008; Ratzinger et al. 2008)) might influence the
+likelihood of introducing a defect. We plan to expand our metric set to include additional
+categories in future work.
+7.2 Internal Validity
+We use defect datasets provided by prior work (Kamei et al. 2013) that identify defectinducing
+changes using the SZZ algorithm (S´ liwerski et al. 2005). The SZZ algorithm
+Table 12 Summary of recall values for models using the training data without re-sampling
+Empir Software Eng (2016) 21:2072-2106
+2101
+Table 13 Summary of F-measure values for models using the training data without re-sampling
+is commonly used in defect prediction research (Kim et al. 2008; Moser et al. 2008), yet
+has known limitations. For example, if a defect is not recorded in the VCS commit message
+or the keywords used defect identifiers differ from those used in the previous study (e.g.,
+“Bug” or “Fix” (Kamei et al. 2007)), such a change will not be tagged as defect-inducing.
+The use of an approach to recover missing links that improve the accuracy of the SZZ
+algorithm (Wu et al. 2011) may improve the accuracy of our results.
+7.3 External Validity
+We only study 11 open source systems, and hence, our results may not generalize to all
+software systems. However, we study large, long-lived systems from various domains in
+order to combat potential bias in our results. Nonetheless, replication of our study using
+additional systems may prove fruitful.
+We use random forest to evaluate the effect of the JIT prediction across projects, since
+this modeling technique is known to perform well for defect prediction. However, using
+other modeling techniques may produce different results.
+8 Conclusions
+In this paper, we study approaches for constructing Just-In-Time (JIT) defect prediction
+models that identify source code changes that have a high risk of introducing a defect.
+Since one cannot produce JIT models if insufficient training data is available, e.g., a project
+does not archive change histories in a VCS repository, we empirically evaluated the use of
+datasets collected from other projects (i.e., cross-project prediction). We evaluate the use
+of conventional data mining and software engineering context to produce JIT models that
+perform well in a cross-project context. Through an empirical study on 11 open source
+projects, we make the following observations:
+-
+The within-project performance of a JIT model is not a strong indicator of its
+performance in a cross-project context (Section 4).
+Although using similarity to select JIT models from a collection of choices tends to
+identify the best-performing option for a cross-project context, the performance of these
+models is significantly lower than within-project model performance (RQ1).
+2102
+-
+Several datasets can be used in tandem to produce more accurate cross-project JIT
+models by sampling from a larger pool of training data (RQ2) or combining the predictions
+of several models (RQ3). The performance of these models is statistically
+indistinguishable from within-project JIT model performance.
+However, using project similarity to filter away dissimilar project data (RQ2) or models
+(RQ3) does not tend to improve the cross-project performance of JIT models that use
+all available training data.
+Acknowledgments This research was partially supported by JSPS KAKENHI Grant Numbers 15H05306
+and 24680003 and the Natural Sciences and Engineering Research Council of Canada (NSERC).
+Empir Software Eng (2016) 21:2072-2106
+References
+Basili VR, Briand LC, Melo WL (1996) A validation of object-oriented design metrics as quality indicators.
+IEEE Trans Softw Eng 22(10):751-761
+Bettenburg N, Nagappan M, Hassan AE (2012) Think locally, act globally: Improving defect and effort
+prediction models. In: Proc. Int'l Working Conf. on Mining Software Repositories (MSR'12), pp 60-69
+Breiman L (2001) Random forests. Mach Learn 45(1):5-32
+Briand LC, Melo WL, Wu¨st J (2002) Assessing the applicability of fault-proneness models across objectoriented
+software projects. IEEE Trans Softw Eng 28(7):706-720
+Coolidge FL (2012) Statistics: A Gentle Introduction. SAGE Publications (3rd ed.)
+D'Ambros M, Lanza M, Robbes R (2010) An extensive comparison of bug prediction approaches. In: Proc.
+Int'l Working Conf. on Mining Software Repositories (MSR'10), pp 31-41
+Fukushima T, Kamei Y, McIntosh S, Yamashita K, Ubayashi N (2014) An empirical study of just-intime
+defect prediction using cross-project models. In: Proc. Int'l Working Conf. on Mining Software
+Repositories (MSR'14), pp 172-181
+Graves TL, Karr AF, Marron JS, Siy H (2000) Predicting fault incidence using software change history. IEEE
+Trans Softw Eng 26(7):653-661
+Guo PJ, Zimmermann T, Nagappan N, Murphy B (2010) Characterizing and predicting which bugs get
+fixed: An empirical study of microsoft windows. In: Proc. Int'l Conf. on Softw. Eng. (ICSE'10) vol 1,
+pp 495-504
+Hall T, Beecham S, Bowes D, Gray D, Counsell S (2012) A systematic literature review on fault prediction
+performance in software engineering. IEEE Trans Softw Eng 38(6):1276-1304
+Hassan AE (2009) Predicting faults using the complexity of code changes. In: Proc. Int'l Conf. on Softw.
+Eng. (ICSE'09), pp 78-88
+He Z, Shu F, Yang Y, Li M, Wang Q (2012) An investigation on the feasibility of cross-project defect
+prediction. Automated Software Engg 19(2):167-199
+Jiang Y, Cukic B, Menzies T (2008) Can data transformation help in the detection of fault-prone modules?
+In: Proc. Workshop on Defects in Large Software Systems (DEFECTS'08), pp 16-20
+Kamei Y, Monden A, Matsumoto S, Kakimoto T, Matsumoto Ki (2007) The effects of over and under
+sampling on fault-prone module detection. In: Proc. Int'l Symposium on Empirical Softw. Eng. and
+Measurement (ESEM'07), pp 196-204
+Kamei Y, Matsumoto S, Monden A, Matsumoto K, Adams B, Hassan AE (2010) Revisiting common bug
+prediction findings using effort aware models. In: Proc. Int'l Conf. on Software Maintenance (ICSM'10),
+pp 1-10
+Kamei Y, Shihab E, Adams B, Hassan AE, Mockus A, Sinha A, Ubayashi N (2013) A large-scale empirical
+study of just-in-time quality assurance. IEEE Trans Softw Eng 39(6):757-773
+Kampstra P (2008) Beanplot: A boxplot alternative for visual comparison of distributions. J Stat Softw,Code
+Snippets 28(1):1-9
+Kim S, Whitehead EJ, Zhang Y (2008) Classifying software changes: Clean or buggy IEEE Trans Softw Eng
+34(2):181-196
+Kocaguneli E, Menzies T, Keung J (2012) On the value of ensemble effort estimation. IEEE Trans Softw
+Eng 38(6):1403-1416
+Koru AG, Zhang D, El Emam K, Liu H (2009) An investigation into the functional form of the size-defect
+relationship for software modules. IEEE Trans Softw Eng 35(2):293-304
+Empir Software Eng (2016) 21:2072-2106
+2103
+Lessmann S, Baesens B, Mues C, Pietsch S (2008) Benchmarking classification models for software defect
+prediction: A proposed framework and novel findings. IEEE Trans Softw Eng 34(4):485-496
+Li PL, Herbsleb J, Shaw M, Robinson B (2006) Experiences and results from initiating field defect prediction
+and product test prioritization efforts at ABB Inc. In: Proc. Int'l Conf. on Softw. Eng. (ICSE'06), pp 413422
+Matsumoto S, Kamei Y, Monden A, Matsumoto K (2010) An analysis of developer metrics for fault
+prediction. In: Proc. Int'l Conf. on Predictive Models in Softw. Eng. (PROMISE'10), pp 18:1-18:9
+McIntosh S, Nagappan M, Adams B, Mockus A, Hassan AE (2014) A large-scale empirical study of
+the relationship between build technology and build maintenance. Empirical Software Engineering.
+doi:10.1.1/jpb001. http://link.springer.com/article/10.1007
+Menzies T, Turhan B, Bener A, Gay G, Cukic B, Jiang Y (2008) Implications of ceiling effects in defect
+predictors. In: Proc. Int'l Conf. on Predictive Models in Softw. Eng. (PROMISE'10), pp 47-54
+Menzies T, Butcher A, Marcus A, Zimmermann T, Cok D (2011) Local vs. global models for effort estimation
+and defect prediction. In: Proc. Int'l Conf. on Automated Software Engineering (ASE'11),
+pp 343-351
+Menzies T, Butcher A, Cok D, Marcus A, Layman L, Shull F, Turhan B, Zimmermann T (2013) Local versus
+global lessons for defect prediction and effort estimation. IEEE Trans Softw Eng 39(6):822-834
+Minku LL, Yao X (2014) How to make best use of cross-company data in software effort estimation? In:
+Proc. Int'l Conf. on Software Engineering (ICSE'14), pp 446-456
+Mısırlı AT, Bener AB, Turhan B (2011) An industrial case study of classifier ensembles for locating software
+defects. Softw Qual J 19(3):515-536
+Mockus A (2009) Amassing and indexing a large sample of version control systems: Towards the census of
+public source code history. In: Proc. Int'l Working Conf. on Mining Software Repositories (MSR'09),
+pp 11-20
+Mockus A, Weiss DM (2000) Predicting risk of software changes. Bell Labs Tech J 5(2):169-180
+Moser R, Pedrycz W, Succi G (2008) A comparative analysis of the efficiency of change metrics and static
+code attributes for defect prediction. In: Proc. Int'l Conf. on Softw. Eng. (ICSE'08), 181-190
+Nagappan N, Ball T (2005) Use of relative code churn measures to predict system defect density. In: Proc.
+Int'l Conf. on Softw. Eng. (ICSE'05), pp 284-292
+Nagappan N, Ball T, Zeller A (2006) Mining metrics to predict component failures. In: Proc. Int'l Conf. on
+Softw. Eng. (ICSE'06), pp 452-461
+Nam J, Pan SJ, Kim S (2013) Transfer defect learning. In: Proc. Int'l Conf. on Softw. Eng. (ICSE'13),
+pp 382-391
+Purushothaman R, Perry DE (2005) Toward understanding the rhetoric of small source code changes. IEEE
+Trans Softw Eng 31(6):511-526
+Rahman F, Posnett D, Devanbu P (2012) Recalling the ”imprecision” of cross-project defect prediction. In:
+Proc. Int'l Symposium on the Foundations of Softw. Eng. (FSE'12), pp 61:1-61:11
+Ratzinger J, Sigmund T, Gall HC (2008) On the relation of refactorings and software defect prediction. In:
+Proc. Int'l Working Conf. on Mining Software Repositories (MSR'08), pp 35-38
+Shihab E (2012) An exploration of challenges limiting pragmatic software defect prediction. PhD thesis,
+Queen's University
+Shihab E, Hassan AE, Adams B, Jiang ZM (2012) An industrial study on the risk of software changes. In:
+Proc. Int'l Symposium on the Foundations of Softw. Eng. (FSE'12), pp 62:1-62:11
+S´liwerski J, Zimmermann T, Zeller A (2005) When do changes induce fixes? In: Proc. Int'l Working Conf.
+on Mining Software Repositories (MSR'05), pp 1-5
+Tan M, Tan L, Dara S, Mayuex C (2015) Online defect prediction for imbalanced data. In: Proc. Int'l Conf.
+on Softw. Eng. (ICSE'13 SEIP), (To appear)
+Thomas SW, Nagappan M, Blostein D, Hassan AE (2013) The impact of classifier configuration and
+classifier combination on bug localization. IEEE Trans Softw Eng 39(10):1427-1443
+Turhan B (2012) On the dataset shift problem in software engineering prediction models. Empirical Softw
+Engg 17(1-2):62-74
+Turhan B, Menzies T, Bener AB, Di Stefano J (2009) On the relative value of cross-company and withincompany
+data for defect prediction. Empir Softw Eng 14(5):540-578
+Turhan B, Tosun A, Bener A (2011) Empirical evaluation of mixed-project defect prediction models. In: Proc.
+EUROMICRO Conf. on Software Engineering and Advanced Applications (SEAA'11), pp 396-403
+Wu R, Zhang H, Kim S, Cheung SC (2011) Relink: recovering links between bugs and changes. In: Proc.
+European Softw. Eng. Conf. and Symposium on the Foundations of Softw. Eng. (ESEC/FSE'11), pp 1525
+2104
+Empir Software Eng (2016) 21:2072-2106
+Zhang F, Mockus A, Zou Y, Khomh F, Hassan AE (2013) How does context affect the distribution of
+software maintainability metrics? In: Proc. Int'l Conf. on Software Maintenance (ICSM'13), pp 350-359
+Zhang F, Mockus A, Keivanloo I, Zou Y (2014) Towards building a universal defect prediction model. In:
+Proc. Int'l Working Conf. on Mining Software Repositories (MSR'14), pp 182-191
+Zimmermann T, Nagappan N, Gall H, Giger E, Murphy B (2009) Cross-project defect prediction: a large
+scale experiment on data vs. domain vs. process. In: Proc. European Softw. Eng. Conf. and Symposium
+on the Foundations of Softw. Eng. (ESEC/FSE'09), pp 91-100
+Yasutaka Kamei is an associate professor at Kyushu University in Japan. He has been a research fellow of
+the JSPS (PD) from July 2009 to March 2010. From April 2010 to March 2011, he was a postdoctoral fellow
+at Queen's University in Canada. He received the B.E. degree in Informatics from Kansai University, and
+the M.E. degree and Ph.D. degree in Information Science from Nara Institute of Science and Technology.
+His research interests include empirical software engineering, open source software engineering and mining
+software repositories (MSR). His work has been published at premier venues like ICSE, FSE, ESEM, MSR
+and ICSM, as well as in major journals like TSE, EMSE and IST. More information is available online at
+http://posl.ait.kyushu-u.ac.jp/∼kamei/
+Takafumi Fukushima received his Master's degree at Kyushu University. His research interests include
+mining software repositories and artificial intelligence.
+Empir Software Eng (2016) 21:2072-2106
+2105
+Shane McIntosh is an assistant professor in the Department of Electrical and Computer Engineering at
+McGill University. He received his Bachelor's degree in Applied Computing from the University of Guelph
+and his MSc and PhD in Computer Science from Queen's University. In his research, Shane uses empirical
+software engineering techniques to study software build systems, release engineering, and software quality.
+His research has been published at several top-tier software engineering venues, such as the International
+Conference on Software Engineering (ICSE), the International Symposium on the Foundations of Software
+Engineering (FSE), and the Springer Journal of Empirical Software Engineering (EMSE). More about Shane
+and his work is available online at http://shanemcintosh.org/.
+Kazuhiro Yamashita is a PhD candidate at Kyushu University. He received his Bachelor's degree and Master's
+degree from Kyushu University. His research interests include software engineering, data mining and
+mining software repositories (MSR).
+2106
+Empir Software Eng (2016) 21:2072-2106
+Naoyasu Ubayashi is a professor at Kyushu University since 2010. He is leading the POSL (Principles of
+Software Languages) research group at Kyushu University. Before joining Kyushu University, he worked
+for Toshiba Corporation and Kyushu Institute of Technology. He received his Ph.D. from the University of
+Tokyo. He is a member of ACM SIGPLAN, IEEE Computer Society, and Information Processing Society of
+Japan (IPSJ). He received “IPSJ SIG Research Award 2003”.
+Ahmed E. Hassan is a Canada Research Chair in Software Analytics and the NSERC/Blackberry Industrial
+Research Chair at the School of Computing in Queen's University. Dr. Hassan serves on the editorial board
+of the IEEE Transactions on Software Engineering and the Journal of Empirical Software Engineering. He
+spearheaded the organization and creation of the Mining Software Repositories (MSR) conference and its
+research community. Early tools and techniques developed by Dr. Hassan's team are already integrated into
+products used by millions of users worldwide. Dr. Hassan industrial experience includes helping architect the
+Blackberry wireless platform, and working for IBM Research at the Almaden Research Lab and the Computer
+Research Lab at Nortel Networks. Dr. Hassan is the named inventor of patents at several jurisdictions
+around the world including the United States, Europe, India, Canada, and Japan. More information at: http://
+sail.cs.queensu.ca/.

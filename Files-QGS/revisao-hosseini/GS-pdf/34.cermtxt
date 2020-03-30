@@ -1,0 +1,1230 @@
+Mining Metrics to Predict Component Failures
+Nachiappan Nagappan
+Microsoft Research
+Redmond, Washington
+nachin@microsoft.com
+Thomas Ball
+Microsoft Research
+Redmond, Washington
+tball@microsoft.com
+Andreas Zeller*
+Saarland University
+Saarbrücken, Germany
+zeller@cs.uni-sb.de
+ABSTRACT
+What is it that makes software fail? In an empirical study of the
+post-release defect history of five Microsoft software systems, we
+found that failure-prone software entities are statistically correlated
+with code complexity measures. However, there is no single set of
+complexity metrics that could act as a universally best defect
+predictor. Using principal component analysis on the code metrics,
+we built regression models that accurately predict the likelihood of
+post-release defects for new entities. The approach can easily be
+generalized to arbitrary projects; in particular, predictors obtained
+from one project can also be significant for new, similar projects.
+Categories and Subject Descriptors
+D.2.7 [Software Engineering]: Distribution, Maintenance, and
+Enhancement-version control. D.2.8 [Software Engineering]:
+Metrics-Performance measures, Process metrics, Product metrics.
+D.2.9 [Software Engineering]: Management-Software quality
+assurance (SQA)
+General Terms
+Measurement, Design, Reliability.
+Keywords
+Empirical study, bug database, complexity
+component analysis, regression model.
+metrics, principal
+1. INTRODUCTION
+During software production, software quality assurance consumes a
+considerable effort. To raise the effectiveness and efficiency of this
+effort, it is wise to direct it to those which need it most. We
+therefore need to identify those pieces of software which are the
+most likely to fail-and therefore require most of our attention.
+One source to determine failure-prone pieces can be their past: If a
+software entity (such as a module, a file, or some other component)
+was likely to fail in the past, it is likely to do so in the future. Such
+information can be obtained from bug databases-especially when
+coupled with version information, such that one can map failures to
+specific entities. However, accurate predictions require a long
+Permission to make digital or hard copies of all or part of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior
+specific permission and/or a fee.
+ICSE'06, May 20-28, 2006, Shanghai, China.
+Copyright 2006 ACM 1-59593-085-X/06/0005...$5.00.
+failure history, which may not exist for the entity at hand; in fact, a
+long failure history is something one would like to avoid altogether.
+A second source of failure prediction is the program code itself: In
+particular, complexity metrics have been shown to correlate with
+defect density in a number of case studies. However, indiscriminate
+use of metrics is unwise: How do we know the chosen metrics are
+appropriate for the project at hand?
+In this work, we apply a combined approach to create accurate
+failure predictors (Figure 1): We mine the archives of major
+software systems in Microsoft and map their post-release failures
+back to individual entities. We then compute standard complexity
+metrics for these entities. Using principal component analysis, we
+determine the combination of metrics which best predict the failure
+probability for new entities within the project at hand. Finally, we
+investigate whether such metrics, collected from failures in the past,
+would also good predictors for entities of other projects, including
+projects be without a failure history.
+1. Collect input data
+Bug
+Database
+Version
+Database
+Code
+Code
+Code
+2. Map post-release failures to defects in entities
+Entity
+Entity
+Entity
+Entity
+Predictor
+Failure
+probability
+3. Predict failure probability for new entities
+Figure 1. After mapping historical failures to entities, we can use
+their complexity metrics to predict failures of new entities.
+_________________________________________________________________________________
+*
+Andreas Zeller was a visiting researcher with the Testing,
+Verification and Measurement Group, Microsoft Research in the Fall
+of 2005 when this work was carried out.
+452
+This paper is organized in a classical way. After discussing the state
+of the art (Section 2), we describe the design of our study
+(Section 3). Our results are reported in Section 4. In Section 5, we
+discuss the lessons learned, followed by threats to validity
+(Section 6). Section 7 closes with conclusion and future work.
+2. RELATED WORK
+2.1 Defects and Failures
+In this paper, we use the term defect to refer to an error in the source
+code, and the term failure to refer to an observable error in the
+program behavior. In other words, every failure can be traced back
+to some defect, but a defect need not result in a failure1.
+Failures can occur before a software release, typically during
+software testing; they can also occur after a release, resulting in
+failures in the field. If a defect causes a pre-release failure, we call it
+a pre-release defect; in contrast, a post-release defect causes a
+failure after a release.
+It is important not to confuse these terms. In particular, a study
+conducted by Adams [1] found that only 2% of the defects in eight
+large-scale software systems lead to a mean time to failure of less
+than 50 years-implying that defect density cannot be used to assess
+reliability in terms of failures [10]. Only one study so far has found
+that a large number of fixed pre-release defects raised the probability
+of post-release failures [5].
+For the user, only post-release failures matter. Therefore, our
+approach is exclusively concerned with post-release defects, each of
+them uncovered by at least one failure in the field.
+2.2 Complexity Metrics
+Over the years, a number of software metrics have been proposed to
+assess software effort and quality [11]. These “traditional” metrics
+were designed for imperative, non-object-oriented programs. The
+object-oriented metrics used in our approach were initially
+suggested by Chidamber and Kemerer [8]. Basili et al. [3] were
+among the first to validate these metrics. In an experiment with
+eight student teams, they found that OO metrics appeared to be
+useful for predicting defect density. The study by Subramanyam
+and Krishnan [21] presents a survey on eight more empirical studies,
+all showing that OO metrics are significantly associated with
+defects. In contrast to this existing work, we do not predict prerelease
+defect density, but post-release defects, and hence actual
+failures of large-scale commercial software.
+Empirical evidence that metrics can predict post-release defects
+(rather than pre-release defects) and thus post-release failures is
+scarce. Binkley and Schach [4] found that their coupling
+dependency metric outperformed several other metrics when
+predicting failures of four academia-developed software systems.
+Ohlsson and Alberg [18] investigated a number of traditional design
+metrics to predict modules that were prone to failures during test as
+well as within operation. They found that 20% of the modules
+predicted as most failure-prone would account for 47% of the
+failures. Their problem was, however, that “it was not possible to
+draw generalizable conclusions on the strategy for selecting specific
+1 The term fault is usually used as a synonym for defects, but
+some authors (e.g. [18]) use it as a synonym for failures. In this
+paper, we thus avoid the term.
+453
+variables for the model”-which is why we rely on failure history to
+select the most suitable metrics combination.
+2.3 Historical Data
+Hudepohl et al. [13] successfully predicted whether a module would
+be defect-prone or not by combining metrics and historical data.
+Their approach used software design metrics as well as reuse
+information, under the assumption that new or changed modules
+would have a higher defect density. In our approach, historical data
+is used to select appropriate metrics first, which can then be applied
+to arbitrary entities; also, we focus on post-release rather than prerelease
+defects.
+Ostrand et al. [19] used historical data from two large software
+systems with up to 17 releases to predict the files with the highest
+defect density in the following release. For each release, the 20% of
+the files with the highest predicted number of defects contained
+between 71% and 92% of the defects being detected. Again, our
+approach focuses on post-release rather than pre-release defects; it
+also goes beyond the work of Ostrand et al. by not only identifying
+the most failure-prone entities, but also determining their common
+features, such that entities of other projects can be assessed.
+2.4 Mining Software Repositories
+In recent years, researchers have learned to exploit the vast amount
+of data that is contained in software repositories such as version and
+bug databases [16, 17, 19, 22]. The key idea is that one can map
+problems (in the bug database) to fixes (in the version database) and
+thus to those locations in the code that caused the problem [9, 12,
+20]. This mapping is the base of automatically associating metrics
+with post-release defects, as described in this work.
+2.5 Contributions
+This work extends the state of the art in four ways:
+1.
+2.
+3.
+4.
+It reports on how to systematically build predictors for
+post-release defects from failure history found in the field
+by customers.
+It investigates whether object-oriented metrics can predict
+post-release defects from the field.
+It analyzes whether predictors obtained from one project
+history are applicable to other projects.
+It is one of the largest studies of commercial software-in
+terms of code size, team sizes, and software users.
+3. STUDY DESIGN
+3.1 Researched Projects
+The goal of this work was to come up with failure predictors that
+would be valid for a wide range of projects. For this purpose, we
+analyzed the project history of five major Microsoft project
+components, listed in Table 1.
+These projects were selected to form a wide range of product types.
+All of them have been released as individual products; they thus do
+not share code. All use object-oriented programming languages like
+C++ or C#. Finally, all of these projects are large-not only in
+terms of code or team size (> 250 engineers), but also in terms of
+user base. DirectX, for instance, is part of the Windows operating
+system, which has an estimated 600 million users. (The team sizes
+are normalized in Table 1 below).
+Table 1. Projects researched
+Project
+Description
+Components
+Internet
+Explorer 6
+IIS W3
+Server core
+Process
+Messaging
+Component
+DirectX
+NetMeeting
+Web browser
+Web server
+Application
+communication
+and networking
+Graphics
+library
+A/V
+Conferencing
+HTML
+rendering
+Application
+loading
+all
+all
+all
+Let us now give a high level outline of each project.
+Code
+size
+511
+KLOC
+37
+KLOC
+147
+KLOC
+306
+KLOC
+109
+KLOC
+Team
+size
+14.3X
+6.3X
+3.4X
+18.5X
+X
+•
+•
+•
+•
+•
+•
+•
+•
+Internet Explorer 6 (IE6) is the standard Web browser
+shipped with most versions of Microsoft Windows.
+Since only a part of IE6 is written in object-oriented
+languages, we focus upon the HTML rendering part as an
+object-oriented component.
+Internet Information Services (IIS) is the standard Web
+server shipped with Microsoft Server. Again, we focus
+on an object-oriented component responsible for loading
+applications into IIS.
+Process Messaging Component is a Microsoft
+technology that enables applications running at different
+times to communicate across heterogeneous networks
+and systems that may be temporarily offline.
+Microsoft DirectX is an advanced suite of multimedia
+application programming interfaces (APIs) built into
+Microsoft Windows. DirectX is a Windows technology
+that enables higher performance in graphics and sound
+when users are playing games or watching video on their
+PC.
+Microsoft NetMeeting is used for both voice and
+messaging between different locations.
+In the remainder of the paper, we shall refer to these five projects as
+projects A, B, C, D, and E. For reasons of confidentiality, we do not
+disclose which letter stands for which project.
+3.2 Failure Data
+Like any company, Microsoft systematically records all problems
+that occur during the entire product life cycle. In this study, we
+were interested in post-release failures-that is, failures that
+occurred in the field within six months after the initial release. For
+each of the projects, we determined the last release date, and
+extracted all problem reports that satisfied three criteria:
+The problem was submitted by customers in the field,
+The problem was classified as non-trivial (in contrast to
+requests for enhancement), and
+The problem was fixed in a later product update.
+The location of the fix gave us the location of the post-release
+defect. We thus could assign each entity the number of post-release
+defects. The likelihood of a post-release defect is also what we want
+to predict for new entities-that is, entities without a failure history.
+Since each post-release defect is uncovered by a post-release failure,
+predicting the likelihood of a post-release defect in some entity is
+equivalent to predicting the likelihood of at least one post-release
+failure associated with this entity.
+3.3 Metrics Data
+For each problem report, Microsoft records fix locations in terms of
+modules-that is, a binary file within Windows, built from a number
+of source files. Thus, we chose modules as the entities for which we
+collected the failure data and for which we want to predict the
+failure-proneness.
+For each of the modules, we computed a number of source code
+metrics, described in the left half of Table 3. These metrics apply to
+a module M, a function or method f(), and a class C, respectively.
+Here is some additional information on the metrics in Table 3:
+•
+•
+•
+The Arcs and Blocks metrics refer to a function's control
+flow graph, which is also the base for computing
+McCabe's cyclomatic complexity (separately measured as
+Complexity).
+The AddrTakenCoupling metric counts the number of
+instances where the address of some global variable is
+taken in a function-as in the C++ constructs int *ref
+= &globalVar or int& ref = globalVar.
+The ClassCoupling metrics counts the number of classes
+coupled to a class C. A class is “coupled” to C if it is a
+type of a class member variable, a function parameter, or a
+return type in C; or if it is defined locally in a method
+body, or if it is an immediate superclass of C. Each class
+is only counted once.
+In order to have all metrics apply to modules, we summarized the
+function and class metrics across each module. For each function
+and class metric X, we computed the total and the maximum number
+per module (henceforth denoted as TotalX and MaxX, respectively).
+As an example, consider the Lines metric, counting the number of
+executable lines per function. The MaxLines metric indicates the
+length of the largest function in M, while TotalLines, the sum of all
+Lines, represents the total number of executable lines in M.
+Likewise, MaxComplexity stands for the most complex function
+found in M.
+3.4 Hypotheses
+So, what do we do with all these metrics? Our hypotheses to be
+researched are summarized in Table 2:
+Table 2. Research hypotheses
+Hypothesis
+Increase in complexity metrics of an entity E correlates with
+the number of post-release defects of E.
+There is a common subset of metrics for which H1 applies in
+all projects.
+There is a combination of metrics which significantly
+predicts the post-release defects of new entities within a
+project.
+Predictors obtained using H3 from one project also predict
+failure-prone entities in other projects.
+454
+H1
+H2
+H3
+H4
+Metric
+Table 3. Metrics and their correlations with post-release defects. For each module M, we determine how well the metrics correlate
+with M's post-release defects. Bold values indicate significant correlation.
+Description Correlation with post-release defects of M
+A B C D E
+Module metrics - correlation with metric in a module M
+Classes # Classes in M
+Function # Functions in M
+GlobalVariables # global variables in M
+0.531 0.612
+0.131 0.699
+0.023 0.664
+Per-function metrics - correlation with maximum and sum of metric across all functions f() in a module M
+Lines # executable lines in f() Max -0.236 0.514
+Total 0.131 0.709
+Parameters # parameters in f() Max -0.344 0.372
+Total 0.116 0.689
+Arcs # arcs in f()'s control flow graph Max -0.209 0.376
+Total 0.127 0.679
+Blocks # basic blocks in f()'s control flow Max -0.245 0.347
+graph Total 0.128 0.707
+ReadCoupling # global variables read in f() Max -0.005 0.582
+Total -0.172 0.676
+WriteCoupling # global variables written in f() Max 0.043 0.618
+Total -0.128 0.629
+AddrTakenCoupling # global variables whose address is Max 0.237 0.491
+taken in f() Total 0.182 0.593
+ProcCoupling # functions that access a global Max -0.063 0.614
+variable written in f() Total 0.043 0.562
+FanIn # functions calling f() Max 0.034 0.578
+Total 0.066 0.676
+FanOut # functions called by f() Max -0.197 0.360
+Total 0.056 0.651
+Complexity McCabe's cyclomatic complexity of Max -0.200 0.363
+f() Total 0.112 0.680
+Per-class metrics - correlation with maximum and sum of metric across all classes C in a module M
+ClassMethods # methods in C (private / public / Max 0.244 0.589
+protected) Total 0.520 0.630
+InheritanceDepth # of superclasses of C Max 0.428 0.546
+Total 0.432 0.606
+ClassCoupling # of classes coupled with C (e.g. as Max 0.501 0.634
+attribute / parameter / return types) Total 0.547 0.598
+SubClasses # of direct subclasses of C Max 0.196 0.502
+Total 0.265 0.560
+0.713
+0.761
+0.695
+0.585
+0.797
+0.547
+0.790
+0.587
+0.803
+0.585
+0.787
+0.633
+0.756
+0.392
+0.629
+0.412
+0.667
+0.496
+0.579
+0.846
+0.814
+0.613
+0.776
+0.594
+0.801
+0.534
+0.581
+0.303
+0.496
+0.466
+0.592
+0.582
+0.566
+455
+0.066
+0.104
+0.108
+0.496
+0.187
+0.015
+0.152
+0.527
+0.158
+0.546
+0.158
+0.362
+0.277
+0.011
+0.230
+0.016
+0.175
+0.024
+0.000
+0.037
+0.074
+0.345
+0.046
+0.451
+0.165
+0.100
+0.094
+0.131
+0.111
+-0.303
+-0.158
+-0.207
+-0.170
+0.438
+0.531
+0.460
+0.509
+0.506
+0.346
+0.478
+0.444
+0.484
+0.462
+0.472
+0.229
+0.445
+0.450
+0.406
+0.263
+0.145
+0.357
+0.443
+0.530
+0.537
+0.465
+0.506
+0.543
+0.529
+0.283
+0.469
+0.323
+0.425
+0.264
+0.383
+0.387
+0.387
+As a first step, we examine whether there are any significant
+correlations between complexity metrics and post-release defects
+(H1). We then want to find whether there is some common subset of
+these metrics that is correlated with post-release defects across
+different projects (H2). As a third step, we evaluate whether we can
+predict the likelihood of post-release defects in new entities by
+combining multiple metrics (H3). Finally, we evaluate whether
+predictors obtained from one project are also good predictors of
+failure-proneness for another project (H4).
+4. RESULTS
+Let us now discuss the results for the four hypotheses.
+hypothesis is discussed in its individual section.
+Each
+4.1 Do complexity metrics correlate with
+failures in the field?
+To investigate our initial hypothesis H1, we determined the
+correlation between the complexity metrics (Section 3.3) for each
+module M with the number of post-release defects (Section 3.2).
+The resulting standard Spearman correlation coefficients2 are shown
+in Table 3. Correlations that are significant at the 0.05 level is
+shown in bold; the associated metrics thus correlate with the number
+of post-release defects. For instance, in project A, the higher the
+number of classes in a module (Classes), the larger the number of
+post-release defects (correlation 0.531); other correlating metrics
+include TotalClassMethods, both InheritanceDepth and both
+ClassCoupling measures. Clearly, for project A, the more classes
+we have in a module, the higher its likelihood of post-release
+defects. However, none of the other metrics such as Lines correlate,
+implying that the length of classes and methods has no significant
+influence on post-release defects.
+Projects B and C tell a different story: Almost all complexity metrics
+correlate with post-release defects. In project D, though, only the
+MaxLines metric correlates with post-release defects, meaning the
+maximum length of a function within a module. Why is it that in
+project B and C, so many metrics correlate, and in project D, almost
+none? The reason lies within the project nature itself, or more
+precisely within its process: The team of project D routinely uses
+metrics like the ones above to identify potential complexity traps,
+and refactors code pieces which are too complex. This becomes
+evident when looking at the distribution of post-release defects
+across the modules: In project D, the distribution is much more
+homogeneous than in project B or C, where a small number of
+modules account for a large number of post-release defects. These
+modules also turn out to be the more complex ones-which is what
+makes all the metrics correlate in B and C.
+Nonetheless, one should note that we indeed found correlating
+metrics for each project. This confirms our hypothesis H1:
+For each project, we can find a set of complexity metrics that
+correlates with post-release defects-and thus failures.
+2 The Spearman rank correlation is a commonly-used robust
+correlation technique [11] because it can be applied even when
+the association between elements is non-linear.
+456
+4.2 Is there a single set of metrics that predicts
+post-release defects in all projects?
+As already discussed, each of the projects comes with its own set of
+predictive metrics. It turns out that there is not a single metric that
+would correlate with post-release defects in all five projects.
+All in all, this rejects our hypothesis H2, which has a number of
+consequences. In particular, this means that it is unwise to use some
+complexity metric and assume the reported complexity would imply
+anything-at least in terms of post-release defects. Instead,
+correlations like those shown in Table 3 should be used to select and
+calibrate metrics for the project at hand, which is what we shall do
+in the next steps.
+There is no single set of metrics that fits all projects.
+4.3 Can we combine metrics to predict postrelease
+defects?
+If there is no universal metric to choose from, can we at least exploit
+the failure history and its correlation with metrics? Our basic idea
+was to build predictors that would hold within a project. We would
+combine the individual metrics, weighing the metrics according to
+their correlations as listed in Table 3.
+However, one difficulty associated with combining several metrics
+is the issue of multicollinearity. Multicollinearity among the metrics
+is due to the existence of inter-correlations among the metrics. In
+project A, for instance, the Classes, InheritanceDepth,
+TotalMethods, and ClassCoupling metrics not only correlate with
+post-release defects, but they also strongly correlated with each
+other. Such an inter-correlation can lead to an inflated variance in
+the estimation of the dependent variable-that is, post-release
+defects.
+To overcome the multicollinearity problem, we used a standard
+statistical approach, namely principal component analysis (PCA)
+[14]. With PCA, a smaller number of uncorrelated linear
+combinations of metrics that account for as much sample variance as
+possible are selected for use in regression (linear or logistic). These
+principal components are independent and do not suffer from
+multicollinearity.
+We extracted the principal components for each of the five projects
+that account for a cumulative sample variance greater than 95%.
+Table 4 gives an example: After extracting five principal
+components, we can account for 96% of the total variance in project
+E. Therefore, five principal components suffice.
+Table 4. Extracted principal components for project E
+Principal
+Component
+1
+2
+3
+4
+5
+Total
+25.268
+3.034
+2.045
+.918
+.523
+Initial Eigenvalues
+% of Variance
+76.569
+Cumulative %
+76.569
+9.194
+6.198
+2.782
+1.584
+85.763
+91.961
+94.743
+96.327
+Project
+A
+B
+C
+D
+E
+A
+B
+C
+D
+E
+9
+6
+7
+7
+5
+95.33
+96.13
+95.34
+96.44
+96.33
+Using the principal components as the independent variable and the
+post-release defects as the dependent variable, we then built multiple
+regression models. We thus obtained a predictor that would take a
+new entity (or more precisely, the values of its metrics) and come up
+with a failure estimate. The regression models built using all the
+data for each project are characterized in Table 5. For each project,
+we present the R2 value which is the ratio of the regression sum of
+squares to the total sum of squares. As a ratio, it takes values
+between 0 and 1, with larger values indicating more variability
+explained by the model and less unexplained variation. In other
+words: The higher the R2 value, the better the predictive power.
+The adjusted R2 measure also can be used to evaluate how well a
+model will fit a given data set [7]. It explains for any bias in the R2
+measure by taking into account the degrees of freedom of the
+independent variables and the sample population. The adjusted R2
+tends to remain constant as the R2 measure for large population
+samples. The F-ratio is to test the null hypothesis that all regression
+coefficients are zero at statistically significant levels.
+How does one interpret the data in Table 5? Let us focus straight
+away on the R2 values of the regression models. The R2 values
+indicate that our principal components explain between 57.9% and
+91.9% of the variance-which indicates the efficacy of the built
+regression models. The adjusted R2 values indicate the lack of bias
+in our R2 values-that is, the regression models are robust.
+To evaluate the predictive predictors, we ran a standard experiment:
+For each project, we randomly split the set of entities into 2/3 and
+1/3, respectively. We then built a predictor from the 2/3 set. The
+better the predictor, the stronger the correlations
+Table 5. Regression models and their explanative power
+Number of principal
+components
+% cumulative variance
+explained
+R2
+0.741
+0.779
+0.579
+0.684
+0.919
+Adjusted R2
+0.612
+0.684
+0.416
+0.440
+0.882
+F - test
+5.731, p < 0.001
+8.215, p < 0.001
+3.541, p < 0.005
+2.794, p < 0.077
+24.823, p < 0.0005
+would be between the actual and estimated post-release defects; a
+correlation of 1.0 would mean that the sensitivity of the predictor is
+high and vice versa.
+The results of our evaluation are summarized in Table 6. Overall,
+we performed five random splits to build five models for each
+project to evaluate the prediction efficacy. We repeated the same
+process using different random splits, overall leading to 25 different
+models and predictions. Again, positive correlations are shown in
+bold. We present both the Spearman and Pearson correlations for
+completeness; the Pearson bivariate correlation requires the data to
+be distributed normally and the association between elements to be
+linear. In three of the five projects, all but one split result in
+significant predictions. The exceptions are projects C and E, which
+is due to the small number of binaries in these projects: In random
+splitting, a small sample size is unlikely to perform well, simply
+because one single badly ranked entity is enough to bring the entire
+correlation down.
+What does this predictive power mean in practice? In Figure 2, we
+show two examples of ranking modules both by estimated and
+actual number of post-release defects. The left side shows one of
+the random split experiments from Table 6 with a Pearson
+correlation of >0.6. The project shown had 30 modules; the history
+and metrics of 2/3 of these were used for predicting the ranking of
+the remaining ten modules. If a manager decided to put more testing
+effort into, say, the top 30% or three of the predicted modules, this
+selection would contain the two most failure-prone modules, namely
+#4 and #8. Only one selected module (#6) would receive too much
+testing effort; and only one (#3) would receive too little.
+0.725
+0.693
+0.181
+0.318
+-0.190
+0.050
+0.522
+0.494
+-0.818
+-0.883
+-0.381
+-0.602
+0.939
+0.906
+0.495
+0.190
+0.266
+0.494
+0.418
+0.120
+0.637
+0.422
+0.227
+0.218
+-0.060
+0.082
+0.419
+0.494
+0.007
+0.152
+Table 6. Predictive power of the regression models in random split experiments
+Project
+Correlation type
+Random split 1
+Random split 2
+Random split 3
+Random split 4
+Random split 5
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+0.480
+0.238
+-0.173
+-0.055
+0.559
+0.445
+0.572
+0.617
+-0.711
+-0.759
+0.327
+0.185
+0.410
+0.054
+-0.539
+-0.165
+0.845
+0.828
+0.976
+0.577
+457
+6
+4
+8
+1
+5
+7
+3
+9
+10
+2
+4
+8
+3
+5
+1
+7
+2
+6
+9
+10
+5
+7
+1
+2
+3
+6
+4
+2
+7
+1
+4
+3
+5
+6
+predicted
+actual
+predicted
+actual
+Figure 2. Comparing predicted and actual rankings
+On the right side of Figure 2, we see another experiment from Table
+6 with a Pearson correlation of <0.3. Here, the inaccurate ranking of
+module #5 in a small sample size is the reason for the low
+correlation. However, for any top n predicted modules getting extra
+effort, one would never see more than one module not deserving
+that effort, and never more than one of the top n actual modules
+missed.
+All in all, both the R2 values in Table 5 and the sensitivity of the
+predictions in Table 6 confirm our hypothesis H3 for all five
+projects, illustrated by the examples in Figure 2. In practice, this
+means that within a project, the past failure history of a project can
+successfully predict the likelihood of post-release defects for new
+existing entities; therefore, the predictors can also be used after a
+change to estimate the likelihood of failure. The term “new entities”
+also includes new versions of existing entities; therefore, the
+predictions can also be used after a change to estimate the likelihood
+of failure.
+Predictors obtained from principal component analysis are
+useful in building regression models to estimate postrelease
+defects.
+4.4 Are predictors obtained from one project
+applicable to other projects?
+Finally, our hypothesis H4 remains: If we build a predictor from the
+history and metrics of one project, would it also be predictive for
+other projects? We evaluated this question by building one
+predictor for each project, and applying it to the entities of each of
+the other four projects. Once more, we checked how well the actual
+and predicted rankings of the entities would correlate.
+Our findings are summarized in Table 7. The entry “yes” indicates a
+significant correlation, meaning that the predictor would be
+successful; “no” means no or insignificant correlation.
+458
+Table 7. Prediction correlations using models built from a
+different project
+Sensitivity correlations between actual and
+predicted
+Project
+used to
+build the
+model
+A
+B
+C
+D
+E
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+Pearson
+Spearman
+A
+No
+No
+No
+No
+No
+No
+No
+No
+B
+No
+No
+Yes
+Yes
+No
+No
+No
+No
+C
+No
+No
+Yes
+No
+No
+No
+No
+Yes
+D
+No
+No
+No
+No
+No
+No
+No
+No
+E
+No
+No
+No
+No
+Yes
+Yes
+No
+No
+As it turns out, the results are mixed-some project histories can
+serve as predictors for other projects, while most cannot. However,
+after our hypothesis H2 has failed, this is not too surprising.
+Learning from earlier failures can only be successful if the two
+projects are similar-from the failure history of an Internet game,
+one can hardly make predictions for a nuclear reactor.
+What is it that makes projects “similar” to each other? We found
+that those project pairs which are cross-correlated share the same
+heterogeneous defect distribution across modules which would also
+account for the large number of defect-correlated metrics, as
+observed in Section 4.1. The cross-correlated projects B and C, for
+instance, both share a heterogeneous defect distribution,
+In essence, this means that one can learn from code that is more
+failure-prone to predict other entities which are equally failureprone.
+For projects which are already aware of failure-prone
+components, one should go beyond simple code metrics, and
+consider the goals, the domain, and the processes at hand to find
+similar projects to learn from. This, however, is beyond the scope of
+this paper.
+To sum up, we find our hypothesis H4 only partially confirmed:
+Predictors obtained from one project are applicable only to similar
+projects-which again substantiates our word of caution against
+indiscriminate use of metrics. Ideas on how to identify similar
+projects are discussed in Section 7.
+Predictors are accurate only when obtained from the same
+or similar projects.
+5. LESSONS LEARNED
+We started this work with some doubts about the usefulness of
+complexity metrics. Some of these doubts were confirmed:
+Choosing metrics without a proper validation is unlikely to result in
+meaningful predictions-at least when it comes to predict postrelease
+defects, as we did. On the other side, metrics proved to be
+useful as abstractions over program code, capturing similarity
+between components that turned out to be a good source for
+predicting post-release defects. Therefore, we are happy that the
+failure history of the same or a similar project can indeed serve to
+validate and calibrate metrics for the project at hand.
+Rather than predicting post-release defects, we can adapt our
+approach to arbitrary measures of quality. For instance, our measure
+might involve the cost or severity of failures, risk considerations,
+development costs, or maintenance costs. The general idea stays the
+same: From earlier history, we select the combination of metrics
+which best predicts the future. Therefore, we have summarized our
+approach in a step-by-step guide, shown in
+Figure 3. In the long term, this guide will be instantiated for other
+projects within Microsoft, using a variety of code and process
+metrics as input for quality predictors.
+DO NOT use complexity metrics without validating them
+for your project.
+DO use metrics that are validated from history to identify
+low-quality components.
+6. THREATS TO VALIDITY
+In this paper, we have reported our experience with five projects of
+varying goal, process, and domain. Although we could derive
+successful predictors from the failure history in each of the projects,
+this may not generalize to other projects. In particular, the specific
+failure history, the coding and quality standards, or other process
+properties may be crucial for the success. We therefore encourage
+users to evaluate the predictive power before usage-for instance,
+by repeating the experiments described in Section 4.3.
+Even if our approach accurately predicts failure-prone components,
+we advise against making decisions which are based uniquely upon
+such a prediction. To minimize the damage of post-release defects,
+one must not only consider the number of defects, but also the
+severity, likelihood, and impact of the resulting failures, as
+established in the field. Such estimations, however, are beyond the
+scope of this paper.
+While the approach easily generalizes, we would caution against
+drawing general conclusions from this specific empirical study. In
+software engineering, any process depends to a large degree on a
+potentially large number of relevant context variables. For this
+reason, we cannot assume a priori that the results of a study
+generalize beyond the specific environment in which it was
+conducted [2]. Researchers become more confident in a theory
+when similar findings emerge in different contexts [2]. Towards this
+end, we hope that our case study contributes to strengthening the
+existing empirical body of knowledge in this field.
+459
+Building quality predictors:
+A step-by-step guide
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+Determine a software E from which to learn. E can
+be an earlier release of the software at hand, or a
+similar project.
+Decompose E into entities (subsystems, modules,
+files, classes…) E = {e1, e2,...} for which you can
+determine the individual quality.
+In this paper, we decomposed the software into
+individual binaries-i. e. Windows componentssimply
+because a mapping between binaries and
+post-release failures was readily available.
+Build a function quality: E → R which assigns to
+each entity e ∈ E a quality. This typically requires
+mining version and bug histories (Section 2.4).
+In our case, the “quality” is the number of defects in
+an entity e that were found and fixed due to postrelease
+failures.
+Have a set of metric functions M = {m1, m2 ,...} such
+that each m ∈ M is a mapping m: E → R which
+assigns a metric to an entity e ∈ E . The set of
+metrics M should be adapted for the project and
+programming language at hand.
+We use the set of metrics M described in Table 3.
+For each metric m ∈ M and each entity e ∈ E ,
+determine m(e).
+Determine the correlations between all m(e) and
+quality(e), as well as the inter-correlations between
+all m(e).
+The set of correlations between all m(e) and
+quality(e) is shown in Table 3; the inter-correlations
+are omitted due to lack of space.
+Using principal component analysis, extract a set of
+principal components PC = { pc1, pc2,...} , where
+each component pci ∈ PC has the
+form pci = c1, c2,..., c M
+.
+An example of the set PC is given in Table 4.
+You can now use the principal components PC to
+build a predictor for new entities E′ = {e1′, e′2,...}
+with E′ ∩ E = ∅ . Be sure to evaluate the
+explanative and predictive power-for instance,
+using the experiments described in Section 4.3.
+We used PC to build a logistic regression equation,
+in which we fitted the metrics m(e') for all new
+entities e′ ∈ E′ and all metrics m ∈ M . The
+equation resulted in a vector
+P = p1, p2,..., p E′
+where each pi ∈ P is the
+probability of failure of the entity ei′ ∈ E' .
+Figure 3. How to build quality predictors
+7. CONCLUSION AND FUTURE WORK
+In this work, we have addressed the question “Which metric is best
+for me?” and reported our experience in resolving that question. It
+turns out that complexity metrics can successfully predict postrelease
+defects. However, there is no single set of metrics that is
+applicable to all projects. Using our approach, organizations can
+leverage failure history to build good predictors which are likely to
+be accurate for similar projects, too.
+This work extends the state of the art in four ways. It is one of the
+first studies to show how to systematically build predictors for postrelease
+defects from failure history from the field. It also
+investigates whether object-oriented metrics can predict post-release
+defects. It analyzes whether predictors obtained from one project
+history are applicable to other projects, and last but not least, it is
+one of the largest studies of commercial software-in terms of code
+size, team sizes, and software users.
+Of course, there is always more to do.
+concentrate on these “more” topics:
+Our future work will
+•
+•
+•
+•
+•
+More metrics. Right now, the code metrics suggested are
+almost deceptively simple. While in our study, McCabe's
+cyclomatic complexity turned out to be an overall good
+predictor, it does not take into account all the additional
+complexity induced by method calls-and this is where
+object-oriented programs typically get complicated. We
+plan to leverage the failure data from several projects to
+evaluate more sophisticated metrics that again result in
+better predictors.
+More data. Besides only collecting source code versions
+and failure reports, we have begun to collect and recreate
+run-time information such as test coverage, usage profiles,
+or change effort. As all of these might be related to postrelease
+defects, we expect that they will further improve
+predictive power-and provide further guidance for
+quality assurance.
+More similarity. One important open question in our
+work is: What is it that makes projects “similar” enough
+such that predictions across projects become accurate?
+For this purpose, we want to collect and classify data on
+the process and domain characteristics. One possible
+characterization would be a polar chart as shown in
+Figure 4, where we would expect similar projects to cover
+a similar space. As a side effect, we could determine
+which process features correlate with quality.
+More automation. While we have automated the
+extraction and mapping of failure and version
+information, we still manually use third-party statistical
+tools to obtain the predictors. We want to automate and
+integrate this last step as well, such that we can
+automatically obtain predictors from software archives.
+The next step would be to integrate these predictors into
+development environments, supporting the decisions of
+programmers and managers.
+More projects. Given a fully automated system, we shall
+be able to apply the approach on further projects within
+and outside of Microsoft. This will add more diversity to
+the field-and, of course, help companies like Microsoft
+to maximize the impact of their quality efforts.
+460
+Figure 4. A Boehm-Turner polar chart [6] which
+characterizes the software process [15]
+All in all, modern software development produces an abundance of
+recorded process and product data that is now available for
+automatic treatment. Systematic empirical investigation of this data
+will provide guidance in several software engineering decisionsand
+further strengthen the existing empirical body of knowledge in
+software engineering.
+Acknowledgments. Andreas Zeller's work on mining software
+archives was supported by Deutsche Forschungsgemeinschaft, grant
+Ze 509/1-1. We thank Melih Demir, Tom Zimmermann and many
+others for their helpful comments on earlier revisions of this paper.
+We would like to acknowledge all the product groups at Microsoft
+for their cooperation in this study.
+REFERENCES
+[1] E. N. Adams, “Optimizing Preventive Service of Software
+Products”, IBM Journal of Research and Development, 28(1),
+pp. 2-14, 1984.
+[2] V. Basili, Shull, F.,Lanubile, F., “Building Knowledge through
+Families of Experiments”, IEEE Transactions on Software
+Engineering, 25(4), pp. 456-473, 1999.
+[3] V. R. Basili, L. C. Briand, and W. L. Melo, “A Validation of
+Object-Oriented Design Metrics as Quality Indicators”, IEEE
+Transactions on Software Engineering, 22(10), pp. 751-761,
+1996.
+[4] A. B. Binkley, Schach, S., “Validation of the coupling
+dependency metric as a predictor of run-time failures and
+maintenance measures”, Proceedings of International
+Conference on Software Engineering, pp. 452 - 455, 1998.
+[5] S. Biyani, Santhanam, P., “Exploring defect data from
+development and customer usage on software modules over
+multiple releases”, Proceedings of International Symposium
+on Software Reliability Engineering, pp. 316-320, 1998.
+[6] B. Boehm and R. Turner, “Using Risk to Balance Agile and
+Plan-Driven Methods”, IEEE Computer, 36(6), pp. 57-66,
+June 2003.
+[7] F. Brito e Abreu, Melo, W., “Evaluating the Impact of ObjectOriented
+Design on Software Quality”, Proceedings of Third
+International Software Metrics Symposium, pp. 90-99, 1996.
+[8] S. R. Chidamber and C. F. Kemerer, “A Metrics Suite for
+Object Oriented Design”, IEEE Transactions on Software
+Engineering, 20(6), pp. 476-493, 1994.
+[9] D. Čubranić, Murphy, G.C., “Hipikat: recommending pertinent
+software development artifacts”, Proceedings of International
+Conference on Software Engineering, pp. 408-418, 2003.
+[10] N. E. Fenton, Neil, M., “A critique of software defect
+prediction models”, IEEE Transactions in Software
+Engineering, 25(5), pp. 675-689, 1999.
+[11] N. E. Fenton and S. L. Pfleeger, Software Metrics: A Rigorous
+and Practical Approach: Brooks/Cole, 1998.
+[12] M. Fischer, Pinzger, M., Gall, H., “Populating a Release
+History Database from version control and bug tracking
+systems”, Proceedings of International Conference on
+Software Maintenance, pp. 23-32, 2003.
+[13] J. P. Hudepohl, Aud, S.J., Khoshgoftaar, T.M., Allen, E.B.,
+Mayrand, J., “Emerald: software metrics and models on the
+desktop”, IEEE Software, 13(5), pp. 56 - 60, 1996.
+[14] E. J. Jackson, A User's Guide to Principal Components.
+Hoboken, NJ: John Wiley & Sons Inc., 2003.
+[15] L. Layman, L. Williams, and L. Cunningham, “Exploring
+Extreme Programming in Context: An Industrial Case Study”,
+Proceedings of Agile Development Conference, Salt Lake
+City, UT, pp. 32-41, 2004.
+[16] A. Mockus, Zhang, P., Li, P., “Drivers for customer perceived
+software quality”, Proceedings of International Conference on
+Software Engineering (ICSE), St. Louis, MO, pp. 225-233,
+2005.
+[17] N. Nagappan, Ball, T., “Use of Relative Code Churn Measures
+to Predict System Defect Density”, Proceedings of
+International Conference on Software Engineering (ICSE), St.
+Louis, MO, pp. 284-292, 2005.
+[18] N. Ohlsson, Alberg, H., “Predicting fault-prone software
+modules in telephone switches”, IEEE Transactions in
+Software Engineering, 22(12), pp. 886 - 894, 1996.
+[19] T. Ostrand, Weyuker, E., Bell, R.M., “Predicting the location
+and number of faults in large software systems”, IEEE
+Transactions in Software Engineering, 31(4), pp. 340 - 355,
+2005.
+[20] J. Sliwerski, Zimmermann, T., Zeller, A., “When Do Changes
+Induce Fixes?” Proceedings of Mining Software Repositories
+(MSR) Workshop, 2005.
+[21] R. Subramanyam and M. S. Krishnan, “Empirical Analysis of
+CK Metrics for Object-Oriented Design Complexity:
+Implications for Software Defects”, IEEE Transactions on
+Software Engineering, 29(4) pp. 297-310, April 2003.
+[22] T. Zimmermann, Weißgerber, P., Diehl, S., Zeller, A., “Mining
+Version Histories to Guide Software Changes”, IEEE
+Transactions in Software Engineering, 31(6), pp. 429-445,
+2005.
+461

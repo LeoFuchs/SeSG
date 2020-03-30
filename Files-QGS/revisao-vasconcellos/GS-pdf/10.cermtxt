@@ -1,0 +1,1352 @@
+The Rosetta Stone Methodology - A Benefits Driven Approach to Software
+Process Improvement
+Fionbarr McLoughlin
+Ph.D. 2010
+Submitted to the University of Limerick
+October 2010
+Supervised by:
+Dr. Ita Richardson
+The Rosetta Stone Methodology - A Benefits Driven Approach to Software
+Process Improvement
+Abstract
+Part of the maturity process in the fields of software engineering and information technology
+has involved, and continues to involve, establishing best practices in the various domains that
+constitute the area. Specifically, from a software development perspective, there are several
+competing Software Process Improvement (SPI) methodologies such as the Software
+Engineering Institute's (SEI) Capability Maturity Model Integrated (CMMI) approach and
+the International Standards Organization's ISO/IEC 15504 (previously known as SPICE). All
+these initiatives aim to improve an organization's systems capabilities but they aim to do so
+from an Information Technology (IT) perspective. However, the majority of organizations are
+not IT-centric and IT is but one of several elements which contributes to their success. As a
+result, organizational leaders are more comfortable seeing the benefits of SPI within the
+context of organizational benefits and objectives and what SPI can contribute to the
+organization as a whole, not as a purely IT objective. Unfortunately, there is a dearth of
+methodologies which approach software improvement from an organizational goals and
+objectives perspective.
+In response to the lack of an organization-focused approach to SPI, the research presented in
+this thesis, the Rosetta Stone Methodology, has been developed. This methodology allows
+organizations to make SPI decisions based on business- and organizational-driven goals and
+objectives. The methodology allows practitioners to map from a benefits model which is
+organization-focused to a proven SPI methodology. The methodology itself is fully
+customizable and allows organizations to make adjustments to the model where they feel it
+appropriate. Further, in order to demonstrate the usefulness, appropriateness, and practicality
+of the generic methodology, the Rosetta Stone IGSI-ISM to CMMI Instance mapping (RSICMMI)
+is developed using a generic set of business objectives developed by IBM
+Consulting Services which are then mapped to an established SPI methodology, namely the
+CMMI (Staged) model. Using the RS-ICMMI instance of the methodology, practitioners can
+readily determine which specific Process Areas should be undertaken to achieve specific
+business objectives. A validation phase was performed whereby both the methodology and
+the instance mapping were reviewed by experts.
+The work presented in this thesis is entirely my own work. It has not been submitted
+previously to this or any other institute for this or any other academic award. Where use has
+been made of the work of other people, it has been acknowledged and referenced.
+Signed: ____________________________________
+Date: _______________
+Fionbarr McLoughlin
+To my beloved parents Evelayn (1942 - 1996) and Clement (1944 - 1995) McLoughlin
+To Eimear, Niamh, Aisling, and Pierce
+Thank you for your constant love, patience, and support
+Acknowledgements
+I could not have completed this work without the help and support of so many people. In
+particular, I would like to thank my supervisor and part-time psychologist Dr. Ita Richardson.
+There were so many times I just wanted to give up but Ita always found a way for me to put
+this in perspective and encouraged me to carry on.
+I would also like to thank Dr. Dennis Goldenson of the Software Engineering Institute in
+Carnegie Mellon University, Pittsburgh. Dennis helped me in many, many ways and was
+always there to answer questions and educate me on the finer points of CMMI. Dr. Liam
+O'Brien, formerly of Lero and the Software Engineering Institute, was also instrumental in
+helping me out when I started off this work. Thanks also goes to Dr. Tom O'Kane of UCC
+who took a lot of time out of his busy days to help me, as did all the people who agreed to be
+interviewed by me. Dr. Jim Buckley of the University of Limerick deserves a special mention
+for his comments and feedback, particularly for his review of the Research Methodology
+chapter. I would also like to thank Professor Tony Cahill of the University of Limerick for his
+encouragement in this endeavour.
+Most importantly, I would like to thank my family. Without the constant support of my wife
+Eimear I would never have been able to undertake this work - this is just one of the many
+things I have to thank her for. Without her, this work would not have been possible. In
+addition, I would like to thank my wonderful children Niamh, Aisling, and Pierce who gave
+up time with their Daddy so he could work on his thesis. A special mention also goes to my
+two sisters, Charolotte and Edell, who are always there for me and have provided some
+invaluable sanity during this work.
+Without the help and support of my parents, Evelayn and Clement McLoughlin, I honestly
+don't know where I'd be or what I'd be doing now. There were many bright people who grew
+up with me in Southill who never had the opportunities that I received from my parents. My
+Dad taught me that there's a difference between being smart and being educated. Please God,
+I'll always remember that.
+Table of Contents
+1
+2
+INTRODUCTION............................................................................................................1
+1.1 BACKGROUND.................................................................................................................1
+1.2 RESEARCH OBJECTIVES ..................................................................................................3
+1.3 OUTLINE OF DISSERTATION STRUCTURE.........................................................................4
+LITERATURE REVIEW ...............................................................................................5
+2.1 INTRODUCTION ...............................................................................................................5
+2.2 DEFINITIONS ...................................................................................................................5
+2.3 SOFTWARE DEVELOPMENT LIFE CYCLES........................................................................6
+2.4 SOFTWARE PROCESS IMPROVEMENT MODELS ................................................................9
+2.5 CMMI - THE CAPABILITY MATURITY MODEL INTEGRATED .........................................10
+2.5.1 The Capability Maturity Model Integration - CMMI ..........................................10
+2.5.2 CMMI Staged versus Continuous Representations .............................................12
+2.5.3 CMMI - Staged Representation...........................................................................13
+2.5.4 CMMI - Continuous Representation ...................................................................15
+2.6 ISO/IEC 15504.............................................................................................................16
+2.6.1 Overview of ISO/IEC 15504 ...............................................................................16
+2.7 ANALYSIS OF ISO/IEC 15504 AND CMMI ...................................................................18
+2.7.1 Relationships and History ....................................................................................18
+2.7.2 Comparison of Models.........................................................................................19
+2.7.3 The Future of CMMI and ISO/IEC 15504...........................................................20
+2.8 AGILE SOFTWARE DEVELOPMENT AND SPI ..................................................................21
+2.9 COSTS AND BENEFITS OF SPI........................................................................................23
+2.9.1 Consistency and Limitations of Reported Benefits of SPI ..................................23
+2.9.2 Categorization of Benefits ...................................................................................25
+2.9.3 Return on Investment - ROI.................................................................................26
+2.9.4 Productivity..........................................................................................................30
+2.9.5 Quality..................................................................................................................35
+2.9.6 Cost ......................................................................................................................41
+2.9.7 Reduced Cycle Time............................................................................................43
+2.9.8 Soft Benefits.........................................................................................................46
+2.10 CRITICAL ANALYSIS OF SPI......................................................................................47
+2.11 BUSINESS PROCESS IMPROVEMENT LITERATURE REVIEW ........................................49
+2.12 CONCLUSION.............................................................................................................51
+3
+RESEARCH METHODOLOGY .................................................................................53
+3.1 INTRODUCTION .............................................................................................................53
+3.2 JENKINS' RESEARCH PROCESS MODEL .........................................................................53
+3.3 IDEA AND LIBRARY RESEARCH .....................................................................................54
+3.4 RESEARCH OBJECTIVE ..................................................................................................56
+3.5 RESEARCH STRATEGY...................................................................................................57
+3.5.1 Research Philosophies .........................................................................................57
+3.5.2 Research Style - Idiographic, Nomothetic, or Constructive?..............................58
+3.5.3 Positivist vs. Interpretivist ...................................................................................58
+3.5.4 Quantitative vs. Qualitative .................................................................................60
+3.6 RESEARCH APPROACH ..................................................................................................62
+3.7 EXPERIMENTAL DESIGN................................................................................................64
+3.7.1 GQM ....................................................................................................................64
+3.8 VALIDATION OF THE ROSETTA STONE METHODOLOGY ................................................65
+3.8.1 Expert Panel .........................................................................................................66
+3.8.2 Data Capture ........................................................................................................66
+3.8.3 Data Analysis .......................................................................................................66
+3.9 RS-ICMMI BENEFITS MAPPING VALIDATION PROCESS...............................................68
+3.9.1 Primary Vs. Secondary ........................................................................................69
+3.9.2 Degrees of Evidence ............................................................................................69
+3.9.3 Interview Sampling Method ................................................................................69
+3.9.4 Compliance to Expectations ................................................................................71
+3.10 SUMMARY.................................................................................................................71
+4 THE ROSETTA STONE OBJECTIVE-DRIVEN SPI METHODOLOGY TRANSLATING
+BETWEEN ORGANIZATIONAL OBJECTIVES AND SPI .............72
+4.1 INTRODUCTION .............................................................................................................72
+4.2 THE ROSETTA STONE META-MODEL ............................................................................72
+4.2.1 Background ..........................................................................................................72
+4.2.2 Rosetta Stone Meta-Model Overview..................................................................74
+4.2.3 Elements...............................................................................................................74
+4.2.4 Relationships........................................................................................................75
+4.2.5 Return, Costs and ROI .........................................................................................75
+4.3 THE ROSETTA STONE METHODOLOGY..........................................................................77
+4.3.1 Step 1 - Choose the SPI Methodology ................................................................78
+4.3.2 Step 2 - Choose the Benefits Model....................................................................79
+4.3.3 Steps 3 - Mapping between the SPI Methodology and the Benefits model.........80
+4.3.4 Step 4 - Determine Implementation Order..........................................................81
+4.3.5 Step 5 - Identification of Metrics/Indicators for Benefits ...................................81
+4.4 OPERATIONALIZATION OF THE ROSETTA STONE METHODOLOGY .................................82
+4.4.1 Step 1 - Choose SPI Methodology - CMMI (Staged) .........................................83
+4.4.2 Step 2 - Choose Benefits Model - IGSI-ISM Benefits Model............................83
+4.4.3 Step 3 - Map between SPI Methodology and Benefits Model............................87
+4.4.4 Step 4 - Determine Implementation Order........................................................105
+4.4.5 Step 5 - Identify Metrics for Benefits................................................................109
+4.5 CONCLUSION...............................................................................................................110
+5
+ROSETTA STONE METHODOLOGY VALIDATION PROCESS .....................112
+5.1 INTRODUCTION .......................................................................................................112
+5.2 THE OBJECTIVES OF THE RESEARCH .......................................................................112
+5.2.1 Introductory Section...........................................................................................113
+5.2.2 Background Information on the Interviewee .....................................................113
+5.2.3 Review of the Methodology...............................................................................113
+5.2.4 Questions............................................................................................................115
+5.2.5 Other Comments by Interviewees......................................................................115
+5.3 INTERVIEWEES ............................................................................................................116
+5.4 ANALYSIS OF INTERVIEWS ......................................................................................117
+5.4.1 Question Group 1 - Reasons for using SPI .......................................................117
+5.4.2 Question Group 2 - Novelty Approach .............................................................119
+5.4.3 Question Group 3 - The IGSI-ISM - CMMI (Staged) Level 2 Mapping .........120
+5.4.4 Question Group 4 - The Rosetta Stone Methodology and Meta-Model ...........121
+5.4.5 Other comments and Future Enhancements ......................................................122
+5.4.6 Summary............................................................................................................123
+6
+RS-ICMMI VALIDATION PROCESS .....................................................................125
+6.1 INTRODUCTION ...........................................................................................................125
+6.2 VALIDATION OF PROCESS AREA/BENEFITS MAPPING .................................................125
+6.2.1 Requirements Management ...............................................................................125
+6.2.2 Project Planning .................................................................................................128
+6.2.3 Project Monitoring and Control .........................................................................130
+6.2.4 Supplier Agreement Management .....................................................................132
+6.2.5 Measurement and Analysis ................................................................................134
+6.2.6 Process and Product Quality Assurance ............................................................137
+6.2.7 Configuration Management ...............................................................................139
+6.3 UPDATED RS-ICMMI MODEL....................................................................................141
+6.4 CONCLUSION...............................................................................................................145
+7
+SUMMARY AND CONCLUSIONS ..........................................................................146
+7.1 INTRODUCTION ...........................................................................................................146
+7.2 RESEARCH QUESTION .................................................................................................146
+7.3 CRITICAL REVIEW OF RESEARCH ................................................................................147
+7.3.1 Critical Review of Research Approach and Philosophy....................................147
+7.3.2 Critical Review of Research Contribution.........................................................148
+7.3.3 Other Limitations ...............................................................................................150
+7.4 SUMMARY OF FINDINGS AND CONTRIBUTION .............................................................150
+7.5 OPPORTUNITIES FOR FUTURE RESEARCH ....................................................................151
+7.5.1 Opportunities for Future Research - Rosetta Stone Methodology ....................151
+7.5.2 Opportunities for Future Research - RS-ICMMI mapping ...............................153
+7.6 CONCLUSION...............................................................................................................153
+APPENDIX A FULL CMMI (STAGED) TO IGSI-ISM MAPPING .............................169
+APPENDIX B (FINAL) POST-VALIDATION LEVEL 2 MAPPING...........................185
+APPENDIX C ROSETTA STONE METHODOLOGY EXPERT PANEL
+BIOGRAPHIES ...................................................................................................................189
+APPENDIX D RS-ICMMI EXPERT PANEL BIOGRAPHIES .....................................193
+APPENDIX E SUMMARY OF CMMI PROCESS AREA TO IGSI-ISM BENEFITS
+MAP ......................................................................................................................................195
+APPENDIX F EXPERT PANEL INTERVIEW PRESENTATION ..............................198
+APPENDIX G PRESENTATION TO NDIA CONFERENCE 2006 ..............................211
+APPENDIX H PROFES2010 CONFERENCE PAPER...................................................223
+APPENDIX I EUROSPI 2010 CONFERENCE PAPER .................................................239
+List of Tables
+Table 2-1: Characteristics of Seven frameworks (Sheard, 1997) ..............................................9
+Table 2-2: Staged and Continuous relative advantages (Ahern et al, 2001)............................12
+Table 2-3: CMMI Staged PA to Level mapping......................................................................14
+Table 2-4: CMMI Capability Levels........................................................................................15
+Table 2-5: Model Chronology (Tantara Consulting Inc., 2001)..............................................19
+Table 2-6: SPI Benchmarks Critical Review (Solon and Statz, 2002) ....................................25
+Table 2-7: NSQE ROI on Software Inspection (O'Neill, 2003)..............................................27
+Table 2-8: Summary of Overall Results (Herbsleb et al, 1994b) ............................................28
+Table 2-9: General Dynamics ROI results (King and Diaz, 2002)..........................................29
+Table 2-10: CMM productivity results (Herbsleb, Goldenson et al, 1995) .............................32
+Table 2-11: Productivity Results (Brodman and Johnson, 1995) ............................................32
+Table 2-12: Productivity results (Diaz and Sligo, 1997) .........................................................33
+Table 2-13: OC-ALC Productivity Data (Butler and Lipke, 2000) .........................................34
+Table 2-14: General Dynamics Productivity Benefits per CMM Level (King and Diaz, 2002)
+..................................................................................................................................................35
+Table 2-15: Quality Results (Herbsleb et al., (1994b) ............................................................38
+Table 2-16: Quality Results (Brodman and Johnson, 1995)....................................................39
+Table 2-17: Quality Results (Diaz and Sligo, 1997)................................................................39
+Table 2-18: Quality Results (Butler and Lipke, 2000) ............................................................40
+Table 2-19: Quality Results (King and Diaz, 2002) ................................................................40
+Table 2-20: Cost Savings (Brodman and Johnson, 1995)........................................................41
+Table 2-21: Cost Benefits (Goldenson et al., 1995).................................................................42
+Table 2-22: SPI results (Wohlwend and Rosenbaum, 1994)...................................................43
+Table 2-23: Schedule Results (Goldenson et al., 1995)...........................................................44
+Table 2-24: Cycle Time results (Diaz and Sligo, 1997) ..........................................................45
+Table 2-25: Cycle Time results (Butler and Lipke, 2000) .......................................................45
+Table 2-26: Summary of reported soft benefits of SPI............................................................46
+Table 2-27: Summary of reported soft benefits of SPI (cont.) ................................................47
+Table 3-1: Qualitative vs. Quantitative technique comparisons (Glesne & Peskin, 1991): ....61
+Table 3-2: Quantitative vs. Qualitative comparisons (Silverman, 2006).................................62
+Table 3-3: Classification of Mingers' (2003) and Galliers' (1992) Research Methods
+(Choudrie and Dwivedi, 2005) ................................................................................................63
+Table 3-4: Content Analysis Codes for Rosetta Stone Interviews...........................................67
+Table 3-5: Summary of Questions per Interviewee .................................................................70
+Table 4-1: IGSI-ISM Benefits .................................................................................................87
+Table 4-2: : CMMI (Staged) Level 2 to IGSI-ISM Map - Primary Benefits ..........................89
+Table 4-3: Expected primary benefits of REQM.....................................................................90
+Table 4-4: Expected secondary, non-derived benefits of REQM ............................................90
+Table 4-5: Derived benefits of implementation of REQM ......................................................92
+Table 4-6: Expected primary benefits of PP ............................................................................93
+Table 4-7: Expected non-derived secondary benefits of PP ....................................................93
+Table 4-8: Expected benefits of PP..........................................................................................94
+Table 4-9: Expected primary benefits of PMC ........................................................................95
+Table 4-10: Expected benefits of PMC....................................................................................95
+Table 4-11: Expected primary benefits of SAM......................................................................96
+Table 4-12: Expected non-derived secondary benefits of SAM..............................................96
+Table 4-13: Expected benefits of SAM ...................................................................................97
+Table 4-14: Expected primary benefits of MA ........................................................................98
+Table 4-15: Expected non-derived secondary benefits of MA ................................................98
+Table 4-16: Expected benefits of MA......................................................................................98
+Table 4-17: Primary benefits of PPQA....................................................................................99
+Table 4-18: Expected benefits of PPQA................................................................................100
+Table 4-19: Expected primary benefits of CM ......................................................................101
+Table 4-20: Expected non-derived secondary benefits of CM ..............................................102
+Table 4-21: Expected benefits of CM....................................................................................102
+Table 4-22: Summary of all CMMI (Staged) Level 2 Benefits .............................................103
+Table 4-23: Summary of all CMMI (Staged) Level 2 Benefits (cont.) .................................104
+Table 4-24: Lower Time to Market .......................................................................................106
+Table 4-25: Example Objective - Lower Time to Market .....................................................107
+Table 4-26: Implementation order of PAs .............................................................................109
+Table 5-1: List of Interviewees ..............................................................................................116
+Table 5-2: Summary of interviewee experience ....................................................................117
+Table 6-1: Expected primary benefits of REQM...................................................................126
+Table 6-2: Other Process Area/Benefit combinations for REQM .........................................127
+Table 6-3: Primary benefits of PP..........................................................................................128
+Table 6-4: Other Process Area/Benefit combinations of PP..................................................129
+Table 6-5: Primary benefits of PMC......................................................................................130
+Table 6-6: Other Process Area/Benefit combinations of PMC..............................................131
+Table 6-7: Primary benefits of SAM .....................................................................................132
+Table 6-8: Other Process Area/Benefit combinations of SAM .............................................133
+Table 6-9: Primary benefits of MA........................................................................................134
+Table 6-10: Other Process Area/Benefit combinations of MA..............................................136
+Table 6-11: Primary benefits of PPQA..................................................................................137
+Table 6-12: Other Process Area/Benefit combinations of PPQA..........................................138
+Table 6-13: Primary benefits of CM......................................................................................139
+Table 6-14: Other Process Area/Benefit combinations of CM..............................................141
+Table 6-15: Summary of post-validation changes to RS-ICMMI mapping ..........................142
+Table 6-16: Post-validation REQM benefits mapping...........................................................142
+Table 6-17: Post-validation PP benefits mapping..................................................................143
+Table 6-18: Post-validation PMC benefits mapping..............................................................143
+Table 6-19: Post-validation SAM benefits mapping .............................................................143
+Table 6-20: Post-validation MA benefits mapping................................................................144
+Table 6-21: Post-validation PPQA benefits mapping............................................................144
+Table 6-22: Post-validation CM benefits mapping................................................................145
+List of Figures
+Figure 1-1: Software and System Domain standards.................................................................2
+Figure 2-1: Waterfall Lifecycle (Royce, 1970)..........................................................................7
+Figure 2-2: Spiral Lifecycle (Boehm, 1998)..............................................................................8
+Figure 2-3: CMMI Model Structure (Chrissis et al., 2003) .....................................................11
+Figure 2-4: CMMI Staged Representation...............................................................................13
+Figure 2-5: CMMI Continuous Representation .......................................................................15
+Figure 2-6: ISO/IEC 15504 Process Assessment Relationship (ISO/IEC 15504-1) ...............16
+Figure 2-7: ISO/IEC 15504 Assessment Process (ISO/IEC 15504-1).....................................17
+Figure 2-8: ISO/IEC 15504 Process Model Relationships (ISO/IEC 15504-1) ......................17
+Figure 2-9: Relationships between Models (Tantara Consulting, 2001) .................................18
+Figure 3-1: Disconnect between Research and Practice (Moody, 2000).................................55
+Figure 3-2: GQM Approach (Basili, 1992)..............................................................................65
+Figure 3-3: Modified GQM Approach.....................................................................................65
+Figure 3-4: Question Flow for validation of PA to IGSI-ISM Benefit map............................68
+Figure 4-1: Axes of SPI studies ...............................................................................................73
+Figure 4-2: Rosetta Stone Meta-Model....................................................................................74
+Figure 4-3: Traditional vs. Rosetta Stone SPI Approach.........................................................76
+Figure 4-4: Rosetta Stone Methodology ..................................................................................78
+Figure 4-5: Modified GQM Reverse Lookup ..........................................................................80
+Figure 4-6: PA to Business Objective Map using a reverse GQM map ..................................80
+Figure 4-7: Traditional GQM Approach (Basili, 1992)...........................................................82
+Figure 4-8: Implementation Instance of RS-ICMMI ...............................................................83
+Figure 4-9: IGSI-ISM ROI Model (Goyal et al., 2001)...........................................................84
+Figure 4-10: Determining order of implementation...............................................................105
+Figure 5-1: Rosetta Stone Meta-Model to Instance Mapping................................................112
+Figure 5-2: Rosetta Stone Expert Panel Interview Mindmap ................................................114
+Figure 7-1: Modified IGSI-ISM model..................................................................................152
+Figure 7-2: Project Management Triangle.............................................................................152
+ATE
+BPI
+BPR
+CMM
+CMMI
+CMU
+COBIT
+COCOMO
+COQ
+CPI
+DD
+DERA
+DOD
+GG
+GQM
+ICT
+IEC
+IEEE
+IGSI-ISM
+IID
+IRR
+IS
+ISD
+ISO
+ISACA
+IT
+ITGI
+List of Acronyms
+Automatic Test Equipment
+Business Process Improvement
+Business Process Re-engineering
+Capability Maturity Model
+Capability Maturity Model Integrated
+Carnegie Mellon University
+Control Objectives for Information and Related Technology
+COnstructive COst MOdel
+Cost Of Quality
+Cost Performance Index
+Defect Density
+Defence Evaluation Research Agency
+(US) Department of Defense
+Generic Goal (CMMI-SW Staged 1.1)
+Goal-Question-Metric
+Information Communications Technology
+International Electrotechnical Commission
+Institute of Electrical and Electronics Engineers
+IBM Global Services India - Interpretive Structural Modelling
+Iterative and Incremental Development
+Internal Rate of Return
+Information Systems
+Integrated Systems Development
+International Standards Organization
+Information Systems Audit and Control Association
+Information Technology
+Information Technology Governance Institute
+ITIL
+ISO 12207
+JTC1/SC7/WG10
+KBPI
+KPA
+KSLOC
+MIS
+NASA
+NGO
+NPV
+NQSE
+OECD
+OGC
+PA
+PAM
+PMAT
+PMBOK
+PMI
+PMO
+PRINCE2
+PRM
+QA
+ROI
+RS-ICMMI
+SEI
+SEL
+SG
+SLA
+SLCM
+Information Technology Infrastructure Library
+Software Process Lifecycle model
+Joint Technical Committee 1, Sub-committee 7, Working Group 10
+Knowledge-based Business Process Improvement
+Key Process Area (CMM)
+Source Lines of Code in Thousands (Kilo)
+Management Information Systems
+National Aeronautics and Space Administration
+Non-Government Organizations
+Net Present Value
+National Software Quality Experiment
+Organization for Economic Coordination and Development
+Office of Government Commerce
+Process Area (CMMI-SW Staged 1.1)
+Process Assessment Model
+Process Maturity
+Project Management Book Of Knowledge
+Project Management Institute
+Project Management Office
+PRojects IN Controlled Environments
+Process Reference Model
+Quality Assurance
+Return On Investment
+Rosetta Stone IGSI-ISM to CMMI Instance mapping
+Software Engineering Institute
+Software Engineering Laboratory (NASA)
+Specific Goal (CMMI-SW Staged 1.1)
+Service Level Agreement
+Software Life Cycle Model
+SME
+SP
+SPA
+SPI
+SPICE
+TPS
+UAT
+USDOD
+Small and Medium Enterprises
+Specific Practice (CMMI-SW Staged 1.1)
+Software Process Assessment
+Software Process Improvement; Schedule Performance Index
+Software Process Improvement and Capability dEtermination
+Test Program Set
+User Acceptance Testing
+United States Department of Defence
+1 Introduction
+1.1
+Background
+Organizations do not exist in a vacuum. Every organization has certain objectives
+which it is chartered to achieve, depending on the type of organization. Some
+organizations are for-profit organizations which concentrate on achieving profits;
+some organizations are public service organizations which provide services to the
+public; yet others are chartered with furthering research and development
+activities. What they all have in common is that they want to achieve their relative
+organizational objectives as efficiently as possible, using the minimum of
+resources to maximum effect.
+A significant amount of capital expenditure and operating expenses are spent on
+hardware, software, and technical support. In fact, according to the Organization
+for Economic Co-Operation and Development (2006), total worldwide spending
+on ICT1 was expected to reach $2.964 trillion in 2005, the last year for which the
+OECD has published estimates. Given the massive amount of spending involved,
+anything which can shave even a few percentage points off costs could potentially
+free up a large amount of capital that could be used in either other areas of an
+organization or could be re-invested in further software development.
+As disciplines, software engineering and information technology are relatively
+new and are maturing rapidly. Part of this maturity process has involved, and
+continues to involve, establishing best practices in the various domains that
+constitute the area. As we can see from Figure 1-1, various standards have
+emerged for the various domains and sub-domains within Software Engineering,
+Software Development and IT. From a management perspective, for example, we
+have the IT Governance Institute's (ITGI) Control Objectives for Information and
+Related Technology (COBIT®) standard (ISACA 2007) which is related to IT
+Governance; the Project Management Institute's (PMI) standard for Project
+Management as described in the Project Management Book of Knowledge (PMI
+2004); the Office of Government Commerce's (OGC) PRINCE2 standard for
+1 In 1998, the OECD countries reached agreement on an industry-based definition of the ICT
+sector based on Revision 3 of the International Standard Industrial Classification (ISIC Rev. 3).
+The principles underlying the definition are the following: for manufacturing industries, the
+products of a candidate industry must be intended to fulfill the function of information processing
+and communication including transmission and display, must use electronic processing to detect,
+measure and/or record physical phenomena or control a physical process; for services industries,
+the products of a candidate industry must be intended to enable the function of information
+processing and communication by electronic means (OECD (2008). OECD.Stat Database, OECD.
+1
+Project Management as described in (OGC 2005); and the OGC's IT
+Infrastructure Library (ITIL) standard as defined in (OGC 2007b; 2007a).
+Figure 1-1: Software and System Domain standards
+From a Software Process Improvement (SPI) perspective, there are several
+competing and, in some cases, complementary standards such as the Software
+Engineering Institute's CMMI for Development version 1.2 (SEI 2006); the
+International Standards Organization's (ISO) 15504 (ISO 2003), formerly known
+as SPICE; the Trillium Model (Coallier 1994; April and Coallier 1995), an
+assessment model that aims to benchmark a software supplier's product
+development and support capability which was developed originally in 1991 by
+Bell Canada; and the ISO's 9000-3 standard (ISO 1994) and the ISO 9001:2000
+standard (ISO 2000) , a process-driven approach to define, establish and maintain
+software quality within an organization that will allow organizations to meet their
+business objectives (Hailey 2001).
+All these initiatives aim to improve an organization's systems capabilities but
+they all aim to do so from an IT perspective. There are few, if any, methodologies
+which approach systems improvement from a business goals and objectives
+perspective. The Rosetta Stone Methodology, developed and evaluated during this
+research, consists of a methodology, a meta-model, and a concrete instance of that
+meta-model which allows businesses to undertake business- and organizationaldriven
+goals and objectives.
+2
+1.2
+Research Objectives
+There are currently several major Software Process Improvement (SPI)
+methodologies being actively used in organizations worldwide. While these
+methodologies will continue to mature and evolve over time, one thing they all
+have in common is that they are IT-centric. The focus of these methodologies is
+the implementation of specific IT and software engineering practices in order to
+gain benefits. They do not focus on satisfying a business objective by
+implementing specific IT practices. As we shall see in Chapter 2, there is quite a
+deal of literature available to support the hypothesis that implementation of the
+various SPI methodologies will result in benefits to organizations. However, these
+benefits come about as a result of implementation of SPI i.e. SPI, which is ITcentric,
+drives the benefits. There is no ability within the established SPI
+methodologies to define what benefits/objectives an organization would like to
+achieve and use business-centric objectives to drive what particular SPI initiatives
+should be undertaken.
+The purpose of this research is twofold. Firstly, a methodology has been
+developed which allows practitioners to map arbitrary business benefits models to
+arbitrary SPI models or methodologies. Secondly, a mapping of business-centric
+benefits to CMMI (Staged) has been developed which allows practitioners to
+target specific business benefits through the implementation of various Process
+Areas (PAs). In order for the methodology and mapping instance to be successful:
+•
+•
+•
+they must take into account the wide variety of organizations that exist as
+well as their overall goals and objectives. Examples of these various types
+of organizations include for-profit organizations such as Goldman Sachs
+and General Electric, public service organizations such as local
+authorities, government departments, and research organizations such as
+NASA and various universities
+they should be able to re-use existing SPI methodologies such as
+CMM/CMMI, Trillium, ISO 9000/9001, and ISO/IEC 15504
+they should be directly usable by practitioners within the organizations
+concerned - organizations should not have to rely unnecessarily on
+outside experts to implement the methods defined within the overall
+methodology.
+Both the generic methodology and the concrete mapping developed during this
+research were evaluated through interviews which are presented in chapters 5 and
+6.
+3
+1.3
+Outline of Dissertation Structure
+The dissertation is structured as follows:
+•
+•
+•
+•
+•
+•
+•
+Chapter 1: Introduction. Chapter 1 provides a context for this research.
+It explains why there is a need for the Rosetta Stone Methodology and
+why it is an appropriate approach to solving issues that many
+organizations face on a daily basis. In addition, Chapter 1 outlines the
+remaining chapters.
+Chapter 2: Literature Review. Chapter 2 provides a high level review of
+CMMI and ISO/IEC 15504 as well as a high-level comparison and a
+genealogy of their development. It also provides a literature review of the
+benefits of implementing various SPI methodologies with a specific
+emphasis on CMM and CMMI as these two models are the basis for the
+specific implementation of the Rosetta Stone implementation detailed in
+Chapter 4. In addition, it discusses Business Process Improvement (BPI)
+and how it links into SPI.
+Chapter 3: Research Methodology. Chapter 3 details the research
+process and research methodology that is used in this research work. The
+chapter provides specific information on how the model was developed
+and evaluated and what is the academic basis for the research methods
+used.
+Chapter 4: The Rosetta Stone Objective-Driven SPI Methodology.
+The generic Rosetta Stone Methodology is introduced which allows
+organizations to map organization- and business-driven objectives to
+various SPI methodologies. Using the generic Rosetta Stone
+Methodology, a specific implementation is explored using a generic, forprofit
+objectives model obtained from IBM Global Services, India (Goyal
+et al. 2001) and the CMMI Staged Representation (CMMI Product Team
+2002).
+Chapter 5: Rosetta Stone Methodology Validation Process. In order to
+evaluate and validate the model, interviews were conducted with various
+practitioners, authors, and academics. Chapter 5 contains the results of
+these interviews.
+Chapter 6: RS-ICMMI Validation Process. An implementation of the
+RSM was created which consists of all the mappings from the IBM Global
+Services (India) Interpretive Structural Modelling (IGSI-ISM) benefits
+model to CMMI (Staged). These individual mappings were discussed indepth
+with various practitioners and academics for CMMI (Staged) Level
+2 and the model and instance mapping were modified accordingly. The
+results of the interviews and the re-mapping are discussed in Chapter 6.
+Chapter 7: Summary and Conclusions. Chapter 7 brings together the
+various strands of this research and draws conclusions, lessons learnt and
+scope for future research.
+4
+2
+Literature Review
+2.1
+Introduction
+Over the years, software and systems development methodologies have evolved
+to enable the development of larger scale and ever more complex solutions to
+real-world problems. Significant advances in hardware design have given
+software engineers enough raw computing power to them to allow them to create
+solutions for more and more complex and larger problem domains. Unfortunately,
+however, improvements in software design and development have not kept pace
+with these advances in hardware. Brooks (1995) states that “larger-scale
+programming over the past decade has been such a tar pit, and many great and
+powerful beasts have thrashed violently in it.”
+The good news, however, is that advances have been made and, while there are
+still quite a few horror stories reported in the press, we now appear to be more
+capable of developing more large-scale, complex systems than previously. To get
+to where we are now, however, has taken a lot of hard work and the gradual
+evolution of development processes. Initially, the focus of improvement was on
+general engineering solutions such as Fagan's work on Software Inspections
+(Fagan 1986) and Structured Programming (Jackson 1975; Djikstra 1979) but
+later on focus shifted to various, specialized Software Process Improvement (SPI)
+and Project Management methodologies. In addition to the reported progress on
+SPI, a great deal of research has been undertaken on Business Process
+Improvement (BPI). IT is seen as an integral part of this and there is a growing
+body of work which seeks to integrate both BPI and SPI.
+This first part of this chapter focuses in providing a background on software
+development lifecycles in general as well as a review of two of the leading
+SPI/SPA models. In addition, this chapter also reports on the demonstrated
+benefits of software engineering improvement techniques in general as well as of
+SPI, BPI, and the integration of both SPI and BPI.
+2.2
+Definitions
+Before proceeding further it is important to provide appropriate definitions for the
+subjects being discussed in this chapter. The basis for the life cycle definitions in
+this thesis is the IEEE/EIA 12207.0 standard (1996), which provides a framework
+for all software lifecycle processes. According to the standard, individual projects
+5
+may be tailored and must be mapped onto a Software Life Cycle Model (SLCM)
+(IEEE/EIA 1998; Schmidt 2000). Examples of the SLCM include the Waterfall
+Model and the Spiral Model, both of which are software development models and
+which shall be discussed in the next section. The definition of the Software Life
+Cycle is quite broad and, according to the standard, may include items not
+specific to the development process such as operational support and acquisition of
+services so we therefore distinguish between the Software Development Life
+Cycle and the Software Life Cycle.
+Sommerville (2004) defines the software process as a structured set of activities
+required to develop a software system, including at least the processes of
+specification, design, validation, and evolution. According to Paulk et al. (1995)
+the software process “can be defined as a set of activities, methods, practices, and
+transformations that people employ to develop and maintain software and the
+associated products.” While implied in Sommerville's definition, Boehm (1998)
+specifically includes the notion of order to the definition of the software process
+in that “the primary functions of a software process model are to determine the
+order of the stages involved in software development and evolution and to
+establish the transition criteria for progressing from one stage to the next.”
+According to these definitions, therefore, the terms “software process” and
+“software development process” may be regarded as being synonymous. For the
+purposes of this thesis we treat the terms “software process”, “software
+development process” and “software development life cycle” as being
+synonymous while the “software life cycle” encompasses all phases, including the
+operational phase, of software.
+The work presented in this thesis is the Rosetta Stone Methodology and is
+composed of 2 parts - the Rosetta Stone Methodology (RSM) which is the
+methodology used to create an implementation instance of the Rosetta Stone
+meta-model and the Rosetta Stone Implementation instance for CMMI (RSICMMI)
+which is an implementation instance of the RSM based on the IGSI-ISM
+benefits model and the CMMI (Staged) SPI model.
+2.3
+Software Development Life Cycles
+Probably the earliest software development process model discussed in the
+literature is discussed in Davis et al. (1988) and was the code-and-fix model
+whereby development consisted of two steps:
+1. Write program code
+2. Fix any issues or bugs in the code.
+6
+7.3.2
+Critical Review of Research Contribution
+Central to any research work is the establishment of the trustworthiness or
+validity of the report itself. Lincoln and Guba (1985) suggest four questions
+which can be used to evaluate the trustworthiness of a report:
+1. Truth Value - can the report we relied upon to provide the “truth” in
+relation to the findings of the report in the context of the research?
+2. Applicability - to what extent are the findings generalizable and
+applicable to other contexts?
+3. Consistency - to what extent would another report produce the same
+results?
+4. Neutrality - to what extent is the report absent of bias (intentional or
+otherwise), interests, or perspectives of the person writing the report?
+Within the context of this thesis two distinct phases of research were undertaken research
+of the validity and applicability of the Rosetta Stone Methodology and
+the validation of the mapping of the RS-ICMMI. In order to arrive at a balanced,
+critical review of the research process for this thesis, including threats to the
+validity of the work, both phases will be evaluated individually in relation to the
+questions posed by Lincoln and Guba.
+Critical Review of the Validation of the Rosetta Stone Methodology
+The research process for the validation of the Rosetta Stone Methodology may be
+summarized as being interpretivist in nature, using an expert panel to analyse the
+validity of the proposed methodology. The interviews were then analysed using
+content analysis techniques. The expert panel members came primarily from three
+disparate sources - IT professionals who have used CMMI extensively; peers in
+various organizations which practice some form of SPI; and several academics
+who have a professional and academic interest in SPI. Based on these sources, it
+could be argued that many of the interviewees have an in-built bias in favour of
+SPI. As the proposed methodology is quite different from other methodologies
+which have been proposed, there was very little basis on which to ask the
+members to compare one methodology against another. As a result, many of the
+questions were purposefully open-ended, allowing them to provide answers which
+could provide more depth and insight than if closed-ended questions were asked.
+Due to the open-ended nature of the answers, widely-used content analysis
+techniques were employed to analyse the results.
+While there were several panel members who admitted to either working or
+having worked in organizations where there was scepticism of SPI, many of the
+panel members had an in-built positive disposition towards SPI. As a result, from
+a truth value perspective, criticism could be levelled at the research that there may
+148
+be an in-built bias towards the positive aspects of SPI. However, this is also
+reflected in the literature where there are relatively fewer negative SPI articles
+than positive ones. As this is a general methodology, it should have a high level of
+applicability. From a consistency perspective, as a lot of the questions posed to
+the panel members were open ended there is no guarantee that, given the same
+interview at a different time, there would not be a different answer. That is not to
+say, however, that the answers panel members gave in the interviews were
+incorrect or misleading - it might just be that, given a different stimulus from
+whatever source, the answer might be taken down a different path. It is extremely
+difficult for humans to be totally neutral in their thoughts and ideas - everyone
+has their own built-in biases which they may not even be aware of. However, in
+an attempt to avoid this problem, the interviews were all pre-scripted, recorded,
+and analysed consistently so, within the context of what was actually asked, the
+results of the interviews are expected to be neutral.
+Critical Review of the Validation of RS-ICMMI
+The research process for the validation of the RS-ICMMI mapping consisted of a
+set of very tightly scripted mapping questions and, for each mapping question, an
+open ended question where the interviewee was asked if he or she had any
+particular evidence to support the mapping question. The results were then
+analyzed empirically.
+Again, as was the case for the validation phase of the Rosetta Stone Methodology,
+the population of members of the expert panel came from a group of professionals
+who, in many cases, would be expected to be biased in favour of SPI. As a result,
+from a truth value perspective, criticism could also be levelled at this phase of the
+research that there may be an in-built bias towards the positive aspects of SPI.
+The RS-ICMMI mapping is a specific application of the generic Rosetta Stone
+Methodology. In particular, it depends heavily on the IGSI-ISM benefits model.
+As a result, a possible criticism of the RS-ICMMI mapping is that, because it is
+closely coupled the IGSI-ISM benefits model, it could be seen to lack
+generalizability. With regard to consistency, while there was a substantial number
+of experts in the expert panel available for the research, due to the large volume
+of questions which needed to be answered, each mapping was put to only two
+expert panel members. From a statistical analysis perspective, larger populations
+samples tend to provide a more accurate reflection of the domain being studied
+and an extension of the study would increase the consistency of the result. With
+regard to neutrality, as the mapping questions were binary in nature, and not as
+open-ended as in the first phase, this phase of the research would seem to be more
+neutral than the previous phase.
+149
+7.3.3
+Other Limitations
+This research is primarily focused on the creation of a methodology to support
+business-driven SPI, as well as one particular instance of that mapping using
+CMMI and the IGSI-ISM benefits model. As a result of this narrow focus, there
+are several other remaining interesting research areas which could be addressed in
+future research in order to increase the generalizability of the work. These areas
+are addressed in section 7.5. However, probably the main limitation of this
+research is the fact that the RS-ICMMI mapping has not been used in industry to
+verify that it works as anticipated. While there are legitimate reasons why it has
+not been implemented and these have been discussed earlier, the ultimate proof of
+its validity would be the implementation of it in practice to achieve specific
+business objectives.
+7.4
+Summary of Findings and Contribution
+The Rosetta Stone Methodology and an implementation instance of the
+methodology, the RS-ICMMI implementation instance, are presented in this
+work. Through a literature review, it was established that no business-driven SPI
+methodology was readily available. The Rosetta Stone Methodology and the RSICMMI
+mapping instance was then developed using a literature review, GQM,
+and an informal review by fellow professionals by combining an existing business
+objectives model, the IGSI-ISM benefits model, and CMMI. To validate the
+Rosetta Stone Methodology, a series of expert panel interviews was carried out
+with SPI experts. The response to the methodology has been positive with many
+of the interviewees expressing interest in potentially using the approach discussed
+in this thesis. The meta-model and methodology was universally approved by the
+interviewees without negative comment, while the only major comments on the
+IGSI-ISM benefits model to CMMI (Staged) mapping were on possible
+customizations to the IGSI-ISM benefits model, which is in any case catered for
+by the model itself. The RS-ICMMI mapping instance was validated using an
+expert panel and relevant changes were made to the mapping as a result of the
+validation process.
+Literature and potential methodologies/models in the chosen area are quite sparse.
+As we shall see in the next section, this whole area is ripe for research and
+commercial exploitation. That is not to say, however, that the methodology
+developed for this dissertation is perfect and is readily usable by practitioners; in
+fact, far from it. To date no organization has implemented either the methodology
+or the RS-ICMMI mapping instance and, while intellectually the methodology
+may appear to make sense, there is potentially a very large gap between a
+theoretical methodology and a practical (and useful) implementation of that
+methodology.
+150
+7.5
+Opportunities for Future Research
+The entire area of an organization-driven objectives approach to SPI is novel and,
+as a result, has not been explored to any degree. Consequently, there are many
+opportunities for future research. As with the methodology itself, the
+opportunities for future research can be characterized along the lines of those
+opportunities which result from open questions or clarifications on the generic
+methodology and open questions or clarifications arising from the mapping from
+the IGSI-ISM benefits model to CMMI (Staged).
+7.5.1
+Opportunities for Future Research - Rosetta Stone Methodology
+The Rosetta Stone Methodology allows an arbitrary benefits/objectives model to
+be mapped to an arbitrary SPI methodology. As a demonstration of this, a
+mapping was developed between a benefits model developed by IBM in India and
+CMMI (Staged). As IBM is a commercial organization and the division in
+question was a consulting services organization, the focus on the benefits was
+primarily on commercial benefits with a bias towards consulting services. There
+are many other different types of organization - NGOs, military, and government
+organizations to name but a few - which each have their own organizational
+drivers. It is highly unlikely that these organizations would have the same drivers
+as the IGSI-ISM model so the whole area of developing generic objective/driver
+models for these organizations would be of tremendous interest to them,
+especially if the IGSI-ISM to CMMI mapping is undertaken by a commercial
+organization and proves to be of benefit.
+Another area for potential future research is on the IGSI-ISM model itself and to
+perhaps incorporate changes to the model. Indeed, as noted in section 5.4.3, some
+minor changes to the model were suggested by the participants in the interview
+process and these changes have been incorporated in Figure 7-1.
+151
+Figure 7-1: Modified IGSI-ISM model
+In a similar vein, one of the interviewees in the expert panel interviews suggested
+a model based on the Project Management Triangle:
+Figure 7-2: Project Management Triangle
+The idea would be to have one benefits model for each of the constraints - Cost,
+Scope, and Schedule. As this is a generic project management constraint model, it
+could potentially be used by organizations, primarily software houses, whose
+main business is in software development. This would not obviously address
+operational issues such as support of existing systems.
+152
+As we have seen in Chapter 2, CMM/CMMI has gone through a gradual
+evolution from the original CMM (SW) implementation which was a staged
+model through to the generic CMMI model which is now available in either a
+Staged or a Continuous model. Concurrently, the ISO/IEC 15504 model has been
+developed and is continuous in nature. In addition, it seems that a continuous
+approach offers a lot more flexibility than the traditional staged models. It would
+not be unexpected, therefore, that future evolutions of CMMI will move more and
+more towards a continuous approach, up to the point where it is conceivable that a
+staged approach may in fact be totally dropped from their offerings. While it may
+be useful to explore various other SPI methodologies from a generic methodology
+perspective, I would suggest that the next one to be mapped should be the CMMI
+(Continuous) model.
+7.5.2
+Opportunities for Future Research - RS-ICMMI mapping
+Many of the areas for potential future research within the concrete demonstration
+mapping arise from the limitations already described within the research
+methodology and the results of the expert panel interviews.
+The first, and probably most critical, area for future research based on the
+mapping would be to implement it within a commercially focused organization
+who could easily customize (if required) the IGSI-ISM benefits/objectives model
+to their own organization. The successful implementation of the mapping would
+prove to usefulness of this approach. Failing a full implementation, a limitedscope
+implementation would be the next-best thing, again helping to demonstrate
+the usefulness of the Rosetta Stone Methodology.
+In addition, as this work validated the RS-ICMMI mapping for CMMI (Staged)
+Level 2 only, it may be worthwhile to validate the remaining CMMI Levels - 3,
+4, and 5.
+7.6
+Conclusion
+This research set out to both develop and evaluate a business-driven approach to
+SPI. As a result, a new methodology and a new instance mapping were developed
+- the Rosetta Stone Methodology and the concrete RS-ICMMI model which maps
+from the IGSI-ISM business-focused benefits model to the CMMI (Staged) SPI
+model. Both the methodology and the instance mapping were then reviewed and
+evaluated by a set of experts in both the software life cycle and SPI. Based on
+their evaluation, both the methodology and the instance mapping constitute a
+valid and practical approach to a business-driven approach to SPI. As a result,
+both primary objectives of this research have been successfully accomplished.
+153
+References
+. "Manifesto for Agile Software Development." from www.agilemanifesto.org.
+Abrahamsson, P. (2001). Commitment Development in Software Process Improvement:
+Critical Misconceptions. 23rd International Conference on Software Engineering (ICSE'01),
+Toronto, Canada.
+Ahern, D. M., A. Clouse, et al. (2001). CMMI distilled : a practical introduction to integrated
+process improvement. Boston, Addison-Wesley.
+Akao, Y. (1990). QFD: Quality Function Deployment - Integrating Customer Requirements
+into Product Design, Productivity Press.
+Anderson, D. J. (2005). Stretching Agile to fit CMMI Level 3. AGILE 2005: 193 - 201.
+Antill, L. (1985). Selection of a Research Method. Research methods in information systems.
+E. Mumford, R. Hirschheim, G. Fitzgerald and A. T. Wood-Harper, North-Holland
+Publishing Co.
+April, A. and F. Coallier (1995). Trillium: A Model for the Assessment of Telecom Software
+System Development and Maintenance Capability. IEEE Software Engineering Standards
+Symposium, Montreal, Quebec, Canada, IEEE.
+Ashrafi, N. (2003). "The impact of software process improvement on quality: in theory and
+practice." Information & Management 40(7): 677 - 690.
+Avison, D. (1998). "Rigour in Action Research: Some Observations and a Plea."
+Scandanavian Journal of Information Systems 10(1-2): 119 - 124.
+Baker, S. W. (2005). Formalizing agility: an agile organization's journey toward CMMI
+accreditation. AGILE 2005: 185 - 192
+Baker, S. W. (2006). Formalizing Agility part 2: how an agile organization embraced the
+CMMI. AGILE 2006: 8 pp.-154.
+Basili, V. (1992). Software Modeling and
+Paradigm, University of Maryland.
+Measurement: The Goal/Question/Metric
+Basili, V., G. Caldiera, et al. (1994). The Goal Question Metric Approach. Encyclopedia of
+Software Engineering. J. J. Marciniak, John Wiley & Sons Inc. 1.
+Basili, V. and S. Green (1994). "Software Process Evolution at the SEL." IEEE Software.
+Basili, V. and H. D. Rombach (1988). "The TAME Project: Towards Improvement-Oriented
+Software Environments." IEEE Transactions on Software Engineering SE-14(6): 758 - 773.
+Basili, V. and D. M. Weiss (1984). "A Methodology for Collecting Valid Software
+Engineering Data." IEEE Transactions on Software Engineering SE-10(6): 728 - 738.
+154
+Beecham, S. (2003). A Requirements-based Software Process Maturity Model. Department
+of Computer Science, University of Hertfordshire. PhD.
+Beecham, S., T. Hall, et al. (2005). "Using an expert panel to validate a requirements process
+improvement model." The Journal of Systems and Software 76(3): 251 - 275.
+Beer, M., R. A. Eisenstat, et al. (1990). "Why Change Programs Don't Produce Change."
+Harvard Business Review 68(6): 158 - 166.
+Blanco, M., P. Gutierrez, et al. (2001). "SPI Patterns: Learning from Experience." 18
+3(May/June 2001): 28 - 35.
+Boehm, B. (1981). Software Engineering Economics, Prentice-Hall.
+Boehm, B. (1998). "A Spiral Model of Software Development and Enhancement." IEEE
+Computer 21(5): 61 - 72.
+Boehm, B., C. Abts, et al. (2000). Software Cost Estimation With COCOMO II, PrenticeHall.
+Bollinger, T. B. and C. McGowan (1991). "A cricital look at software capability evaluations."
+IEEE Software 8(4): 25 - 41.
+Brigham, E. F. and L. C. Gapenski (1994). Financial Management - Theory and Practice,
+Dryden Press.
+Brodman, J. G. and D. L. Johnson (1995). "Return on Investment (ROI) from Software
+Process Improvement as Measured by US Industry." Software Process: Improvement and
+Practice 1(1): 35-47.
+Brodman, J. G. and D. L. Johnson (1996a). "Realities and Rewards of Software Process
+Improvement." IEEE Software 13(6): 99-101.
+Brodman, J. G. and D. L. Johnson (1996b). "Return on Investment from Software Process
+Improvement as Measured by U.S. Industry." CrossTalk - The Journal of Defense Software
+Engineering(April).
+Brooks, F. P. (1995). The Mythical Man-Month, Addison Wesley Longman.
+Bruckhaus, T., N. H. Madhavji, et al. (1996). "The Impact of Tools on Software
+Productivity." IEEE Software 13(5): 29-38.
+Buchman, C. D. (1996). Software Process Improvement at Allied Aerospace. 29th Annual
+International Conference on System Sciences, Hawaii, IEEE.
+Buckley, J. W. (1976). Research Methodology and Business Decisions, Institute of
+Management Accountants.
+155
+Burton, J., I. Richardson, et al. (2009). The Medical Device Industry: Developments in
+Software Risk Management, Cambridge Scholars Publishing.
+Burzcuk, S. P. and B. Appleton (2002). Software Configuration Management Patterns:
+Effective Teamwork, Practical Integration, Addison Wesley.
+Butler, K. L. (1995). "The Economic Benefits of Software Process Improvement." CrossTalk
+- The Journal of Defense Software Engineering 1995(July).
+Butler, K. L. and W. Lipke (2000). Software Process Achievement at Tinker Air force Base,
+Oklahma, Software Engineering Institute: 58.
+Buzan, T. (2006). The MindMap Book, BBC Active.
+Choudrie, J. and Y. K. Dwivedi (2005). "Investigating the Research Approaches for
+Examining Technology Adoption Issues." Journal of Research Practice 1(1): 1 - 12.
+Chrissis, M. B., M. Konrad, et al. (2003). CMMI : Guidelines for Process Integration and
+Product Improvement. Boston, Addison-Wesley.
+Christensen, M. J. and R. H. Thayer (2001). The Project Manager's Guide to Software
+Engineering's Best Practices, IEEE Computer Society.
+Clark, B. K. (1997). The Effects of Software Process Maturity on Software Development
+Effort. Department of Computer Science, University of Southern California.
+Clark, B. K. (1999). Effects of Process Maturity on Development Effort, Center for Software
+Engineering, University of Southern California: 9.
+Clark, B. K. (2000). "Quantifying the Effects of Process Improvement on Effort." IEEE
+Software 17(6): 65-70.
+Using a 161-project sample, this article isolates the effects on effort of process
+maturity versus other effects, concluding that an increase of one process maturity
+level can reduce development effort by 4% to 11%
+Clover, V. T. and H. L. Balsley (1984). Business Research Methods, John Wiley & Sons, Inc.
+CMMI Product Team (2002). Capability Maturity Model Integration Version 1.1, Software
+Engineering Institute.
+Coallier, F. (1994). "Trillium Reference
+http://www2.umassd.edu/swpi/BellCanada/trillium-html/trillium.html.
+Manual."
+from
+Coallier, F. (1995). "Trillium: A Model for the Assessment of Telecom Product Development
+& Support Capability." Software Process Newsletter 2(Winter 1995): 3-8.
+Coallier, F. (2003). Trillium Update. F. McLoughlin.
+Concise Oxford English Dictionary (2008). Concise Oxford English Dictionary, Oxford
+University Press.
+156
+Cooper, D. R. and P. S. Schindler (2008). Business Research Methods, McGraw-Hill Higher
+Education.
+Cornford, T. and S. Smithson (2005). Project Research in Information Systems, Palgrave
+Macmillan.
+Creswell, J. W. (2007). Qualitative Inquiry and Research Design: Choosing Among Five
+Traditions, Sage Publications, Inc.
+Dalmaris, P., E. Tsui, et al. (2007). "A framework for the improvement of knowledgeintensive
+business processes." Business Process Management 13(3): 279 - 305.
+Damij, N., T. Damij, et al. (2008). "A methodology for business process improvement and IS
+development." Information and Software Technology 50(11): 1127 - 1141.
+Davenport, T. H. and J. E. Short (1990). "The New Industrial Engineering: Information
+Technology and Business Process Redesign." Sloan Management Review 31(4).
+Davis, A. M., E. H. Bersoff, et al. (1988). "A Strategy for Comparing Alternative Software
+Development Lifecycle Models." IEEE Transactions on Software Engineering 14(10): 1453 1461.
+Debou, C. and A. Kuntzmann-Combelles (2000). "Linking Software Process Improvement to
+Business Strategies: Experiences from Industry." Software Process: Improvement and
+Practice 5(1): 55 - 64.
+Diaz, M. and J. Sligo (1997). "How Software Process Improvement Helped Motorola." IEEE
+Software 14(5): 75-81.
+Dion, R. (1992). "Elements of a Process-Improvement Program." IEEE Software 9(4): 83-85.
+Dion, R. (1993). Process Improvement and the Corporate Balance Sheet. IEEE Software. 10:
+28-35.
+Djikstra, E. (1979). Go to statement considered harmful. Classics in Software Engineering,
+Yourdon Press: 27 - 33.
+Doolan, E. P. (1992). "Experience with Fagan's Inspection Method." Software - Practice and
+Experience 22(2): 173 - 182.
+Dyba, T. (2000). "An Instrument for Measuring the Key Factors of Success in Software
+Process Improvement." Empirical Software Engineering 5(4): 357 - 390.
+Dyba, T. (2005). "An Empirical Investigation of the Key Factors for Success in Software
+Process Improvement." IEEE Transactions on Software Engineering 31(5): 410 - 424.
+El Emam, K. and L. Briand (1997). Cost and Benefits of Software Process Improvement,
+Fraunhofer IESE: 27.
+157
+El Emam, K. and N. H. Madhavi (1996a). "Does Organizational Maturity Improve Quality?"
+IEEE Software 13(6): 109 - 110.
+El Emam, K. and N. H. Madhavi (1996b). "User Participation in the Requirements
+Engineering Process: an Empirical Study." Requirements Engineering Journal 1(1): 4 - 26.
+Fagan, M. E. (1976). "Design and Code inspections to reduce errors in program
+development." IBM Systems Journal 15(3): 182 - 211.
+Fagan, M. E. (1986). "Advances in Software Inspections." IEEE Transactions on Software
+Engineering 12(7): 744-751.
+Fantina, R. (2005). Practical Software Process Improvement Artech House.
+Fayad, M. E. and M. Laitinen (1997). "Process Assessment Considered
+Communications of the ACM 40(11): 125 - 128.
+Wasteful."
+Ferguson, P., G. Leman, et al. (1999). Software Process Improvement Works!, Software
+Engineering Institute.
+Fitzgerald, B. (1997). Methodology-in-Action: The Nature of Usage of Systems
+Development Methodologies in Practice. Department of Computer Science, Birbeck College.
+London, University of London. Ph.D.
+Fitzgerald, B. and D. Howcroft (1998). Competing dichotomies in IS research and possible
+strategies for resolution. Proceedings of the international conference on Information systems.
+Helsinki, Finland, Association for Information Systems.
+Galin, D. and M. Avrahami (2006). "Are CMM Program Investments Beneficial? Analyzing
+Past Studies." IEEE Software 23(6): 81 - 87.
+Galliers, R. (1992). Information Systems Research : Issues, Methods and Practical
+Guidelines, Blackwell Sci.
+Galliers, R. D. and F. Land, F. (1987). "Viewpoint: choosing appropriate information systems
+research methodologies." Communications of the ACM 30(11): 901-902.
+Garmus, D. and D. Herron (2001). Function Point Analysis - Measurement Practices for
+Successful Software Projects, Addison-Wesley.
+Garmus, D. and S. Iwanicki (2007). "Improved Performance Should Be Expected from
+Process Improvement." Software Tech News 10(1): 14 - 17.
+Glazer, H., J. Dalton, et al. (2008). CMMI or Agile: Why Not Embrace Both!, Software
+Engineering Institute.
+Glesne, C. and A. Peshkin (1991). Becoming Qualitative Researchers: An Introduction
+Pearson Education Ltd.
+158
+Goldenson, D. R. and D. L. Gibson (2003a). Demonstrating the Impact and Benefits of
+CMMI: An Update and Preliminary Results, Software Engineering Institute, CarnegieMellon
+University.
+Goldenson, D. R. and D. L. Gibson (2003b). Demonstrating the Impact and Benefits of
+CMMI®:An Update and Preliminary Results, The Software Engineering Institute: 55.
+Goyal, A., S. Kanungo, et al. (2001). ROI for SPI: Lessons from Initiatives at IBM Global
+Services India. SEPG 2001.
+Grady, R. B. (1992). Practical Software Metrics for Project Management and Process
+Improvement, Prentice Hall.
+Grady, R. B. (1997). Successful Software Process Improvement, Prentice Hall.
+Grady, R. B. and D. L. Caswell (1987). Software Metrics: Establishing a Company-wide
+Program, Prentice Hall.
+Gray, E. M. and W. L. Smith (1998). "On the limitations of software process assessment and
+the recognition of a required re-orientation for global process improvement." Software
+Quality Journal 7(1): 21 - 34.
+Hailey, V. A. (2001). ISO 9001: A Tool for Systematic Software Process Improvement.
+Software Process Improvement. R. Hunter and R. H. thayer, IEEE Computer Society: 291309.
+Hakim, C. (1987). Research Design: Strategies and Choices in the Design of Social Research,
+Routledge.
+Halstead, M. H. (1977). Elements of Software Science, Elsevier.
+Hammer, M. (1990). "Reengineering work: don't automated, obliterate." Harvard Business
+Review 68(4): 104 - 112.
+Hammer, M. and J. Champy (1990). Reengineering the Corporation: A Manifesto for
+Business Revoluation, Harper Paperbacks.
+Harter, D. and S. Slaughter (2003). "Quality Improvement and Infrastructure Activity Costs
+in Software Development: A Longitudinal Analysis." Management Science 49(6): 784-800.
+Hayashi, A. and N. Kataoka (2008). A Method to Identify Critical Software Process
+Improvement Area using Quality Function Deployment. 2008 International Conferences on
+Computational Intelligence for Modelling, Control and Automation; Intelligent Agents, Web
+Technologies and Internet Commerce; and Innovation in Software Engineering: 1153-1158.
+Herbsleb, J., A. Carleton, et al. (1994a). Benefits of CMM-Based Software Process
+Improvement: Executive Summary of Results, Software Engineering Institute: 16.
+Herbsleb, J., A. Carleton, et al. (1994b). Benefits of CMM-Based Software Process
+Improvement: Initial Results, Software Engineering Institute, Carnegie-Mellon University.
+159
+Herbsleb, J. and D. R. Goldenson (1995). After the Appraisal: A Systematic Survey of
+Process Improvement, its Benefits, and Factors the Influence Success, Software Engineering
+Institute.
+Herbsleb, J. and D. R. Goldenson (1996). A systematic survey of CMM experience and
+results. 18th International Conference on Software Engineering (ICSE'96), Berlin, Germany,
+IEEE.
+Herbsleb, J., D. Zubrow, et al. (1997). "Software Quality and the Capability Maturity
+Model." Communications of the ACM 40(6): 30-40.
+Higgins, R. C. (1998). Analysis for Financial Management, Irwin/McGraw-Hill.
+Hinley, D. S. and S. Reiblein (1995). A goal-oriented approach for managing software
+process change. Software Quality Management III Vol 1 Quality Management. C. A.
+Brebbia, Witpress: 287 - 297.
+Hirschheim, R. (1985). Information Systems Epistemology: A Historical Perspective.
+Research Methods In Information Systems. E. Mumford, R. Hirschheim, G. Fitzgerald and A.
+T. Wood-Harper, North-Holland Publishing Co.
+Houston, D. and J. B. Keats. (1996). "Cost of Software Quality: A Means of Promoting
+Software Process Improvement." from http://www.eas.asu.edu/~sdm/papers/cosq.htm.
+Humphrey, W. S. (1987). Characterizing the Software Process: A Maturity Framework
+CMU/SEI-87-TR-11, The Software Engineering Institute.
+Humphrey, W. S. (1988). "Characterizing the Software Process: A Maturity Framework."
+IEEE Software 5(2): 73-79.
+Humphrey, W. S. (1989). Managing the Software Process, Addison Wesley.
+Humphrey, W. S., T. R. Snyder, et al. (1991). "Software Process Improvement at Hughes
+Aircraft." IEEE Software 8(4): 11-23.
+Hyde, K. and D. Wilson (2004). "Intangible Benefits of CMM-based Software Process
+Improvement." Software Process Improvement and Practice 9(4): 217 - 228.
+IEEE/EIA (1996). IEEE/EIA Standard Industry Implementation of International Standard
+ISO/IEC12207:1995 and (ISO/IEC 12207) Standard for Information Technology-Software
+life cycle processes. IEEE/EIA 12207.0.
+IEEE/EIA (1998). Industry implementation of International Standard ISO/IEC 12207: 1995.
+)(ISO/IEC 12207 standard for information technology - software life cycle processes implementation
+considerations).
+Iivari, J. (1991). "A paradigmatic analysis of contemporary schools of IS development."
+European Journal of Information Systems 1(1): 249-272.
+160
+International Standards
+Organization.
+Organization (1994). ISO
+9000-3, International Standards
+International Standards Organization (2000). ISO 9001:2000, International Standards
+Organization.
+International Standards Organization (2003). "ISO/IEC 15504-2:2003
+technology - Process assessment - Part 2: Performing an assessment."
+International Standards Organization (2004). "ISO/IEC 15504-1:2004
+Technology - Process assessment - Part 1: Concepts and voabulary."
+Information
+Information
+International Standards Organization (2006). "ISO/IEC 15504-5:2006 Information
+technology - Process assessment - Part 5: An exemplar Process Assessment Model."
+International Standards Organization (2008). "ISO/IEC 12207:2008 - Systems and software
+engineering - Software life cycle processes."
+ISACA (2007). COBIT 4.1.
+ISO (1994). ISO 9000-3, International Standards Organization.
+ISO (2000). ISO 9001:2000, International Standards Organization.
+ISO (2003). "ISO/IEC 15504-2:2003 Information technology - Process assessment - Part 2:
+Performing an assessment."
+ISO (2004a). "ISO/IEC 15504-1:2004 Information Technology - Process assessment - Part 1:
+Concepts and voabulary."
+ISO (2004b). "ISO/IEC 15504-3:2004 Information technology - Process assessment - Part 3:
+Guidance on performing an assessment."
+ISO (2004c). "ISO/IEC 15504-4:2004 Information Technology - Process assessment - Part 4:
+Guidance on use for process improvement and process capability determination."
+ISO (2006). "ISO/IEC 15504-5:2006 Information technology - Process assessment - Part 5:
+An exemplar Process Assessment Model."
+Jackson, M. A. (1975). Principles of Programme Design, Academic Press Inc.
+Jakobsen, C. R. and K. A. Johnson (2008). Mature Agile with a twist of CMMI. AGILE
+2008: 212 - 217.
+Jenkins, A. M. (1985). "Research Methodologies and MIS Research." Research Methods in
+Information Systems, Elsevier Science Publishers B.V. (North Holland): 97 - 103.
+Jones, C. (1986). Programming Productivity, McGraw-Hill.
+Jones, C. (1991). Applied Software Measurement, McGraw-Hill.
+161
+Jones, C. (2008). Applied Software Measurement: Global Analysis of Productivity and
+Quality, McGraw-Hill Osborne.
+Kan, S. K. (2003). Metrics and Models in Software Quality Engineering, Addison-Wesley.
+Kaplan, A. (1964). The Conduct of Inquiry: Methodology for Behavioral Science, Chandler
+Publishing Co. .
+Kaplan, B. and D. Duchon (1988). "Combining qualitative and quantitative methods
+information systems research: a case study"." Manage. Inf. Syst. Q. 12(4): 571-586.
+King, J. and M. Diaz (2002). "How CMM Impacts Quality, Productivity, Rework, and the
+Bottom Line." CrossTalk - The Journal of Defense Software Engineering(March 2002).
+Kitchenham, B., S. L. Pfleeger, et al. (2002). "An Empirical Study of Maintenance and
+Development Estimation Accuracy." The Journal of Systems and Software 64(1): 57 - 77.
+Kitson, D. H., L. J. Kitson, et al. (2006). A 15504-compliant CMMI-based Appraisal
+Producing 12207 and 9001-related Outcomes. Proceedings of the 6th International SPICE
+Conference on Process Assessment and Improvement.
+Klein, H., K. and M. D. Myers (1999). "A Set of Principles for Conducting and Evaluating
+Interpretive Field Studies in Information Systems." MIS Quarterly 23(1): 67 - 94.
+Kolakowski, L. (1972). Positivist Science, Penguin Books: Harmondsworth.
+Konrad, M. and S. Shrum (2001). CMM Integration: Enterprise-Wide Process Improvement
+Using the Next Generation of CMMs. Software Process Improvement. R. Hunter and R. H.
+Thayer: 219-234.
+Krasner, H. (1995). A Case History of Process Improvements at the NASA Software
+Engineering Laboratory.
+Krasner, H., J. Pyles, et al. (1994). A Case History of the Space Shuttle Onboard Systems
+Project.
+Kuhn, T. S. (1996). The Structure of Scientific Revolutions, University of Chicago Press.
+Larman, C. and V. Basili (2003). "Iterative and incremental developments. a brief history."
+IEEE Computer 36(6): 47 - 56
+Lauesen, S. and O. Vinter (2001). "Preventing Requirement Defects: An Experiment in
+Process Improvement " Requirements Engineering 6(1): 37 - 50.
+Lawlis, P. K., R. M. Flowe, et al. (1995). "A Correlational Study of the CMM and Software
+Development Performance." CrossTalk - The Journal of Defense Software
+Engineering(September).
+162
+Lee, A. S. (1991). "Integrating Positivist and Interpretive Approaches to Organizational
+Research." Organization Science 2(4): 342 - 365.
+Lim, W. C. (1994). "Effects of Reuse on Quality, Productivity, and Economics." IEEE
+Software 11(5): 23-30.
+Lincoln, Y. and E. A. Guba (1985). Naturalistic Inquiry, Sage Publications, Inc.
+Liu, A. Q. (2007). "Motorola Software Group's China Center: Value Added by CMMI."
+Software Tech News 10(1): 18 - 23.
+Liu, X. F., Y. Sun, et al. (2006). "Business-oriented Software Process Improvement Based on
+CMM using QFD." Software Process Improvement and Practice 11(6): 573 - 589.
+Macdonald, J. (1997). "Together TQM and BPR are winners." TQM Magazine 7(3): 21 - 25.
+MacKenzie, B. D. (1977). Behaviourism and the Limits of Scientific Methods, Humanities
+Press.
+Mandeville, W. A. (1990). "Software Costs of Quality." IEEE Journal on Selected Areas in
+Communications 8(2): 315 - 318.
+McCabe, T. J. (1976). "A Complexity Measure." IEEE Transactions on Software Engineering
+2(4): 308-320.
+McCaffery, F. and A. Dorling (2009). "Medi SPICE development." Software Process:
+Improvement and Practice: n/a.
+McGarry, F., R. Pajerski, et al. (1994). Software Process Improvement in the NASA Software
+Engineering Laboratory, Software Engineering Institute.
+McLoone, P. J. and S. L. Rohde (2007). "Performance Outcomes of CMMI-Based Process
+Improvements." Software Tech News 10(1): 5 - 9.
+Miles, M. B. and A. M. Huberman (1994). Qualitative Data Analysis - An Expanded
+Sourcebook, Sage Publications Inc.
+Mingers, J. (2003). "The paucity of multi-method research: a review of the information
+systems literature." Information Systems Journal 13: 233-249.
+Moody, D. L. (2000). Building links between IS research and professional practice:
+improving the relevance and impact of IS research. Proceedings of the twenty first
+international conference on Information systems. Brisbane, Queensland, Australia,
+Association for Information Systems.
+Nogueira, J. C., Luqi, et al. (2000). A Formal Risk Assessment Model for Software
+Evolution. Proceedings of the 22nd International Conference on Software Engineering (ICSE
+2000), Limerick, Ireland.
+163
+O'Neill, D. (2003). "Determining Return on Investment Using Software Inspections."
+CrossTalk - The Journal of Defense Software Engineering.
+OECD (2008). OECD.Stat Database, OECD.
+Office of Government Commerce (2007). ITIL Lifecycle Publication Suite: Service Strategy
+WITH Service Design AND Service Transition AND Service Operation AND Continual
+Service Improvement, Stationery Office Books.
+OGC (2005). Managing Successful Projects with PRINCE2.
+OGC (2007a). ITIL Lifecycle Publication Suite: Service Strategy WITH Service Design
+AND Service Transition AND Service Operation AND Continual Service Improvement,
+Stationery Office Books.
+OGC (2007b). ITIL Service Lifecycle (Official Introduction), Stationery Office Books.
+Oldham, L. G., D. B. Putnam, et al. (1999). "Benefits Realized from Climbing the CMM
+Ladder." CrossTalk - The Journal of Defense Software Engineering.
+Omran, A. (2008). AGILE CMMI from SMEs perspective. ICTTA 2008: 1 - 8
+Organization for Economic Co-Operation and Development (2006). OECD Information
+Technology Outlook, 2006, OECD.
+Orlikowski, W. J. and J. J. Baroudi (1991). "Studying Information Technology in
+Organizations: Research Approaches and Assumptions." Information Systems Research 2(1):
+1 - 28.
+Parnas, D. L. and P. C. Clements (1986). "A Rational Design Process: How and Why to Fake
+It." IEEE Transactions on Software Engineering SE-12(2): 251-256.
+Patton, M. Q. (2001). Qualitative Research & Evaluation Methods, Sage Publications.
+Paulk, M. C., B. Curtis, et al. (1993). Capability Maturity Model for Software, Version 1.1,
+Software Engineering Institute.
+Paulk, M. C., C. V. Weber, et al. (1995). The Capability Maturity Model - Guidelines for
+Improving the Software Process, Addison-Wesley.
+Pennington, H. D. (1956). Production of Large Compuer Programs. ONR Symposium
+Advanced Programming Methods for Digial Computers.
+Phillips, J. J. (1997). Return On Investment in Training and Performance Improvement
+Programs, Gulf Publishing Company.
+Pino, F. J., M. T. Baldassarre, et al. (2009). "Harmonizing Maturity Levels from CMMI-DEV
+and ISO/IEC 15504." Software Process Improvement and Practice 22(4): 279 - 296.
+PMI (2004). Project Management Book Of Knowledge.
+164
+Povey, B. (1998). "The development of a best practice business process improvement
+methodology." Benchmarking for Quality Management & Technology 5(1): 27 - 44.
+Pressman, R. (1996). "Software Process Impediment." IEEE Software 13(5): 16 - 17.
+Putnam, L. H. and W. Myers (1997). "How Solved is the Cost Estimation Problem." IEEE
+Software 14(6): 105-107.
+Reiblein, S. and A. Symons (1997). "SPI: 'I can't get no satisfaction' - directing process
+improvement to meet business needs." Software Quality Journal 6(2): 89 - 98.
+Remus, U. and S. Schub (2003). "A Blueprint for the Implementation of Process-oriented
+Knowledge Management." Knowledge and Process Management 10(4): 237 - 253.
+Robeson, D., S. Davidson, et al. (1997). "Evolution of a Software Engineering Factory."
+CrossTalk - The Journal of Defense Software Engineering September 1997(1997).
+Rosqvist, T., M. Koskela, et al. (2003). "Software Quality Evaluation Based on Expert
+Judgement." Software Quality Journal 11(1): 39 - 55.
+Ross, S. A., R. W. Westerfield, et al. (1999). Corporate Finance, Irwin/McGraw-Hill.
+Rout, T. P. (1998). SPICE and the CMM: is the CMM compatible with ISO/IEC 15504?
+AQUIS (International Conference on Achieving Quality In Software), Venice, Italy.
+Rout, T. P. (2003). "ISO/IEC 15504 - Evolution to an International Standard." Software
+Process Improvement and Practice 8(1): 27 - 40.
+Rout, T. P. and A. Tuffley (2007). "Harmonizing ISO/IEC 15504 and CMMI." Software
+Process Improvement and Practice 12(4): 361 - 371.
+Royce, W. (1970). Managing the Development of Large Software Systems. IEEE Wescon,
+IEEE.
+Royce, W. (2002). CMM vs. CMMI: From Conventional to Modern Software Management.
+The Rational Edge E-zine, Rational Software.
+Rubin, H. A. (1993). Software Process Maturity: Measuring Its Impact on Productivity and
+Quality. International Conference on Software Engineering.
+Saaty, T. L. (1980). The Analytic Hierarchy Process, McGraw-Hill.
+Sapp, M., R. Stoddard, et al. (2007). "Cost, Schedule and Quality Improvements at Warner
+Robins Air Logistics Center." Software Tech News 10(1): 10 - 13.
+Schmidt, M. E. C. (2000). Implementing the IEEE Software Engineering Standards, SAMS.
+SEI (2002a). CMMI for Software Engineering, Version 1.1, Continuous Representation
+(CMMI-SW, V1.1, Continuous) - CMU/SEI-2002-TR-028.
+165
+SEI (2002b). CMMI for Software Engineering, Version 1.1, Staged Representation (CMMISW,
+V1.1, Staged) - CMU/SEI-2002-TR-029.
+SEI (2002c). CMMI for Systems Engineering/Software Engineering/Integrated Product and
+Process Development/Supplier Sourcing, Version 1.1, Continuous Representation (CMMISE/SW/IPPD/SS,
+V1.1, Continuous), Software Engineering Institute, Carnegie Mellon
+University: 724.
+SEI (2002d). CMMI for Systems Engineering/Software Engineering/Integrated Product and
+Process Development/Supplier Sourcing, Version 1.1, Staged Representation (CMMISE/SW/IPPD/SS,
+V1.1, Staged), Software Engineering Institute, Carnegie Mellon
+University: 729.
+SEI. (2005). "CMMI Performance Results - 2005."
+http://www.sei.cmu.edu/cmmi/2005results.html.
+SEI (2006). CMMI for Development Version 1.2, SEI.
+Retrieved 07/12/2008, 2008, from
+Shaikh, A., A. Ahmed, et al. (2009). Strengths and Weaknesses of Maturity Driven Process
+Improvement Effort. 2009 International Conference on Complex, Intelligent and Software
+Intensive Systems, Fukuoka, Japan.
+Sheard, S. A. (1997). "The Frameworks Quagmire." CrossTalk - The Journal of Defense
+Software Engineering 10(9): 17 - 22.
+Shepperd, M. and M. Cartwright (2001). "Predicting with Sparse Data." IEEE Transactions
+on Software Engineering 27(11): 987 - 998.
+Silverman, D. (1998). "Qualitative research: meanings or practices?" Information Systems
+Journal 8(1): 3 - 20.
+Silverman, D. (2006). Interpreting Qualitative Data: Methods for Analyzing Talk, Text and
+Interaction, Sage Publications Ltd.
+Slowey, K. and I. Richardson (2006). A Practical Application of Content Analysis, Lero - the
+Irish Software Research Center.
+Solon, R., Jr. and J. Statz (2002). "Benchmarking the ROI for Software Process Improvement
+(SPI)." Software Tech News 5(4): 6 - 11.
+Sommerville, I. (2004). Software Engineering, Addison Wesley.
+Sommerville, I. (2007). Software Engineering, Addison Wesley.
+Stone, E. F. (1978). Research Methods in Organizational Behavior, Goodyear Publishing.
+Sun, Y. and X. F. Liu (2010). "Business-oriented software process improvement based on
+CMMI using QFD." Information and Software Technology 52(1): 79 - 91.
+166
+Sutherland, J., C. R. Jakobsen, et al. (2007). Scrum and CMMI Level 5: The Magic Potion for
+Code Warriors. AGILE 2007: 272-278.
+Tantara Consulting Services Inc. (2001). "History and relationship of process
+standards/models." from http://www.tantara.ab.ca/a_isorel.htm.
+Tockey, S. (2004). Return on Software: Maximizing the Return on Your Software
+Investment, Addison Wesley.
+Valiris, G. and M. Glykas (1999). "Critical review of existing BPR methodologies - the need
+for a holistic approach." Business Process Management 5(1): 65 - 86.
+van Loon, H. (2007). Process Assessment and ISO/IEC 15504. A Reference Book, Springer.
+van Solingen, R. (2004). "Measuring the ROI of Software Process Improvement." IEEE
+Software 21(3): 32 - 38.
+Vogel, D., R. and J. Wetherbe, C. (1984). "MIS research: a profile of leading journals and
+universities." ACM SIGMIS Database 16(1): 3-14.
+Webster, W. A. R. (1973). Handbook of O. & M analysis, London Business Books.
+Williams, L. and A. Cockburn (2003). "Agile software development: it's about feedback and
+change." IEEE Computer 36(6): 39 - 43.
+Wohlwend, H. and S. Rosenbaum (1994). "Schlumberger's Software Improvement Program."
+IEEE Transactions on Software Engineering 20(11): 833-839.
+Yamamura, G. and G. B. Wigle (1997). "SEI CMM Level 5: For the Right Reasons."
+CrossTalk - The Journal of Defense Software Engineering(August 1997).
+Zahran, S. (1996). Business and Cost Justification of Software Process Improvement - "ROI
+from SPI". International Software Process Association Conference, Brighton, England.
+167

@@ -1,0 +1,6 @@
+Experiences and insights from applying GQM+Strategies in a systems product development organisation
+
+Aligning software-related activities with corporate strategies and goals is increasingly important for several reasons such as increasing the customer satisfaction in software-based products and services. Several approaches have been proposed to create such an alignment. GQM+Strategies is an approach that applies measurement principles to link goals and strategies on different levels of an organisation. In this paper, we describe experiences from applying GQM+Strategies to elicit, link, and align the goals of an integrated systems product development organisation across multiple organisational levels. We provide insights into how GQM+Strategies was applied during a five-month period. The paper presents the enacted application process and main lessons learnt. In addition, related approaches are described and an outlook on future work is given.
+
+Measurement, strategic alignment, case study, GQM+Strategies, software engineering, project management
+

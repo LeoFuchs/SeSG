@@ -1,0 +1,1163 @@
+Strategically Balanced Process Adoption
+Hesam Chiniforooshan Esfahani
+Department of Computer Science
+University of Toronto
+40 St. George St.
+Toronto - Canada
+Eric Yu
+Faculty of Information
+University of Toronto
+140 St. George St.
+Toronto - Canada
+Maria Carmela Annosi
+Ericsson Telecomunicazioni Sp.A
+Ericsson Software Research
+Via Madonna di Fatima, 2, 84016 Pagani,
+Salerno, Italy
+Hesam@cs.toronto.edu
+Eric.yu@utoronto.ca
+Mariacarmela.annosi@ericsson.com
+ABSTRACT
+Software processes have an important role to play in realizing
+organizational strategies. When a software organization is about
+to decide on the adoption of a new process, it should have a clear
+understanding of its own strategic objectives, as well as the
+potentials of the new method in supporting or hindering its
+strategic plan. From this perspective, a successful process
+adoption initiative is one which provides maximum support to the
+strategic objectives of an organization while producing a
+minimum of adverse effects.
+This paper introduces the concept of Strategically Balanced
+Process Adoption (SBPA) for anticipating and monitoring the
+strategic impacts of a new process before and after its adoption. A
+set of techniques are proposed for the realization of SBPA, which
+are based on a repository of method fragments, introduced in an
+earlier ICSP paper. The proposed techniques are deployed in an
+industrial experience, where the subject organization was about to
+adopt a custom-designed agile process. The proposed techniques
+of SBPA helped the subject organization to better design the to-be
+process, with improved control over its enactment.
+Categories and Subject Descriptors
+K.6.3 [Software Management] - Software Process
+General Terms
+Management, Measurement
+Keywords
+Software Process, Process Adoption,
+Improvement, Strategic Management
+Software
+Process
+1. INTRODUCTION
+Changing the development process of a software organization is
+often motivated by the need for a new process that better supports
+the organizational strategies. Regardless of the way that the new
+Permission to make digital or hard copies of all or part of this work for
+Peprmerissosnioalnotroclmasaskreoodmiguitsael iosrgrhaanrtdedcowpiitehsouotffeaellpororvpidaretdotfhatthcisopwieosrkarefor
+penrsootnmalaodre colarsdsriostorimbuutesde ifsorgrparnotfeidt owritchoomutmfeereciparloavdidveadnttahgaet acnodpiethsaatre
+noctompiaedseboerarditshtirsibnuotetidcefoarnpdrothfiet ofurlclocmitamtieorncioalnatdhveanfitrasgtepagned. tThaot ccooppyies
+beoatrhtehriwsinsoe,ticoer arnedputhbelisfhu,lltcoitaptoisotnoonn tsheervfierrsst opragteo. rTeodicsotrpibyuotethetorwliissets,,to
+repreuqbuliisrehs, tporipoorsstpoencisfiecrvpeerrsmoisrstioonreadnidst/roirbuatfeeeto. lists, requires prior specific
+peIrCmSisSsPio'1n1a,nMd/aoyr a fee.
+ICSSP'11, May 212-12-22,22,021011,1W,Waiakiikkiik,iH,Honoonloulluul,u,HHI,I,UUSSAA.
+CoCpoypriygrhigth2t021011A1CAMCM97987-81--14-540530-30-703508-07-/81/11/10/505......$$1100.0.000.
+process is designed (systematic SPI frameworks or ad hoc process
+assembly), it is expected to improve certain strategic objectives of
+organization, without producing unexpected side-effects on other
+strategic objectives. Thus, when a software organization decides
+on the adoption of a new development process, it should have a
+clear understanding of the strategic impacts of this initiative.
+However, gaining such understanding before the adoption of new
+process is inherently complex, because often the strategic impacts
+of a new process are visible after its actual enactment.
+In an earlier paper [1], we introduced a repository of Agile
+Method Fragments (AMF), with content collected through
+systematic reviewing of empirical studies on agile methods.
+Among the services of this repository is the provision of a list of
+objectives that can be contributed (either positively or negatively)
+by any agile method fragment. The repository supplies situational
+evidence for every contribution relation by referencing the
+empirical study that had reported the contribution relation. For
+instance, for the agile method fragment Pair  Programming, the
+repository states over 15 objectives (such as Reduced  Defect 
+Rate, Better  Time  to  Market, Increased  Productivity, etc.), and
+provides evidence from empirical studies where the enactment of
+Pair  Programming helped or hurt the achievement of those
+objectives.
+Leveraging the knowledge in the AMF repository, this paper
+proposes a set of techniques for managing a process adoption
+initiative from a strategic perspective. We introduce the concept
+of Strategically Balanced Process Adoption (SBPA), as a process
+adoption initiative which promotes a balance among all categories
+of strategic objectives, before and after the enactment of the new
+process. The SBPA is explained in two major parts:
+•
+•
+The pre-adoption analysis, which anticipates the potential
+impacts of a new process over the strategic objectives of an
+organization, before the adoption of the new process.
+The post-adoption monitoring, which investigates the actual
+impacts of a new process over the strategic objectives of an
+organization, after the adoption of the new process.
+Since September 2010 we have been involved in a Software
+Process Improvement (SPI) initiative in one of the R&D units of
+the Ericsson Company in Italy. We joined the SPI initiative at the
+time that the as-is process was analyzed. A to-be process had been
+proposed to the organization, but was not yet adopted. The
+proposed to-be process was mainly composed of agile method
+fragments, which had experienced success in other R&D units of
+the organization. However, due to the particular situation of the
+169
+unit, managers had not been convinced that the new process could
+help achieve their strategic objectives. The pre-adoption analysis
+techniques described in this paper were introduced in that SPI
+initiative to anticipate the positive and negative effects that the
+new process could have for the organization. Some parts of the
+results of the pre-adoption analysis are explained in this paper.
+The post-adoption monitoring is still in progress - results will be
+reported in the future.
+The remainder of this paper is organized as follows: Section 2
+provides a brief background about the approach of Balanced
+Scorecards in strategic management, from which the inspiration
+for SBPA was derived. Section 3 explores the concept of balanced
+process adoption, defines four techniques for pre-adoption
+analysis, and explains the post-adoption monitoring. This section
+also specifies the preparative steps, which are needed for strategic
+analysis of a to-be software process. Section 4 illustrates the
+application of pre-analysis techniques in our industrial
+experience. Sections 5 and 6 discuss related work and our future
+plans.
+2. BACKGROUND
+In the 1990's, Kaplan and Norton introduced the concept of
+Balanced Scorecards (BSC). The basic idea of BSC is to support
+the strategic management of organizations, through the structuring
+of portfolio strategies from different perspectives. One of the
+major goals of BSC is to translate the often vague and high-level
+organizational vision and mission statements into actionable and
+measurable objectives that, first, are all traceable back to the high
+level strategies, and second, each can be understood and
+implemented by accountable staff [2].
+The BSC proposes that an organization's strategies should be
+viewed from four perspectives: (1) Financial - strategies for
+profitability of an organization from shareholders' viewpoint; (2)
+Customer - strategies for creating value from customers'
+perspective, (3) Internal Business Process - strategies for
+improving the key business processes of the organization; (4)
+Learning & Growth - strategies for improving the qualifications
+of individuals and growth of the corporation. The BSC suggests
+that the high-level strategies of an organization (which are often
+articulated as vision and mission statements) be decomposed into
+actionable Objectives, categorized by the four perspectives, and
+attributed with quantifiable Measures, desired Targets, and list of
+supporting Initiatives [3].
+The initial concepts of the BSC approach are supported by
+detailed frameworks for building and implementing particular
+scorecards. A mapping technique called Strategy Maps [4] [4]
+was proposed for linking strategic objectives across four
+perspectives, clarifying their cause-and-effect relationships. The
+Balanced Scorecard Institute® proposed a framework (called
+Nine Steps to SuccessTM) for strategic planning and management.
+The institute also proposed a maturity model for assessing the
+quality of strategic management [5]. The model defines eight
+dimensions for strategic management and proposes five levels of
+maturity for each dimension.
+BSC has also been investigated in the context of information
+systems and the software industry. Martinsons et al. [6] proposed
+a customized BSC for Information Systems (IS), in which the
+original BSC perspectives are substituted by business value, user
+orientation, internal process, and future readiness. They argued
+that the strategic goals and activities of an IS organization can be
+classified into these perspectives, and proposed a number of
+measures for evaluating each category. Following the original
+BSC guidelines [2], they stated that all of the metrics should be
+quantifiable, easy to understand, and have meaningful analysis
+results. Grembergen et al. [7] also proposed a customized BSC for
+e-Business, which consists of four perspectives: customerorientation,
+business contribution, operational excellence, and
+future orientation. Each perspective is then supported by a
+number of quantifiable measures. Indeed, there are many reports
+of using BSC for strategic management in the software industry
+[8-11].
+3. BALANCED PROCESS ADOPTION
+The basic idea of Strategically Balanced Process Adoption
+(SBPA) is inspired by the BSC, where it looks for a balanced
+view of organizational strategies. One of the important problems
+in the strategic management of organizations is the anticipation of
+the potential impacts of organizational initiatives over the major
+categories of strategic objectives. If an initiative results in the
+improvement of a particular set of strategic objectives, at the cost
+of uncontrolled deterioration of other sets, this initiative is
+considered a kind of risk for the balance of organizational
+strategies.
+Within the context of software organizations, the balanced view
+of organization strategies highly depends to the choice of software
+development process. The reason lies in the fact that software
+processes are the main carrier of organizational technological
+advances, as well as business success, and human-related
+phenomena, all of which having significant roles in the strategic
+management of a software organization. Therefore, any kind of
+major change to the development process of a software
+organization should be performed with respect to its potential
+impacts on the strategic objectives of the organization.
+The concept of SBPA is particularly important for the adoption of
+software processes which are mainly built on agile method
+fragments. The high emphasis of agile methods on product
+aspects rather than on the process can lead the organization to
+unknowingly sacrifice certain sets of strategic interests for the
+sake of improving others. For example, the valuation of code over
+documents is highly advocated by agile methods, and argued to
+have a direct positive effect on the Productivity  of  Individuals.
+However, such practices often have side effects on some other
+sets of strategic objectives (e.g., negative impacts on System
+Maintainability). Therefore, it is a must for a software
+organization about to adopt a new development process
+(particularly an agile process) to view the adoption initiative with
+regard to its impacts over various categories of the organization
+specific strategic objectives.
+To further clarify the concept of SBPA, we define Strategically
+Balanced Process Adoption as an initiative with the following
+attributes:
+1.
+2.
+It positively contributes to the strategic objectives, which
+are expected to be improved.
+It does not cause uncontrolled negative impacts on the
+strategic objectives, which are not within the focus of
+improvement.
+170
+3.
+4.
+•
+•
+It does not cause overall deterioration of a particular
+category of strategic objectives, for the sake of improving
+some other categories.
+It results in homogenous impacts over all categories of
+strategic objectives.
+The first attribute is the minimum expectation from a SBPA,
+which assures that the adoption of the new process would lead to
+the improvement of the set of strategic objectives which were in
+need of improvement (e.g., due to issues identified in the as-is
+process); the second and third attributes seek the balance of
+process adoption respectively from the perspective of every
+strategic objective and every category of strategic objectives. The
+last attribute of SBPA is an optional one, which specifies whether
+a process adoption initiative causes proportionately similar
+impacts over different categories of strategic objectives (i.e., all
+categories of strategies will benefit from the initiative to a similar
+extent). Further explanation of SPBA attributes are presented in
+the next section.
+In order to explore the proper balance of a process adoption
+initiative, the following questions should be answered:
+How to anticipate the balance of the initiative, before the
+actual enactment of new process?
+How to monitor the balance of the initiative, after the
+enactment of new process?
+The first question is addressed as pre-adoption analysis, which
+introduces four strategic analysis techniques. It investigates the
+balance of process adoption at two levels: objectives and
+categories, respectively exploring the improvement and the
+preservation of the status of strategic objectives and categories of
+strategies. The second question is addressed as post-adoption
+monitoring, which as its name implies is about monitoring the
+balance of initiative after the enactment of the new process.
+Prior to conducting pre-adoption analysis (or post-adoption
+monitoring) a set of preparative steps are required. These steps are
+mainly about setting up the strategic model of the organization
+and inspecting the contributions of new process over the strategic
+objectives of organization. These are briefly explained in the
+following two subsections.
+3.1 Defining Organizational Strategies
+To perform the pre-adoption analysis, the organization should
+have a clear understanding of its strategic objectives at different
+levels, and the way these objectives would impact each other.
+Indeed the strategic objectives must be categorized into
+predefined categories, which represent major classes of strategies
+that are important for the organization. The categorization of
+strategic objectives is represented by the following relation:
+Categ(C, SO) where:
+•
+•
+C is a category of strategies.
+SO is the strategic objective
+For instance, Categ(Business, Reduced Time to Market)
+represents that the strategic objective Reduced  Time  to  Market
+belongs to the category of Business strategies.
+The original BSC suggests to use a table of four sections, each
+containing the strategic objectives that belong to one of the four
+major strategic perspectives (Financial, Customer, Internal
+Business Process, Learning and Growth) [2]. In case of a software
+organization these perspectives can be customized to represent
+their own major strategic concerns (such as classifications
+proposed in [6, 7]). The other form of representing strategic
+objectives is to use Strategy Maps which are intended to visualize
+how strategic objectives of each category would impact the
+objectives of other category [4]. We propose the use of Strategies
+Graph (SG) for representing the Decompositional and
+Contributional relations of strategic objectives. The idea of SG
+was inspired by goal graph structures in Goal-Oriented
+Requirements Engineering, particularly the i* modeling
+framework [12]. The decompositional relations represent the
+logical AND/OR decompositions of high-level objectives to those
+of lower-levels; and Contributional relations represent the positive
+and negative impacts of strategic objectives over each other. . The
+contributional relations can be plotted across different categories
+(e.g., business, customer, internal process) and levels (high-level
+visional strategic to low-level actionable objectives) in the
+Strategies Graph. Figure 1 shows a portion of a sample SG.
+Develop Good Product
+And
+And
+Quality Product
+Developing Right Product
++
++
++ +
++
++
+Performance Usability
+Comply to
+Standards
+Design
+Quality
+Understanding
+customer needs
+Frequent feedback
+from Customer
+Figure 1: A portion of a sample Strategies Graph
+Relations among the strategic objectives are formulated by the
+relation: ObjRel(SO1, SO2, K, T) where:
+•
+•
+•
+•
+SO1 is the decomposed or contributed strategic objective
+SO2 is the decomposing or contributing strategic objective
+K is the kind of contribution, which can be C or D,
+respectively representing contributional and
+decompositional relations.
+T is the type of relation, which for contributional relations
+can take values of {++, +, -, --}; and for decompositional
+relations {AND, OR}.
+For instance for the SG of Figure 1, ObjRel(Quality  Product, 
+Performance,  C,  +) represents the positive contribution relation
+which exist from the strategic objective Performance towards
+Quality Product.
+The pre-adoption analysis takes a qualitative approach for
+analyzing the potential impacts of a new process over strategic
+objectives of an organization. Thus, at this stage it is not required
+to provide quantifiable metrics and target values for every
+objective. These factors will be needed at the next stage (PostAdoption
+Monitoring).
+171
+3.2 Inspecting the Contributions of New
+Process
+Inspecting the contributions of a new process is intended to
+identify the types of impacts that a new process would make on
+the strategic objectives of an organization. This is based on the
+following assumptions:
+The new process is decomposable into a number of method
+fragments (as described in [13]). A method fragment can be
+a process or product fragment.
+Every fragment of the new process makes distinguishable
+contributions to the strategic objectives of organization.
+The overall impact of the new process over the strategic
+objectives is the aggregation of contributions of its
+fragments over different portions of strategic objectives.
+Two approaches are proposed for exploring the contributions of a
+method fragment over strategic objectives: Evidence-Based and
+Consensus-Based. In the evidence-based approach the
+contribution of a method fragment to a strategic objective is
+supported by evidential knowledge, which is provided by the
+repository of method fragments (introduced in [1]). This
+repository provides structured evidential information for a set of
+method fragments, mostly agile ones. The content of the
+repository has been populated through extensive systematic
+literature review of empirical studies, which had reported various
+objectives that can be contributed by a method fragment in
+different project situations. The content of this repository is
+evidential in that it provides references to the original studies
+which had reported each contribution. If a strategic objective of
+the subject organization is among the objectives dataset of a
+candidate method fragment found in the repository, that
+information can be used as evidence for exploring the
+contribution relation. Otherwise, the contribution relation is
+determined through the consensus-based approach, which relies
+on an agreement among process analysis team members about the
+contribution relation, based on the definition of the method
+fragment as understood by the team members. Contribution
+relations are defined as the following relation: Cont(MF, SO, R,
+T) where:
+•
+•
+•
+•
+•
+•
+•
+a.
+b.
+c.
+a.
+b.
+MF is the name of contributing method fragment
+SO is the name of contributed strategic objective SO
+R is the rationale of contribution, which explains why such
+contribution might happen
+T is the type of contribution, which can be {++, +, -, --}
+respectively representing strongly positive, positive,
+negative, and strongly negative contributions.
+A positive contribution implies that the adoption of method
+fragment MF would improve the strategic objective SO, and vice
+versa for a negative contribution. For instance, Cont(Pair 
+Programming, Reduced Defect Rate, Two programmers make less 
+defect,  ++) implies that the adoption of method fragment Pair 
+Programming would improve the strategic objective Reduced 
+Defect  Rate, because of the mentioned rationale. As another
+example, Cont(Pair  Programming,  Individuals  Productivity,  Less 
+LOC  per  Developer  per  Month,  ‐) represents the negative impact
+of the method fragment Pair  Programming on strategic objective
+Productivity  of  Individuals. (In both examples the contribution
+172
+relations have been identified through the evidence-based
+approach, with the help of knowledge provided in the repository
+of method fragments. This repository is available online at
+http://www.ProcessExperience.org)
+3.3 Pre-Adoption Analysis
+After establishing the strategic model of organization and
+inspecting the potential impacts of the new process over the
+organizational strategic objectives, it is now possible to analyze
+the balance of the process adoption initiative. Here, four
+techniques are described for the pre-adoption analysis. For each
+technique, first the target of the technique is stated, and then the
+steps which should be taken.
+3.3.1 Balance Improvement
+The introduction of a new process to an organization is often
+motivated by a set of strategic objectives that are currently not
+well met. This can be due to problems of the current development
+process, which prevented the organization from achieving its
+strategies; or a change in strategies, which made the current
+process inadequate of meeting the target values of the new
+strategic objectives. To reach a balanced state after adopting the
+new process, it is necessary that the new process address the
+strategic objectives that are not sufficiently met. Thus the first
+target of SBPA is to investigate whether:
+The new process is positively contributing to the
+strategic objectives, which are expected to be improved.
+It should be mentioned that this paper is not concerned with the
+problem of finding the strategic objectives that are in need of
+improvement. We assume that these objectives are known to the
+organization.
+The Balance Improvement analysis is performed through the
+following steps:
+1.
+2.
+Identify the list of strategic objectives whose current status
+is not satisfactory and needing improvement - this set of
+objectives is called ToBeImprovedObjs.
+Based on the results of (3.2), identify the list of strategic
+objectives that will receive, from the fragments of the new
+process:
+Only positive contributions - this set is called
+ToBeImprovingObjs.
+Conflicting contributions (both negative and positive
+contributions) - this set is called ToBeConflictingObjs.
+Only negative contributions - this set is called
+ToBeDeterioratingObjs.
+3. To analyze the Balance Improvement target, the following
+cases should be considered:
+If ToBeImprovedObjs  is a subset
+ToBeImprovingObjs, then the target is met.
+of 
+If ToBeImprovedObjs has any common element with
+ToBeConflictingObjs, then every strategic objective
+which belongs to the common set should be further
+investigated to anticipate whether it will eventually
+deteriorate or improve (this investigation will be
+explained in the next subsection).
+c.
+If ToBeImprovedObjs has any common element with
+ToBeDeterioratingObjs, then the target cannot be fully
+met. When this situation occurs, the analysis team
+should decide on corrective actions on the new process
+(e.g. altering the constituent fragments, or changing
+the settings of current fragment), depending on the
+significance of the strategic objectives in question.
+3.3.2 Balance Preservation
+The improvement of strategic objectives that were expected to be
+improved by the adoption of the new process should not result in
+a false perception of overall process improvement. That is
+because a new process that is designed to effectively improve a
+limited set of objectives can produce uncontrolled negative
+impacts on other sets. In SBPA, one of the attributes of an optimal
+to-be process is that it does not leave uncontrolled side-effects
+over the organizational strategies - especially those which are out
+of the focus of improvement. Thus, the second target of SBPA is
+to inspect whether:
+The new process is not causing uncontrolled negative
+impacts on the strategic objectives which are not within
+the focus of improvement.
+The analysis technique is described in the following steps:
+Calculate the contribution weight of every strategic
+objective, expressed as CW (SO) - which is the sum of the
+value of contribution relations that a strategic objective (SO)
+receives from different fragments of the new process. The
+value of (qualitative) contribution links is quantified as
+follow:
+a. +1 for Positive Contribution
+b. +2 for Strongly Positive Contribution
+c. -1 for Negative Contribution
+d. -2 for Strongly Negative
+The target is ideally met when the contribution weight of all
+strategic objectives is positive. But that is not usually the
+case. Thus, for every strategic objective with CW (SO) < 0:
+a. If the SO belongs to the ToBeDeterioratingObjs then the
+analysis team should go through the following check list
+to see whether the perceived deterioration of the SO is
+under control:
+i. Is it tolerable for the organization to see this
+strategic objective deteriorating, in trade-off with
+the improvement of other objectives?
+ii. Is there any fragment in the new process of
+software development that could overcome the
+negative contributions, but was overlooked in step
+3.2.
+iii. Is there any corrective action applicable on the
+new process, which would overcome the negative
+contributions? If yes, the impacts of this corrective
+action on other strategic objectives of organization
+should be re-explored by repeating step 3.2.
+iv. If all above conditions are denied, the negative
+contribution of the new process to the subject
+1)
+2)
+strategic objective
+uncontrollable.
+is
+considered
+to
+be
+b. If the SO belongs to the ToBeConflictingObjs then the
+analysis team should go through a similar check list , but
+with the following condition added:
+v. Is it worth accepting the negative contribution, in
+trade-off with the positive ones towards the same
+strategic objective?
+3.3.3 Balance Preservation across Categories
+The improvement of organizational strategic objectives can be
+viewed at different levels. The previous technique was focusing
+on instances of strategic objectives, and was concerned with
+keeping the balance of each individual objective against others.
+However, one of the issues which might disturb the balance of a
+process adoption initiative is that the new process worsens one or
+more categories of strategic objectives. For instance, for an
+organization that is doing badly on customer-related strategic
+objectives, the first priority of process improvement would be the
+improvement of its customer-related strategies. However, this
+should not result in the deterioration of other categories of
+strategic objectives such as those for business or internal process.
+Thus, the third target of SBPA is introduced at the category level
+of organizational strategies, and is intended to inspect whether:
+The new process is not causing overall deterioration of a
+particular category of strategic objectives, for the sake
+of improving some other categories.
+The analysis technique is carried out with the following steps:
+1. For each category of objectives, calculate the total weight
+of the negative contributions (TWNC) and the total weight
+of the positive contributions (TWPC) made towards the
+strategic objectives of that category. Calculate the total net
+weight of contributions (TWC) for that category TWC =
+TWPC - TWNC.
+2. A process adoption is considered unbalanced if either of
+these conditions hold even in one category of strategic
+objectives:
+a.
+b.
+The TWC is negative, which shows that the new
+process is causing the deterioration of that category.
+The TWC is positive overall, but the TWNC is a large
+negative number, which suggests that the small overall
+gain of the new process (in this category) may not be
+worth the risk.
+3.3.4 Homogenous Contributions across Categories
+The fourth perspective from which the balance of a process
+adoption can be viewed is the relative homogeneity of
+contributions that the new process makes to different categories of
+strategic objectives. This kind of balance analysis is to determine
+whether the new process is proportionately treating all categories,
+i.e., different categories are benefiting or hurting to the same
+degree from the adoption of new process. This can be investigated
+by identifying the variance of the percentage of different types of
+contributions, made from the new process to different categories
+of strategic objectives. Thus, the fourth target of SBPA is to
+inspect whether:
+173
+1)
+2)
+The new process is causing homogenous impacts over all
+categories of strategic objectives.
+Analyzing the homogeneity of contributions across different
+categories has a precondition. This analysis is meaningful only if
+strategic objectives are evenly distributed across different
+categories; i.e., the variance of the number of strategic objectives
+in different categories does not exceed certain limit. For example,
+in an organization with 100 strategic objectives grouped in 3
+categories, with distribution of 28 objectives in the first category,
+38 in the second, and 34 in the third; it makes sense to analyze the
+homogeneity of contributions across categories, because the
+variance is not too much and objectives are almost evenly
+distributed among categories. But, if the number of objectives
+were distributed unevenly, e.g., 80, 15, 5 among three categories,
+then due to the high variance of number of objectives across
+categories, the homogeneity analysis will not be meaningful. The
+reason is that for instance, the last category will be fully
+supported by the new process if it receives only five positive
+contributions; whereas the first category would need 80 positive
+contributions to get the similar status.
+The following technique is proposed for this analysis:
+Build the contribution distribution table, which for each
+category of strategic objectives shows the number and
+percentage (within the category) of strategic objectives
+which are:
+a.
+b.
+c.
+d.
+Supported - SO belongs to the ToBeImprovingObjs
+Declined - SO belongs to the ToBeDeterioratingObjs
+Conflicted - SO belongs to the ToBeConflictingObjs
+Unaddressed - Otherwise.
+To investigate the homogeneity of the contributions across
+categories, explore the variance of contributions of the new
+process to the strategic objectives. This technique would
+show whether the new process is making similar
+contributions to different categories. To do so, for each status
+value (supported, declined, conflicted, unaddressed),
+calculate the variances of percentages and numbers in
+different categories. For instance, calculate the variance of
+the percentage of strategic objectives with the status value of
+Supported among different categories. The lower the
+variance measures, the more homogenous contributions are
+made from the new process to different categories of
+objectives.
+The homogeneity of the contributions of a new process to
+different categories of strategic objectives becomes important
+when the organization expects that improvement in some
+categories of strategies will lead to improvements in some other
+categories. For example, it is often expected that improvements in
+the internal development process will lead to improvements in
+achieving business objectives as well as technological ones.
+Analyzing the homogeneity of SBPA is a mechanism for
+investigating this issue.
+3.4 Post-Adoption Monitoring
+Post-adoption monitoring aims to assess the actual impacts of the
+adopted new process on the strategic objectives of the
+organization. Unlike pre-adoption analysis, which was based on
+evidential or consensual anticipations of the future status of
+strategic objectives, post-adoption monitoring is based on data
+about the actual status of strategic objectives achievement. Postadoption
+monitoring is a necessary action to see whether promises
+of the new process are achieved within the current organization
+setting, or there is need for further customization of the process or
+change of other organizational parameters.
+In order to conduct a post-adoption analysis, strategic objectives
+should be supported by quantifiable metrics, with specified target
+and threshold values. The target value of a strategic objective
+represents its desired status; and the threshold value represents its
+worst tolerable status, which might be reached by its
+deterioration.
+Post-adoption monitoring involves continuous monitoring of
+strategic objectives, comparing current status with what was
+analyzed at the pre-adoption analysis. In detail, post-adoption
+monitoring aims to assess:
+1.
+2.
+3.
+4.
+5.
+6.
+The degree to which the indicators of strategic objectives
+which were analyzed to be improved, are actually
+improving; and whether this improvement is adequate for
+meeting the expected target values.
+The degree to which the indicators of strategic objectives
+which were analyzed to be deteriorating, are actually
+declining; and whether this deterioration is still tolerable
+for the organization.
+The degree to which the indicators of strategic objectives
+which were analyzed to receive conflicting contributions
+from the new process, are actually changing; whether this
+change is positive or negative; and if negative whether it is
+tolerable.
+To capture the unexpected behaviour of strategic
+objectives, e.g., strategic objectives which were analyzed
+to remain unaddressed by the adoption of the new process,
+but their indicators show improvements or deteriorations.
+For either improving or deteriorating strategic objectives,
+conducting a root-cause analysis to find the actual causes
+of change. If changes were rooted in the fragments of the
+new process, then update the repository of method
+fragments [1] with the newly investigated evidence.
+In cases of deteriorating strategic objectives, if the root
+cause was in the new process, inform the process design
+team (or other responsible organization members) to fix
+the problem, if the deterioration was not tolerable.
+4. INDUSTRIAL EXPERIENCE
+The proposed pre-adoption analysis techniques have been
+experimented with in an industrial setting. The experiment was
+conducted in parallel with an agile adoption initiative in one of
+the Ericsson R&D units in Italy. The R&D unit had decided to
+gradually adopt some of the fragments of the Scrum process. To
+mitigate the risks of process adoption, the new process was going
+to be first tried in a pilot project. The unit was going to investigate
+the compatibilities and conflicts in the new process by putting it
+in a test run, and monitoring the results. The authors of this paper
+proposed the strategic balance analysis, as a complement to the
+approach that the unit was pursuing. The distinguishing aspect of
+the proposed strategic balance analysis approach was that it
+investigates the potential impacts of the new process over the
+174
+strategic objectives of the organization based on experiments or
+experiences from other organizations that are already in the
+literature. This empirical evidential knowledge is systematically
+provided by the repository of agile method fragments [1].
+In this experiment, strategic objectives of the R&D unit were
+extracted using a participatory and model-driven approach. The
+approach was participatory because representatives of almost all
+organization roles (to the level that was related to this initiative)
+participated in defining and structuring the strategic objectives.
+To facilitate the process of identifying strategic objectives we
+took a model-driven approach, in which the Strategies Graph was
+used to visualize the strategic concerns of the organization. The
+use of the Strategies Graph helped not only in eliciting strategic
+objectives, but also in raising the level of shared understanding of
+participants about the strategic concerns of various parties in the
+organization. A very small portion of the Strategies Graph of this
+experiment is shown in the Figure 1. In this experiment,
+participants came up with about 50 strategic objectives, classified
+into three categories: Business Value, User Orientation, and
+Internal Process (categories inspired by Martinsons et al. [6]).
+4.1 Experiment with Pre-Adoption Analysis
+Here we explain the way we experimented with each of the
+techniques proposed for pre-adoption balance analysis.
+4.1.1 Balance Improvement
+In our experiment, the subject organization had a set of preidentified
+strategic objectives that were expected to be improved
+by the adoption of the new agile process. These objectives were
+{Improved  Productivity,  Reduced  Waste,  Better  Time  to  Market, 
+Improved Communication / Collaboration}.
+What we noticed in the Ericsson experiment was that the strategic
+objectives that had been pre-identified for improvement were
+mostly high-level objectives, which could have been decomposed
+to, or are contributed to, by many finer-grained, more specific
+strategic objectives. This issue became apparent when together
+with organization members we completed the Strategies Graph.
+Questions arose as to which of the high-level strategies were to be
+further clarified in terms of their constituent (or contributing)
+lower-level objectives. For instance, the strategic objective
+'Reduced  Waste' was identified to be decomposable into five
+other strategic objectives. Having done this, we could identify the
+exact middle- and low-level strategic objectives which were
+actually in need of improvement. Finally, we identified 23
+strategic objectives, at different levels, which were expected to be
+improved by the adoption of the new process, resulting in the
+ToBeImprovedObjs set.
+After inspecting the contributions of the fragments of new process
+over the Strategies Graph, the elements of ToBeImprovingObjs,
+ToBeDeterioratingObjs, and ToBeConflictingObjs were identified.
+In the experiment, the ToBeImprovedObjs had four elements in
+common with the ToBeConflictingObjs, but no element in
+common with the ToBeDeterioratingObjs. However, the common
+set of ToBeImprovedObjs and ToBeConflictingObjs  were middleand
+high-level strategic objectives, each was contributed to by a
+number of lower-level strategic objectives.
+Another result of this analysis was the following observation: in
+most cases the lower-level strategic objectives would belong
+either to the ToBeDeterioratingObjs or ToBeImprovingObjs, or
+they do not receive any contribution from the new process;
+however, middle- and high-level strategic objectives often receive
+conflicting contributions from the new process and belong to the
+ToBeConflictingObjs (which is quite reasonable because the
+received contribution of a high-level objective is the aggregation
+of contribution that its lower-level objectives received).
+4.1.2 Balance Preservation
+Among the strategic objectives that were not in the focus of
+improvement, two were identified with CW < 0; one of them
+belonged to the ToBeDeterioratingObjs and the other one to the
+ToBeConflictingObjs. The deteriorating one was then identified to
+be supported by some of the already in-place development
+techniques, which were going to remain unchanged after the
+adoption of the new process. Thus, the negative impact of new
+process to this objective was decided to be tolerable. However,
+for the conflicting strategic objective, the trade-off analysis failed
+to find any already in-place technique, or any other fragment of
+new process to make it up. This issue led the analysis team decide
+on a new supportive action, to preserve the balance of that
+particular strategic objective.
+It should be mentioned that in this experiment the new process
+had only four fragments. These fragments were specifically
+chosen by the process design team in order to address some of the
+issues of the current process. If the to-be process was more
+complex, it could be expected that a greater number of strategic
+objectives would have negative CWs. The reason for this
+assumption is that at least from the business perspective, the cost
+of incorporating a complex set of changes (which radically alters
+the current process) is more than the cost of modifying current
+process, with a limited set of fragments. Therefore, for complex
+process adoption initiatives, strategic objectives which belong to
+the Business category are more prone to be side-effects of the
+initiative.
+4.1.3 Balance Preservation across Categories
+In this experiment, after calculating the total weight of positive
+and negative contributions (TWPC and TWNC) the total weight
+of contribution (TWC) of all categories turned out to be positive.
+Indeed, none of the categories received a substantially bad
+TWNC, which indicated that the adoption of the new process
+would not cause the overall deterioration of one category of
+objectives as a side-effect of improving some other categories.
+As mentioned before, this experiment was carried out in parallel
+with an existing initiative of agile adoption already in progress. In
+our observation, this fact might have indirectly influenced the
+way stakeholders expressed strategic objectives, predisposing
+them towards agile values. For this reason, the candidate method
+fragments were mostly analyzed to have positive impacts over
+strategic objectives, with few negative impacts. In general, this
+issue - i.e., incomplete or biased construction of the Strategies
+Graph - can be considered as a threat to the validity of analysis
+results.
+4.1.4 Homogenous Contributions across Categories
+In this experiment, strategic objectives were grouped into three
+categories: User Orientation, Business Value, and Internal
+Process, respectively containing 16, 15, and 20 strategic
+objectives. Figure 2 shows the distribution of the number and
+175
+percentage of strategic objectives with different statuses in each
+of the three categories. For instance, it shows that 80% (16 out of
+20) of the strategic objectives of the Internal Process category
+would be supported by the fragments of the new process, with
+10% conflicted, 10% unaddressed, and none declined.
+Figure 2: Contribution Distribution Tables (U: Unaddressed,
+C: Conflicted, S: Supported, D: Declined)
+User Orientation
+16 Business Value
+15 Internal Process
+#
+%
+U
+0
+0
+C
+0
+0
+S
+15
+93
+D
+1
+7
+#
+%
+U
+0
+0
+C S
+3 13
+20 80
+D
+0
+0
+#
+%
+U C S
+2 2 16
+10 10 80
+20
+D
+0
+0
+The variances of numbers and percentages of different statuses
+across categories were then calculated. The results showed that
+the new process makes a homogenous contribution to the
+Supported strategic objectives across different categories, as the
+variances of the percentages and numbers were quite low. The
+contributions to Declined strategic objectives also had low
+variances.
+4.2 Impacts of SBPA
+The application of SBPA had the following impacts on the
+organization in which we conducted the experiment:
+1.
+2.
+3.
+4.
+5.
+The participatory and model-driven approach of
+identifying strategic objectives enabled different parties in
+the organization to express their strategic concerns, which
+improved the completeness of the SG. Indeed, this process
+helped organizational members to gain a shared
+understanding of the organizational strategic objectives.
+The use of SG for analyzing a set of candidate agile
+process fragments introduced a new decision making
+approach within the organization, which can be used for
+the evaluation of a wide range of organizational initiatives.
+The Balance Improvement technique had a considerable
+impact on the organization's decisions about their
+candidate agile practices. In fact, through this analysis the
+managers discovered that the proposed set of practices are
+incomplete with regard to the strategic objectives that
+were expected to get improved by the introduction of the
+new process.
+The Balance Preservation technique clarified the set of
+strategic objectives which might be declined (or
+conflicted) by the introduction of new method. This
+clarification helped process mangers to know which
+strategic objectives would need to be monitored more
+closely after adopting the new process.
+The category-level analysis techniques of SBPA guided
+the decision making of process analysis team by giving
+them a wider spectrum of strategic concerns which should
+be considered in the process of designing a new process.
+In fact, the original idea of introducing a new agile process
+to the R&D unit was highly under the influence of the
+Lean approach of process improvement, which focuses on
+the removal of software process waste [14]. The categorylevel
+analysis techniques raised the importance of other
+categories of strategic objectives for the analysis team, and
+helped them to keep the integrity of the new process with
+respect to its contributions to various categories of
+strategic objectives.
+5. RELATED WORK
+The techniques proposed in this paper can be used to support the
+adoption of different kinds of processes. We have focused on the
+case of agile adoption, since the repository of method fragments
+that we have developed mainly provides information about agile
+processes. In this section, we review a number of agile adoption
+frameworks, with special focus on the kind analysis methods that
+they prescribe for investigating the suitability of a candidate
+process for an organization.
+Sidky et al. [15] proposed an agile measurement index for
+evaluating the degree to which an organization can become agile.
+Based on this index, they defined an agile adoption framework.
+The first step seeks to identify discontinuing factors - whose
+presence indicates unreadiness of the organization to adopt agile.
+Project and organizational capability for adopting agile are then
+assessed. Based on the degree of potential agility, the most
+suitable set of agile practices are proposed. An application of this
+framework in adopting agile processes for the development of
+life-critical systems is presented in [16]. Despite the novelty of
+this framework in proposing a set of agile practices with respect
+to the potential agility (agile-ability) of an organization, the
+framework does not relate agile practices to a balanced
+consideration of strategic objectives.
+Qumer & Henderson-Sellers [17] proposed an agile adoption
+framework backed by an agility measurement technique. The
+adoption framework, called Agile Adoption and Improvement
+Model (AAIM), introduces six levels of agile adoption: Agile
+Infancy, Agile Initial, Agile Realization, Agile Value, Agile
+Smart, and Agile Progress. At each level, the AAIM incorporates
+certain agile principles (e.g., Speed, Flexibility, Peopleorientation,
+Leanness, etc.) into the organization. This framework
+uses the 4-DAT agility measurement technique, which provides
+specific metrics for quantitatively assessing the agility level of a
+software process. Unlike [15], the AAIM does not explicitly
+propose agile practices to an organization,.Rather it focuses on the
+localization of agile principles. In relying on a quantitative
+measurement scale, the framework is sensitive to the way
+individual measures are combined to produce a single measure
+to represent the overall agility degree of a process.
+Krasteva et al. [18] proposed an experience-based framework for
+adopting agile practices, using techniques from assembly-based
+situational process engineering. Sureshchandra et al. [10]
+proposed a framework for adopting agile in distributed
+development,composed of four stages: Evaluation, to determine
+the degree of distribution of the project; Inception, to form the
+distributed teams, and the way agile practice can be incorporated
+into the development infrastructure; Transition, to enact the agile
+practices into the development activities; and Steady State, to
+provide baselines for smoothly adding further distributed teams
+into the project.
+Our approach in supporting the pre-adoption phase of process
+adoption with strategic analysis is quite unique, as none of the
+reviewed agile adoption frameworks introduces any technique in
+this regard. The proposed techniques can be used in conjunction
+176
+with other existing frameworks of agile adoption to further
+strengthen the choice of new process from the perspective of its
+compliance with the overall strategies of the organization.
+6. DISCUSSION AND FUTURE WORK
+Adopting a new process is a risky undertaking which should be
+carried out with adequate knowledge of its potential benefits and
+drawbacks. From the viewpoint of strategic management, process
+adoption is a significant organizational initiative, which might
+impact a wide range of strategic objectives. Some objectives
+might benefit from the adoption of a new process, some might be
+hurt. Therefore, it is important for organization managers to first,
+know the potential impacts of new process on strategic objectives,
+second, know whether the new process is in line with their
+strategic plans, and third, know if the new process would make
+negative impacts over the already improved strategic objectives.
+Having this knowledge about the strategic impacts of a new
+process would help managers choose the optimum solution for
+their development process, and make informed decisions about its
+advantages and drawbacks.
+This paper defined the concept of Strategically Balanced Process
+Adoption (SBPA) which aims at a balanced performance across
+different categories of strategic objectives while adopting a new
+development process. The realization of the SBPA was then
+explained in two major parts: pre-adoption analysis and postadoption
+monitoring. For the pre-adoption analysis four
+techniques were proposed, which anticipate the affects of a new
+(candidate) process over the strategic objectives of an
+organization, before the new process gets enacted. The idea of
+pre-adoption analysis is very similar to the rule of finding bugs in
+the process of software development - the earlier a defect is
+found, the cheaper it is fix it. Similarly, detecting and fixing the
+negative impacts of a development process (over strategic
+objectives of an organization) is for sure less expensive at the
+time that the new process is not yet adopted than afterwards. Of
+course any process initiative comes at a certain cost and might
+negatively impact some of the strategic objectives of an
+organization. One of the important points in SBPA is its focus on
+the analysis of the controllability of negative impacts over
+strategic objectives. The negative impacts of an adoption initiative
+are controllable if they are supported by reasonable justifications,
+or corrective actions to make them up. For instance, the adoption
+of an agile process that deploys Pair Programming, as part of its
+fragments, might result in the reduction of individuals'
+productivity (in terms of LOC per Month per Developer).
+However, this negative impact is controllable, if it is justified to
+be the reasonable cost of having fewer defects in code.
+Although the presented techniques of pre-adoption analysis use
+some quantitative computations, the overall approach is not
+computational in that the computations are not intended to
+produce precise absolute numbers leading to unambiguous
+decisions. Instead, these techniques are indicator-oriented, i.e.,
+they are used as indicators that provide a kind of dashboard or
+decision-aid in order to evaluate the envisaged process change in
+a more global perspective.
+The idea of investigating the balance of a process adoption
+initiative was inspired by the approach of Balance Scorecards
+(BSC) in strategic management of organizations. The BSC argues
+that organizations should have a clear definition of their strategic
+objectives at different levels of granularity and various categories;
+also should have a clear understanding of the impacts of each
+organizational initiative over the organizational strategic
+objectives; and try to reach a balance state of performance across
+different categories of strategic objectives, upon the introduction
+of any new organizational initiative.
+The proposed techniques for the realization of the SBPA are
+based on the repository of method fragments, introduced in our
+earlier ICSP paper [1]. This repository was originally built for
+agile method fragments, and for each fragment it specifies the list
+of objectives which can be contributed by the adoption of that
+fragment. The content of this repository is collected through an
+extensive literature review of empirical studies. For every
+contribution relation that is stated for any agile method fragment,
+the repository provides the link to the empirical study which had
+reported that contribution.
+The reliance of the SBPA on the repository of agile method
+fragments has both positive and negative aspects. On the positive
+side, it supports the strategic analysis with evidential situations
+from the experiences of other organizations in trying similar
+fragments in their projects. Therefore, the analysis results are
+more reliable, compared to the cases that the basis of analysis is
+just the commonly known knowledge of agile processes, or the
+experience of a process consultant. Besides, the strategic
+knowledge of agile fragments can help organizations in
+completing their Strategies Graph. However, relying on the
+evidential repository has some negative aspects and imposes some
+limitations. The negative aspects are issues such as the lack of
+adequate information for some agile method fragments, or the
+mismatch of organization situation with the information that is
+available in the repository. The primary limitation that can be
+imposed by the heavy reliance on this repository is that the
+content of repository only supports the strategic analysis of agile
+method fragments (and a few non-agile method fragments). Thus
+the strategic analysis of non-agile method fragments would be left
+based on the consensus of analysis team and description of
+process, and not based on firm evidences from the repository.
+A final point about SBPA is that the balance of a process adoption
+does not mean that the proposed process is the best solution for
+the organization. However, the SBPA attributes are quite
+important, and can greatly impact the choice of a candidate
+development process.
+As future work we are going to propose a complete framework for
+strategic software process adoption. This framework would
+include techniques for strategic trade-off analysis and strategic
+root-cause analysis. The other major future work is the expansion
+of the repository of method fragments by supplying information
+for further method fragments, and providing more evidences for
+its current set of fragments. The proposed techniques of this paper
+have been experienced in one industrial case. Further experiments
+are intended to be done.
+7. ACKNOWLEDGMENTS
+We would like to appreciate the collaboration of managers and
+developers of the R&D unit of the Ericsson Company in Italy,
+who greatly contributed to this project. Financial support from the
+Natural Sciences and Engineering Research Council of Canada is
+gratefully acknowledged.
+177
+8. REFERENCES
+[1] H. Chiniforooshan Esfahani and E. Yu, A Repository of Agile
+Method Fragments, in New Modeling Concepts for Today's
+Software Processes (Proceedings of the ICSP'10), J. Münch,
+Y. Yang, and W. Schäfer, Editors, Springer Berlin /
+Heidelberg: Germany. p. 163 -174 (2010)
+[2] R.S. Kaplan and D.P. Norton, The balanced scorecard:
+Translating strategy into action, Boston, Harvard Business
+School Press(1996)
+[3] R.S. Kaplan and D.P. Norton, Using the Balanced Scorecard
+as a Strategic Management System.In Harward Business
+Review, 74 p. 75-85 (1996)
+[4] R.S. Kaplan and D.P. Norton, Strategy Maps : Converting
+Intangible Assets into Tangible Outcomes, Boston, Harvard
+Business School(2004)
+[5] Smg, The Strategic Management Maturity Model, Strategy
+Managemetn Group, Balanced Scorecard Institute, (2010)
+[6] M. Martinsons, R. Davison, and D. Tse, The balanced
+scorecard: a foundation for the strategic management of
+information systems.In Decision Support Systems, 25(1) p.
+71-88 (1999)
+[7] V.W. Grembergen and I. Amelinckx. Measuring and
+managing e-business projects through the balanced
+scorecard. In Proceedings of the 35th Annual Hawaii
+International Conference on System Sciences (2002)
+[8] C.D. Huang and Q. Hu, Achieving IT-Business Strategic
+Alignment via Enterprise-Wide Implementation of Balanced
+Scorecards.In Information Systems Management, 24(2) p.
+173 - 184 (2007)
+[9] J. Kim, E. Suh, and H. Hwang, A model for evaluating the
+effectiveness of CRM using the balanced scorecard.In
+Journal of Interactive Marketing, 17(2) p. 5-19 (2003)
+[10] K. Sureshchandra and J. Shrinivasavadhani. Adopting Agile
+in Distributed Development. In Global Software
+Engineering, 2008. ICGSE 2008. IEEE International
+Conference on (2008)
+[11] H. Eilat, B. Golany, and A. Shtub, R&D project evaluation:
+An integrated DEA and balanced scorecard approach.In
+Omega, 36(5) p. 895-912 (2008)
+[12] E.S.K. Yu. Towards modelling and reasoning support for
+early-phase requirements engineering. In Proceedings of the
+Third IEEE International Symposium on Requirements
+Engineering: IEEE Computer Society (1997)
+[13] S. Brinkkemper, Method engineering: engineering of
+information systems development methods and tools.In
+Information and Software Technology, 38(4) p. 275-280
+(1996)
+[14] T. Poppendieck, Lean Software Development: An Agile
+Toolkit, Addison Wesley(2003)
+[15] A. Sidky, J. Arthur, and S. Bohner, A disciplined approach to
+adopting agile practices: the agile adoption framework.In
+Innovations in Systems and Software Engineering, 3(3) p.
+203-216 (2007)
+[16] A. Sidky and J. Arthur. Determining the Applicability of
+Agile Practices to Mission and Life-Critical Systems. In
+Proceedings of the 31st IEEE Software Engineering
+Workshop: IEEE Computer Society (2007)
+[17] A. Qumer and B. Henderson-Sellers, A framework to support
+the evaluation, adoption and improvement of agile methods
+in practice.In Journal of Systems and Software, 81(11) p.
+1899-1919 (2008)
+[18] I. Krasteva, S. Ilieva, and A. Dimov, Experience-Based
+Approach for Adoption of Agile Practices in Software
+Development Projects, in Advanced Information Systems
+Engineering, Springer Berlin / Heidelberg. p. 266-280 (2010)
+178

@@ -1,0 +1,5 @@
+Adapting a Fault Prediction Model to Allow Inter Language
+
+An important step in predicting error prone modules in a project is to construct the prediction model by using training data of that project, but the resulting prediction model depends on the training data. Therefore it is difficult to apply the model to other projects. The training data consists of metrics data and bug data, and these data should be prepared for each project. Metrics data can be computed by using metric tools, but it is not so easy to collect bug data. In this paper, we try to reuse the generated prediction model. By using the metrics and bug data which are computed from C++ and Java projects, we have evaluated the possibility of applying the prediction model, which is generated based on one project, to other projects, and have proposed compensation techniques for applying to other projects. We showed the evaluation result based on open source projects.
+
+error prone, metrics, inter language prediction, open source

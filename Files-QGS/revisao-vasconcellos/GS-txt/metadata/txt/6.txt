@@ -1,0 +1,5 @@
+Software Engineering Strategies: Aligning Software Process Improvement with Strategic Goals
+
+Aligning software process improvement with the business and strategic goals of an enterprise is a key success factor for process improvement. Software process improvement methods typically only provide little or generic guidance for goal centered process improvements. We provide a framework for developing software engineering strategies that are aligned with corporate strategies and goals. Strategic objects as an important part of our framework can be directly aligned with SPICE or CMMI processes. This allows that any process improvement action can be systematically aligned with strategic goals.
+
+Software process improvement, software engineering strategy, functional strategy, strategic goal, CMMI

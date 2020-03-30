@@ -1,0 +1,5 @@
+Aligning Software-related Strategies in Multi-Organizational Settings
+
+Aligning the activities of an organization with its business goals is a challenging task that is critical for success. Alignment in a multi-organizational setting requires the integration of different internal or external organizational units. The anticipated benefits of multi-organizational alignment consist of clarified contributions and increased transparency of the involved organizational units. The GQM+Strategies approach provides mechanisms for explicitly linking goals and strategies within an organization and is based on goal-oriented measurement. This paper presents the process and first-hand experience of applying GQM+Strategies in a multi-organizational setting from the aerospace industry. Additionally, the resulting GQM+Strategies grid is sketched and selected parts are discussed. Finally, the results are reflected on and an overview of future work is given.
+
+Measurement-based  business  IT  alignment,  multi-organizational goal alignment, GQM+Strategies deployment, strategic measurement systems 

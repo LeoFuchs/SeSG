@@ -1,0 +1,1509 @@
+784
+IEEE TRANSACTIONSON SOFTWARE ENGINEERING. VOL. 25, NO. 6, NOVEMBERIDECEMBER 1999
+Managing Process Inconsistency
+Using Viewpoints
+Ian Sommerville, Member, / € € E Computer Society,
+Pete Sawyer, Member, /E€€ Computer Society, and
+Stephen Viller, Member, /E€€ Computer Society
+Abstract-This paper discusses the notion of process inconsistencyand suggests that inconsistenciesin softwareprocesses are
+inevitable and sometimes desirable.We present an approachto process analysisthat helps discoverdifferent perceptionsof a software
+process and that supportsthe discovery of process inconsistenciesand process improvementsstimulated by these inconsistencies.By
+analogy with viewpointsfor requirementsengineeringthatallow multipleperspectivesona software system specificationto be managed,
+we have developedthe notion of process viewpointsthat provide multiperspective descriptions of softwareprocesses. A process
+viewpoint includesa statement of focus or "world-view,"aset of sources of process information,a process description and a set of
+organizationalconcernsthat represent goals or constraintson the process analysis.We present a description and rationale of process
+viewpoints, discuss the process of applying process viewpoints for process understandingand illustratethe overail approach using part
+of a case study drawn from industrial processes that are pari of a safety-criticalsystem development.
+Index Terms-Viewpoints, software process, process improvement.
++
+1 INTRODUCTION
+0VawERartehneespsatshtafteowrgyaneaizras,tiotnhserecanhalsevbeeraegne asiggnroifwicianngt
+productivity improvements by improving their business
+processes. Software development processes are one class of
+business process that have received particular attention
+and, since the early %Os, a significant body of research into
+software processes and software process improvement has
+developed.
+Very roughly, this research can be split into two main
+categories:
+I . Fundamental research concerned with process modeling,
+enactment, and support technology. This
+involves developing notations for representing processes
+and looking at how some automated support
+for these processes can be provided. Good summaries
+of research in this area are provided by [l],[Z].
+2. Research concerned with process improvement, that
+is, the introduction of process changes to improve
+software productivity, quality, etc. This is related to
+general work on business process reengineering [3]
+although software process improvement programs
+tend to be evolutionary rather than revolutionary. The
+best known work in this area is that of the Software
+Engineering Institute and their Capability Maturity
+model [4], [5] but other related work on maturity
+models (Bootstrap and SPICE) for process improvement
+has also been carried out [6],[7].
+e The authors are with the Computing Depnrtment, Lancnster Uniucmity,
+Lancaster LA1 4YR UK. E-mail: lis, sawyer, vlllcrlBcomp.1nncs.ac.uk.
+Manirscript received 15 Sept. 1997: revised 25 July. 1998.
+Recommended for acceptance by C. Ghezzi nnd U. Nuseibeh.
+For information on obtaining reprints of this article, please send e-wrail to:
+tseOcamputcr.org, and reference IEEECS Log Number 109060.
+To a large extent, these different aspects of process R&D
+have been parallel research streams. The fundamental
+process research has not really addressed the issues of
+how the research results can be applied to facilitate change
+and improvement. The process improvement work has
+taken a pragmatic approach to process description and is
+not dependent on structured or formal process notations.
+Proponents of this approach suggest that automation is not
+central to process improvements. Indeed, the SEI Capability
+Maturity model discourages automation in the early stages
+of improvement. Its developers believe that process enactment
+support is unlikely to add significant value to
+managers or developers until a disciplined and repeatable
+process has been put in place.
+Process improvement frameworks such as the Capability
+Maturity model, the Bootstrap model, and the SPICE model
+are based on improving process maturity by introducing
+good engineering practice. They are designed to be
+independent of the current process and this is both their
+strength and their weakness. It is a strength as it allows the
+frameworks to be generic; it is a weakness as it does not
+support improvements based on good features of the
+existing processes that lie outside the inprovement model.
+While we are generally supportive of process improvement
+frameworks, we believe that process improvement is
+more likely to be accepted if we understand existing
+processes and evolve these processes in ways that maintain
+their strengths. As discussed next, these processes are often
+inconsistent so to understand them we must understand this
+inconsistency. To help with this understanding, we have
+developed a framework for managing process descriptions
+and an associated process analysis process that reveals the
+process inconsistencies and uses them to identify potential
+process improvements. Our work, therefore, supplements
+0098-5589/99$10.00/M91!0 00 01999 IEEE
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSING VIEWPOINTS
+785
+and is complementary to process improvement frameworks
+and does not overlap with them.
+The work that we describe in this paper was carried out
+in a project that was specificallyaimed at discovering routes
+to requirements engineering process improvement [8]. It is
+part of a spectrum of work to assist process improvement
+including the development of methods for human factors
+analysis of processes [9], the development of good practice
+guidelines for requirements engineering processes [8], and
+the development of a practical viewpoint-oriented approach
+to requirements engineering [lo], [11].
+In the remainder of the paper, we discuss different types
+of process inconsistency and how an understanding of
+inconsistency can lead to process improvements. We then
+go on to describe our viewpoint-based process analysis
+framework and the process of applying viewpoints for
+process analysis. Finally, we present a small case study of
+using the approach for the analysis of process descriptions
+in a safety-critical system, illustrate process inconsistencies
+that were discovered, reflect on the lessons learned, and
+draw some conclusions about our work.
+1.1 Process Inconsistency
+There are two opposing sets of beliefs about processes. One
+belief is that processes are ways of describing how work
+should be done. A process model or process description is a
+representation of this ideal process. Process inconsistencyis
+seen as a discrepancy in these process descriptions or a
+discrepancy between these process descriptions and the
+actual process. Process improvement is achieved by
+modifying the actual process to make it more prescriptive
+and compliant with this ideal process. Inconsistency is
+undesirable and the rationale for identifying inconsistency
+is to remove it from process descriptions. This belief is
+widespread in the software engineering community and is
+exemplified by research concerned with process programing
+and process enactment support tools [12], [13], [14] and
+with process changes through the introduction of good
+practice [15].
+An alternative belief, which is the norm among those
+interested in the sociology of work, is that processes are
+ways of describing how work is done. A process description
+or model is not a description of an ideal process with some
+gap between that process model and reality but is simply a
+description of the work as it is actually carried out by the
+people involved in the process. There is, therefore, no
+distinction between a process and a process description.
+Process inconsistency, in this view, means that different
+actors reach the same goal in different ways. Process
+improvement is achieved through identifying good practice,
+relating it to the existing process and convincing actors
+in the process to change the way that they work and adopt
+that practice. From this social perspective, process models
+may have an educational role but they should not be
+prescriptive. Prescribing processes to remove inconsistencies
+can lead to reduced process efficiency because the
+people involved feel that their professionalism is being
+undermined [16].
+We have been influenced by both of the above opinions
+about processes. A standardized process model is helpful to
+facilitate communicationsabout processes and to get started
+on activities. Such a model must define key points where
+the documented and actual processes must be in line with
+each other. The number and extent of these varies
+depending on the type of application being developed
+and the size of the development team. In a research
+environment, there need only be a few areas of correspondence
+between defined and actual processes; in the
+development of a large, critical system there should be
+much less divergence between the published and the actual
+process. However, any practical process must allow scope
+for professional judgment and different working practices.
+The above perspectives highlight the problems of
+arriving at a simple definition of process inconsistency.
+From a formal perspective, inconsistency can be considered
+as some kind of logical contradiction so, with formally
+defined process models, inconsistencies can be detected by
+mathematical analysis. Some specific work on process
+inconsistencies, based on formal process models, has been
+reported by Cugola et al. [17]. In this work, they define
+formal models of both human-centered processes and
+process-support systems. The models that they propose
+are state-based and they introduce the notion of a deviation
+(an event that leads to an inconsistent state) and an
+inconsistent state which is a state that is not a member of
+the inconsistent states defined by their model. There can be
+inconsistencies in the model of the human-centered system
+(which they suggest may be tolerable) and between the
+model of the human-centered system and the process
+support system.
+However, mathematical models of processes rarely
+reflect the reality of everyday work. If processes are
+considered from a social and organizational perspective, it
+is much more difficult to define process inconsistency in a
+precise and unambiguous way. Inconsistencies are differences
+of various kinds in the ways in that different people
+perceive or execute a process. For example:
+1. Inconsistencies in process execution. Many tasks require
+sofhvare engineers to exercise professionaljudgment
+and experience. Different people may do the same
+thing in differentways, all of which may be effective.
+For example, one requirements engineer may elicit
+information about requirements by defining structured
+system models and discussing these models
+with end-users. Another engineer may prefer to
+develop a prototype system and work through this
+with end-users. Each engineer uses their professionaljudgment
+to decide which is the best approach
+in a particular context.
+2. Inconsistencies in process organization. Different processes
+with the same objectives may have developed
+in different parts of the organization'as a consequence
+of local factors such as tool and equipment
+availability, management style, etc. For example,
+configuration management processes in the same
+company may differ because some engineers use
+Unix workstations and some use PC-based systems
+for software development. Here the inconsistency is
+not a matter of professional judgment but of
+managerial decisions that may be historical or that
+may take into account local organizational factors
+786
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25, NO. 6, NOVEMBERIOECEMBER1999
+such as the experience of the workforce or budg-ets
+for tool procurement.
+3. Inconsistencies of process perception. Depending on
+their particular interests, different people may
+focus on different aspects of a process. For
+example, a software engineer may be mostly
+concerned with process activities that arc involved
+in the production of the system whereas a project
+manager is concerned with the scheduling and
+resources used by activities identified in the
+project plan. There may be a mismatch between
+the project plan activities (the manager's perspective)
+and the actual activities involved in developing
+the software (the engineer's perspective).
+The above inconsistencies are not mutually exclusive and
+may coexist. Furthermore, the meaning of these inconsistencies
+depends on the particular process perspective that is
+adopted. For example, from an engineering perspective,
+inconsistencies in process execution reflect either an inadequate
+underlying process that does not include descriptions
+of possible alternative approaches or inconsistencies in the
+process description. From a sociological perspective, however,
+inconsistencies in process execution are fundamentalto
+the notion of professionalism and reflect a process strength
+rather than a process weakness. From an engineering
+perspective, inconsistencies in process organization reflect
+the failure of an organization to standardize its processes;
+from a sociologicalperspective, they reflect the ability of the
+organization to adapt its processes to local circumstances.
+A fundamental assumption underlying our work is that
+it is important to understand process inconsistencies in
+actual processes because these inconsistencies may point to
+potential process improvements:
+Areas of inconsistency may be accidental in that
+there arc no good reasons for them; reconciling these
+inconsistencies may lead to more efficient process
+enactment.
+Areas of inconsistency may suggest process redundancy
+where activities are unnecessary. Fully or
+partially removing this redundancy may lead to
+process improvements.
+Areas of inconsistency can highlight particularly
+good practice. Where different processes for accomplishing
+some goal have evolved, the most effective
+of these processes may be selected for widespread
+dissemination across the organization.
+We consider process inconsistency management to be the
+activities involved in eliciting process details, analyzing and
+identifying process inconsistencies, and "resolving" these
+inconsistencies. Resolving inconsistencies docs not mean
+that these inconsistencies arc necessarily removed from the
+different process perspectives or descriptions of the process.
+Where .appropriate, there may be process modifications to
+remove the inconsistency but, in other cases, all that may be
+necessary is to flag the inconsistencies and ensure that the
+reason for their existence is understood by the process
+participants.
+2
+PROCESSVIEWPOINTS
+Most research on process modeling notations [18]has been
+based on the assumption that a single model of the process
+can be elicited and agreed upon by all process participants.
+As we have already discussed, we do not believe that this
+deterministic perspective reflects the reality of software
+processes. Nor do we believe that it necessarily a goal that
+will lead to more effective software processes. Our
+experience from working with industry on process studies
+suggested that:
+Different people involved in the "same" process
+think of and describe that process in completely
+different ways. These differences are so significant
+that there is no practical way of combining the
+different descriptions into a single description or
+model except at a very abstract level. Attempting to
+integrate detailed process descriptions to produce a
+shared model results in a model of such complexity
+that it is unrecognizable to the process participants
+and is effectively useless for analysis.
+There is no single notation that all process participants
+and stakeholders arc familiar and comfortable
+with. People want to describe "their" process in their
+own way and imposing some, perhaps formal,
+notation on this is counterproductive. We believe
+that there is a lot to be said for Checkland's "rich
+pictures" I191 where processes are described using
+representations that arc meaningful to the people
+involved in the process.
+Viewpoints, first proposed by Mullery for requirements
+engineering [20] are a technique for organizing and
+structuring partial descriptions of a system. Our previous
+experience of requirements engineering viewpoints [21],
+[22] suggested that they might be an appropriate framework
+for encapsulating process perspectLvcsW.e decided to
+adapt the approach to requirements viewpoints that we had
+developed [lo]for process representation. This approach to
+requirements engineering was explicitly designed for
+application in a range of industrial applications 1111. It
+allows for different types of viewpoint (end-user, stakeholder,
+domain) to be accommodated within a single
+generic framework and provides a mechanism whereby
+business goals and constraints drive the requirements
+engineering process.
+Process viewpoints are an approach to inconsistency
+management that support the activities of process elicitation,
+analysis, and understanding. They encapsulate process
+information elicited from different sources and allow the
+process to be described in notations that arc familiar to the
+sources of the viewpoint information.
+Our initial process viewpoint model was based on our
+requirements viewpoint model [23]but found that this was
+not entirely workable in practice. We, therefore, derived a
+simpler model of a process viewpoints with five components
+as follows:
+PV = < name, coricerns, locus, sources, processdcscription>
+Briefly, the name identifies the viewpoint, the concems
+reflect business goals and constraints, the focus sets out the
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSINGVIEWPOINTS
+787
+particular viewpoint perspective, the sources document the
+source of process information and the process description is a
+description of the process from the perspective defined in
+the viewpoint focus.
+A very simple example of a process viewpoint is shown
+in Fig. 1. This is a viewpoint on a requirements review
+process. For simplicity, we have not actually included the
+process description here.
+We must emphasize that process viewpoints are not
+projections of some underlying, definitive process and that
+merging the process descriptions in the different process
+viewpoints does not lead to a global model of the process.
+As discussed, a fundamental assumption underlying our
+work is that it is practically impossible to produce a single,
+detailed process model that accurately reflects the real,
+complex processes in which participants are involved.
+2.1 Viewpoint Naming
+The name of the process viewpoint is a meaningful
+identifier that should reflect the process perspective
+documented in that viewpoint. For example:
+e
+The name of a'role or department in an organization
+such as ”configuration management,” ”quality assurance,”
+“customer,” etc. This implies that the
+process description will focus on the process
+activities, inputs and outputs that are most important
+to that department or role.
+The name of a process characteristic that is of
+particular interest. This can either be a functional
+characteristic such as ”process activities,” “roles
+and actions,” or can be a nonfunctional process
+attribute such as “repeatability,” ”performance,”
+etc. The particular process characteristic may be
+reflected in the notation used for the process
+description. For example, in a ”process activities”
+viewpoint, a Petri net based notation may be used;
+in a ”performance” viewpoint, the process may be
+represented using bar charts.
+2.2 Concerns and Concern Decomposition
+Process improvement should always be driven by the needs
+of the organization enacting the process. To allow for this,
+we have introduced the notion of viewpoint concerns that
+reflect organizational goals, needs, priorities, constraints,
+etc. Concerns are not just another type of viewpoint. A
+viewpoint is an encapsulated process description; a concern
+relates the process description to the business needs of the
+organization enacting the process. Concerns cut across
+viewpoints and drive the process analysis so that proposed
+process changes and improvements contribute to the real
+needs of the business.
+We have identified several different classes of concern:
+e Understanding concerns. These reflect the organization's
+objectives for process understanding. The
+organization may wish to understand a process to
+discover its relationships with other organizational
+processes, to define the process in a quality plan, to
+analyze the process for improvements, etc. Where an
+organization has immature processes, understanding
+these processes is the first step toward process
+definition and, ultimately, improvement.
+e Improvement concerns. These reflect the objectives of
+the organization as far as process improvement is
+concerned. At a very abstract level, these may be
+reduced time to process completion, reduced process
+costs, etc. However, aswe discussbelow, thesehave to
+be decomposed into realistically achievable goals.
+e Constraint concerns. These are organizational constraints
+placed on the process or on the process
+improvement activity. They may limit the analysis or
+possible process improvements.
+Concerns are similar to goals in Basili and Rombachs
+GQM approach to process measurement [24]. In practice,
+therefore, concerns are decomposed into a set of questions
+that are put to process sources. Therefore, if an understanding
+concern is process definition, then this may be
+translated into an abstract question:
+“What are our requirements engineering process activities.”
+If an improvement concern is process cost reduction, the
+most abstract question becomes:
+”How can the costs of the process be reduced.”
+However, these questions are so general and abstract
+that they are not particularly useful for eliciting process
+details. Therefore, concerns are decomposed into subconcerns
+and, ultimately, into a specific question list which
+may be put to viewpoint sources.
+Name
+Concerns
+Focus
+Sources
+Process description
+Quality management
+Time to market, product defects
+The requirements review process and how overall system qualily may bc
+influenced by that process.
+Product defects arc being introduccd as a rcsult of requircmcnts errors. Product
+development schedules are longer than they should be because of the need to
+detect and remove these errors.
+project managers, quality managers, company standards,
+A description of the review process including inputs, outputs, activities,
+process participants and commentary on the process and its influence on
+Fig. 1. A process viewpoint
+766
+iEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25, NO. 6, NOVEMBEWDECEMBER 1999
+Concerns
+(Goals/constraints)
+I
+Leadto
+Questions
+Process viewpoint
+Help
+Fig. 2. Decomposition of a cost reduction concern
+As a n illustration of this, Fig. 2 shows how the
+improvement concern to reduce costs might be decomposed.
+Notice that improvement concerns will almost
+always decompose to a mixture of understanding subconcerns
+(what are we doing now?) and improvement
+subconcerns (how can we do it better?). It is artificial to
+try to separate these as knowledge that can contribute to
+improvement emerges naturally as understanding of the
+process is developed.
+Specific questions may be associated with nodes in this
+decomposition. In this example, we may have:
+1, Budget. The budget available to the process improvement
+team is SXXXX.
+2. Existing tools and standards. Existing design notations
+such as SADT must be used to describe the system
+requirements.
+3. Training. Proposed improvements should require no
+more than Y days of additional training time per team
+member (or alternately Z days akrossthe whole team).
+These concerns are process requirements and process
+improvements that are proposed must be validated against
+them.
+Q1. What are the types of resource used in each activity? 2.3 Viewpoint Focus
+Q2. How much of each resource is used in each activity? A viewpoint's focus is a succinct description of the
+viewpoint's perspective on the process. It, therefore, adds
+43. Does the output from the activity justify the resource to the information implied by the viewpoint name. The
+input? focus description should normally identify the subprocesses
+Q4. Are there comparable activities that use dispropor- that are of interest to that viewpoint. It may also include a
+tionate amounts of some resource? statement of the organizational functions that are significant
+in the analysis of a process, a statement of the role of
+viewpoint sources or a statement of the particular type of
+model that will be presented.
+Examples of focus descriptions might, therefore, be:
+”Configurationmanagement in the requirements
+engineering process,”
+The formulation of questions helps identify the level of
+detail that should be included in a process description. In
+essence, the detail in the description must allow these
+questions to be answered. If the process description is too
+abstract, the questions cannot be answered and if it is too
+detailed, the questions are lost in that detail. Therefore,
+several attempts at the process model are likely to be required In this case, the subprocess is the requirements engineerwith
+the questions used to test the detail of the model. ing process and this process is of interest from a configFor
+the above set of questions associated with the cost uration management perspective.
+reduction concern, the process description must identify the “A system architect's view of the requirements engineering
+activities for which resource utilization information is process”
+available. The costs of these activities can then be computed Again, the subprocess is the requirements engineering
+before and after the process improvement has been process but the perspective is that of the system architect.
+implemented. If this information is not available, process He or she will not necessarily be interested in the same
+improvements cannot be evaluated. In such a situation, activities as the configuration manager.
+attempts at process improvement do not make sense until ”An entity-relationshipmodel of the documents used in the
+process data collection has been implemented. quality management process”
+As well as understanding and improvement concerns, Here the subprocess is the quality management process
+organizations also place constraints on both the process and the perspective is stated in terms of the models that
+improvement process and the possible improvement should be included in the viewpoint.
+proposals. These constraints may also be expressed as We have found that explicitly defining the focus of a
+concerns and decomposed into questions that must be viewpoint is valuable for three reasons:
+addressed during the stages of process analysis and
+improvement suggestion. Examples of concerns that are
+constraints might be:
+1. It helps to identify sources of process information.
+2. It can be used in the development of organizational
+concerns.
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSING VIEWPOINTS
+789
+3. It can be used to help discover overlapping viewpoints
+(where inconsistencies in process perception
+are most likely) and gaps in the viewpoint coverage
+of the process.
+detail of the enactment, they can be accommodated within a
+single process description.
+These differences are accommodated by including a
+stable part and a variable part in the process description:
+The viewpoint focus may also have an associated
+rationale that is comparable to the notion of Weltanschauung
+or ”world view” in Soft Systems Methodology [19], [25].
+Examples of rationale which could be associated with the
+above focus descriptions are:
+“Our current configuration management process is not
+integrated with our requirements engineering process”
+”System architects are normally consulted after the requirements
+have been defined and this can cause serious design
+problems”
+“We need a formal description of the process entities to
+support improved configuration management”
+This rationale presents assumptions on which the viewpoint
+is based and helps the reader understand why the
+viewpoint has been identified for process analysis.
+2.4
+Viewpoint Sources
+Viewpoint sources are an explicit record of where the
+information about the process has been collected. The most
+important sonrces of process information are usually:
+I . the participants in the process
+2. management in the organization where the process
+is being enacted.
+3. organizational process charts, responsibility charts,
+quality manuals, etc.
+The list of sources connected with a viewpoint is useful
+because it provides an explicit trace to where the process
+information was derived. This allows the original sources to
+be consulted for possible problems when process improvements
+and process changes are proposed. Source information
+may be represented as names, associated roles, and
+contact information if the sources are people, document
+identifiers, page references, and Web URLs, etc.
+2.5 Process Description
+We do not mandate any particular notation for process
+description. Our experience showed that most engineers in
+industry prefer informal process descriptions made u p of
+diagrams and explanatory text. While these are more
+subject to misinterpretation than formal descriptions, we
+believe that this is more than compensated for by their
+understandability and flexibility in describing processes
+where exceptions are common. Of course, for some viewpoints
+that are concerned with particular types of process
+model, such as an entity-relationshipmodel, an appropriate
+formal or structured notation may be used.
+Because of individual differences in process enactment,
+there may be alternative perceptions of a process presented
+by different sources in the same viewpoint. This is
+particularly likely where one of the sources is process
+documentation that defines the organizational perception of
+a process (or what a process ought to be) and another
+source is a process participant who can explain what really
+happens. If these differ very radically, they should really be
+separate viewpoints but where the differences are in the
+1. The stable part of a process description is the part of
+the description that is shared and accepted by all of
+the sources contributing to the process viewpoint.
+2. The variable part of the process description highlights
+those parts of the process that exhibit variability and
+documents the differentways in which this variability
+occurs. In many cases, the variability manifests itself
+in the exception handling-different people cope with
+problems in different ways.
+Describing processes using stable and variable parts is
+one way of tolerating inconsistency in process descriptions.
+As we discuss in Section 3, that describes the process of
+acquiring process descriptions, we try to reconcile inconsistencies
+as soon as they emerge but, if this is impossible,
+we simply leave them in the description. The inconsistency
+analysis that we also discuss later is then applied within the
+viewpoint as well as across process viewpoints.
+The process description may be a hierarchical description
+with the process described at different levels of
+abstraction. At the top level, we recommend that the
+process description should fit onto a single page so that it
+may be understood as a whole. All, or some parts of, the
+process may then be described in more detail as necessary.
+3
+USING PROCESS VIEWPOINTS IN PROCESS
+ANALYSIS
+The process viewpoint model that we have described is
+intended to help elicit and analyze information about
+processes with a view to subsequent process improvement.
+To support the use of the model, we have developed a
+process for process modeling and improvement that is
+shown in outline in Fig. 3.
+In the notation that we use here and in later figures,
+process activities are denoted in boxes. Dashed arrows
+linking boxes mean that there is a temporal relationship
+between these activities. It is not possible for an activity at
+the destination of an arrow to be completed until the
+activity at the source of the arrow has completed. However,
+the destination activity may start before the source activity
+has completed and the activities may be interleaved or may
+run concurrently. In Fig. 3, the arrow linking the last box
+with the first box means that the process is cyclic and can be
+reentered after a set of improvements have been proposed.
+The overall process has four main phases:
+1. Concern definition. During this phase, the main
+business goals and constraints are identified. The
+people involved are the process improvement team,
+senior managers in the organization, and project
+managers. Concerns are decomposed into a set of
+questions as discussed above.
+2. Viewpoint and source identification.Possible viewpoints
+and associated sources of process information are
+identified in a review involving process participants
+and the process improvement team. We discuss this
+stage in more detail below.
+CO"CCl.nS
+---+
+Inconsistency
+IC,IOlt
+rroccss
+desciiptioiis
+790
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25. NO. 6, NOVEMBERIDECEMBER1999
+definition and
+question formulation
+identification
+and process
+Organisational concern
+definition
+Understanding and analysis
+and analysis
+I
+F Time
+Iinprovemcnt planning
+Fig. 3.Process improvement with viewpoints,
+Viewpoint and source identification
+Viewpoint data collection and process description
+Fig. 4. Viewpoint identificationand process elicitation
+The subactivities involved in this stage are:
+3. Datn collection and process description. Information
+about the process is collected and the process is
+documented. Process inconsistencies are identified
+during this stage. Again, we discuss this in more
+detail below.
+4. Improvement suggestion and analysis. The processes as
+described in each viewpoint are compared and
+analyzed. Process inconsistencies are the focus for
+improvement and may point to potential process
+modifications to select best practice or to reconcile
+these inconsistencies. Improvements are analyzed
+against the concerns to ensure that they are
+consistent with business goals.
+As the theme of this paper is process viewpoints and the
+support they provide for managing inconsistency, we will
+concentrate on the middle two stages, where viewpoints are
+applied and process inconsistencies are identified. Fig. 4 is a
+more detailed description of these two stages. In this figure,
+solid arrows between activities indicate data flow.
+The process is iterative and we recommend that it should
+begin as soon as some viewpoints have been identified.
+Once a viewpoint has been identified, some information
+about the process can be collected and this may then be
+used to help with the identification of further viewpoints.
+1. Identify viewpoints. This is concerned with identifying
+the most appropriate process perspectives that can
+contribute useful information about the process and
+representing these as viewpoints. As a starting point,
+viewpoints covering organizational standards, process
+participants, management and, where appropriate
+customers should be identified. There should
+be no restrictions on the numbers of viewpoints
+identified at this stage.
+2. Reconcile viewpoints. The focus descriptions of the
+different viewpoints are used to identify viewpoints
+that may be merged. Merging viewpoints is possible
+when their foci overlap or are closely related. For
+example, a viewpoint whose focus is software
+testing may be merged with a viewpoint whose
+focus is static analysis of the system to create a
+general verification and validation viewpoint. Our
+experience of applying a viewpoint-oriented approach
+to requirements engineering [ll] suggests
+that for practical reasons, the number of viewpoints
+should be limited. If there are a large number of
+viewpoints, the costs of information collection and
+analysis become impractically high.
+3.1 Viewpoint and Source Identification 3. Identi& viewpoint sources. Viewpoint sources are
+This stage of the process is concerned with identifying information sources that can adopt the viewpoint
+relevant viewpoints and the information sources associated focus. They may be people, documents, standards,
+with these viewpoints. Viewpoints and their sources are domain knowledge, etc. These are identified by
+identified in an iterative way so that these activities are consultation with managers and engineers involved
+interleaved. The inputs to this activity are concerns and in the process.
+associated questions. These questions may either elicit The process of viewpoint identification may bring
+process details, discover rationale for process activities, concerns to light that have not already been considered.
+discover information about the timing, duration, and Therefore, it is sometimes necessary to revisit the previous
+interdependencies of activities or the support for the stage to refine these concerns before moving on to elicit
+process that is available. information about the process description.
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSINGVIEWPOINTS
+791
+3.2 Viewpoint Data Collection and Process 3.3 Inconsistency Analysis
+Description During the inconsistency analysis, the process descriptions
+This stage of the process improvement process is that are encapsulated in each viewpoint are compared and
+concerned with understanding, analyzing and describing reviewed by a team including process participants and
+the current process that is used. We recommend an members of the organizational process improvement group.
+incremental application of the steps described below fox Process inconsistencies are highlighted but no decisions
+each identified viewpoint. about process modifications are made at this stage. This
+The questions and process descriptions should he refined happens in a subsequent process where the concerns are
+used to design process changes that contribute to the
+as process information from viewpoint sources is elicited. business goals.
+That is, an initial set of questions to elicit process Inconsistency analysis has been shown as a separate
+information is derived, viewpoint sources are consulted process stage in Fig. 4 but, in fact, much of the work actually
+and a process description is proposed. This inevitably takes place during the elicitation of process information.
+reveals omissions and problems with the initial set of Once a process description is available from one viewpoint,
+questions. The analyst then refines the questions and it may be used as an input to the next elicitation activity.
+repeats this consultation and refinement process until all During that activity, process stakeholders identify inconviewpoints
+have been covered. sistencies by pointing out how their view of the process
+The stages in this process are: differs from the view that is presented to them. In some
+cases, where inconsistencies are a result of misunderstandings
+(for example, where different terminology is used) it
+may be possible for the people involved to see immediately
+how to resolve the problem and the process descriptions are
+changed during elicitation to remove the inconsistency. In
+other cases, however, the inconsistency reflects a genuine
+difference and it is documented for subsequent analysis.
+Inconsistencies may be identified by individuals when
+they examine the different process descriptions or in a
+process review meeting. In this review, a process or process
+fragment is examined and discussed by the meeting
+participants. Different views of the same process are
+considered and inconsistencies across these views are
+identified. Each of the identified inconsistencies is then
+classifiedusing the categories shown in Fig. 5 . The outcome
+of the review is an inconsistency report that is passed on to
+the next stage of the process improvement process.
+Classifying process inconsistencies in this way is helpful
+for making judgments about possible process improvements.
+These different types of inconsistency may be used
+in different ways when considering process improvements:
+1. Consult process viewpoint sources. The analyst puts the
+questions derived from concerns to the viewpoint
+sources to discover process information. These
+questions may need to he refined for the specific
+viewpoint (e.g., by changing the terms used)
+depending on the background of the source. As well
+as the questions, of course, sources should be asked
+to comment on their processes. We have found that
+the best way to elicit information is to ask them to
+critique an existing process description (however
+inadequate this may be) that may be derived when
+concerns are established. The process description
+focuses the elicitation as stakeholders can point out
+where it is incomplete and differs from their actual
+process. Once a more detailed process description
+has been elicited from one viewpoint, it may then
+serve as a basis for discussion about the process in
+other viewpoints.
+2. Create process descriptions. A process description is
+created taking into account the differences as seen by
+different viewpoint sources. Any notation may he
+used here to describe the process so long as it is
+understandable by all people who are viewpoint
+sources.
+3. Analyze inconsistencies. This activity is concerned
+with analyzing the process descriptions to discover
+redundancy and inconsistencies. We discuss this in
+more detail in Section 4.3.
+4. Refine process descriptions, The results of the inconsistency
+analysis are fed hack to the process sources
+and, where appropriate, the process descriptions are
+modified. For example, where different people use
+different names for the same process, a single term
+may be agreed. Where inconsistencies cannot be
+reconciled, they are documented in an inconsistency
+report that is an input to the next phase of the
+process concerned with process improvements.
+This activity is also likely to reveal problems with the
+identified concerns and questions. Some iteration may be
+required to redefine the concerns and the associated
+questions.
+Tolerable inconsistencies often reflect different professional
+judgment and we believe that good processes
+allow skilled professionals to exercise that judgment.
+Removing tolerable inconsistencies is likely to be demotivating
+for skilled professional staff. Therefore,
+improvement proposals should be assessed to check
+that they are not too prescriptive in defining how
+professional tasks are executed.
+Constraining inconsistencies are inconsistencies that
+must be maintained in any process improvement
+proposals because they reflect local factors (such as
+the use of standards) that are outside the control of the
+process improvement team. Therefore, improvement
+proposals should be assessedto check that they do not
+inadvertently remove this type of inconsistency.
+Accidental inconsistencies should be resolved as part
+of the process improvement.
+Improveable inconsistencies are pointers to differing
+practices within an organization. The process improvement
+team should look for the best practice
+and should propose improvements that disseminate
+782
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25, NO.6, NOVEMBERIDECEMBER 1889
+Class o f
+inconsistency
+Tolerable
+Constraining
+Accidental
+Improvcdble
+Explanation
+There is an inconsistency in processes as scen Srom differentviewpoints that
+does not inalerially affcct the outcomc of these processes. This type oC
+inconsistency often ayises from differentjudgements madc by different
+process participants.An example of this might be where different techniques
+are used for object identificationand no one tcchnique is clearly supcrior.
+The inconsistency in processes must he maintained because it has arisen as a
+Consequenceof some external factors that are oulside the influence of thc
+process improvcmenl team. For cxample, leains in Lhc same organisation
+working in differentcountries may operate difference,inconsislcnt processes.
+Process inconsistencies arise as a conscquence of local laws, such as health
+and safely regulations, lhat must bc followed.The inconsistency therefore
+constrains process cvolulion.
+These are process inconsislencicsthat have been introduced by accident and
+that are a consequence of human mistakes and omissions. An example of
+this type of inconsistency is where an activity appears i n one vicw o r a
+process but where that activily has been omilted from another view where it
+should have been included
+These u e inconsistencieswhere differentsub-processesare used by diffennt
+peoplc or in differentparls of an organisation. Some of thcsc sub-processes
+may be clearly bclter than othcrs. For example, one part OF an organisation
+may support thcir lesting proccss using CASE tools whereas, in other
+testing processes, no automated support is used.
+Fig. 5. Classes of process inconsistency
+this good practice across the organization. They are
+distinct from tolerable inconsistencies in that the
+choice of practice is not a question of professional
+judgment but is a consequence of lack of information
+or arbitrary historical decisions.
+4
+A SIMPLECASESTUDY
+In this section, we present part of a process analysis case
+study where we applied the process viewpoint approach.
+The processes concerned were development and management
+processes for a safety-related expert system that was
+being developed by a relatively small company for a large
+client. The system involved the development of a "safe"
+expert system shell and the instantiation of this shell with
+specific domain data. The system was to be formally
+specified and the implementation validated by correctness
+arguments (not a complete proof) against the specification.
+The company developing the system is a specialist in critical
+computing systems, is technically mature and is strongly
+committed to quality and quality improvement.
+Our aim in carrying out this case study was to evaluate
+our approach in a formative way. That is, we wanted to try
+it out on a real example and learn from the problems that
+we encountered without prejudgment of what these
+problems might be. We do not believe that summative
+evaluation where a hypothesis is proposed and then
+confirmed or denied is realistic in an engineering discipline.
+We approached the case study with an open mind about
+what we would learn and how that might affect the process
+viewpoints approach. We summarize some of these lessons
+and some of the difficulties we faced later in this section.
+4.1 Concerns and Questions
+The first stage in the process analysis is to identify the
+organizational concerns that contribute to the process
+analysis. As this is a safety-related system, the most
+important of these concerns was safety. A critical business
+goal of the organization was to ensure that the systems it
+developed were safe and processes always had to take this
+into account. A further business concern in this particular
+case was customer relationships as the customer in this case
+was a large organization and a likely source of future
+contracts. The final concern identified was skill utilization.
+The organization developing the system is very highly
+skilled in a number of areas and processes had to be
+designed to utilize these skills.
+Note that these concerns don't fall neatly into our earlier
+classification of understanding, improvement, or constraint
+concerns. For example, safety is both an improvement
+concern and a constraint. The organization wishes to
+develop a safer process where fewer product defects are
+introduced but also constrains any process improvements
+to be such that the safety of the process is not impaired.
+To illustrate question derivation, let us consider the safety
+concern. Some relevant process questions associated with
+this concern are:
+1. Is there an independent validation activity for each
+of the outputs of the processes?
+2. Have adequate resources been assigned to each
+validation activity?
+3. How are identified hazards tracked at each stage in
+the process?
+SOMMERVILLE ET AL.' MANAGING PROCESS INCONSISTENCYUSING VIEWPOINTS
+793
+4. Are the processes conformant with the safety plan these are not always ideal; they 'may not allow complete
+agreed with the customer? coverage of a method and they may have to be carried out
+5. Are descriptions of the system in different notations to a very tight schedule. However, we argue that they are
+checked for consistency? inevitably useful in some respects and are more valuable
+By applying these questions to process sources, we built than academic examples that don't capture the messy
+up a model of the process as seen by different process reality of industrial software development.
+viewpoints.
+4.2
+Viewpoint Identification
+The next stage of the process of analysis is to 'identify
+relevant viewpoints. The process we recommend involves
+identifying as many viewpoints as possible then merging
+these to reduce the number of viewpoints for analysis. In
+this case, we will skip the first stage and simply discuss the
+final viewpoints used in the analysis. Three viewpoints
+were identified as significant in this case:
+e A project management viewpoint
+A qnality management viewpoint
+e An engineering viewpoint
+The scope of each of these viewpoints is defined by
+describing their focus. All viewpoints are concerned with
+the whole of the development process for the system so this
+need not be explicitly set out in the viewpoint focus
+descriptions:
+1. Project management. The project management viewpoint
+is concerned with the process as defined by
+those activities that are identified in the project plan
+and that are assigned specific resources and a
+schedule for completion.
+2. Quality management. The quality management viewpoint
+is concerned with those aspects of the process
+where the customer requires explicit evidence of
+validation activities and the conformance of process
+deliverables to requirements and standards.
+3. Engineering. The engineering viewpoint is concerned
+with the process that is actually enacted by the
+engineers involved in the system development.
+In conjunction with the process of viewpoint identification,
+sources of information associated with the viewpoint
+should also be identified. The focus description may be
+used as a starting point for identifying information sources.
+In this case, once one source was identified, he helped in the
+identification of other possible sources.
+For brevity, we will focus the remainder of this
+discussion on the first two viewpoints above namely quality
+management and project management. Sources of information
+associated with these viewpoints are:
+e project management: project plan, project manager,
+customer project manager, software developers
+quality management: project quality plan, organizational
+quality manual, quality manager, customer
+project manager
+In practice, it is not always possible to get access to all
+sources. In this particular case, we had close links with the
+development organization but no access to their customer.
+We were therefore unable to get any information from
+customer-based sources. This illustrates a general problem
+with industrial case studies. External factors mean that
+4.3
+Process Description
+Once the sources have been identified, they are consulted
+and a process description is developed. The principal
+source for the project management and quality management
+viewpoints was the very comprehensive process
+documentation that had been produced to satisfy the
+quality requirements of the customer. The questions which
+were derived from the concerns were used to elicit process
+details from this documentation and from the people
+involved in the process.
+From the project management viewpoint, resources and
+schedules had been drawn up for 21 activities; from the
+quality management viewpoint, 36 explicit validation
+activities were identified. In each of these cases, there were
+logical groupings of activities so it was relatively straightforward
+to produce a more abstract model of the process.
+This high-level project management model is shown in
+Fig. 6. Again, the dotted arrows mean temporal sequence
+where a destination activity may start but may not finish
+before the source activity has finished. Where activities are
+vertically aligned, this means that they may (but need not)
+be carried out in parallel.
+From the quality management perspective, the high-level
+model focused on validation activities. This model is
+illustrated in Fig. 7.
+Because of the safety-related nature of this project,
+auditable validation of all process deliverables is essential.
+Therefore, for model consistency, we should look for a 1:l
+relationship between project management activities and
+validation activities. If there are validation activities that do
+not appear in the project management model, this implies
+that these have not been allocated project resources.
+Bearing this in mind, a comparison of Figs. 6 and 7
+reveals two inconsistencies:
+1. The project management model has an activity
+"acceptance testing" that does not appear in the
+quality management process. This is a tolerable
+inconsistency as the responsibility for validating the
+acceptance test lies with the customer for the
+software. The developer, therefore, need not assign
+resources to this activity.
+2. The quality management model includes an activity
+"safety plan review" that is not included in the project
+management model. This is an accidental inconsistency
+that highlights an error in the project management
+view of the process. In practice, the inconsistency
+could be resolved by adding a subactivityto "technology
+assessment" that was concerned with preparing
+inputs for use in the project.
+Further inconsistency analysis requires a more detailed
+look at the process. Let us look at the processes, inputs and
+outputs for the shell specification activity shown in Fig. 6.
+This more detailed model is shown in Fig. 8. Solid arrows
+794
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25, NO. 6, NOVEMBERIDECEMBER1999
+Fig. 6. Project management model.
+Fig. 7. Quality management model.
+4.4 Inconsistency Analysis
+In analyzing these more detailed models for inconsistency,
+we put the process descriptionsfromthequalitymanagement
+and the projectmanagement viewpoints side-by-sideand ask
+a number of questions motivated by the concerns and their
+associated questions. Examples of these questions are:
+1. What is the correspondence between tasks for which
+resources have been allocated and identified validation
+activities? That is, is it possible to equate,
+perhaps by name similarity, the activities in the
+different viewpoints.
+2. Are there any mismatches in the process descriptions
+such as development activities with no
+corresponding validation activity or validation activities
+with no allocated resources?
+3. Does the process description in the project management
+viewpoint clearly identify the deliverables that
+must be validated to ensure compliance with the
+project safety plan?
+4. Is the identification of outputs in the project
+management viewpoint consistent with the identification
+of process inputs in the quality management
+viewpoint?
+When we examined the process descriptions in the
+project management and process management viewpoint
+and put these questions to the models, we found inconsistenciesin
+the process. From the process fragments shown
+linking boxes indicate data-flows. The System S E is a in Figs. 8 and 9 we can see that, in the project management
+software requirements statement, written in English, that view, there are three validation activities in the process
+was produced by the customer for the system. (activities 2, 3, and 5 ) . Somehow, these must map onto the
+The comparable quality management model that identi- six activities identified in the quality management view of
+fies validation activities, inputs and outputs is shown in the process. When we looked at the processes in detail
+Fig. 9. In this process, each validation activity produces a using the above questions, we found three inconsistencies:
+report and has a set of associated success criteria. These are
+not really inputs to the next stage (the inputs to validation
+are outputs from development activities) so they are not
+included as data-flows on this diagram.
+specification ~
+. implementation
+4
+1. The quality management view requires a static
+analysis of the formal specification (activity 1)that
+is not explicit in the project management view. This
+is probably an accidental inconsistency resulting
+from a failure in communicationbetween the project
+manager and the quality manager. However, it could
+be an improveable inconsistency. If the, project
+manager and the quality manager are from different
+backgrounds, then the project manager may not be
+aware of the benefits of static analysis.
+2. There is no activity in the project management
+model where test planning is explicit and the test
+plan is not specified as an output of any activity.It is,
+however, an input to validation activities 4 and 5
+that review the plan. As there are two test plan
+reviews, it is clear that, from a quality management
+viewpoint, significant effort should be devoted to
+test planning. This is probably an accidental inconsistency
+that suggests that the project management
+view of the process should be modified to include a
+test planning activity.
+3. The quality management viewpoint identifies inputs
+as "revised formal spec," but it is not clear which
+version of these inputs should be used. That is, the
+project management model assumes a number of
+revisions of this specification (identified in the
+process as V1, V2, V3, and V4) but the quality
+management viewpoint does not explicitly state
+which of these are inputs to which validation
+activity. This is an accidental inconsistency that
+suggests that the quality management process
+description should be modified to include explicit
+version identification.
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSING VIEWPOINTS
+795
+Fig. 8 . Project management model of shell specification
+Existing
+prolotype
+formal spec.
+Revised formal
+spec. (v3)
+I
+I
+I
+I
+Formal
+spec.
+Test plan
+I
+formal spec.
+Formal
+spec. ( V I )
+I
+System SRS
+I
+I
+Revised formal
+spec. (v2)
+I
+Testing using
+animated formal
+Rcvised formal spec. (v4)
+Test coverage report
+Revised
+formal
+spec.
+validation
+Revised
+I test plan
+Revised
+formal Syslem SRS
+spec.
+Revised
+test plan
+I
+Shell
+protolype
+Fig. 9. Quality management view of shell specification validation
+4.5 Lessons Learned
+Applying the approach to a real industrial case study was
+very helpful. The nature of this case study was such that it
+did not allow all aspects of the process viewpoint approach
+The process of process analysis is continued for the other to be evaluated but we gained very useful feedback
+process fragments associated with the activities identified in particularly on the application of the approach to process
+Fig. 6 and Fig. 7. We will not show this here as it simply
+involves applying the same process as we have described analysis. Some lessons that we learned were:
+for the shell specification. Overall, we identified a total of 14
+inconsistencies between the processes as seen from the
+project management and quality management perspective.
+Of these, two were tolerable inconsistencies and the
+remainder were either accidental or improveable inconsistencies.
+We did not find any constraining inconsistencies.
+This was not surprising as we expect this type of
+inconsistency to arise when comparable processes in
+different parts of an organization are compared.
+1. Even in the relatively simple processes studied here,
+there were a significant number of process inconsistencies
+and structuring the process analysis using
+viewpoints was a helpful way of discovering these
+inconsistencies.
+2. The distinction between the types of inconsistency
+that we proposed in Fig. 5 is not as clear cnt as we
+anticipated. It was helpful to identify inconsistencies
+but, in this particular study, it was sometimesunclear
+whether these inconsistencies were accidental i.e., a
+result of process errors or misunderstandings or
+improveable i.e., a result of one view being unaware
+of better practice that is part of a different view. It is
+perhaps the case that making a distinction between
+796
+IEEETRANSACTIONSON SOFTWAREENGINEERING, VOL. 25, NO. 6 , NOVEMBERIDECEMBER 1999
+types of inconsistency is irrelevant. Further work is views. This work has continued with a newer version of
+clearly needed to determine if firstly, inconsistency the language MVP-L 2 now available [27]. MVP-L has a
+classification is useful and, secondly, if the classifica- fixed set of views namely a product view, a process view
+tions discussed here are the right ones. and a resource view. It therefore provides an integrated
+3. Our original notion that processes may be described, mechanism to define different representations of a process
+within a viewpoint, using any notation was a valid and its supporting environment MVP-E [28]supports some
+one. For example, from a project management consistency checking across these representations. Our
+viewpoint, processes were described using bar notion of viewpoints is really quite different from that in
+charts and from a quality management viewpoint MVP-L and reflects the process as seen by different
+they were described using narrative text. However, stakeholders. We are not concerned with cross-checking
+we quickly realized that we needed some common different representations of the process that are derived
+notation to make effective comparisons of processes from the same source.
+and we redescribed the processes using the simple Verlage [29], in work related to MVP-L, confirms the
+graphical notation that we have used here. need for a multiple perspective approach to process
+4. The tool support requirements for the approach are modeling and presents a set of requirements for this
+relatively simple. Tool support would have been approach. He suggests the following key requirements:
+helpful in translating the elicited process descriptions
+into a common format and comparing these 1. different perspectives on the same process element
+descriptions. We used a graphical editor for this but must be offered
+specialized tool support that would have allowed us 2. tailorable (user-defined) perspectives
+to explicitly link processes in different viewpoints 3. structuring of views
+that had different names would have been helpful. 4. independent modeling of views
+5. The identification of concerns was a very useful step 5 . detecting similarities between views
+in the process as it helped us understand the 6. detecting inconsistencies between views.
+priorities of the process “owners.” The questions 7. dynamic change of perspectives
+derived from concerns were useful because they 8. concurrent views-different views for different
+helped us to get started with the process analysis. people
+However, it wasn't sensible to stick with our pre- We believe that this is a helpful list of requirements and
+prepared list of questions as it quickly became clear we return to it in the conclusions of the paper where we
+that some of them were irrelevant to some of the assess our process viewpoints approach against it.
+sources of process information. However, the fact Bandinelli et al. [30],[31] discuss an experiment where
+that we did not see proposed process improvements they used a formal process modeling language to help
+meant that we could not validate our notion that discover process inconsistencies across different views of a
+concerns could be used to check that proposed process. This paper is an interesting illustration of the belief
+improvements were conformant with business goals. of processes as descriptions of how work should be done as
+6. Inconsistency analysis often raised further questions discussed in Section 1.1.The authors identify five different
+about the process. If we consider the example of the views of a software process:
+static analysis inconsistency discussed above, further
+issues came to light. It is not clear whether or not the
+specification should ”pass” the static analysis with
+no significant errors or how the results of the static
+analysis are used in the internal consistency check of
+the specification. Nor is it clear if the static analysis
+revort is delivered to the customer or not.
+The essential lesson that we learned from the case study
+was the need for flexibility. The fundamental framework
+that we have described here was helpful but when we tried
+to realize it in a practical context, we had to be opportunistic
+about what information could be collected and when it was
+collected. It wasn't really possible to separate the activities
+of viewpoint and source identification and sources sometimes
+pointed out process inconsistencies before actually
+describing the process used.
+1. the desired view, which is the process that the
+organization really wants
+2. the ojjcicial view, which is the process that has been
+documented
+3. the perceived view, which is the process that different
+actors think has been documented
+4. the observed view, which is what observers examining
+the process see happening
+5. the actual view, which is the process actually
+followed by process actors
+The objective of the process analysis was to increase the
+conformity of the official and desired process, improve the
+specification of the official process, and move the actual
+process closer to the officially defined process. This work
+discovered a number of process inconsistencies and, in
+particular, identified a number of problems in the description
+of the ”official” process. Clearly, the use of different
+5 RELATEDWORK views was helpful in focusing the inconsistency analysis
+and the authors were committed to the use of formal
+The earliest work that we are aware of that has taken a process modeling to support the analysis.
+multiperspective approach to process modeling was carried The paper shows that formal modeling of processes can
+out by Rombach in the late '80s. He developed MVP-L [26], be used to discover inconsistencies but it neither claims nor
+a process modeling language that supported multiple demonstrates that this is a cost-effective approach to
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCY USING VIEWPOINTS
+797
+Requirement
+Different perspectives on the
+same process element must be
+offered
+Tailorable (user-defined)
+erspectives
+tructuring of views
+Independent modelling of
+views
+Detecting similarities between
+views
+Detecting inconsistencies
+between views
+Dynamic change of
+perspectives
+Concurrent views - different
+views for different people.
+Assessment
+A fundamental feature of our approach
+A fundamental reature of our a_p_proach
+The requirement suggests that process elements should
+be explicitly grouped to form a view. Our notion of
+focus would appear to support this although it is not
+entirely clear to us what the requirement means.
+As suggested, correspondence of views is established
+after their description
+No automated support. This requirement and the
+requirements for incoiisistcncy detection is partially
+supported through a suggested process for using process
+viewpoints
+No automated support.
+This suggests that it must be possible for the same actor
+to view a process differcntly in different situations. This
+is supported by defining different viewpoints but with
+common sources of viewpoint information.
+This is supported by allowing flexibility in the notations
+used to describe processes.
+Flg. IO. Assessment of process viewpoints
+inconsistency analysis. The paper does not discuss whether
+the formal models were used directly with the process
+owner and process agents or if these were paraphrased for
+discussions with them about the process. Their informal
+process views are sensible but we believe that there are
+likely to be many actual processes (corresponding to
+different process actors) and, perhaps, several official
+processes (documented in different places) and that this
+cannot be accommodated in a predefined set of viewpoints.
+Turgeon and Madhavji have also developed a multiview
+approach to elicitation with some automated consistency
+checking. This is based on their work on process elicitation
+and the methodological and tool support that has been
+developed for this. Their original Elicit approach [32], [33]
+supported the notion of multiple views to manage different
+representations of processes such as an activity view, a
+resource view, etc. More recently, they discuss [34]the need
+for role-driven views for process modeling. This work is
+still under development but they are also taking a languagebased
+approach to inconsistency detection and offer some
+support for automated detection of inconsistencies in a
+formal process model.
+Of all other research in this field, this is the closest to the
+work we have reported here. We share the notion that
+views can be associated with roles and that there may be
+specific models (Turgeon and Madhavji use the term
+"aspect" here) associated with a view. Our notion of a
+viewpoint is a more general one. We do not constrain
+viewpoints to be associated with roles (although this is
+certainly the most common type of process viewpoint) and
+the use of concerns and associated questions provides a
+starting point for the elicitation process. We are not
+concerned with automated inconsistency checking so work
+with a more flexible notion of inconsistency that can
+encompass inconsistencies derived from human and organizational
+factors.
+Our work has also been influenced by a body of work
+that has been concerned with inconsistency management
+across viewpoints in requirements engineering [35], [36].
+The goal of this work is to provide a framework for
+allowing potentially inconsistent requirements to coexist
+and to help discover those inconsistencies. This relies on
+automatic or semiautomatic analysis of formal process
+descriptions to discover inconsistencies across viewpoints
+[37]. This work has been successful for small-scale requirements
+analysis but the difficulties of creating formal
+descriptions of requirements and in reconciling functional
+and nonfunctional requirements inconsistencies mean that
+it is a major challenge to scale the approach for industrial
+systems.
+6
+CONCLUSIONS
+This paper has described an approach to process analysis
+and improvement based on viewpoints where each viewpoint
+manages a distinct process perspective. It allows
+inconsistent models of processes to be managed and
+provides a framework for analyzing the inconsistencies
+with a view to subsequent process improvement. Fig. 10 is
+an assessment of our work against the requirements for
+multiview modeling of software processes identified by
+Verlage [29]. This demonstrates that there is a substantial
+correspondence between our process viewpoints and the
+identified requirements.
+All our work was strongly influenced by practical
+industrial requirements. Consequently, we have designed
+798
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING, VOL. 25, NO. 6, NOVEMBERIDECEMBER1999
+process viewpoints to be a flexible approach to process
+analysis that does not require users to take the risk of
+committing themselves to new, specialized notations. The
+case study described here demonstrated that it was realistic to
+apply our approach to real industrial processes, although we
+must admit that this was a relatively small project with a
+limited number of stakeholders.It did not exercise all aspects
+of our approach to process analysis,but the results suggested
+that there was some merit at least in using viewpoints when
+tryingto understand and improve processes. We do not yet
+h o w how the approach will scale up to the processesused in
+large software engineering projects.
+ACKNOWLEDGMENTS
+The work described in this paper was partially supported
+by the European Commission's ESPRIT programme under
+project REAIMS (8649). Particular thanks are due to Robin
+Bloomfield at Adelard for case study information.
+REFERENCES
+[1] A. Finkelstein, J. Kramer, and B. Nuseibeh, cds., Software Process
+Modelling and Technology, Taunton, Somerset, England: Research
+Studies Press Ltd., 1994.
+[Z] A. Fuggetta and A. Wolf, eds., Trends in Software: Software Process.
+Chichester, U.K.:John Wiley & Sons, 1996.
+[3] M. Hammer, "Reengineering Work: Don't Automate, Obliterate,"
+Harvard Bitsiness Review, pp. 104-112, July/Aug. 1990.
+[4] W.S. Humphrey, "Characterizing the Software Process," IEEE
+Software, vol. 5, no. 2, pp. 73-79, 1988.
+[5] M.C. Pauik B. Curtis, M.B. Cbrissis, and C.V. Weber, "Capability
+Mahlrity Model, version 1.1," IEEE Software, vol. 10, no. 4, pp. 1827.
+1993.
+[6] V. Haase, R. Messnarz, C.Koch, H.J. Kugler, and P. Decrinis,
+"Bootstrap: Fine Tuning Process Assessment," IEEE Software,
+vol. 11, no. 4, pp. 25-35, 1994.
+[7] K. El Emam, J. Drouin, and M. Welo, SPICE: The Theory and
+Practice of Software Process Improvement and Capability Determinntion.
+Los Alamitos, Calif.: IEEE CS Press. 1997.
+I. Sommerville and P. Sawyer, Requirements Engineering: A Good
+Practice Guide. Chichester U.K.: John Wiley & Sons, 1997.
+L. Emmet, R. Bloomfield, J. Bowers, 'and S. Viller, "PERE
+Evaluation and Improvement of Dependable Processes," Proc.
+Safecomp'96, 1996.
+I. Sammerville and P. Sawyer, "Viewpoints: Principles, Problems
+and a Practical Approach to Requirements Engineering," Annunl
+Software Eng., vol. 3, 1997.
+I. Sommerville, P. Sawyer, and S. Viller, "Viewpoints for
+Requirements Elicitation: A Practical Approach," Proc. Int'l Conf
+Reauiremcets E n c . 19911.
+..
+Proc. Second Int'l Conf. Software Proccss;l993.
+S.M. Sutton and L.J. Osterweil, "The Design of a Next-Generation
+Process Language," ESEC/FSE'97, pp. 142-58, Springer-Verlag,
+1997.
+M.C. Paulk. C.V. Weber. B. Curtis. and M.B. Chrissis. TJrt
+Capability Maturity Model:' Guidelines,for Improving~the S o ~ w a ~ e
+Process. Reading, Mass.: Addison-Wesley, 1995.
+I. Sommerville and T. Radden, "Human, Social and Organizational
+Influences on the Software Process," Trends in Software, A.
+Fuggetta and A. Wolf, eds., p..p. 89-110, New York Tohn Wiley &
+Sons, 1996.
+G. Cugola, E. Di Nitto, A. Fuggetta, and C. Ghezzi, "A
+Framework for Formalizin~Inconsistencies and ~ ~ ~in i
+Human-Centered Systems," ACM Trans. Software Eng. and
+Methodology, vol. 5, no. 3, pp. 191-230, 1996.
+[18] R. Conradi and C. Liu, "Process Modelling Languages: One or
+Many," Proc. Fourth European Workshop Softw& Pr&essTechnology,
+Springer-Verlag, 1995.
+[I91 P. Checkland, Systems Thinking, Systems Prnctice. Chichester U.K.:
+John Wiley & Sons, 1981.
+[201 G. Mullery, "CORE-A Method for Controlled Requirements
+Specification," Proc. Fourth Int'l Conf. Software Eng., pp. 126-35,
+IEEE CS Press. 1979.
+[22] G. Kotonya and 1. Sommerville, "Requirements Engineering with
+Viewpoints," BCSIIEE Software Eng. I,, vol. 11,no.1, pp. 5-18,1996.
+[23] I. Sommerville, P. Sawyer G. Kotonyu, and S. Viller, "Process
+Viewpoints," Proc. Fifth European Workshop Software Process
+Technology, Springer-Verlsg, 1995.
+[24] V.R. Basili and H.D. Rombach, "The TAME Project: Towards
+Improvement-Oriented Software Environments," IEEE Trans.
+Software Eng., vol. 14, no. 6, pp. 758-773, June 1988.
+[25] P. Checkland and J. Scholes, Soft Systems Methodology in Action.
+Chichester U.K.: John Wiley & Sons, 1990.
+[261 H.D. Rombach, "MVP-L, A Language for Process Modeling Inthe-Large,"
+Inst. for Advanced Computer Studies, Univ. of
+Maryland, 1991.
+[27] A. Brockers, C.M. Lott, H.D. Rombach, and M. Verlage, "MVP-L
+Language Report, version 2," Dept. of Computer Science, Univ. of
+Kaiserslautern, Germany, 1995.
+[28] U. Becker, D. Hamann, J. Miinch, and M. Verlage, "MVP-E A
+Process Modeling Environment" IEEE Trans. Computer Software
+Enr. So,ftware Process Newsletter. vol. 10. ID.D.10-15. 1997.
+I
+~ 9 1M. Verlage, "Multi-View Modeling of Software Processes," Proc.
+Third Europeas Workshop Software Process Technology, SpringerVerlag,
+pp. 123-127, 1994.
+~301S. Bandinelli, A. Fuggetta L. Lavazza, M. Loi, and G.P. Picco,
+"Modeling and Improving an Industrial Software Process," IEEE
+Trans. Software Eng., vol. 21, no. 5, pp. 440-454, May 1995.
+~311S. Bmdinelli, A. Fuggetta , and C. Gherzi, "Software Process
+Evolution in the SPADE Environment," IEEE Trans. Software EIIY.,
+vol. 19, no. 12, pp. 1,128-1,144, 1993.
+[32] N.H. Madhevii. D. Holtie. H. WonKook. and T. Bruckhaus "Elicit:
+[341 J. Turgeon and N.H. M a d h a j i , "A Systematic View-Based
+Approach to Eliciting Process Models," Proc. Fifth Euopean
+Workshop Software Process Technology,Springer-Verlag, 1996.
+[351 A. Finkelstein, J , Kramer, B. Nuseibeh, and M. Goedicke, "Viewpoints:
+A Framework for Integrating Multiple Perspectives in
+System Development," Int'l 1. Software Eng. and Knowledge Eng.,
+vol. 2, no. 1, pp. 31-58, 1992.
+B. Nuseibeh, J. Kramer , and A, Finkelstein, "A Framework for
+Expressing the Relationships between Multiple Views in Requirements
+Specifications," IEEE Tmns. Software Eng., vol. 20, no. 10,
+pp. 760-773, Oct. 1994.
+S. Easterbrook and B. Nuseibeh. "Usine Viewpoints for
+Inconsistency Management," BCS/IEE Soft&& Eng. J , v61. 11,
+no. 1, pp, 31-43, 1996.
+Ian Sommerville received a BSc degree in
+physics from Strathclyde University and the MSc
+and PhD degrees from St. Andrews University,
+Scotland. He is a professor of computer science
+and chair of the Computing Department at
+Lancaster University. He has been involved in
+software engineering research and teaching for
+the past 20 years and his current research
+interests are in requirements engineering, system
+evolution. and human and social factors in
+Svstems desion. He is a member of the AGM. the IEEE Comouter
+Socioly. ande;! B r l so CompJer Soc,ely. and s a follow 01 Ine !nstt.le
+01 E eclrica Eng ncers
+~
+t
+i
+~
+~
+~
+SOMMERVILLE ET AL.: MANAGING PROCESS INCONSISTENCYUSING VIEWPOINTS
+799
+,,.. . . . .
+Pete Sawyer holds BSc and PhD degrees in
+computer science from Lancaster University.
+He is a senior lecturer in the Computing
+Department at Lancaster University, where he
+has held a variety of positions since 1986. His
+principal research interests are in requirements
+engineering, dependable systems, and software
+process improvement. He is a member of the
+iEEE Computer Society and the ACM.
+Stephen Vilier has a BSc degree in computation
+from the University of Manchester Institute of
+Science' and Technology, an MSc degree in
+cognitive science from Manchester University,
+and a PhD in computer science from Lancaster
+University. He is currently a research leiiow in the
+Computing Department at Lancaster University.
+His research interests are broadly within the
+fields of requirements engineering and computer
+supported cooperative work, focusing on improving
+suppolt for humar1 activity in the design of cooperative systems. He
+is a member of the IE!EE Computer Society and the ACM.
