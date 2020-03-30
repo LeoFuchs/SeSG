@@ -2,11 +2,11 @@
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
-## Note
+## :warning: Note
 
 This is a research algorithm, susceptible to errors and imperfections.
 
-## Structure
+## :file_folder: Structure
 This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
@@ -42,17 +42,17 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
-## Usage
+## :chart_with_upwards_trend: Usage
 
-### Azeem et al.
+###  :one: Azeem et al.
 
-### Hosseini et al.
+###  :two: Hosseini et al.
 
-### Vasconcellos et al.
+###  :three: Vasconcellos et al.
 
-## Results
+##  :bar_chart: Results
 
-## Requirements
+##  :red_circle: Requirements
 * Python 2.7
 * Torch 1.2.0+
 * Numpy 1.15.4+
