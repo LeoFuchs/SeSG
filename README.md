@@ -48,7 +48,15 @@ To run SeSG, simply run some of the .py files present at the root of the directo
 
 ####  :one: Azeem et al.
 
-The file `teste`
+The file `SeSG-azeem-random.py` performs the experiment for the study by Azeem et al.. For this to happen, some parameters passed within the code must be:
+
+```bash
+    author = 'azeem'
+    pub_year_one = 2018  # 0 = disable pub_year
+    pub_year_two = 1999  # 0 = disable pub_year
+    qgs_size = 5
+    gs_size = 15
+```
 
 ####  :two: Hosseini et al.
 
