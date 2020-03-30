@@ -41,7 +41,7 @@ def bag_of_words(min_df, qgs_txt):
     min_document_frequency = min_df
     max_features = None
 
-    # Load the training dataset (It's always in the Files-QGS folder).
+    # Load the training dataset (It's always in the files-qgs folder).
     files = load_files(container_path=os.path.join(sys.path[0], qgs_txt), encoding="iso-8859-1")
 
     # Extract the words and vectorize the dataset.
@@ -241,10 +241,10 @@ def enrichment_words(word, bert_model, bert_tokenizer):
 
     # Tokenize input
     read_files = glob.glob(
-        os.path.join(sys.path[0], "Files-QGS/revisao-%s/QGS-txt/metadata-enrichment/txt/*.txt" % author))
+        os.path.join(sys.path[0], "files-qgs/%s-review/qgs-txt/metadata-enrichment/txt/*.txt" % author))
 
     # Merge all the files in one file named 'sentences.txt'.
-    with open(os.path.join(sys.path[0], "Exits/sentences.txt"), "w") as merge_files:
+    with open(os.path.join(sys.path[0], "exits/sentences.txt"), "w") as merge_files:
         for f in read_files:
             with open(f, "r") as infile:
                 merge_files.write(infile.read())
@@ -252,7 +252,7 @@ def enrichment_words(word, bert_model, bert_tokenizer):
     merge_files.close()
 
     # Manipulating the file 'sentences.txt', replacing line breaks for #.
-    with open(os.path.join(sys.path[0], "Exits/sentences.txt"), "r") as metadata_file:
+    with open(os.path.join(sys.path[0], "exits/sentences.txt"), "r") as metadata_file:
         text = metadata_file.read().strip()
         text = text.replace('\r\n', '#.')
 
@@ -356,7 +356,7 @@ def scopus_search(string):
     pd.options.display.max_rows = 99999
     pd.options.display.max_colwidth = 250
 
-    search_df[['title']].to_csv(os.path.join(sys.path[0], "Exits/Result.csv"), index_label=False,
+    search_df[['title']].to_csv(os.path.join(sys.path[0], "exits/result.csv"), index_label=False,
                                 encoding='utf-8', index=False, header=True, sep='\t')
 
     return int(len(search_df))
@@ -375,14 +375,14 @@ def open_necessary_files():
         manual_comparation: List for manual comparison of results
             found with results initially stored.
     """
-    gs = pd.read_csv(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/GS.csv' % author), sep='\t')
+    gs = pd.read_csv(os.path.join(sys.path[0], 'files-qgs/%s-review/GS.csv' % author), sep='\t')
 
-    qgs = pd.read_csv(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS.csv' % author), sep='\t')
+    qgs = pd.read_csv(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author), sep='\t')
 
-    result_name_list = pd.read_csv(os.path.join(sys.path[0], 'Exits/Result.csv'), sep='\t')
+    result_name_list = pd.read_csv(os.path.join(sys.path[0], 'exits/result.csv'), sep='\t')
     result_name_list = result_name_list.fillna(' ')
 
-    manual_comparation = open(os.path.join(sys.path[0], 'Exits/ManualExit.csv'), 'w')
+    manual_comparation = open(os.path.join(sys.path[0], 'exits/manual-exit.csv'), 'w')
 
     return qgs, gs, result_name_list, manual_comparation
 
@@ -404,9 +404,9 @@ def similarity_score_qgs(qgs, result_name_list, manual_comparation):
             search result that are in the QGS.
     """
     len_qgs, len_result = 0, 0
-    for len_qgs, l in enumerate(open(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS.csv' % author))):
+    for len_qgs, l in enumerate(open(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author))):
         pass
-    for len_result, l in enumerate(open(os.path.join(sys.path[0], 'Exits/Result.csv'))):
+    for len_result, l in enumerate(open(os.path.join(sys.path[0], 'exits/result.csv'))):
         pass
 
     list_qgs = []
@@ -477,9 +477,9 @@ def similarity_score_gs(gs, result_name_list, manual_comparation):
     """
 
     len_gs, len_result = 0, 0
-    for len_gs, l in enumerate(open(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/GS.csv' % author))):
+    for len_gs, l in enumerate(open(os.path.join(sys.path[0], 'files-qgs/%s-review/GS.csv' % author))):
         pass
-    for len_result, l in enumerate(open(os.path.join(sys.path[0], 'Exits/Result.csv'))):
+    for len_result, l in enumerate(open(os.path.join(sys.path[0], 'exits/result.csv'))):
         pass
 
     list_gs = []
@@ -563,7 +563,7 @@ def snowballing():
        final_edges: List with final connection nodes.
    """
 
-    with open(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/GS.csv' % author), mode='r') as gs:
+    with open(os.path.join(sys.path[0], 'files-qgs/%s-review/GS.csv' % author), mode='r') as gs:
 
         # Skipping the GS.csv line written 'title'.
         next(gs)
@@ -578,7 +578,7 @@ def snowballing():
 
     # Analyzing the citations of each article.
     for i in range(1, len(title_list) + 1):
-        article_name = 'Files-QGS/revisao-%s/GS-pdf/%d.cermtxt' % (author, i)
+        article_name = 'files-qgs/%s-review/gs-pdf/%d.cermtxt' % (author, i)
         with open(os.path.join(sys.path[0], '%s' % article_name), mode='r') as file_zone:
             reader = file_zone.read().strip().lower().replace('\n', ' ').replace('\r', ''). \
                 replace(' ', '').replace('.', '')
@@ -662,7 +662,7 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
     g.attr(fontsize='12')
 
     r = graphviz.Source(g, filename="graph-with-%0.1f-%d-%d-%d" % (min_df, number_topics, number_words, enrichment),
-                        directory=os.path.join(sys.path[0], 'Exits/Snowballing/'), format="ps")
+                        directory=os.path.join(sys.path[0], 'exits/Snowballing/'), format="ps")
     r.render()
     # r.view()
 
@@ -685,7 +685,7 @@ def randomize_qgs(qgs_size, gs_size):
     print(random_list)
 
     # Delete all the files in the QGS folder before the randomization.
-    folder_meta = os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS-txt/metadata/txt/' % author)
+    folder_meta = os.path.join(sys.path[0], 'files-qgs/%s-review/qgs-txt/metadata/txt/' % author)
     for the_file in os.listdir(folder_meta):
         file_path = os.path.join(folder_meta, the_file)
         try:
@@ -694,7 +694,7 @@ def randomize_qgs(qgs_size, gs_size):
         except Exception as e:
             print ("Exception: " + str(e))
 
-    folder_enrich = os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS-txt/metadata-enrichment/txt/' % author)
+    folder_enrich = os.path.join(sys.path[0], 'files-qgs/%s-review/qgs-txt/metadata-enrichment/txt/' % author)
     for the_file in os.listdir(folder_enrich):
         file_path = os.path.join(folder_enrich, the_file)
         try:
@@ -705,19 +705,19 @@ def randomize_qgs(qgs_size, gs_size):
 
     # Copy files from the GS folder to the QGS folder.
     for i in random_list:
-        chosed_file_meta = 'Files-QGS/revisao-%s/GS-txt/metadata/txt/%d.txt' \
+        chosed_file_meta = 'files-qgs/%s-review/gs-txt/metadata/txt/%d.txt' \
                            % (author, i)
 
-        chosed_file_enrich = 'Files-QGS/revisao-%s/GS-txt/metadata-enrichment' \
+        chosed_file_enrich = 'files-qgs/%s-review/gs-txt/metadata-enrichment' \
                              '/txt/%d.txt' % (author, i)
 
         shutil.copy2(os.path.join(sys.path[0], chosed_file_meta), os.path.join(sys.path[0], folder_meta))
         shutil.copy2(os.path.join(sys.path[0], chosed_file_enrich), os.path.join(sys.path[0], folder_enrich))
 
-    if os.path.exists(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS.csv' % author)):
-        os.remove(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS.csv' % author))
+    if os.path.exists(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author)):
+        os.remove(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author))
 
-    with open(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/GS.csv' % author), mode='r') as gs:
+    with open(os.path.join(sys.path[0], 'files-qgs/%s-review/GS.csv' % author), mode='r') as gs:
 
         # Skipping the GS.csv line written 'title'.
         next(gs)
@@ -727,7 +727,7 @@ def randomize_qgs(qgs_size, gs_size):
 
     gs.close()
 
-    with open(os.path.join(sys.path[0], 'Files-QGS/revisao-%s/QGS.csv' % author), mode='wr') as qgs:
+    with open(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author), mode='wr') as qgs:
 
         # Skipping the GS.csv line written 'title'.
         qgs.write('title')
@@ -762,7 +762,7 @@ def main():
     qgs_size = 15
     gs_size = 46
 
-    qgs_txt = 'Files-QGS/revisao-%s/QGS-txt/metadata' % author
+    qgs_txt = 'files-qgs/%s-review/qgs-txt/metadata' % author
 
     # Running CERMINE (Change the path to the .jar file and to the input folder)
     # All the articles in .pdf formate were hidden due to their publication restrictions.
