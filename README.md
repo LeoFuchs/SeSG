@@ -48,7 +48,7 @@ To run SeSG, simply run some of the .py files present at the root of the directo
 
 ####  :one: Azeem et al.
 
-The file `SeSG-azeem-random.py` performs the experiment for the study by Azeem et al.. For this to happen, some parameters passed within the code must be:
+The file `SeSG-azeem-random.py` performs the experiment for the study by Azeem et al. [[1]](#1). For this to happen, some parameters passed within the code must be:
 
 ```bash
     author = 'azeem'
@@ -75,3 +75,9 @@ The file `SeSG-azeem-random.py` performs the experiment for the study by Azeem e
 * pyscopus 0.9.0
 * pytorch_transformers 1.0.0+
 * python-Levenshtein 0.12.0
+
+### :page_facing_up: References
+<a id="1">[1]</a> 
+Dijkstra, E. W. (1968). 
+Go to statement considered harmful. 
+Communications of the ACM, 11(3), 147-148.
