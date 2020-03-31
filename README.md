@@ -45,8 +45,6 @@ This is the directory structure. In summary, there is a folder with the results 
 ### :rocket: SeSG Process
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
-<p align="center">  ![Boundary Conditions](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
-</p>
 
   ![Boundary Conditions](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
 
