@@ -2,11 +2,11 @@
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
-### :warning: Note
+### Note
 
 This is a research algorithm, susceptible to errors and imperfections.
 
-### :file_folder: Repository Structure
+### Repository Structure
 This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
@@ -91,7 +91,7 @@ qgs_size = 10
 gs_size = 30
 ```
 
-###  :bar_chart: Quasi-Experiment Results
+### Quasi-Experiment Results
 
 The execution of the `.py` script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named `author-result.csv` with a compilation of this information presented. 
 
@@ -116,7 +116,7 @@ The output graph represents the connection between the articles present in the G
 * pytorch_transformers 1.0.0+
 * python-Levenshtein 0.12.0
 
-### :page_facing_up: References
+### References
 <a id="1">[1]</a> Azeem, M. I., Palomba, F., Shi, L., & Wang, Q. (2019). [Machine learning techniques for code smell detection: A systematic literature review and meta-analysis.](https://www.sciencedirect.com/science/article/abs/pii/S0950584918302623) Information and Software Technology, 108, 115-138.
 
 <a id="2">[2]</a> Hosseini, S., Turhan, B., & Gunarathna, D. (2017). [A systematic literature review and meta-analysis on cross project defect prediction.](https://ieeexplore.ieee.org/abstract/document/8097045/) IEEE Transactions on Software Engineering, 45(2), 111-147.
