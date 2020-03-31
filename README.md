@@ -50,7 +50,7 @@ An example of how the SeSG process works is shown in Figure 1. This process begi
 
 <p align="center"><b> Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
 
-
+<br>
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
 ### Quasi-Experiment Running
