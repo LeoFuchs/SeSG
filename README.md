@@ -45,7 +45,7 @@ This is the directory structure. In summary, there is a folder with the results 
 ### :rocket: SeSG Process
 
 <div style="text-align:center">
-  <img src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg">
+  <img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg">
 </div>
 ![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
 
