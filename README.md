@@ -87,7 +87,7 @@ gs_size = 30
 
 ###  :bar_chart: Results
 
-![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png | width=100)
+![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png =250x250)
 
 
 ###   :bangbang: Requirements
