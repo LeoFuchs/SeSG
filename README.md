@@ -46,9 +46,8 @@ This is the directory structure. In summary, there is a folder with the results 
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
-<p align="center" style="font-size:6"><b> #### Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
+<p align="center"><b> #### Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
 
-<center>Centered text</center>
 
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
@@ -101,6 +100,9 @@ In addition, in the folder `/exits/snowballing-images/` are the graphs that repr
 The output graph represents the connection between the articles present in the GS, showing which of these were found by searching bases (red nodes), those found through snowballing rounds (blue nodes) and those that were not found after the application of the hybrid approach (black nodes).
 
 <p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500"></p>
+
+<p align="center"><b> #### Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
+
 
 ###   :bangbang: Requirements
 * Python 2.7
