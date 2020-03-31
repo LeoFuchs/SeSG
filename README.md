@@ -42,6 +42,9 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
+![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
+
+
 ###  :runner: Running
 
 To run SeSG, simply run some of the .py files present at the root of the directory.
@@ -83,6 +86,9 @@ gs_size = 30
 ```
 
 ###  :bar_chart: Results
+
+![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png)
+
 
 ###   :bangbang: Requirements
 * Python 2.7
