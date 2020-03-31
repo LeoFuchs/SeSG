@@ -44,7 +44,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ### :rocket: SeSG Process
 
-<p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg"></p>
+<p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
