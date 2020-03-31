@@ -46,7 +46,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
-<p align="center"><b> #### Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
+<p align="center"><b> Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
 
 
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
@@ -101,7 +101,7 @@ The output graph represents the connection between the articles present in the G
 
 <p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500"></p>
 
-<p align="center"><b> #### Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
+<p align="center"><b> Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
 
 
 ###   :bangbang: Requirements
