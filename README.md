@@ -48,6 +48,8 @@ This is the directory structure. In summary, there is a folder with the results 
 
 <p align="center" style="font-size:6"><b> #### Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
 
+<center>Centered text</center>
+
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
 ###  :runner: Quasi-Experiment Running
