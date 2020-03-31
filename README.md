@@ -6,7 +6,7 @@ Implementation and experimentation of SeSG, a search string generator that uses 
 
 This is a research algorithm, susceptible to errors and imperfections.
 
-### :file_folder: Structure
+### :file_folder: Repository Structure
 This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
@@ -44,10 +44,11 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
 
+To executing the SeSG, simply run some of the .py files present at the root of the directory.
 
-###  :runner: Running
+###  :runner: Quasi-Experiment Running
 
-To run SeSG, simply run some of the .py files present at the root of the directory.
+There are three .py files that perform the SeSG, each with the ideal configuration to perform the experiment with a particular article.
 
 ####  :one: Azeem et al.
 
@@ -85,7 +86,11 @@ qgs_size = 10
 gs_size = 30
 ```
 
-###  :bar_chart: Results
+###  :bar_chart: Quasi-Experiment Results
+
+The execution of the .py script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named "author-result.csv" with a compilation of this information presented. 
+
+In addition, in the folder `/exits/snowballing-images/` are the graphs that represent the snowballing of each of the search strings presented, with their nomenclature following the test configuration. For example, "graph-with-0.1-3-7-0.ps" symbolizes that the represented graph has the following configuration: 0.1 min-df, 3 topics, 7 words and 0 similar words.
 
 <img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500">
 
