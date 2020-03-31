@@ -61,8 +61,8 @@ The file `SeSG-azeem.py` performs the experiment for the study by Azeem et al. [
 
 ```bash
 author = 'azeem'
-pub_year_one = 2018  # 0 = disable pub_year
-pub_year_two = 1999  # 0 = disable pub_year
+pub_year_one = 2018
+pub_year_two = 1999
 qgs_size = 5
 gs_size = 15
 ```
@@ -73,8 +73,8 @@ The file `SeSG-hosseini.py` performs the experiment for the study by Hosseini et
 
 ```bash
 author = 'hosseini'
-pub_year_one = 2016  # 0 = disable pub_year
-pub_year_two = 0  # 0 = disable pub_year
+pub_year_one = 2016
+pub_year_two = 0
 qgs_size = 15
 gs_size = 46
 ```
@@ -85,8 +85,8 @@ The file `SeSG-vasconcellos.py` performs the experiment for the study by Vasconc
 
 ```bash
 author = 'vasconcellos'
-pub_year_one = 2015  # 0 = disable pub_year
-pub_year_two = 0  # 0 = disable pub_year
+pub_year_one = 2015
+pub_year_two = 0
 qgs_size = 10
 gs_size = 30
 ```
