@@ -44,6 +44,8 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ### SeSG Process
 
+An example of how the SeSG process works is shown in Figure 1. This process begins with the execution of the LDA on a bag-of-words formulated from the selected QGS. Then, BERT is used to find similar terms, used to enrich the search string. Finally, the terms found previously are grouped together and the search string is formulated.
+
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
 <p align="center"><b> Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
