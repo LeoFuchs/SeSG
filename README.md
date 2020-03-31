@@ -42,7 +42,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
-### :rocket: SeSG Process
+### SeSG Process
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
@@ -51,11 +51,11 @@ This is the directory structure. In summary, there is a folder with the results 
 
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
-###  :runner: Quasi-Experiment Running
+### Quasi-Experiment Running
 
 There are three `.py` files that perform the SeSG, each with the ideal configuration to perform the experiment with a particular article.
 
-####  :one: Azeem et al.
+#### 1. Azeem et al.
 
 The file `SeSG-azeem.py` performs the experiment for the study by Azeem et al. [[1]](#1). For this to happen, some parameters passed within the code must be:
 
@@ -67,7 +67,7 @@ qgs_size = 5
 gs_size = 15
 ```
 
-####  :two: Hosseini et al.
+#### 2. Hosseini et al.
 
 The file `SeSG-hosseini.py` performs the experiment for the study by Hosseini et al. [[2]](#2). For this to happen, some parameters passed within the code must be:
 
@@ -79,7 +79,7 @@ qgs_size = 15
 gs_size = 46
 ```
 
-####  :three: Vasconcellos et al.
+#### 3. Vasconcellos et al.
 
 The file `SeSG-vasconcellos.py` performs the experiment for the study by Vasconcellos et al. [[3]](#3). For this to happen, some parameters passed within the code must be:
 
@@ -104,7 +104,7 @@ The output graph represents the connection between the articles present in the G
 <p align="center"><b> Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
 
 
-###   :bangbang: Requirements
+### Requirements
 * Python 2.7
 * Torch 1.2.0+
 * Numpy 1.15.4+
