@@ -1,4 +1,4 @@
-# SeSG (Search String Generator)
+<p align="center"> # SeSG (Search String Generator) </p>
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
@@ -44,9 +44,7 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ### :rocket: SeSG Process
 
-<p align="center">  <img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg">
-</p>
-![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
+<p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg"></p>
 
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
@@ -98,7 +96,7 @@ In addition, in the folder `/exits/snowballing-images/` are the graphs that repr
 
 The output graph represents the connection between the articles present in the GS, showing which of these were found by searching bases (red nodes), those found through snowballing rounds (blue nodes) and those that were not found after the application of the hybrid approach (black nodes).
 
-<img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500">
+<p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500"></p>
 
 ###   :bangbang: Requirements
 * Python 2.7
