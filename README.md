@@ -42,13 +42,16 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
+### :rocket: SeSG Process
+
+
 ![alt text](https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg)
 
-To executing the SeSG, simply run some of the .py files present at the root of the directory.
+To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
 ###  :runner: Quasi-Experiment Running
 
-There are three .py files that perform the SeSG, each with the ideal configuration to perform the experiment with a particular article.
+There are three `.py` files that perform the SeSG, each with the ideal configuration to perform the experiment with a particular article.
 
 ####  :one: Azeem et al.
 
@@ -88,9 +91,11 @@ gs_size = 30
 
 ###  :bar_chart: Quasi-Experiment Results
 
-The execution of the .py script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named "author-result.csv" with a compilation of this information presented. 
+The execution of the `.py` script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named `author-result.csv` with a compilation of this information presented. 
 
-In addition, in the folder `/exits/snowballing-images/` are the graphs that represent the snowballing of each of the search strings presented, with their nomenclature following the test configuration. For example, "graph-with-0.1-3-7-0.ps" symbolizes that the represented graph has the following configuration: 0.1 min-df, 3 topics, 7 words and 0 similar words.
+In addition, in the folder `/exits/snowballing-images/` are the graphs that represent the snowballing of each of the search strings presented, with their nomenclature following the test configuration. For example, `graph-with-0.1-3-7-0.ps` symbolizes that the represented graph has the following configuration: 0.1 min-df, 3 topics, 7 words and 0 similar words.
+
+The output graph represents the connection between the articles present in the GS, showing which of these were found by searching bases (red nodes), those found through snowballing rounds (blue nodes) and those that were not found after the application of the hybrid approach (black nodes).
 
 <img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500">
 
