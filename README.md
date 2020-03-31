@@ -87,7 +87,7 @@ gs_size = 30
 
 ###  :bar_chart: Results
 
-<img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="200">
+<img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500">
 
 ###   :bangbang: Requirements
 * Python 2.7
