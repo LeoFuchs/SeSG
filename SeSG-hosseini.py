@@ -180,8 +180,8 @@ def string_formulation(model, feature_names, number_words, number_topics, simila
                                 stem_similar_word.append(lancaster.stem(j))
 
                             for number, word in enumerate(stem_similar_word):
-                                if stem_feature_names != word and Levenshtein.distance(str(stem_feature_names),
-                                                                                       str(word)) > levenshtein_distance:
+                                if stem_feature_names != word and Levenshtein.distance(
+                                        str(stem_feature_names), str(word)) > levenshtein_distance:
                                     irrelevant = 0
                                     for k in final_stem_similar_word:
                                         if Levenshtein.distance(str(k), str(word)) < levenshtein_distance:
@@ -806,7 +806,8 @@ def main():
 
                     for enrichment in enrichment_list:
                         string = string_formulation(lda, dic, number_words, number_topics, enrichment,
-                                                    levenshtein_distance, pub_year_one, pub_year_two, bert_model, bert_tokenizer)
+                                                    levenshtein_distance, pub_year_one, pub_year_two,
+                                                    bert_model, bert_tokenizer)
 
                         scopus_number_results = scopus_search(string)
 
