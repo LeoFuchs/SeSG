@@ -97,6 +97,8 @@ gs_size = 30
 
 The execution of the `.py` script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named `author-result.csv` with a compilation of this information presented. 
 
+**Note**: The results found in the `/exits/` folder are exemplifying a random execution of the `SeSG-azeem.py` script
+
 In addition, in the folder `/exits/snowballing-images/` are the graphs that represent the snowballing of each of the search strings presented, with their nomenclature following the test configuration. For example, `graph-with-0.1-3-7-0.ps` symbolizes that the represented graph has the following configuration: 0.1 min-df, 3 topics, 7 words and 0 similar words.
 
 The output graph represents the connection between the articles present in the GS, showing which of these were found by searching bases (red nodes), those found through snowballing rounds (blue nodes) and those that were not found after the application of the hybrid approach (black nodes).
