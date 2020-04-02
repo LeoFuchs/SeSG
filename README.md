@@ -2,9 +2,7 @@
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
-### Note
-
-This is a research algorithm, susceptible to errors and imperfections.
+**Note**: This is a research algorithm, susceptible to errors and imperfections.
 
 ### Repository Structure
 This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
