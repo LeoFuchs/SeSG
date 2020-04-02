@@ -2,11 +2,11 @@
 
 Implementation and experimentation of SeSG, a search string generator that uses text mining techniques to build a search string from a supplied Quasi-Gold Standard.
 
-### :warning: Note
+### Note
 
 This is a research algorithm, susceptible to errors and imperfections.
 
-### :file_folder: Repository Structure
+### Repository Structure
 This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
@@ -42,56 +42,58 @@ This is the directory structure. In summary, there is a folder with the results 
 
 ```
 
-### :rocket: SeSG Process
+### SeSG Process
+
+An example of how the SeSG process works is shown in Figure 1. This process begins with the execution of the LDA on a bag-of-words formulated from the selected QGS. Then, BERT is used to find similar terms, used to enrich the search string. Finally, the terms found previously are grouped together and the search string is formulated.
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
 <p align="center"><b> Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
 
-
+<br>
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
 
-###  :runner: Quasi-Experiment Running
+### Quasi-Experiment Running
 
 There are three `.py` files that perform the SeSG, each with the ideal configuration to perform the experiment with a particular article.
 
-####  :one: Azeem et al.
+#### 1. Azeem et al.
 
 The file `SeSG-azeem.py` performs the experiment for the study by Azeem et al. [[1]](#1). For this to happen, some parameters passed within the code must be:
 
 ```bash
 author = 'azeem'
-pub_year_one = 2018  # 0 = disable pub_year
-pub_year_two = 1999  # 0 = disable pub_year
+pub_year_one = 2018
+pub_year_two = 1999
 qgs_size = 5
 gs_size = 15
 ```
 
-####  :two: Hosseini et al.
+#### 2. Hosseini et al.
 
 The file `SeSG-hosseini.py` performs the experiment for the study by Hosseini et al. [[2]](#2). For this to happen, some parameters passed within the code must be:
 
 ```bash
 author = 'hosseini'
-pub_year_one = 2016  # 0 = disable pub_year
-pub_year_two = 0  # 0 = disable pub_year
+pub_year_one = 2016
+pub_year_two = 0
 qgs_size = 15
 gs_size = 46
 ```
 
-####  :three: Vasconcellos et al.
+#### 3. Vasconcellos et al.
 
 The file `SeSG-vasconcellos.py` performs the experiment for the study by Vasconcellos et al. [[3]](#3). For this to happen, some parameters passed within the code must be:
 
 ```bash
 author = 'vasconcellos'
-pub_year_one = 2015  # 0 = disable pub_year
-pub_year_two = 0  # 0 = disable pub_year
+pub_year_one = 2015
+pub_year_two = 0
 qgs_size = 10
 gs_size = 30
 ```
 
-###  :bar_chart: Quasi-Experiment Results
+### Quasi-Experiment Results
 
 The execution of the `.py` script completely originates in several outputs. The script itself generates the search strings and their respective results as an output on the screen, in addition to a spreadsheet named `author-result.csv` with a compilation of this information presented. 
 
@@ -104,7 +106,7 @@ The output graph represents the connection between the articles present in the G
 <p align="center"><b> Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
 
 
-###   :bangbang: Requirements
+### Requirements
 * Python 2.7
 * Torch 1.2.0+
 * Numpy 1.15.4+
@@ -116,7 +118,7 @@ The output graph represents the connection between the articles present in the G
 * pytorch_transformers 1.0.0+
 * python-Levenshtein 0.12.0
 
-### :page_facing_up: References
+### References
 <a id="1">[1]</a> Azeem, M. I., Palomba, F., Shi, L., & Wang, Q. (2019). [Machine learning techniques for code smell detection: A systematic literature review and meta-analysis.](https://www.sciencedirect.com/science/article/abs/pii/S0950584918302623) Information and Software Technology, 108, 115-138.
 
 <a id="2">[2]</a> Hosseini, S., Turhan, B., & Gunarathna, D. (2017). [A systematic literature review and meta-analysis on cross project defect prediction.](https://ieeexplore.ieee.org/abstract/document/8097045/) IEEE Transactions on Software Engineering, 45(2), 111-147.
