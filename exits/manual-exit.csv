@@ -1,14 +1,14 @@
-QGS1:			tracking design smells: lessons from a study of god classes	
-				tracking design smells: lessons from a study of god classes	
+QGS1:			ids: an immune-inspired approach for the detection of software design smells	
+				on the design of a bioacoustic sensor for the early detection of the red palm weevil	
 
-QGS2:			can i clone this piece of code here?	
-				deep learning code fragments for code clone detection	
+QGS2:			smurf: a svm-based incremental anti-pattern detection approach	
+				smurf: a svm-based incremental anti-pattern detection approach	
 
-QGS3:			support vector machines for anti-pattern detection	
-				esvm: evolutionary support vector machine for automatic feature selection and classification of microarray data	
+QGS3:			adaptive detection of design flaws	
+				adaptive detection of design flaws	
 
-QGS4:			code smell severity classification using machine learning techniques	
-				clonewise – detecting package-level clones using machine learning	
+QGS4:			bdtex: a gqm-based bayesian approach for the detection of antipatterns	
+				search-based web service antipatterns detection	
 
 QGS5:			deep learning code fragments for code clone detection	
 				deep learning code fragments for code clone detection	
@@ -17,44 +17,44 @@ GS1:			code smell detection: towards a machine learning-based approach
 				deep learning code fragments for code clone detection	
 
 GS2:			tracking design smells: lessons from a study of god classes	
-				tracking design smells: lessons from a study of god classes	
+				a cloud service design for quality evaluation of design patterns	
 
 GS3:			a bayesian approach for the detection of code and design smells	
-				the relationship between design patterns and code smells: an exploratory study	
+				more: a multi-objective refactoring recommendation approach to introducing design patterns and fixing code smells	
 
 GS4:			ids: an immune-inspired approach for the detection of software design smells	
-				the relationship between design patterns and code smells: an exploratory study	
+				on the design of a bioacoustic sensor for the early detection of the red palm weevil	
 
 GS5:			bad-smell prediction from software design model using machine learning techniques	
-				learnable evolution model: evolutionary processes guided by machine learning	
+				code review analysis of software system using machine learning techniques	
 
 GS6:			smurf: a svm-based incremental anti-pattern detection approach	
-				pattern-based design evolution using graph transformation	
+				smurf: a svm-based incremental anti-pattern detection approach	
 
 GS7:			can i clone this piece of code here?	
 				deep learning code fragments for code clone detection	
 
 GS8:			support vector machines for anti-pattern detection	
-				esvm: evolutionary support vector machine for automatic feature selection and classification of microarray data	
+				support vector machines for anti-pattern detection	
 
 GS9:			experience report: evaluating the effectiveness of decision trees for detecting code smells	
-				the evolution and impact of code smells: a case study of two open source systems	
+				deep learning code fragments for code clone detection	
 
 GS10:			code smell severity classification using machine learning techniques	
-				clonewise – detecting package-level clones using machine learning	
+				code review analysis of software system using machine learning techniques	
 
 GS11:			adaptive detection of design flaws	
-				using history information to improve design flaws detection	
+				adaptive detection of design flaws	
 
 GS12:			bdtex: a gqm-based bayesian approach for the detection of antipatterns	
-				empirically based evolution of a variability management approach at uml class level	
+				search-based web service antipatterns detection	
 
 GS13:			comparing and experimenting machine learning techniques for code smell detection	
-				deep learning code fragments for code clone detection	
+				code review analysis of software system using machine learning techniques	
 
 GS14:			deep learning code fragments for code clone detection	
 				deep learning code fragments for code clone detection	
 
 GS15:			classification model for code clones based on machine learning	
-				clonewise – detecting package-level clones using machine learning	
+				deep learning code fragments for code clone detection	
 

@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2011d89f-f9ad-49c2-87cd-b5d0428a8ceb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/11.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/12.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/11.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/12.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" beforeDir="false" afterPath="$PROJECT_DIR$/files-qgs/azeem-review/QGS.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata-enrichment/txt/8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files-qgs/azeem-review/qgs-txt/metadata/txt/8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/manual-exit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/manual-exit.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exits/result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exits/sentences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/exits/sentences.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585587992645</updated>
-      <workItem from="1585588003310" duration="6455000" />
+      <workItem from="1585588003310" duration="7486000" />
     </task>
     <servers />
   </component>

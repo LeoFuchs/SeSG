@@ -1,175 +1,253 @@
 title
-A qualitative study of secondary school teachers’ perception of social network analysis metrics in the context of alcohol consumption among adolescents
-The impact of design ventilation rates on the indoor air quality in residential buildings: An Italian case study
-The co-evolution of test maintenance and code maintenance through the lens of fine-grained semantic changes
-A study on low complexity models to predict flaws in the Linux source code
-Synergies and conflicts among software quality attributes and bug fixes
-Relationship between design and defects for software in evolution
-Model-Driven reverse engineering of open source systems
-Collaborative ontology evolution and data quality - An empirical analysis
-The evolution of design pattern grime: An industrial case study
-Infrastructure based on template engines for automatic generation of source code for self-Adaptive software domain
-On the implementation of dynamic software product lines: A preliminary study
-An exploratory study of api changes and usages based on apache and eclipse ecosystems
-MOWGLI: prediction of protein–MannOse interacting residues With ensemble classifiers usinG evoLutionary Information
-Medicinal Chemistry Projects Requiring Imaginative Structure-Based Drug Design Methods
+Application framework for forest surveillance and data acquisition using unmanned aerial vehicle system
+Unmanned aerial vehicle surveillance system (UAVSS) for forest surveillance and data acquisition
+On stochastic sensor network scheduling for multiple processes
+Integrated environmental assessment (IEA) of groundwater depletion in Ardebil plain for management solutions
+Fault detection and explanation through big data analysis on sensor streams
+Improved query reformulation for concept location using CodeRank and document structures
+Control Software for TOF-SIMS Based on LabVIEW Object Oriented Programming
+Modulation and modeling of monoclonal antibody N-linked glycosylation in mammalian cell perfusion reactors
+Multi-scale integrated analysis of charcoal production in complex social-ecological systems
+Energy reduction platform based on occupant behavior pattern detection in enhanced living environments
+Search-Based Web Service Antipatterns Detection
+Increasing the temporal resolution of direct normal solar irradiance forecasted series
+Scope-aware useful cache block analysis for data cache related preemption delay
+Exploring performance and energy tradeoffs for irregular applications: A case study on the Tilera many-core architecture
+MORE: A multi-objective refactoring recommendation approach to introducing design patterns and fixing code smells
+Proceedings - Asia-Pacific Software Engineering Conference, APSEC
+Industrial Base Sustainment through Risk Modeling with Model-Based Systems Engineering Applications
+The unfinished health agenda: Neonatal mortality in Cambodia
+Code review analysis of software system using machine learning techniques
+Unsupervised learning based approach for plagiarism detection in programming assignments
+An accurate and fast trace-aware performance estimation model for prioritized MPSoC bus with multiple interfering bus-masters
+Heterogeneous Opcode Space for Metamorphic Malware Detection
+Predicting defect of software system
+Machine learning strategies for temporal analysis of software clone evolution using software metrics
+Prediction &amp; assessment of change prone classes using statistical &amp; machine learning techniques
+Cached: Identifying cache-based timing channels in production software
+Traffic accidents analysis using self-organizing maps and association rules for improved tourist safety
+Development of thunderstorm monitoring technologies and algorithms by integration of radar, sensors, and satellite images
+Development of a fracture recognition system to read off experimental data from petrographic thin section images
+Systems analysis uncovers inflammatory Th/Tc17-driven modules during acute GVHD in monkey and human T cells
+Applications of design patterns and data mining algorithms in software development
+Service Usage Classification with Encrypted Internet Traffic in Mobile Messaging Apps
+A Novel and Intelligent Home Monitoring System for Care Support of Elders with Cognitive Impairment
+Efficient 2-Body Statistics Computation on GPUs: Parallelization beyond
 Deep learning code fragments for code clone detection
-The relationship between design patterns and code smells: An exploratory study
-Modeling of information systems as systems of systems through DSM
-Multi-level formation of complex software systems
-Multi-criteria code refactoring using search-based software engineering: An industrial case study
-Using cohesion and coupling for software remodularization: Is it enough?
-DmS-Modeler: A tool for modeling decision-making systems for self-adaptive software domain
-Application of GA-MLR for QSAR modeling of the arylthioindole class of tubulin polymerization inhibitors as anticancer agents
-Cost-effective evolution of research prototypes into end-user tools: The Mach case study
-A tale of two mobile learning journeys with smartphones and tablets: The interplay of technology and implementation change
-The evolution of e-learning platforms from content to activity based learning: The case of Learn@WU
-Evaluating the effort of composing design models: a controlled experiment
-Proceedings - 41st Euromicro Conference on Software Engineering and Advanced Applications, SEAA 2015
-Consistency checking of UML class and sequence diagrams
-An effective approach using dissimilarity measures to estimate software code clone
-Extract Package Refactoring in ARIES
-Ontology-based feature modeling: An empirical study in changing scenarios
-Punctuated equilibrium in the large-scale evolution of programming languages
-Exploring the synergies between join point interfaces and feature-oriented programming
-Learning from optimization: A case study with apache ant
-Mixing of join point interfaces and feature-oriented programming for modular software product line
-The effect of refactoring on change and fault-proneness in commercial C# software
-An experimental investigation on the innate relationship between quality and refactoring
-TADSim: Discrete event-based performance prediction for temperature-accelerated dynamics
-A tale of two mobile learning journeys with smartphones and tablets: The interplay of technology and implementation change
-Model-driven reverse engineering of open source systems
-Empirically based evolution of a variability management approach at UML class level
-Model-driven reverse engineering of open source systems
-2013 3rd International Conference on Advanced Materials and Information Technology Processing, AMITP 2013
-Methodbook: Recommending move method refactorings via relational topic models
-2013 International Conference on Communication Technology, ICCT 2013
-13th International Conference on Space Operations, SpaceOps 2014
-GCad: A near-miss clone genealogy extractor to support clone evolution analysis
-Behavior evolution in Tomb Raider Underworld
-Analyzing software quality evolution using metrics: An empirical study on open source software
-The ESA STE-QUEST mission study - Space mission design to test Einstein's Equivalence Principle
-Using structural and semantic measures to improve software modularization
-OBEY: Optimal batched refactoring plan execution for class responsibility redistribution
-UML design pattern metamodel-level constraints for the maintenance of software evolution
-Design of a medium voltage protection device using system simulation approaches: A case study
-Proceedings of the 7th International Workshop on Variability Modelling of Software-Intensive Systems, VaMoS 2013
-Class schema evolution for persistent object-oriented software: Model, empirical study, and automated support
-A multiple case study of design pattern decay, grime, and rot in evolving software systems
-Clonewise – Detecting package-level clones using machine learning
-Test-to-code traceability: Why and how?
-4th International Conference on Information Computing and Applications, ICICA 2013
-Homogenization of vehicle fleet frontal crash pulses from 2000-2010
-Supporting extract class refactoring in eclipse: The ARIES project
-On the analysis of evolution of software artefacts and programs
-An analysis of anti-micro-patterns effects on fault-proneness in large Java systems
-The IFC standard - A review of history, development, and standardization
-Using software metrics for automatic software design improvement
-Supporting collaborative work by preserving model meaning when merging graphical models
-SCOTCH: Test-to-code traceability using slicing and conceptual coupling
-32nd International Conference on Information System 2011, ICIS 2011, Volume 4
-32nd International Conference on Information System 2011, ICIS 2011, Volume 3
-32nd International Conference on Information System 2011, ICIS 2011, Volume 1
-Data-driven synthesis for object-oriented frameworks
-Towards a classification of logical dependencies origins: A case study
-Causes of premature aging during software development: An observational study
-An empirical study on object-oriented metrics and software evolution in order to reduce testing costs by predicting change-prone classes
-Phylogenetic analysis and protein modeling of Plasmodium falciparum aspartate transcarbamoylase (ATCase)
-Leveraging design structure matrices in software design education
-Sub-graph mining: Identifying micro-architectures in evolving object-oriented software
-Aspect-based dynamic software updating: A model and its empirical evaluation
-Automatically identifying changes that impact code-to-design traceability during evolution
-Learning from a teacher's perspective
-Software re-modularization based on structural and semantic metrics
-Synthesis of object-oriented software structural models using quality metrics and co-evolutionary genetic algorithms
-SOFTVIS'10 - Proceedings of the 2010 International Symposium on Software Visualization, Co-located with VisWeek 2010
-Evaluation of Novel Approaches to Software Engineering - 3rd and 4th International Conferences, ENASE 2008/2009, Revised Selected Papers
-Object oriented design pattern decay: A taxonomy
-Hierarchical clustering for adaptive refactorings identification
-Measuring class importance in the context of design evolution
-Are popular classes more defect prone?
-Design pattern evolutions in QVT
-LOFAR and the low frequency universe. Probing the formation and evolution of massive galaxies, AGN and clusters
-The evolution and impact of code smells: A case study of two open source systems
-2009 IEEE International Conference on Software Maintenance, ICSM 2009 - Proceedings of the Conference
-Tracking design smells: Lessons from a study of God classes
+Expression of the NMDA receptor subunit GluN3A (NR3A) in the olfactory system and its regulatory role on olfaction in the adult mouse
+Wavelet-based unsupervised learning method for electrocardiogram suppression in surface electromyograms
+"The role of ecological networks in ""Environmental logic-identity forming"" design of urban regions, case study: Isfahan poladshahr urban region"
+ViPS: Visual processing system for medical imaging
+Knowledge transfer: Manageable in crisis?
+"A ""fast Data"" architecture: Dashboard for anomalous traffic analysis in data networks"
+Combining glass box and black box evaluations in the identification of heart disease risk factors and their temporal relations from clinical records
+A novel 3D method of locomotor analysis in adult zebrafish: Implications for automated detection of CNS drug-evoked phenotypes
+Automated memory leak diagnosis by regression testing
+Interfacing the hardware API with a feature-based operating system family
+Analyzing incoming workload in Cloud business services
+Density-based parallel skin lesion border detection with webCL
+Automated measurement of mouse social behaviors using depth sensing, video tracking, and machine learning
+Design and Evaluation of an Intelligent Remote Tidal Volume Variability Monitoring System in E-Health Applications
+Unsupervised seismic facies analysis technology based on SOM and PSO
+MATLAB-based automated patch-clamp system for awake behaving mice
+Software Engineering Meets Control Theory
+Research and Development of Semantics-based Sharable Clinical Pathway Systems
+The methyl binding domain 3/nucleosome remodelling and deacetylase complex regulates neural cell fate determination and terminal differentiation in the cerebral cortex
+On applying machine learning techniques for design pattern detection
+A framework for Discrete Events Systems enactment
+A proposed method for design of test cases for economic analysis in power systems
+CbGRiTS: Cerebellar gene regulation in time and space
+Human behavior inspired obstacle avoidance &amp; road surface quality detection for autonomous bicycles
+The application of a sequence alignment method to the creation of typologies of tourist activity in time and space
+Simple and Efficient Method for Region of Interest Value Extraction from Picture Archiving and Communication System Viewer with Optical Character Recognition Software and Macro Program
+Technology feasibility and production driver study in the first integrated shale gas block in sichuan basin
+SimTCM: A human patient simulator with application to diagnostic accuracy studies of Chinese medicine
+A neighborhood statistics model for predicting stream pathogen indicator levels
+Strategy for integrated surveying techniques finalized to interpretive models in a Byzantine Church, Mesopotam, Albania
+Design of a microscopic electrical impedance tomography system for 3D continuous non-destructive monitoring of tissue culture
+Logic programming to predict cell fate patterns and retrodict genotypes in organogenesis
+Exercising High-Level Parallel Programming on Streams: A Systems Biology Use Case
+Automated touch screen device for recording complex rodent behaviors
+Interactive XCMS online: Simplifying advanced metabolomic data processing and subsequent statistical analyses
+Detecting performance anti-patterns for applications developed using object-relational mapping
+A support vector machine model for intelligent selection of data representations
+Combining evolutionary information extracted from frequency profiles with sequence-based kernels for protein remote homology detection
+Modeling complex metabolic reactions, ecological systems, and financial and legal networks with MIANN models based on Markov-Wiener node descriptors
+SmartDSM: A layered model for development of demand side management in smart grids
+6th International Conference on Computational Collective Intelligence, ICCCI 2014
+11th Joint Conference on Knowledge-Based Software Engineering, JCKBSE 2014
+2013 International Conference on Information and Communication Technology for education, ICTE 2013
+Automatic detection of performance anti-patterns in inter-component communications
+Challenges and technical requirements for multi-beam mask writer development
+Analysis of a circular microstrip antenna on isotropic or uniaxially anisotropic substrate using neurospectral approach
+Strategic analysis on the Multan handicrafts
+Dynamic verification of mashups of service-oriented things through a mediation platform
+The climate of daily precipitation in the Alps: Development and analysis of a high-resolution grid dataset from pan-Alpine rain-gauge data
+Optimizing the block I/O subsystem for fast storage devices
+Investigating the interactive mechanisms between surface water and groundwater over the Jhuoshuei river basin in central Taiwan
+The transcriptional signatures of Sodalis glossinidius in the Glossina palpalis gambiensis flies negative for Trypanosoma brucei gambiense contrast with those of this symbiont in tsetse flies positive for the parasite: Possible involvement of a Sodalis-hosted prophage in fly Trypanosoma refractoriness?
+Why do i have to write that?: Compositionists identify disconnects between student and instructor conceptions of research writing that can inform teaching
+Contextual analysis of program logs for understanding system behaviors
+Improving SOA antipatterns detection in Service Based Systems by mining execution traces
+A 995Mpixels/s 0.2nJ/pixel fractional motion estimation architecture in HEVC for Ultra-HD
+Multisensory integration of dynamic emotional faces and voices: Method for simultaneous EEG-fMRI measurements
+A simplified and accurate model of power-performance efficiency on emergent GPU architectures
+Trends in health-related quality of life among adolescents in the united states, 2001-2010
+Automated Design of a Computer Vision System for Visual Food Quality Evaluation
+Predicting bugs in source code changes with incremental learning method
+IMHere: A novel mHealth system for supporting self-care in management of complex and chronic conditions
+Effect of ECAP-based choice of stimulation rate on speech-perception performance
+Controlling practitioner-patient relationships in acupuncture trials: A systematic review and meta-regression
+Nutritionally Driven Differential Gene Expression Leads to Heterochronic Brain Development in Honeybee Castes
+Dietary practices during the Middle Neolithic: New data from the site of Pontcharaud 2 (Puy-de-Dame, Auvergne, France
+On the design of a bioacoustic sensor for the early detection of the red palm weevil
+Research on dynamic change of landscape pattern and characteristics based on GIS and RS in Jinan city
+CG&amp;A with eye tracking for cognitive behavior analysis and psychoanalysis
+High-resolution computational imaging of leaf hair patterning using polarized light microscopy
+Rice heterotrimeric G-protein alpha subunit (RGA1): In silico analysis of the gene and promoter and its upregulation under abiotic stress
+A novel approach for detecting smart camouflaging worm
+15th International Conference on Human-Computer Interaction, HCI International 2013
+International Conference on Information Systems, ICIS 2013, Volume 2
+International Conference on Information Systems, ICIS 2013, Volume 3
+International Conference on Information Systems, ICIS 2013, Volume 5
+International Conference on Information Systems, ICIS 2013, Volume 4
+One image fibrescopic fringe projection with inverse approach
+Transcriptional analysis of drought-induced genes in the roots of a tolerant genotype of the common bean (Phaseolus vulgaris L.)
+Short range precipitation forecasts evaluation of WRF model over IRAN
+Social patterns and trends
+Theoretical performance simulation of a high pressure agro-forestry swirl nozzle
+The UPBEAT depression and coronary heart disease programme: Using the UK medical research council framework to design a nurse-led complex intervention for use in primary care
+Promise of a low power mobile CPU based embedded system in artificial leg control
+SMURF: A SVM-based incremental anti-pattern detection approach
+A cloud service design for quality evaluation of design patterns
+Interface design principles for usable decision support: A targeted review of best practices for clinical prescribing interventions
+Assessment of time delays and synchronization errors in real-time INS/GNSS systems and its impact on the navigation performance
+Collaborative learning in teaching: A trajectory to expertise in pedagogical reasoning
+Whisper: Tracing the spatiotemporal process of information diffusion in real time
+Self-adaptive cloud capacity planning
+Support vector machines for anti-pattern detection
+Using Pajek and centrality analysis to identify a social network of construction trades
+GPU-FS-kNN: A Software Tool for Fast and Scalable kNN Computation Using GPUs
+A forecast-based STDP rule suitable for neuromorphic implementation
+FPGA based system for automatic cDNA microarray image processing
+Two-dimensional kinetic analyses of swallowing using videofluorographic images of Dysphagia patients
+A real-time online drought broadcast system for monitoring soil moisture index
+Development of the workflow kine systems for support on KAIZEN
+Identifying distributed features in SOA by mining dynamic call trees
+Development of an automatic recognition software of left ventricle by time series processing echocardiograms and application to disease heart
+A new ensemble-feature-selection framework for intrusion detection
+Making multiagent system designs reusable: A model-driven approach
+Proceedings of 2011 International Conference on Machine Learning and Cybernetics, ICMLC 2011
+Proceedings of 2011 International Conference on Machine Learning and Cybernetics, ICMLC 2011
+Proceedings of 2011 International Conference on Machine Learning and Cybernetics, ICMLC 2011
+Proceedings of 2011 International Conference on Machine Learning and Cybernetics, ICMLC 2011
+Direct biochemical measurements of signal relay during dictyostelium development
+Automatic extraction of metadata from scientific publications for CRIS systems
+Unmixing dynamic fluorescence diffuse optical tomography images with independent component analysis
+Ages of celiac disease: From changing environment to improved diagnostics
+Ψ-RA: A parallel sparse index for genomic read alignment
+Testing of CMOS driven vlsi interconnects
+Possibilities of application of relative openness in secondary forest opening of slope forests in Croatia
+A normative approach to multi-agent systems for intelligent buildings
+Development of pattern recognition software for tracks of ionizing radiation in medipix2-based (TimePix) pixel detector devices
+Comparative analysis of different alginate-based immobilization systems for encapsulation of polyphenolic antioxidants from red raspberry leaves (Rubus idaeus L.) by electrostatic extrusion
+Development of a miniaturized DNA microarray for identification of 66 virulence genes of Legionella pneumophila.
+Proceedings of the ACM SIGKDD Workshop on Intelligence and Security Informatics 2010, ISI-KDD 2010
+Reproducibility and validity of a Chinese food frequency questionnaire
+Capacitive proximity sensor design tool based on finite element analysis
+An integer programming based approach for verification and diagnosis of workflows
+Behavioral profiles-a way to model and validate program behavior
+Computer aided casting simulation, analysis and pattern cost estimation
+Real-time finger-controlled navigation system using laser speckle patterns
+Competitive multi-immunosensing of pesticides based on the particle manipulation with negative dielectrophoresis
+Automating context description for software formal verification
+Performance of some biotic indices in the real variable world: A case study at different spatial scales in North-Western Mediterranean Sea
+Systems biology approaches and tools for analysis of interactomes and multi-target drugs
+CSF flow dynamics at the craniovertebral junction studied with an idealized model of the subarachnoid space and computational flow analysis
+Service integrated housing for Australians in later life
+A proposed quality assurance system to support quality analysts for process and products verifications
 Graph-based mining of multiple object usage patterns
-Software-kernel of software network and S-model approximation during software growth
-Toward automatic artifact matching for tool evaluation
-Constructivist learning and teaching of optics concepts using ICT tools in Greek primary school: A pilot study
-Recovering the evolution stable part using an ECGM algorithm: Is there a tunnel in mozilla?
-A case study of source code evolution
-Generation of a virtual reality-based automotive driving training system for CAD education
-The complex software network evolution of Java Development Kits: topological properties and design principles
-An empirical study of the relationships between design pattern roles and class change proneness
-Software visualization with audio supported cognitive glyphs
-AnEnPi: Identification and annotation of analogous enzymes
-Do software libraries evolve differently than applications?: An empirical investigation
-Evolutionary optimisation of composite structures
-The effectiveness of software metrics in identifying error-prone classes in post-release software evolution process
-Prospects for observations of transient UV Events with the TAUVEX UV observatory
+Optimization of rotary furnace parameters using NGOT
+Assisted history matching in an offshore turbidite reservoir with active reservoir management
+Are mediterranean coastal regions more exposed to land degradation in recent years?
+Collaborative learning in teaching: A trajectory to expertise in pedagogical reasoning
+Measuring the quality of urban environments: A need-based micro-simulation approach
+A texture segmentation prototype for industrial inspection applications based on fuzzy grammar
+Vision based interface system for hands free control of an intelligent wheelchair
+Video imaging system for automated shaping and analysis of complex locomotory behavior
+Unified framework for developing testing effort dependent software reliability growth models
+Modeling genomic data with type attributes, balancing stability and maintainability
+Symbolic mining of temporal specifications
+Smart assistance in ECU design and integration
+ECD++ A DEVS based real-time simulator for embedded systems
+Protein microarray technology
 Identifying architectural change patterns in object-oriented systems
-FFT-split-operator code for solving the Dirac equation in 2+1 dimensions
-Application design for wearable computing
-An empirical study on the evolution of design patterns
-3rd International IEEE Workshop on Software Evolvability 2007, SE
-Generation of an automobile driving training interactive environment
-Using concept analysis to detect co-change patterns
-BEAST: Bayesian evolutionary analysis by sampling trees
-The evolution of agency: Spectra of bioagency and cyberagency
-ESVM: Evolutionary support vector machine for automatic feature selection and classification of microarray data
-Pattern-based design evolution using graph transformation
-An empirical study of the bad smells and class error probability in the post-release object-oriented system evolution
-Differencing logical UML models
-From genes to functional classes in the study of biological systems
-Using concept analysis to detect co-change patterns
-Scale free in software metrics
-Infrastructure for dynamic reconfigurable systems: Choices and trade-offs
-Understanding the evolution and co-evolution of classes in object-oriented systems
-MIPRO 2006 - 29th International Convention: Microelectronics, Electronics and Electronic Technologies, MEET, Hypermedia and Grid Systems HGS
-MIPRO 2006 - 29th International Convention: Computers in Technical Systems and Intelligent Systems, CTS and CIS
-MIPRO 2006 - 29th International Convention: Telecommunications and Information, CTI
-MIPRO 2006 - 29th International Convention: Digital Economy - 3rd ALADIN, Information Systems Security and Business Intelligence Systems
-MIPRO 2006 - 29th International Convention: Computers in Education, CE
-A case study on structural characteristics of objectoriented design and its stability
-Classbox/J: Controlling the scope of change in Java
-Classbox/J: Controlling the scope of change in java
-22nd Annual conference of the Australian Society for Computers in Tertiary Education, ASCILITE 2005
-Analyzing the evolutionary history of the logical design of object-oriented software
-Confronting prospective teachers' ideas of evolution and scientific inquiry using technology and inquiry-based tasks
-SNPHunter: A bioinformatic software for single nucleotide polymorphism data acquisition and management
-An empirical study of system design instability metric and design evolution in an agile software process
-Understanding class evolution in object-oriented software
-Understanding phases and styles of object-oriented systems' evolution
-Defect frequency and design patterns: An empirical study of industrial code
-A controlled experiment investigation of an object-oriented design heuristic for maintainability
-Using history information to improve design flaws detection
-An interactive environment for beginning Java programmers
-An alternative decoupled single-input fuzzy sliding mode control with applications
-Software systems as complex networks: Structure, function, and evolvability of software collaboration graphs
-Applying formal concepts analysis to the construction and evolution of domain frameworks
-Using dynamic information for the iterative recovery of collaborations and roles
-Comparison of minisatellites
-Classification of protein disulphide-bridge topologies
-Evaluating the reverse engineering capabilities of web tools for understanding site content and structure: A case study
-PIROL: A case study for multidimensional separation of concerns in software engineering environments
-Reflection and Software Engineering
-PIROL: A case study for multidimensional separation of concerns in software engineering environments
-Empirical study of object-oriented system evolution
-Learnable evolution model: evolutionary processes guided by machine learning
-Predicting class libraries interface evolution: An investigation into machine learning approaches
-Restructuring legacy C code into C++
-Maintaining traceability during object-oriented software evolution: a case study
-Genome complexity, robustness and genetic interactions in digital organisms
-Using neural networks and genetic algorithms to enhance performance in an electronic nose
-Empirical observations on object evolution
-Proceedings - 6th Asia Pacific Software Engineering Conference, APSEC 1999
-A neural network model approach to the study of human TAP transporter.
-1st European Joint Conferences on Theory and Practice of Software, ETAPS 1998 associated with International Workshop on Advanced Communication Services, ACOS 1998, International Workshop on Visualization Issues for Formal Methods, VISUAL 1998, 2nd International Workshop on Advanced Intelligent Networks, AIN 1997
-An empirical study of the use of speech and gestures in human-computer communication
-Proceedings of the 11th ACM SIGPLAN Conference on Object-Oriented Programming, Systems, Languages, and Applications, OOPSLA 1996
-Solving microstructure electrostatics on a proposed parallel computer
-Object-extending class transformations
-6th International Conference on Advanced Information Systems Engineering, CAiSE 1994
-Network operation and support systems
-DEMETER: A CASE STUDY OF SOFTWARE GROWTH THROUGH PARAMETERIZED CLASSES.
+Wavelet-based time-frequency analysis technology for short duration disturbances evaluation in power system
+"Methodology capture: Discriminating between the ""best"" and the rest of community practice"
+Pulsed neutron powder diffraction for materials science
+Facilitating the development of controlled vocabularies for metabolomics technologies with text mining
+Automatic independent component labeling for artifact removal in fMRI
+Power quality event evaluation based on time-frequency transformation
+Laboratory studies investigating the processes leading to discolouration in water distribution networks
+Computerized advice on drug dosage to improve prescribing practice
+Discovery of process models from data and domain knowledge: A rough-granular approach
+Detection of bleeding patterns in WCE video using multiple features
+Chapter 1 Overview: Developments in DNA Sequencing
+Intervening in emerging nanotechnologies A CTA of Lab-on-a-chip technology
+Science and engineering: A collusion of cultures
+Sequence-level population simulations over large genomic regions
+Pattern-driven architectural partitioning balancing functional and non-functional requirements
+Compositional simulation of real-time components
+Classification of afferent signals recorded with a single cuff electrode
+Motor function following multilevel botulinum toxin type A treatment in children with cerebral palsy
+High-performance complex event processing over streams
+Detection and analysis of distribution power quality disturbance based on complex wavelet transform and RBF network
+The development of an automated method for analyzing communication rate in augmentative and alternative communication
+The assessment of acute load and contractility changes by left ventricular pressure measurements
+A Visualization System for Space-Time and Multivariate Patterns (VIS-STAMP)
+Confronting hysteresis: Wood based river rehabilitation in highly altered riverine landscapes of south-eastern Australia
+The role of water in drug-receptor interactions
+Public private partnership in the Dutch polders
+Hidden patterns of play interaction in soccer using SOF-CODER
+Classification of Drosophila embryonic developmental stage range based on gene expression pattern images.
+Adaptive detection of design flaws
+Visualization-based analysis of quality for large-scale software systems
+Disaster hardening for software systems
+Dynamic analysis of object-oriented programs using state machines and ECA rules
+Real time, dynamic target tracking using image motion
+Mechanical cleavage of complex microstructured fibers
+Discrimination
+Selection of relevant duplicate criteria in the monitoring of Staphylococcus aureus methicillin resistance trends
+Use of design pattern layout for automated metrology recipe generation
+Analyzing gene expression time-courses
+The electromagnetic problem of interpanel gaps in reflector antennas
+Angiogenesis is required for successful bone induction during distraction osteogenesis
+Hardware-assisted visibility sorting for unstructured volume rendering
+Adaptive recognition of software-design shortcomings
+In silico microdissection of microarray data from heterogeneous cell populations
+A comprehensive evaluation of multicategory classification methods for microarray gene expression cancer diagnosis
+"Assessing team performance in the operating room: Development and use of a ""black-box"" recorder and other tools for the intraoperative environment"
+Web-based system development: Status in the Norwegian IT organizations
+The electromagnetic problem of interpanel gaps in reflector antennas
+Design and testing of a new injection approach for liquid composite molding
+Acoustic Emission (AE) evaluation of fiberglass insulation material
+Noncooperative breeding in the California Scrub-Jay
+Characterization of cardiovascular liver motion for the eventual application of elasticity imaging to the liver in vivo
+Using a communication architecture specification in an application-driven retargetable prototyping platform for multiprocessing
+Emergency department use among Michigan children with special health care needs: An introductory study
+Pseudo-periodic partitions of biological sequences
+A compiler-based approach for dynamically managing scratch-pad memories in embedded systems
+Integrated wavelet processing and spatial statistical testing of fMRI data
+Array Regrouping and Its Use in Compiling Data-Intensive Embedded Applications
+21st International Communications Satellite Systems Conference and Exhibit, ICSSC 2003
+Machine vision inspection for polished stone manufacture
+Hydrocarbon systems of Northeastern Venezuela: Plate through molecular scale-analysis of the genesis and evolution of the Eastern Venezuela Basin
+Using the observer design pattern for implementation of data flow analyses
+Two controlled experiments assessing the usefulness of design pattern documentation in program maintenance
+Rapid simulator development for multicast protocol analysis
+PlexinA2 and semaphorin signaling during cardiac neural crest development
+The infant lung function model: A mechanical analogue to test infant lung function equipment
+Spatio-temporal directional analysis of 4D echocardiography
+Effectiveness of a co-ordinated nation-wide programme to improve influenza immunisation rates in The Netherlands
+Portable and programmable clinical EOG diagnostic system
+Knowledge discovery and knowledge validation in intensive care

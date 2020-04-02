@@ -1,0 +1,65 @@
+strict graph "Snowballing Graph" {
+	01 [shape=circle]
+	02 [shape=circle]
+	03 [shape=circle]
+	04 [shape=circle]
+	05 [shape=circle]
+	06 [shape=circle]
+	07 [shape=circle]
+	08 [shape=circle]
+	09 [shape=circle]
+	10 [shape=circle]
+	11 [shape=circle]
+	12 [shape=circle]
+	13 [shape=circle]
+	14 [shape=circle]
+	15 [shape=circle]
+	01 -- 06
+	01 -- 08
+	01 -- 12
+	02 -- 03
+	04 -- 03
+	06 -- 08
+	06 -- 12
+	09 -- 03
+	09 -- 06
+	10 -- 01
+	10 -- 05
+	10 -- 06
+	10 -- 08
+	10 -- 12
+	10 -- 13
+	12 -- 03
+	13 -- 01
+	13 -- 03
+	13 -- 06
+	13 -- 08
+	13 -- 11
+	13 -- 12
+	14 -- 07
+	15 -- 07
+	01 [color=red shape=circle]
+	03 [color=red shape=circle]
+	06 [color=red shape=circle]
+	08 [color=red shape=circle]
+	11 [color=red shape=circle]
+	12 [color=red shape=circle]
+	14 [color=red shape=circle]
+	10 [color=red shape=circle]
+	13 [color=red shape=circle]
+	02 [color=red shape=circle]
+	04 [color=red shape=circle]
+	09 [color=red shape=circle]
+	05 [color=red shape=circle]
+	07 [color=red shape=circle]
+	15 [color=red shape=circle]
+	01 [color=blue shape=circle]
+	03 [color=blue shape=circle]
+	06 [color=blue shape=circle]
+	08 [color=blue shape=circle]
+	11 [color=blue shape=circle]
+	12 [color=blue shape=circle]
+	14 [color=blue shape=circle]
+	label="\nGraph with search results for min_df = 0.4, number_topics = 5, number_words = 7 and enrichment = 3.\n Blue nodes were found in the search step in digital bases, red nodes were found through snowballing and black nodes were not found."
+	fontsize=12
+}
