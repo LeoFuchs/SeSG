@@ -1,7 +1,6 @@
 # encoding: utf-8
 import torch
 import Levenshtein
-import csv
 import pandas as pd
 import numpy as np
 import graphviz
@@ -18,7 +17,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.datasets import load_files
 from fuzzywuzzy import process
-from pytorch_transformers import BertTokenizer, BertForMaskedLM
 from nltk.stem import LancasterStemmer
 from graphviz import Graph
 from pyscopus import Scopus
@@ -102,7 +100,7 @@ def lda_algorithm(tf, lda_iterations, number_topics):
 
 
 def string_formulation(model, feature_names, number_words, number_topics, similar_words, levenshtein_distance,
-                       pub_year_one, pub_year_two, bert_model, bert_tokenizer):
+                       pub_year_one, pub_year_two, bert_model, bert_tokenizer, author):
     """Formulate the search string based on the input parameters.
 
     Args:
@@ -122,6 +120,7 @@ def string_formulation(model, feature_names, number_words, number_topics, simila
         pub_year_two: Lower year delimiter in the search string.
         bert_tokenizer: BERT Tokenizer.
         bert_model: BERT Model.
+        author: Name of the Object of study.
 
     Return:
         message: Search string to be used.
@@ -164,7 +163,7 @@ def string_formulation(model, feature_names, number_words, number_topics, simila
 
                 if " " not in feature_names[i]:
                     try:
-                        similar_word = enrichment_words(feature_names[i], bert_model, bert_tokenizer)
+                        similar_word = enrichment_words(feature_names[i], bert_model, bert_tokenizer, author)
 
                         # Error if the word searched it's not presented in the tokens
                         if similar_word == ['error']:
@@ -199,7 +198,7 @@ def string_formulation(model, feature_names, number_words, number_topics, simila
                                                            range(0, similar_words))
 
                     except Exception as e:
-                        print ("Exception: " + str(e))
+                        print("Exception: " + str(e))
 
                 message += "\")"
 
@@ -228,15 +227,16 @@ def string_formulation(model, feature_names, number_words, number_topics, simila
         return message
 
 
-def enrichment_words(word, bert_model, bert_tokenizer):
+def enrichment_words(word, bert_model, bert_tokenizer, author):
     """Formulate the enrichment words for using in the search string.
 
         Args:
             word: Word that will be used to find as similar
-            bert_model: Bert Model loading with the choosed parametrers in main function.
+            bert_model: Bert Model loading with the choosed parameters in main function.
             bert_tokenizer: Bert Tokenizer used to create sentence tokenization via BERT.
+            author: Name of the Object of study.
         Return:
-            predicted_tokens: List with the enrichement words.
+            predicted_tokens: List with the enrichment words.
     """
 
     # Tokenize input
@@ -350,7 +350,7 @@ def scopus_search(string):
     try:
         search_df = scopus.search(string, count=results, view='STANDARD', type_=1)
     except Exception as e:
-        print ("Exception: " + str(e))
+        print("Exception: " + str(e))
         return -1
 
     pd.options.display.max_rows = 99999
@@ -362,10 +362,11 @@ def scopus_search(string):
     return int(len(search_df))
 
 
-def open_necessary_files():
+def open_necessary_files(author):
     """Open the files that will be used in the program.
 
     Args:
+        author: Name of the Object of study.
 
     Returns:
         qgs: All the names of the articles contained in the QGS.
@@ -387,7 +388,7 @@ def open_necessary_files():
     return qgs, gs, result_name_list, manual_comparation
 
 
-def similarity_score_qgs(qgs, result_name_list, manual_comparation):
+def similarity_score_qgs(qgs, result_name_list, manual_comparation, author):
     """It makes the automatic comparison between the Quasi-Gold Standard
         (QGS) and the results, obtaining the count of how many QGS
         articles are present in the result.
@@ -398,6 +399,7 @@ def similarity_score_qgs(qgs, result_name_list, manual_comparation):
             in the search result in Scopus.
         manual_comparation: List for manual comparison of results
             found with results initially stored.
+        author: Name of the Object of study.
 
     Returns:
         counter_improvement: Counter of articles contained in the
@@ -456,7 +458,7 @@ def similarity_score_qgs(qgs, result_name_list, manual_comparation):
     return counter_improvement
 
 
-def similarity_score_gs(gs, result_name_list, manual_comparation):
+def similarity_score_gs(gs, result_name_list, manual_comparation, author):
     """It makes the automatic comparison between the Gold Standard
         (GS) and the results, obtaining the count of how many GS
         articles are present in the result.
@@ -467,6 +469,7 @@ def similarity_score_gs(gs, result_name_list, manual_comparation):
             in the search result in Scopus.
         manual_comparation: List for manual comparison of results
             found with results initially stored.
+        author: Name of the Object of study.
 
     Returns:
         counter_improvement: Counter of articles contained in the
@@ -552,10 +555,11 @@ def window(seq, n):
         yield result
 
 
-def snowballing():
+def snowballing(author):
     """Doing the snowballing of the articles presented in GS (Gold Standard).
 
    Args:
+       author: Name of the Object of study.
 
    Returns:
        title_list: List with the name of the GS articles.
@@ -628,7 +632,7 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
     # Initializing the graph with its respective nodes.
     g = Graph('Snowballing Graph', strict=True)
     for i in node_list:
-        g.node('%02d' % i, shape='circle')
+        g.node('%02d' % i, shape='circle', style='dashed')
 
     for edge in final_edges:
         g.edge('%02d' % edge[0], '%02d' % edge[1])
@@ -650,14 +654,16 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
                             final_list.append(j + 1)
                             flag = 1
     for k in final_list:
-        g.node('%02d' % k, shape='circle', color='red')
+        # Snowballing nodes (Red bold)
+        g.node('%02d' % k, shape='circle', style='bold')
 
     for i in results_list:
-        g.node('%02d' % i, shape='circle', color='blue')
+        # Search string nodes (Blue filled)
+        g.node('%02d' % i, shape='circle', style='filled')
 
     g.attr(label=r'\nGraph with search results for min_df = %0.1f, number_topics = %d, number_words = %d and '
-                 r'enrichment = %d.\n Blue nodes were found in the search step in digital bases, red nodes were found '
-                 r'through snowballing and black nodes were not found.'
+                 r'enrichment = %d.\n Filled nodes were found in the search step in digital bases, bold nodes were found '
+                 r'through snowballing and dashed nodes were not found.'
                  % (min_df, number_topics, number_words, enrichment))
     g.attr(fontsize='12')
 
@@ -669,12 +675,14 @@ def graph(results_list, title_list, adjacency_matrix, final_edges, min_df, numbe
     return len(final_list)
 
 
-def randomize_qgs(qgs_size, gs_size):
+def randomize_qgs(qgs_size, gs_size, author):
     """Randomizing the articles that will be present in QGS from GS.
 
     Args:
         qgs_size: QGS size used.
         gs_size: GS size used.
+        author: Name of the Object of study.
+
     Returns:
 
     """
@@ -692,7 +700,7 @@ def randomize_qgs(qgs_size, gs_size):
             if os.path.isfile(file_path):
                 os.unlink(file_path)
         except Exception as e:
-            print ("Exception: " + str(e))
+            print("Exception: " + str(e))
 
     folder_enrich = os.path.join(sys.path[0], 'files-qgs/%s-review/qgs-txt/metadata-enrichment/txt/' % author)
     for the_file in os.listdir(folder_enrich):
@@ -701,7 +709,7 @@ def randomize_qgs(qgs_size, gs_size):
             if os.path.isfile(file_path):
                 os.unlink(file_path)
         except Exception as e:
-            print ("Exception: " + str(e))
+            print("Exception: " + str(e))
 
     # Copy files from the GS folder to the QGS folder.
     for i in random_list:
@@ -727,7 +735,7 @@ def randomize_qgs(qgs_size, gs_size):
 
     gs.close()
 
-    with open(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author), mode='wr') as qgs:
+    with open(os.path.join(sys.path[0], 'files-qgs/%s-review/QGS.csv' % author), mode='w') as qgs:
 
         # Skipping the GS.csv line written 'title'.
         qgs.write('title')
@@ -738,99 +746,3 @@ def randomize_qgs(qgs_size, gs_size):
                 qgs.write(line)
 
     qgs.close()
-
-
-def main():
-    """Main function."""
-
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
-
-    global author
-
-    levenshtein_distance = 4
-    lda_iterations = 5000
-
-    min_df_list = [0.1, 0.2, 0.3, 0.4]
-    number_topics_list = [1, 2, 3, 4, 5]
-    number_words_list = [5, 6, 7, 8, 9, 10]
-    enrichment_list = [0, 1, 2, 3]
-
-    author = 'hosseini'
-    pub_year_one = 2016  # 0 = disable pub_year
-    pub_year_two = 0  # 0 = disable pub_year
-    qgs_size = 15
-    gs_size = 46
-
-    qgs_txt = 'files-qgs/%s-review/qgs-txt/metadata' % author
-
-    # Running CERMINE (Change the path to the .jar file and to the input folder)
-    # All the articles in .pdf formate were hidden due to their publication restrictions.
-    # print("Loading CERMINE...\n")
-    # cermine = "java -cp cermine-impl-1.14-20180204.213009-17-jar-with-dependencies.jar " \
-    #          "pl.edu.icm.cermine.ContentExtractor -path " \
-    #          "/home/fuchs/Documentos/SeSG/Files-QGS/revisao-%s/GS-pdf/ -outputs text" % author
-    # os.system(cermine)
-
-    print("Randomize QGS...\n")
-    randomize_qgs(qgs_size, gs_size)
-
-    print("Doing Snowballing...\n")
-    title_list, adjacency_matrix, final_edges = snowballing()
-
-    print("Loading BERT...\n")
-    # Load pre-trained model tokenizer (vocabulary).
-    bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
-    # Load pre-trained model (weights).
-    bert_model = BertForMaskedLM.from_pretrained('bert-base-uncased')
-    bert_model.eval()
-
-    with open(os.path.join(sys.path[0], 'exits/%s-result.csv' % author), mode='w') as file_output:
-
-        file_writer = csv.writer(file_output, delimiter=',')
-
-        file_writer.writerow(['min_df', 'Topics', 'Words', 'Similar Words', 'No. Results',
-                              'No. QGS', 'No. GS', 'No. Total'])
-
-        for min_df in min_df_list:
-            for number_topics in number_topics_list:
-                for number_words in number_words_list:
-
-                    print("Test with " + str(number_topics) + " topics and " + str(number_words) + " words in " + str(
-                        min_df) + " min_df:")
-                    print("\n")
-
-                    dic, tf = bag_of_words(min_df, qgs_txt)
-                    lda = lda_algorithm(tf, lda_iterations, number_topics)
-
-                    for enrichment in enrichment_list:
-                        string = string_formulation(lda, dic, number_words, number_topics, enrichment,
-                                                    levenshtein_distance, pub_year_one, pub_year_two,
-                                                    bert_model, bert_tokenizer)
-
-                        scopus_number_results = scopus_search(string)
-
-                        qgs, gs, result_name_list, manual_comparation = open_necessary_files()
-                        counter_one = similarity_score_qgs(qgs, result_name_list, manual_comparation)
-                        counter_two, list_graph = similarity_score_gs(gs, result_name_list, manual_comparation)
-
-                        counter_total = graph(list_graph, title_list, adjacency_matrix, final_edges,
-                                              min_df, number_topics, number_words, enrichment)
-
-                        file_writer.writerow(
-                            [min_df, number_topics, number_words, enrichment, scopus_number_results, counter_one,
-                             counter_two, counter_total])
-
-                        print("String with " + str(enrichment) + " similar words: " + str(string))
-                        print("Generating " + str(scopus_number_results) + " results with " +
-                              str(counter_one) + " of the QGS articles, " + str(counter_two) +
-                              " of the GS articles (without snowballing) and " + str(counter_total) +
-                              " of the GS articles (with snowballing).")
-                        print("\n")
-
-    file_output.close()
-
-
-if __name__ == "__main__":
-    main()
