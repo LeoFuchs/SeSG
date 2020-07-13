@@ -1,60 +1,40 @@
 QGS1:			ids: an immune-inspired approach for the detection of software design smells	
-				on the design of a bioacoustic sensor for the early detection of the red palm weevil	
 
-QGS2:			smurf: a svm-based incremental anti-pattern detection approach	
-				smurf: a svm-based incremental anti-pattern detection approach	
+QGS2:			can i clone this piece of code here?	
 
-QGS3:			adaptive detection of design flaws	
-				adaptive detection of design flaws	
+QGS3:			support vector machines for anti-pattern detection	
 
 QGS4:			bdtex: a gqm-based bayesian approach for the detection of antipatterns	
-				search-based web service antipatterns detection	
 
-QGS5:			deep learning code fragments for code clone detection	
-				deep learning code fragments for code clone detection	
+QGS5:			classification model for code clones based on machine learning	
 
 GS1:			code smell detection: towards a machine learning-based approach	
-				deep learning code fragments for code clone detection	
 
 GS2:			tracking design smells: lessons from a study of god classes	
-				a cloud service design for quality evaluation of design patterns	
 
 GS3:			a bayesian approach for the detection of code and design smells	
-				more: a multi-objective refactoring recommendation approach to introducing design patterns and fixing code smells	
 
 GS4:			ids: an immune-inspired approach for the detection of software design smells	
-				on the design of a bioacoustic sensor for the early detection of the red palm weevil	
 
 GS5:			bad-smell prediction from software design model using machine learning techniques	
-				code review analysis of software system using machine learning techniques	
 
 GS6:			smurf: a svm-based incremental anti-pattern detection approach	
-				smurf: a svm-based incremental anti-pattern detection approach	
 
 GS7:			can i clone this piece of code here?	
-				deep learning code fragments for code clone detection	
 
 GS8:			support vector machines for anti-pattern detection	
-				support vector machines for anti-pattern detection	
 
 GS9:			experience report: evaluating the effectiveness of decision trees for detecting code smells	
-				deep learning code fragments for code clone detection	
 
 GS10:			code smell severity classification using machine learning techniques	
-				code review analysis of software system using machine learning techniques	
 
 GS11:			adaptive detection of design flaws	
-				adaptive detection of design flaws	
 
 GS12:			bdtex: a gqm-based bayesian approach for the detection of antipatterns	
-				search-based web service antipatterns detection	
 
 GS13:			comparing and experimenting machine learning techniques for code smell detection	
-				code review analysis of software system using machine learning techniques	
 
 GS14:			deep learning code fragments for code clone detection	
-				deep learning code fragments for code clone detection	
 
 GS15:			classification model for code clones based on machine learning	
-				deep learning code fragments for code clone detection	
 
