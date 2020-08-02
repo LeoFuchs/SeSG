@@ -2,11 +2,9 @@
     SeSG (Search String Generator)
 </h1> 
 
-
 <p align="center">
     <img alt="Repository Size" src="https://img.shields.io/github/repo-size/LeoFuchs/SeSG">
     <img alt="Top Language" src="https://img.shields.io/github/languages/top/LeoFuchs/SeSG">
-    <img alt="Made By" src="https://img.shields.io/badge/Made%20By-Leonardo%20Fuchs-orange">
     <img alt="License" src="https://img.shields.io/github/license/LeoFuchs/SeSG">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/LeoFuchs/SeSG?style=social">
 </p>
@@ -16,7 +14,7 @@ Implementation and experimentation of SeSG, a search string generator that uses 
 **Note**: This is a research algorithm, susceptible to errors and imperfections.
 
 ### Repository Structure
-This is the directory structure. In summary, there is a folder with the results of the quasi-experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
+This is the directory structure. In summary, there is a folder with the results of the experiment (complete-results), a folder with the output of the execution (exits), a folder with the input files of the execution (files-qgs) and the codes that form the SeSG.
 
 ```bash
 ├── SeSG
@@ -60,7 +58,8 @@ An example of how the SeSG process works is shown in Figure 1. This process begi
 
 <p align="center"><img align="center" src="https://github.com/LeoFuchs/SeSG/blob/master/images/process.jpg" width="500"></p>
 
-<p align="center"><b> Figure 1. </b>An example of the Extracting Patterns and Post-Processing steps of the SeSG approach, showing the necessary input parameters and how the search string is developed.</p>
+<p align="center"><b> Figure 1. </b>An example of the Topics Extraction and Enrichment and Generation of Search String 
+sub-processes of the SeSG process, showing the necessary input parameters and how the search string is developed.</p>
 
 <br>
 To executing the SeSG, simply run some of the `.py` files present at the root of the directory.
@@ -117,7 +116,7 @@ The output graph represents the connection between the articles present in the G
 
 <p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500"></p>
 
-<p align="center"><b> Figure 2. </b>Graph representing the conection between the GS in the Azeem et al. experiment</p>
+<p align="center"><b> Figure 2. </b>Graph representing the connection between the GS in the Vasconcellos et al. [3] object.</p>
 
 
 ### Requirements
