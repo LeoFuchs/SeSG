@@ -114,7 +114,7 @@ In addition, in the folder `/exits/snowballing-images/` are the graphs that repr
 
 The output graph represents the connection between the articles present in the GS, showing which of these were found by searching bases (bold nodes), those found through snowballing rounds (filled nodes) and those that were not found after the application of the hybrid approach (dashed nodes).
 
-<p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="500"></p>
+<p align="center"><img src="https://github.com/LeoFuchs/SeSG/blob/master/images/snowballing-output.png" width="700"></p>
 
 <p align="center"><b> Figure 2. </b>Graph representing the connection between the GS in the Vasconcellos et al. [3] object.</p>
 
